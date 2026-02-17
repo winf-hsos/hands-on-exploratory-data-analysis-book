@@ -1,0 +1,29 @@
+# Quarto cache / temp
+.quarto/
+_freeze/
+
+# R environment / IDE
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# renv local library (OS-specific, large)
+renv/library/
+renv/staging/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+*~
+
+# Common rendered artifacts in source folders
+*_files/
+/.quarto/
+**/*.quarto_ipynb

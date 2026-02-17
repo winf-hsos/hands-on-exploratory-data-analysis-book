@@ -1,0 +1,4 @@
+﻿
+# Vorwort {.unnumbered} 
+
+Dieses Buch führt in die Werkzeuge der explorativen Datenanalyse ein. Konkretes Werzeug, mit dem wir unsere Analysen erstellen, ist R in Kombination mit dem Tidyverse. Für manche Aufgaben im Buch verwenden wir auch Python, insbesondere für die Anwendung von Werkzeugen aus dem Bereich des maschinellen Lernens.

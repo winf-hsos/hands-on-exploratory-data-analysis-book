@@ -1,0 +1,54 @@
+# Laden der Daten {#sec-news-load}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+In diesem ersten Kapitel des Projekts erkunden wir wie immer den neuen Datensatz. Dazu laden wir ihn mit R, und zwar als Tibble, damit wir auf alle Funktionen des Tidyverse zurükgreifen können. Anschließend lernen wir etwas über die enthaltenen Informationen.
+
+## Tagesschau-Beiträge {#sec-tagesschau}
+
+```{r}
+#| include: false
+# Get min/max date range from news dataset and format as "1. Januar 2020" (German locale)
+news_dates <- ts |>
+  drop_na(date_time) |> 
+  summarise(
+    min_date = min(date_time),
+    max_date = max(date_time)
+  ) |>
+  mutate(
+    min_date = format(min_date, "%d.%m.%Y"),
+    max_date = format(max_date, "%d.%m.%Y")
+  ) |>
+    # Strip spaces from min_date and max_date
+  mutate(
+    min_date = str_trim(min_date),
+    max_date = str_trim(max_date)
+  )
+
+  num_articles <- 
+    ts |> count() |> 
+    mutate(n = format(n, big.mark = ".", decimal.mark = ","))
+
+```
+
+Die Daten stammen von der Webseite [Tagesschau.de](https://www.tagesschau.de/), die täglich aktuelle Nachrichten veröffentlicht. Für dieses Projekt wurden für den Zeitraum **`r news_dates$min_date`** bis **`r news_dates$max_date`** insgesamt **`r num_articles`** Nachrichtenartikel gesammelt. Wer gerne mehr über den Prozess der Datensammlung erfahren möchte findet im [Anhang](/appendix/appendix-a-scraping.qmd) eine detaillierte Beschreibung der Python-Skripte, die für die Erstellung dieses Datensatzes verwendet wurden.
+
+Für unsere Analysen gehen wir wie immer davon aus, dass die Daten bereits vorliegen. In diesem Fall als CSV-Datei, die wir sofort als Tibble in R laden können.
+
+```{r}
+#| eval: false
+library(tidyverse)
+ts <- read_csv("data/tagesschau.csv")
+```
+
+Mit der Funktion `glimpse()`  bekommen wir einen schnellen Überblick über die Struktur des Datensatzes.
+```{r}
+ts |>
+  glimpse()    
+```
+
+Wir sehen, dass der Datensatz **`r num_articles`** Zeilen und **`r ts |> ncol()`** Spalten enthält. Jede Zeile entspricht einem Nachrichtenbeitrag, und jede Spalte enthält Informationen über diesen Beitrag, wie zum Beispiel den Titel, den Text, das Veröffentlichungsdatum und einige interessante Informationen mehr. Lasst uns einen Blick auf ein paar ausgewählte Spalten werfen.
+

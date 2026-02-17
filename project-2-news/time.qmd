@@ -1,0 +1,42 @@
+# Zeit {sec-news-time}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+## Verteilung der Beiträge über die Zeit
+
+Nachrichten haben einen inhärenten zeitlichen Charakter, da sie sich auf aktuelle Ereignisse beziehen. Es ist daher interessant zu sehen, wie die Anzahl der veröffentlichten Nachrichtenbeiträge über die Zeit verteilt ist. Die entsprechende Spalte für den Zeitbezug erkennen wir in der Ausgabe der `glimpse()`-Funktion oben am Datentyp `<dttm>`, was für *datetime* steht. Schauen wir uns ein paar Beispiele an:
+
+```{r}
+ts |>
+  select(date_time)
+```
+
+Wir erkennen an der Ausgabe der ersten Zeilen wie genau ein Wert vom *datetime*-Datentyp aufgebaut ist. Es handelt sich um ein standardisiertes Format mit dem Namen [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601), das einer festen Syntax folgt. Der erste Teil stellt das Datum mit seinen Bestandteilen Jahr, Monat und Tag dar, jeweils als vierstellige (Jahr) und zweistellige (Monat, Tag) Zahlen, getrennt mit einem Bindestrich. Danach folgt, getrennt durch ein Leerzeichen, die Uhrzeitangabe. Hier ist das Format wie gewohnt: `HH:MM:ss`, also jeweils zwei Ziffern für die Stunde, Minute und Sekunde, jeweils durch einen Doppelpunkt getrennt.
+
+Weil das Format standardisiert ist, gibt es entsprechende Funktionen, mit denen wir jeden Bestandteil extrahieren wollen. Mit der Funktion `year()` bekommen wir etwa nur das Jahr als Zahl. Ensprechende Funktionen gibt es auch für andere Datums- und Zeitbestandteile. Details zur Arbeit mit Datum und Zeit findet ihr im Kapitel [Dates and times](https://r4ds.hadley.nz/datetimes.html) aus @wickham_r_2023.
+
+Gleichzeitig können wir ein Datum abrunden - klingt komisch? Dabei schneiden wir einfach den Teil des Zeitstempels ab, der unseren gewünschten Detailgrad überschreitet. Wenn wir etwa eine Analyse auf Monatsbasis erstellen wollen, dann können wir jedes Datum auf den jeweils ersten des Monats runden, im dem sich der Zeitstempel befindet:
+
+```{r}
+ts |>
+  mutate(date_month = floor_date(date_time, unit = "month"), .keep = "used")
+```
+
+In der Ausgabe seht ihr links das Originaldatum mit allen Details und rechts das abgeschnittene und auf den ersten des jeweiligen  Monats gerundete Datum. Das Schöne an `floor_date()` ist, dass es als Ergebnis einen Wert vom gleichen Datentyp erzeugt, also auch ein *datetime*. Warum ist das gut? Weil wir damit in der Visualisieurung gut klarkommen, wie ihr im nächsten Schritt sehen werdet:
+
+
+```{r}
+ts |>
+  mutate(date_month = floor_date(date_time, "month")) |>
+  ggplot() +
+  aes(x = date_month) +
+  geom_bar() +
+  theme_bw() +
+  labs(x = "Monat", y = "Anzahl der Beiträge")
+```
+
+Schaut mal auf die x-Achse. Fällt euch was auf?
+

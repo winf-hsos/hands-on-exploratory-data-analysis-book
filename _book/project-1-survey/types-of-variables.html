@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Arten von Variablen – Hands-On Exploratory Data Analytics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../project-2-news/load.html" rel="next">
+<link href="../project-1-survey/survey-data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Hands-On Exploratory Data Analytics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfrage</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Grundlagen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quellen</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#ein-schema-zur-orientierung" id="toc-ein-schema-zur-orientierung" class="nav-link active" data-scroll-target="#ein-schema-zur-orientierung"><span class="header-section-number">2.1</span> Ein Schema zur Orientierung</a></li>
+  <li><a href="#numerische-variablen" id="toc-numerische-variablen" class="nav-link" data-scroll-target="#numerische-variablen"><span class="header-section-number">2.2</span> Numerische Variablen</a>
+  <ul class="collapse">
+  <li><a href="#kontinuierliche-variablen" id="toc-kontinuierliche-variablen" class="nav-link" data-scroll-target="#kontinuierliche-variablen">Kontinuierliche Variablen</a></li>
+  <li><a href="#zählvariablen" id="toc-zählvariablen" class="nav-link" data-scroll-target="#zählvariablen">Zählvariablen</a></li>
+  </ul></li>
+  <li><a href="#kategoriale-variablen" id="toc-kategoriale-variablen" class="nav-link" data-scroll-target="#kategoriale-variablen"><span class="header-section-number">2.3</span> Kategoriale Variablen</a>
+  <ul class="collapse">
+  <li><a href="#nominale-variablen" id="toc-nominale-variablen" class="nav-link" data-scroll-target="#nominale-variablen">Nominale Variablen</a></li>
+  <li><a href="#ordinale-variablen" id="toc-ordinale-variablen" class="nav-link" data-scroll-target="#ordinale-variablen">Ordinale Variablen</a></li>
+  </ul></li>
+  <li><a href="#qualitative-variablen" id="toc-qualitative-variablen" class="nav-link" data-scroll-target="#qualitative-variablen"><span class="header-section-number">2.4</span> Qualitative Variablen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Wie haben in <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> schon Beispiele für eine Arten von Variablen gesehen. In Umfragen begegnen wir häufig nominalskalierten Variablen, seltener sind numerische oder gar qualitative Variablen. Aber was genau unterscheidet diese Variablentypen?</p>
+<section id="ein-schema-zur-orientierung" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ein-schema-zur-orientierung"><span class="header-section-number">2.1</span> Ein Schema zur Orientierung</h2>
+<p>Um das besser zu verstehen wollen wir katgeoriale Variablen gegenüber anderen Arten von Variablen abgrenzen. Laut <span class="citation" data-cites="effect_2026">Huntington-Klein (<a href="../references.html#ref-effect_2026" role="doc-biblioref">2026</a>)</span> unterscheiden wir in der empirischen Forschung zwischen den folgenden Typen von Variablen:</p>
+<ul>
+<li>Kontinuierliche Variablen</li>
+<li>Zählvariablen</li>
+<li>Ordinale Variablen</li>
+<li>Kategoriale Variablen</li>
+<li>Qualitative Variablen</li>
+</ul>
+<p>Ich finde diese Einteilung trifft es sehr gut und verwende sie daher in diesem Buch weiter. Man kann noch eine Ebene darüber einziehen und kontinuierliche Variablen und Zählvariablen als numerische Variablen zusammenfassen. Parallel dazu sind ordinale Variablen genau genommen eine Form von kategorialen Variablen und eine weitere wären die nominalskalierten Variablen.</p>
+<div id="fig-surveys-types-of-variables" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\images/types-of-variables.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
+</figcaption>
+</figure>
+</div>
+<p>Schauen wir uns für jeden Typ Beispiele an, um ihn besser zu verstehen.</p>
+</section>
+<section id="numerische-variablen" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="numerische-variablen"><span class="header-section-number">2.2</span> Numerische Variablen</h2>
+<p>Bei den numerischen Variablen könnte man auch von quantitativen Variablen sprechen. Wir unterscheiden dabei solche, die prinzipiell jeden beliebigen Wert als reelle Zahl annehmen können und solche, die nur ganze, also natürliche, Zahlen annehmen können. Erstere nennen wir <em>kontinuierlich</em>, weil jeder Wert auf einem Kontinuum möglich ist.</p>
+<section id="kontinuierliche-variablen" class="level3">
+<h3 class="anchored" data-anchor-id="kontinuierliche-variablen">Kontinuierliche Variablen</h3>
+<blockquote class="blockquote">
+<p>Continuous variables are variables that could take any value (perhaps within some range). <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+<p>Im vorliegenden Umfragedatensatz fragt die Frage 13 nach der Eingabe eines Preises, den die Teilnehmenden bereit wären, für einen Liter Milch vorgegebener Marken auszugeben:</p>
+<p><em>“Geben Sie für die 3 Marken bitte den Preis an, den Sie für angemessen halten und bei dem Sie zugreifen würden! Als Dezimaltrennzeichen verwenden Sie bitte das Komma.”</em></p>
+<p>Schauen wir auf ein paar Beobachtungen zu dieser Frage. Wie sehen die Antworten aus?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   u013pzahl_1weihen
+               &lt;dbl&gt;
+ 1              1.49
+ 2             NA   
+ 3             NA   
+ 4             NA   
+ 5             NA   
+ 6             NA   
+ 7             NA   
+ 8             NA   
+ 9            150   
+10             NA   
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Anhand der Ausgabe sehen wir 3 Dinge:</p>
+<ol type="1">
+<li>Der Datentyp der Spalte ist als <code>&lt;dbl&gt;</code> angegeben. Das ist typisch für kontinuierliche Varialen, denn das steht für den Datentyp <em>double</em>, der in der Programmierung für Dezimalzahlen (mit Nachkommastellen) verwendet wird.</li>
+<li>Viele Werte sind mit <code>NA</code> angegeben, was bedeutet, dass hier kein Wert existiert. In der Auswertung der Daten stellt sich die Frage, was das im Kontext des Datensatzes bedeutet und wie wir damit umgehen.</li>
+<li>Die beiden einzigen Werte sind 1,49 € und 150 €. Letzteres dürfte ein Tippfehler sein und wirft auch hier die Frage auf, wie wir damit umgehen.</li>
+</ol>
+<p>Den zweiten Punkt in der Liste könnten wir einfach abhaken, indem wir die <code>NA</code>-Werte herausfiltern (auch wenn das kein Patentrezept ist). Dafür gibt es die <code>drop_na</code>-Funktion:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 231 × 1
+   u013pzahl_1weihen
+               &lt;dbl&gt;
+ 1              1.49
+ 2            150   
+ 3              1.19
+ 4              3   
+ 5              2   
+ 6              1.6 
+ 7              1.09
+ 8              3   
+ 9              1.8 
+10              2.2 
+# ℹ 221 more rows</code></pre>
+</div>
+</div>
+<p>Die Ausgabe enthält jetzt keine fehlenden Werte mehr und wir bekommen ein paar mehr “echte” Werte angezeigt. Wir zu erwarten gibt es fast beliebige Werte mit zwei Nachkommastellen, die als Antwort auf die Frage zulässig sind. Solche Daten sind typisch für kontinuierliche Variablen; es gibt keine feste Liste an Werten, sondern theoretisch existiert jeder Wert auf einem Kontinuum. Das kann man sich verdeutlichen, wenn man versucht, die eindeutigen Werte zu ermitteln. Dafür haben wir in <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> die Funktion <code>distinct</code> kennengelernt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 48 × 1
+   u013pzahl_1weihen
+               &lt;dbl&gt;
+ 1              1.49
+ 2            150   
+ 3              1.19
+ 4              3   
+ 5              2   
+ 6              1.6 
+ 7              1.09
+ 8              1.8 
+ 9              2.2 
+10            120   
+# ℹ 38 more rows</code></pre>
+</div>
+</div>
+<p>Zwar sieht es hier so aus, als wären die eindeutigen Werte mit 48 nicht so viele, als das sie nicht auch eine feste Menge an Kategorien darstellen könnten. Allerdings ist es klar, dass <em>theoretisch</em> viel mehr unterschiedliche Preise hätten eingegeben werden können und dass es sich bei der Abfrage eines Preises von Natur her um eine numerische Größe handelt.</p>
+<section id="ausreißer" class="level4">
+<h4 class="anchored" data-anchor-id="ausreißer">Ausreißer</h4>
+<p>Bei kontinuierlichen Variablen spielt häufig das Problem der Ausreißer eine Rolle. Es gibt verschiedene Gründe für Ausreißer, bei Umfragen kommt etwa ein einfacher Tippfehler als Ursache infrage. Je nach Ursprung sind unterschiedliche Maßnahmen möglich. Tippfehler sollten wir entweder korrigieren, oder, wenn wir das nicht können, herausfiltern. Veranschaulichen wir uns die Problematik kurz an einem Beispiel und berechnen den Durchschnittspreis, den die Probanden eingegeben haben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_price
+      &lt;dbl&gt;
+1        NA</code></pre>
+</div>
+</div>
+<p>Die <code>mean</code>-Funktion berechnet das arithemtische Mittel und mit <code>summarize</code> erzeugen wir eine neue, aggregierte Spalte. Die neue Spalte <code>avg_price</code> sollte also den Durchschnittspreis (als arithmetisches Mittel) über alle Probanden enthalten. Wie wir sehen, ist der Wert aber <code>NA</code>.</p>
+<p>Der Grund dafür ist einfach: R weiß nicht, wie es <code>NA</code>-Werte in einer Berechnung behandeln soll. Daher wird jede Berechnung, in der ein <code>NA</code> vorkommt, im Ergebnis sofort auch <code>NA</code>. Die Lösung: Die <code>NA</code>-Werte müssen weg:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Die <code>drop_na</code>-Funktion entfernt alle Zeilen mit <code>NA</code>-Werten. Wenn eine oder mehrere Spalten übergeben werden, dann bezieht sich die <code>NA</code>-Filterung nur auf diese. Sobald eine in der Liste den Wert <code>NA</code> aufweist, wird die Zeile entfernt.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_price
+      &lt;dbl&gt;
+1      4.58</code></pre>
+</div>
+</div>
+<p>Und schon funktioniert es! Was sagt uns der Wert? Im Durchschnitt halten die Probanden also einen Preis von 4,58 € für einen Liter Milch für gerechtfertigt. Kann das sein? Haben die alle zu viel Geld? Berechnen wir den Durchschnitt mit einer anderen Kenngröße, dem Median:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">median</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_price
+      &lt;dbl&gt;
+1      1.49</code></pre>
+</div>
+</div>
+<p>Oha! Der Median ist mit 1,49 € deutlich kleiner. Wie kommt es dazu? Die Antwort ist einfach: Der Median ist robust gegenüber Ausreißern, das arithmetische Mittel dagegen nicht. Das arithmetische Mittel ist einfach die Summe aller Werte geteilt durch die Anzahl Werte:</p>
+<p><span class="math display">\[
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+\]</span></p>
+<p>Der Median ist dagegen einfach der mittlere Wert der sortierten Preise; bei geradem <span class="math inline">\(n\)</span> ist er der Mittelwert der beiden mittleren Werte. Und ihm ist es egal, ob am Ende der Liste ein paar riesige Werte folgen.</p>
+<p><span class="math display">\[
+\tilde{x} =
+\begin{cases}
+x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6pt]
+\frac{1}{2}\left(x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}\right), &amp; \text{falls } n \text{ gerade ist}.
+\end{cases}
+\]</span></p>
+<p>Was also tun? Da wir nicht wissen können, was die Probanden eigentlich eingeben wollten, filtern wir die unangemessen hohen Werte heraus. Schauen wir zunächst einmal, welche das überhaupt sind:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   u013pzahl_1weihen
+               &lt;dbl&gt;
+ 1               150
+ 2               150
+ 3               129
+ 4               120
+ 5               109
+ 6                50
+ 7                 7
+ 8                 4
+ 9                 4
+10                 3
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Was meint ihr? Gar nicht so einfach, zu entscheiden, welche Werte ernst gemeint sind und welche auf Tippfehler schließen lassen. Pragmatisch entscheiden wir uns für die 10 € als Grenze:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_price
+      &lt;dbl&gt;
+1      1.56</code></pre>
+</div>
+</div>
+<p>Durch das Herausfiltern der Ausreißer nähert sich das arithmetische Mittel dem Median deutlich an. Jetzt haben wir die Ausreißer nach oben, also die extrem hohen Werte, betrachtet und behandelt. Gibt es auch Ausreißer nach unten?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(u013pzahl_1weihen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   u013pzahl_1weihen
+               &lt;dbl&gt;
+ 1              0   
+ 2              0   
+ 3              0   
+ 4              0.09
+ 5              0.89
+ 6              0.95
+ 7              0.99
+ 8              0.99
+ 9              0.99
+10              0.99
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Die <code>desc</code>-Funktion hat zuvor dafür gesorgt, dass die Werte absteigend sortiert werden (<em>descending</em> = absteigend). Lassen wir sie weg, dann wird standardmäßig aufsteigend sortiert. Die kleinsten Werte sind jetzt oben in der Liste und wir können erkennen, dass auch hier offensichtlich unplausible Werte existieren. Ein Preis von Null Euro oder nur 9 Cent? Auch die sollten wir vielleicht herausfiltern. Biedes zusammen sieht dann so aus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&gt;</span> <span class="fl">0.1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_price
+      &lt;dbl&gt;
+1      1.59</code></pre>
+</div>
+</div>
+<p>Durch den Aufbau einer Pipeline von <code>filter</code>-Anweisungen werden diese nacheinander angewendet. Zuerst fliegen alle Preise raus, die über 10 € liegen, danach alle, die kleiner als 10 Cent sind. Am Ende berechnen wir auf Basis der gefilterten Werte erneut das arithmetische Mittel.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Filtern von Daten
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Funktion <code>filter</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>-Paket Daten filtert, findet ihr in <a href="../r-basics/filter.html" class="quarto-xref"><span>Kapitel 9</span></a></p>
+</div>
+</div>
+<p>Übrigens stellt die Visualisierung eine geeignete Methode dar, um Ausreißer schnell zu erkennen. Ein Boxplot etwa stellt Ausreißer als Punkte außerhalb der Box dar:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Man erkennt hier sehr schön die handvoll Ausreißer ab der 50€-Marke. Die Box des Plots ist durch die Ausreißer nur als dicker Strich zu erkennen. Was tun? Ein einfaches Filtern ist im Fall eines Boxplots nicht zulässig, nur um den Plot besser zu sehen. Das liegt daran, dass der Boxplot verschiedene Werte berechnet und als Größen der Box darstellt. Darunter auch der Median. Filtern wir aber Werte heraus und berechnen dann den Median, dann ändert sich dadurch die Grundlage für die Berechnung, und damit auch der Plot selbst. Was also tun, damit wir dennoch eine sinnvolle Visualisierung bekommen?</p>
+<p>Die Anwort ist: Reinzoomem statt filtern! Reinzoomen bedeutet, wir betrachten nur den Teil der x-Achse, in dem der wichtigste Teil des Plots liegt. Versuchen wir es und legen einen Bereich zwischen 0 und 10 € fest:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Schon besser, die Box wird sichtbar. Allerdings ist rechts daneben noch immer viel Platz, den wir in der Visualisierung für die Darstellung der Box verwenden könnten. Wenn man sich vergegegwärtigt, dass die Begrenzungen der Box den 25% bzw. 75%-Punkt der Werte bedeuten, und er Strich in der Mitte der 50%-Punkt (Median), dann liegt die Hälfte der Werte in der Box selbst. Ein Viertel liegt jeweils links und rechts von der Box. Die sogenannten Whisker, also die Linien die aus der Box herauslaufen, stellen Werte dar, die noch 1,5-fachen Interquartilsabstand zu den Punkten <span class="math inline">\(Q_1\)</span> und <span class="math inline">\(Q_3\)</span> liegen:</p>
+<p><span class="math display">\[
+\left[\, Q_1 - 1.5\cdot\mathrm{IQR},\; Q_3 + 1.5\cdot\mathrm{IQR} \,\right]
+\]</span></p>
+<p>Wobei gilt:</p>
+<p><span class="math display">\[
+\mathrm{IQR} = Q_3 - Q_1
+\]</span></p>
+<p>Zoomen wir also noch ein Stück weiter hinein:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Eine Alternative für die Darstellung der Verteilung einer kontinuierlichen Variable ist das Histogram:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Auch hier leiden wir erneut unter den Ausreißern. Anders als beim Boxplot können wir hier aber einfach filtern, schließlich berechnet das Histogramm lediglich die Häufigkeiten pro Klasse, die wir dadurch nicht verändern:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wenn wir nichts angeben, dann wählt <code>ggplot2</code> für uns eine passende Klassengröße basierend auf den Daten. Diese können wir beeinflussen, vielleicht wollen wir Klassengrößen von 50 Cent betrachten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wir kommen im Verlauf des Projekts auf unterschiedliche kontinuierliche Variablen zurück. Für jetzt merken wir uns, dass bei ihen Vorsicht mit Ausreißern geboten ist und dass wir mit Boxplots und Histogrammen ihre Verteilung schnell überblicken können.</p>
+</section>
+</section>
+<section id="zählvariablen" class="level3">
+<h3 class="anchored" data-anchor-id="zählvariablen">Zählvariablen</h3>
+<blockquote class="blockquote">
+<p>Count variables are those that, well, count something. Perhaps how many times something happened or how many of something there are. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+<p>Kurz gesagt sind der Unterschied zwischen kontinuierlichen Variablen und Zählvariablen die Stellen nach dem Komma. Letztere haben keine. Und das ist typisch für Dinge, die einfach abzählbar sind:</p>
+<ul>
+<li>Die Jahre, die ein Mensch schon lebt (Alter)</li>
+<li>Die Häufigkeit, wie oft man im Jahr im Fitnessstudio war</li>
+<li>Die Anzahl Produkte, die verkauft wurden</li>
+</ul>
+<p>Zählvariablen können sehr viele unterschiedliche Ausprägungen haben und unterscheiden sich dann oft nicht großartig von kontinuierlichen Variablen. Zumindest nicht in der Auswertung. Dennoch gibt es wichtig Unterschiede. Betrachten wir ein Beispiel aus dem Umfragedaten: Das Alter der Probanden.</p>
+<p>Das Alter ist keine Variable, die direkt in der Umfrage gemessen wurde. Es steckt aber indirekt in der Antwort auf die Frage 2: <em>“In welchem Jahr sind Sie geboren?”</em> Wenn wir das Geburtsjahr kennen, dann können wir das Alter mit einer kleinen Restunsicherheit schätzen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q002geburt)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   q002geburt
+        &lt;dbl&gt;
+ 1       1970
+ 2       1990
+ 3       1963
+ 4       1989
+ 5       1965
+ 6       1957
+ 7       1960
+ 8       1984
+ 9       1974
+10       1954
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Das Geburtsjahr ist numerisch (<code>&lt;dbl&gt;</code>), wir müssen es nur noch von der Jahreszahl abziehen, in der die Umfrage stattgefunden hat:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">age =</span> <span class="dv">2025</span> <span class="sc">-</span> q002geburt)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+     age
+   &lt;dbl&gt;
+ 1    55
+ 2    35
+ 3    62
+ 4    36
+ 5    60
+ 6    68
+ 7    65
+ 8    41
+ 9    51
+10    71
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Sehr schön, wir haben unsere Zählvariable <code>age</code>! Wie verschaffen wir uns einen Überblick? Wir könnten für die Variable <code>age</code> die selben Analysen durchführen, wie wir sie oben für die kontinuierliche Variable eines Preises angewendet haben. Schließlich gibt es ähnlich viele Ausprägungen für das Alter einer Person:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">age =</span> <span class="dv">2025</span> <span class="sc">-</span> q002geburt) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 61 × 1
+     age
+   &lt;dbl&gt;
+ 1    55
+ 2    35
+ 3    62
+ 4    36
+ 5    60
+ 6    68
+ 7    65
+ 8    41
+ 9    51
+10    71
+# ℹ 51 more rows</code></pre>
+</div>
+</div>
+<p>Es sind mit 61 sogar noch mehr Ausprägungen als für den Preis. Betrachten wir also auch hier ein Histogramm, um einen Eindruck über die Alterverteilung der Probanden im Datensatz zu bekommen. Eine Klassenbreite von 5 Jahren erscheint mir sinnvoll:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">age =</span> <span class="dv">2025</span> <span class="sc">-</span> q002geburt) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Häufigeit"</span>, <span class="at">x =</span> <span class="st">"Alter"</span>, <span class="at">title =</span> <span class="st">"Altersverteilung der Probanden"</span>) <span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="types-of-variables_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ich habe mir in diesem Plot etwas mehr Mühe gemacht und ganz nebenbei ein paar Extras eingebaut, um das Ergebnis ansprechender zu gestalten:</p>
+<ul>
+<li>Füllfarbe Hellblau (<code>fill</code>) mit 80%-iger Deckkraft (<code>alpha</code>) für die Balken des Histogramms.</li>
+<li>Beschriftungen der Achsen und ein sprechender Titel mittels der <code>labs</code>-Funktion.</li>
+<li>Anwendung eines Themes mithilfe von <code>theme_bw</code>, was einen helleren Hintergrund bewirkt.</li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Visualisierungen polieren
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../r-basics/visualizations-polish.html" class="quarto-xref"><span>Kapitel 11</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
+</div>
+</div>
+<section id="ganze-zahlen-int" class="level4">
+<h4 class="anchored" data-anchor-id="ganze-zahlen-int">Ganze Zahlen (<code>int</code>)</h4>
+<p>Zählvariablen besitzen verglichen mit kontinuierlichen Variablen einen wesentlichen Unterschied. Es handelt sich um so genannte ganze Zahlen, die wir in der Mathematik auch <em>natürliche Zahlen</em> nennen. Normalerweise würden wir eine Variable, die nur ganze Zahlen annehmen kann, als diskret und nicht als kontinuierlich bezeichnen. Mit diskret meinen wir gang einfach, dass es eine abzählbare Menge an möglichen Werten gibt und nicht unendlich viele denkbare. Beim Alter sind das die ganzen Zahlen zwischen 0 und dem maximalen Alter, das Menschen erreichen können. Pragmatisch nehmen wir hier mal 140 an, meines Wissens gab es bis jetzt keinen Menschen, der so alt wurde.</p>
+<p>Für diskrete Variablen würden wir in der Regel keinen Boxplot und auch kein Histogramm verwenden, weil diese für kontinuierliche Variablen entwickelt wurden. Wie oben schon beschrieben gibt es bei Zählvariablen Fälle, bei denen wir sie ganz ähnlich wie kontinuierliche Variablen behandeln. Die Variable Alter ist so ein Fall, weil es hier sehr viele Ausprägungen gibt, die zwar diskret sind, aber dennoch eher einer kontinuierlichen Größe ähneln.</p>
+<p>Für ganze Zahlen gibt es in R den Datentyp <code>int</code>, der in der <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>2.1</span></a> auch für Zählvariablen angegeben ist. In der Praxis macht es fast keinen Unterschied, ob wir eine Zählvariable als <code>double</code> oder als <code>int</code> speichern. Die einzeigen beiden, die mir einfallen, sind:</p>
+<ol type="1">
+<li>Der Datentyp <code>int</code> benötigt weniger Speicherplatz, was bei sehr großen Datensätzen interessant werden könnte.</li>
+<li>Durch die Verwendung des Datentyps <code>int</code> stellen wir auf der Ebene von R sicher, dass die Variable nur ganze Zahlen annehmen kann. Und es macht es für Personen, die mit dem Datensatz nicht vertraut sind, ein Stück transparenter und einfacher zu verstehen.</li>
+</ol>
+<p>Machen wir uns die Mühe und wandeln das Alter in den Datentyp <code>int</code> um. In dem Zuge speichern wir ihn auch gleich als neue Variable im existierenden Tibble:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    survey <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Q002age =</span> <span class="fu">as.integer</span>(<span class="dv">2025</span> <span class="sc">-</span> q002geburt), <span class="at">.after =</span> <span class="st">"q002geburt"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Eine neue Spalte können wir mit <code>mutate</code> erzeugen. Eine Umwandlung in eine ganze Zahl klappt mit der <code>as.integer</code>-Funktion, allerdings nur, wenn der übergebene Wert als ganze Zahl darstellbar ist. Ansonsten gibt es einen Fehler. Mit dem Parameter <code>.after</code> können wir die Position der neuen Variable bestimmen, nämlich direkt hinter der Urpsrungsvariable des Geburtsjahres.</p>
+<p>Überprüfen wir das Ganze einmal und geben die neue Spalte aus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(q002geburt, Q002age)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 2
+   q002geburt Q002age
+        &lt;dbl&gt;   &lt;int&gt;
+ 1       1970      55
+ 2       1990      35
+ 3       1963      62
+ 4       1989      36
+ 5       1965      60
+ 6       1957      68
+ 7       1960      65
+ 8       1984      41
+ 9       1974      51
+10       1954      71
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Wie alt ist der älteste Teilnehmende?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Q002age)) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  Q002age
+    &lt;int&gt;
+1      80</code></pre>
+</div>
+</div>
+<p>Und der jüngste?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Q002age) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  Q002age
+    &lt;int&gt;
+1      18</code></pre>
+</div>
+</div>
+</section>
+<section id="schneller-überblick-über-eine-spalte-mit-skim" class="level4">
+<h4 class="anchored" data-anchor-id="schneller-überblick-über-eine-spalte-mit-skim">Schneller Überblick über eine Spalte mit <code>skim</code></h4>
+<p>Es gibt ein nützliches Paket mit dem Nmen <code>skimr</code>, das unter anderem die gleichnamige Funktion <code>skim</code> bereitstellt. Sie gibt uns einen schnellen Überblick über einzelne Variablen oder sogar den gesamten Datensatz.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span> </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>() <span class="sc">|&gt;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  skim_type skim_variable n_missing complete_rate numeric.mean numeric.sd
+  &lt;chr&gt;     &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+1 numeric   Q002age               0             1         48.4       14.7
+# ℹ 6 more variables: numeric.p0 &lt;dbl&gt;, numeric.p25 &lt;dbl&gt;, numeric.p50 &lt;dbl&gt;,
+#   numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Den letzten Schritt <code>as_tibble()</code> benötigt ihr nicht, er ist nur notwendig, um die Ausgabe in diesem Buch als Konsolenausgabe zu erzeugen. Wenn ihr <code>skim</code> in eurerm RStudio verwendet, dann wir automatisch eine Konsolenausgabe erzeugt.</p>
+<p>Was sehen wir? Die Funktion <code>skim</code> erzeugt einen Tibble, der eine Reihe von berechneten Variablen in Bezug auf die von uns genannte Spalte <code>Q002age</code> hat:</p>
+<ul>
+<li>Den Datentyp (<code>skim_type</code>), der als <code>numeric</code> erkannt wurde</li>
+<li>Anzahl fehlender Werte (<code>n_missing</code>) - hier fehlt kein Wert</li>
+<li>Füllgrad (<code>complete_rate</code>), hier dementsprechend 1 oder 100%</li>
+<li>Arithmetisches Mittel: <code>numeric.mean</code></li>
+<li>Standardabweichung: <code>numeric.sd</code></li>
+<li>Kleinster Wert: <code>numeric.p0</code></li>
+<li>Unteres Quartil (Q1 oder 25%-Wert): <code>numeric.p25</code></li>
+<li>Median (Q2 oder 50%-Wert): <code>numeric.p50</code></li>
+<li>Oberes Quartil (Q3 oder 75%-Wert): <code>numeric.p75</code></li>
+<li>Größter Wert: <code>numeric.p100</code></li>
+<li>ASCII-Histogram: <code>numeric.hist</code></li>
+</ul>
+<p>Das sind eine ganze Menge interessanter Werte, die wir mit einem Befehl errechnen können. Und es wird noch besser: Dadurch, dass es sich im Ergebnis um einen Tibble handelt, also einen weiteren Datensatz, können wir mit ihm wie mit jedem anderen Tibble arbeiten. Zum Beispiel nur die beiden Varianten des Durchschnitts auswwählen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>() <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yank</span>(<span class="st">"numeric"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">mean_age =</span> mean, <span class="at">median_age =</span> p50) </span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">mean_age</th>
+<th style="text-align: right;">median_age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">48.39</td>
+<td style="text-align: right;">50</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="kategoriale-variablen" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="kategoriale-variablen"><span class="header-section-number">2.3</span> Kategoriale Variablen</h2>
+<section id="nominale-variablen" class="level3">
+<h3 class="anchored" data-anchor-id="nominale-variablen">Nominale Variablen</h3>
+<blockquote class="blockquote">
+<p>Categorical variables are variables recording which category an observation is in - simple enough! The color of a flower is an example of a categorical variable. Is the flower white, orange, or red? None of those options is “more” than the others; they’re just different. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+<p>Wie der Name schon sagt verwenden wir kategoriale Variablen dann, wenn es definierte Kategorien gibt, in die eine Messung eingruppiert werden kann. Gleichzeitig ist keine Gruppe besser oder schlechter als die andere, sie sind nur unterschiedlich.</p>
+</section>
+<section id="ordinale-variablen" class="level3">
+<h3 class="anchored" data-anchor-id="ordinale-variablen">Ordinale Variablen</h3>
+<blockquote class="blockquote">
+<p>Ordinal variables are variables where some values are “more” and others are “less,” but there’s not necessarily a rule as to how much more “more” is. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+</section>
+</section>
+<section id="qualitative-variablen" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="qualitative-variablen"><span class="header-section-number">2.4</span> Qualitative Variablen</h2>
+<blockquote class="blockquote">
+<p>Qualitative variables are a sort of catch-all category for everything else. They aren’t numeric in nature, but also they’re not categorical. The text of a Washington Post headline is an example of a qualitative variable. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-effect_2026" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design and causality</em>. Second edition. A <span>Chapman</span> &amp; <span>Hall</span> <span>Book</span>. Boca Raton London New York: CRC Press.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../project-1-survey/survey-data.html" class="pagination-link" aria-label="Umfragedaten">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../project-2-news/load.html" class="pagination-link" aria-label="Laden der Daten">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

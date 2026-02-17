@@ -1,0 +1,64 @@
+project:
+  type: book
+  execute-dir: project
+
+lang: de
+
+execute:
+  warning: false
+  message: false
+  freeze: auto
+
+book:
+  title: "Hands-On Exploratory Data Analytics"
+  author: "Nicolas Meseth"
+  date: today
+  date-format: long
+  search: true
+  output-file: "Hands-On-Exploratory-Data-Analytics-Book"
+  #downloads: [pdf]
+
+
+  chapters:
+    - index.qmd
+
+    - part: "Projekt 1: Umfrage"
+      chapters:
+      - project-1-survey/survey-data.qmd
+      - project-1-survey/types-of-variables.qmd
+
+    - part: "Projekt 2: News"
+      chapters:
+      - project-2-news/load.qmd
+      - project-2-news/factors.qmd
+      - project-2-news/variables.qmd
+      - project-2-news/time.qmd
+
+    - part: "Grundlagen"
+      chapters:
+      - r-basics/loading-data.qmd
+      - r-basics/pipe.qmd
+      - r-basics/filter.qmd
+      - r-basics/summarize.qmd
+      - r-basics/visualizations-polish.qmd
+      
+    - appendix/appendix-a-scraping.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+    code-annotations: hover
+    code-line-numbers: false
+
+  pdf:
+    documentclass: scrreprt

@@ -1,0 +1,3 @@
+# Pipe-Operator {#sec-survey-pipe}
+
+![Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.](/images/select_pipe_glimpse.png){#fig-surveys-pipe .lightbox}

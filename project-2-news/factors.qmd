@@ -1,0 +1,175 @@
+# Faktoren {sec-news-factors}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Viele Variablen im Tagesschau-Datensatz sind *kategorial*: `ressort`, `language`, `author`, manchmal auch `tag` oder `supertitle`. In R werden solche Kategorien häufig als **Faktoren** (*factors*) dargestellt. Ein Faktor ist im Kern ein Vektor mit festen Ausprägungen (*levels*). Das ist in der Datenanalyse nützlich, weil
+
+- Grafiken und Tabellen automatisch sinnvoll gruppieren,
+- eine feste Reihenfolge der Kategorien reproduzierbar ist,
+- Modelle kategoriale Merkmale korrekt behandeln können.
+
+Im Tidyverse ist `forcats` (Teil von `tidyverse`) das Werkzeug für Faktor-Operationen.
+
+## Überblick: Welche Variablen sind gute Faktoren?
+
+Ein schneller Check ist: Welche Spalten sind Text (`<chr>`) und haben eher wenige unterschiedliche Werte?
+
+```{r}
+#| message: false
+# Anzahl unterschiedlicher Werte je Zeichen-Spalte
+char_uniques <- ts |>
+  summarise(
+    across(where(is.character), ~ n_distinct(.x, na.rm = TRUE))
+  ) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "n_distinct") |>
+  arrange(n_distinct)
+
+char_uniques
+```
+
+Interpretation:
+
+- Kleine `n_distinct` (z.B. `language`) → sehr gute Kandidaten für Faktoren.
+- Große `n_distinct` (z.B. `title`, `url`) → eher Identifikatoren/Free-Text, meistens *kein* Faktor.
+
+## Häufigkeiten: Ressorts zählen und visualisieren
+
+Bei News-Daten ist `ressort` meist eine der wichtigsten Kategorien.
+
+```{r}
+# Häufigkeitstabelle
+ressort_counts <- ts |>
+  count(ressort, sort = TRUE)
+
+ressort_counts
+```
+
+Für eine Visualisierung ist es hilfreich, `ressort` als Faktor zu nutzen und nach Häufigkeit zu ordnen.
+
+```{r}
+ressort_counts |>
+  filter(!is.na(ressort)) |>
+  mutate(ressort = fct_reorder(ressort, n)) |>
+  ggplot(aes(x = ressort, y = n)) +
+  geom_col() +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "Ressort", y = "Anzahl der Beiträge")
+```
+
+Warum ist das nützlich?
+
+- Du erkennst sofort, welche Ressorts dominieren (wichtig für Stichproben, Bias, Gewichtung).
+- Viele weitere Analysen (Zeitreihen, Textfeatures) lassen sich sinnvoll nach Ressort splitten.
+
+## Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)
+
+Bei Kategorien wie `author` gibt es oft sehr viele Ausprägungen. Für Auswertungen und Plots ist es dann sinnvoll, seltene Werte in `Other` zusammenzufassen.
+
+```{r}
+# Top-Autor:innen + Other
+# (Falls author sehr oft NA ist: NAs explizit als Kategorie behandeln)
+
+ts |>
+  mutate(
+    author = fct_explicit_na(author, na_level = "(fehlend)"),
+    author = fct_lump_n(author, n = 15)
+  ) |>
+  count(author, sort = TRUE)
+```
+
+Das ist ein typischer Schritt in der Datenanalyse:
+
+- reduziert visuelle Unordnung,
+- verhindert, dass „Einzelfälle“ die Story dominieren,
+- stabilisiert Modelle (zu viele Kategorien führen sonst schnell zu Overfitting).
+
+## Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen
+
+Ein Faktor muss nicht alphabetisch sortiert sein. Häufig willst du Kategorien nach einer analytischen Kennzahl ordnen.
+
+Beispiel: Welche Ressorts haben im Median die längsten Texte (über `word_count`)?
+
+```{r}
+ressort_wordcount <- ts |>
+  filter(!is.na(ressort), !is.na(word_count)) |>
+  group_by(ressort) |>
+  summarise(
+    n = n(),
+    median_word_count = median(word_count),
+    .groups = "drop"
+  ) |>
+  arrange(desc(median_word_count))
+
+ressort_wordcount
+```
+
+Und als Plot, nach Median-Wortanzahl geordnet:
+
+```{r}
+ressort_wordcount |>
+  mutate(ressort = fct_reorder(ressort, median_word_count)) |>
+  ggplot(aes(x = ressort, y = median_word_count)) +
+  geom_col() +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "Ressort", y = "Median Wortanzahl")
+```
+
+So ein Plot ist ein guter Einstieg, um Hypothesen zu formulieren (z.B. „Politikartikel sind länger als Sportmeldungen“).
+
+## Kategorien bereinigen: Recoding und Missingness sichtbar machen
+
+Oft sind Kategorien „nicht sauber“: unterschiedliche Schreibweisen, leere Strings, oder NAs. Für Analytics ist es wichtig, diese Fälle bewusst zu behandeln.
+
+Beispiel: `language` sollte im Datensatz meistens `de` sein.
+
+```{r}
+# Sprache: NA explizit machen + Häufigkeiten
+
+ts |>
+  mutate(language = fct_explicit_na(language, na_level = "(fehlend)")) |>
+  count(language, sort = TRUE)
+```
+
+Wenn du Kategorien zusammenführen möchtest (z.B. Synonyme), hilft `fct_recode()`:
+
+```{r}
+# Beispiel-Recode (nur als Muster; passe Mapping bei Bedarf an deine Daten an)
+
+ts |>
+  mutate(
+    ressort = fct_recode(
+      ressort,
+      inland = "inland",
+      ausland = "ausland"
+    )
+  ) |>
+  count(ressort, sort = TRUE)
+```
+
+## Abgeleitete Faktoren: Wochentag und Tageszeit
+
+Faktoren entstehen nicht nur aus Textspalten. Gerade Zeitstempel werden in Analytics oft in kategoriale Einheiten transformiert, um Muster sichtbar zu machen.
+
+```{r}
+#| message: false
+# Wochentag (deutsche Labels) und Stunde
+# Hinweis: base::weekdays() hängt von der Locale ab; daher nutzen wir lubridate::wday()
+
+ts |>
+  mutate(
+    weekday = wday(date_time, label = TRUE, abbr = FALSE, week_start = 1),
+    hour = hour(date_time)
+  ) |>
+  count(weekday, sort = TRUE)
+```
+
+Wochentage als Faktor sind besonders nützlich für:
+
+- Publikationsmuster (z.B. weniger Beiträge am Wochenende?),
+- Kontrollvariablen in Modellen,
+- segmentierte Reports ("Mo–Fr" vs. Wochenende).

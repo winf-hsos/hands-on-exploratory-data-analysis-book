@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Umfragedaten – Hands-On Exploratory Data Analytics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../project-1-survey/types-of-variables.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Hands-On Exploratory Data Analytics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfrage</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Grundlagen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quellen</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#daten-laden-mit-r" id="toc-daten-laden-mit-r" class="nav-link active" data-scroll-target="#daten-laden-mit-r"><span class="header-section-number">1.1</span> Daten laden mit R</a></li>
+  <li><a href="#metainformationen-eines-datensatzes" id="toc-metainformationen-eines-datensatzes" class="nav-link" data-scroll-target="#metainformationen-eines-datensatzes"><span class="header-section-number">1.2</span> Metainformationen eines Datensatzes</a></li>
+  <li><a href="#variablen-spalten" id="toc-variablen-spalten" class="nav-link" data-scroll-target="#variablen-spalten"><span class="header-section-number">1.3</span> Variablen (Spalten)</a>
+  <ul class="collapse">
+  <li><a href="#was-ist-eine-variable" id="toc-was-ist-eine-variable" class="nav-link" data-scroll-target="#was-ist-eine-variable">Was ist eine Variable?</a></li>
+  <li><a href="#wie-viele-variablen" id="toc-wie-viele-variablen" class="nav-link" data-scroll-target="#wie-viele-variablen">Wie viele Variablen?</a></li>
+  <li><a href="#welche-arten-von-variablen-gibt-es" id="toc-welche-arten-von-variablen-gibt-es" class="nav-link" data-scroll-target="#welche-arten-von-variablen-gibt-es">Welche Arten von Variablen gibt es?</a></li>
+  <li><a href="#welchen-wertebereich-hat-eine-variable" id="toc-welchen-wertebereich-hat-eine-variable" class="nav-link" data-scroll-target="#welchen-wertebereich-hat-eine-variable">Welchen Wertebereich hat eine Variable?</a></li>
+  </ul></li>
+  <li><a href="#beobachtungen-zeilen" id="toc-beobachtungen-zeilen" class="nav-link" data-scroll-target="#beobachtungen-zeilen"><span class="header-section-number">1.4</span> Beobachtungen (Zeilen)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-surveys-data" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein geeignetes Mittel für unterschiedliche Forschungsfragen und kommen in der Praxis häufig zum Einsatz, um etwas über Präferenzen von Menschen herauszufinden. Umfrageergebnisse analysieren zu können stellt deshalb eine wichtige Kompetenz dar. Die Werkzeuge, die wir dafür kennenlernen, lassen sich ohne Weiteres auf andere, anders geartete Daten, übertragen.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Lernziele in diesem Abschnitt
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Wie lade ich einen Datensatz mit R?</li>
+<li>Was sind Metainformationen eines Datensatzes?</li>
+<li>Woher weiß ich, wie viele Beobachtungen in meinem Datensatz stecken?</li>
+<li>Wie bekomme ich raus, welche Variablen es gibt?</li>
+<li>Worin unterscheiden sich Variablen?</li>
+</ul>
+</div>
+</div>
+<section id="daten-laden-mit-r" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="daten-laden-mit-r"><span class="header-section-number">1.1</span> Daten laden mit R</h2>
+<p>In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz vorliegt, der bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches, es geht primär um die Daten<em>analyse</em>.</p>
+<p>Die Umfrageergebnisse wurden mit der Software <a href="https://www.limesurvey.org/">Limesurvey</a> erhoben und als CSV-Datei exportiert. Wenn ihr das GitHub-Repository für dieses Buch auf euren Rechner heruntergeladen habt, dann liegen die Daten im Ordner <code>/data</code> und können so geladen werden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/mds12_schoko_milch.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warnung</span>Achtet auf den Unterstrich
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bitte achtet auf die Verwendung der richtigen Funktion <code>read_csv</code>. Es gibt in R auch eine Funktion mit dem Namen <code>read.csv</code>, die sehr ähnlich ist, aber keinen Tibble erzeugt. Wir verwenden in diesem Buch durchgehend das Tidyverse und Tibbles.</p>
+</div>
+</div>
+<p>Nach Ausführung des Codeblocks stehen die Daten auf dem Objekt mit dem Namen <code>survey</code> als Tibble bereit. Es ist eine gute Idee, für Objekte, die wir häufig verwenden, möglichst kurze Namen zu vergeben. Gleichzeitig sollten Namen sprechend sein, damit man anhand des Namens schnell erkennt, worum es sich handelt. Beim Objektnamen <code>survey</code> wurde beides berücksichtigt.</p>
+<p>Zum Laden der Daten gehört auch eine Prüfung, ob es alles geklappt hat. Insbesodere zu wissen, ob alle Beobachtungen und alle Variablen geladen wurden, ist essenziell, um mit den Daten weiterzuarbeiten. Beovr wir uns damit beschäftigen schauen wir uns an, was man abseits von den Möglichkeiten, mit R etwas über die Daten zu erfahren, sonst noch wissen sollte.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Daten laden
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten aus verschiedenen Formaten ein. Einen detaillierten Einblick findet ihr in <a href="../r-basics/loading-data.html" class="quarto-xref"><span>Kapitel 7</span></a>.</p>
+</div>
+</div>
+</section>
+<section id="metainformationen-eines-datensatzes" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="metainformationen-eines-datensatzes"><span class="header-section-number">1.2</span> Metainformationen eines Datensatzes</h2>
+<p>Der verwendete Datensatz wurde am Fachgebiet Agrarökonomie der Hochschule Osnabrück unter Leitung von <a href="https://www.hs-osnabrueck.de/prof-dr-ulrich-enneking/">Prof.&nbsp;Dr.&nbsp;Ulrich Enneking</a> im Jahr 2025 erhoben. In einer umfangreichen, mehrteiligen Online-Umfrage wurden deutschlandweit Menschen zu Einstellungen und Kaufverhalten bei Lebensmitteln befragt. An der Umfrage haben 2.811 Personen teilgenommen.</p>
+<p>Der vorherige Absatz enthält wichtige Informationen über den vorliegenden Datensatz. Wir nennen diese Art von Information auch <em>Metainformation</em> (meta = über) oder Kontexinformation. Schauen wir mal drauf, welche Informationen in dem Absatz stecken. <a href="#tbl-survey-context" class="quarto-xref">Tabelle&nbsp;<span>1.1</span></a> fasst das zusammen:</p>
+<div id="tbl-survey-context" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-survey-context-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabelle&nbsp;1.1: Metainformationen zum Umfragedatensatz
+</figcaption>
+<div aria-describedby="tbl-survey-context-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">W‑Frage</th>
+<th style="text-align: left;">Antwort</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Wer hat die Daten erhoben?</td>
+<td style="text-align: left;">Professor Enneking</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wie wurden die Daten erhoben?</td>
+<td style="text-align: left;">Online-Umfrage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wann wurden die Daten erhoben?</td>
+<td style="text-align: left;">2025</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wo wurden die Daten erhoben?</td>
+<td style="text-align: left;">online</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wer wurde befragt?</td>
+<td style="text-align: left;">2.811 Menschen deutschlandweit</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Was wurde erhoben?</td>
+<td style="text-align: left;">Einstellungen und Kaufverhalten bei Lebensmitteln</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Ihr seht es handelt sich um eine Reihe von W-Fragen, auf die sich die Kontextinformationen beziehen. Warum sind diese Informationen überhaupt wichtig? Dazu werden wir später noch mehr erfahren, aber hier verdeutlichen wir es uns anhand einer Frage, auf die wir in der obigen <a href="#tbl-survey-context" class="quarto-xref">Tabelle&nbsp;<span>1.1</span></a> noch keine Antwort finden, die aber extrem wichtig ist: <em>Was repräsentiert eine Zeile in den Daten?</em></p>
+<p>Was sehen wir eigentlich, wenn wir eine Zeile betrachten? Auf diese Frage benötigen wir eine Antwort, bevor wir mit der Datenanalyse beginnen. Zwar können wir oft durch scharfes Hinsehen diese Frage selbst beantworten, aber der Schein kann trügen. Wenn wir nicht selbst Urheber der Daten sind, dann sollten wir diese Information aus sicherer Quelle erfragen. Im vorliegenden Beispiel habe ich das getan und habe meinen geschätzen Kollegn gefragt. Ich weiß nun, dass eine Zeile im Datensatz den Antworten einer Person auf die Online-Umfrage entspricht. Allgemein sprechen wir in der empirischen Forschung von <em>Beobachtungen</em>. Eine Beobachtung in unserem Fall ist also eine ausgefüllte Umfrage, die uns in einer Zeile vorliegt. Systematisch zu beobachten und diese Beobachtungen für die Beantwortung von Forschungsfragen zu analysieren ist der Kern der emprischen Forschung.</p>
+<blockquote class="blockquote">
+<p>Empirical research is any research that uses structured observations from the real world to attempt to answer questions. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+<p>Wenn wir wissen, was eine Zeile bedeutet, dann können wir auch herausfinden, wie viele Personen teilgenommen haben. Oder allgemein, wie viele Beobachtungen wir vorliegen haben. Wie? Mit der Funktion <code>count</code>, die einfach die Anzahl der Zeilen (oder Beobachtungen) im Datensatz zählt. Dazu muss man wissen, dass jede Zeile einer Person entspricht, die an der Umfrage teilgenommen hat.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Der Befehl <code>count</code> zählt die Beobachtungen (oder Zeilen) in einem Datensatz.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1  2811</code></pre>
+</div>
+</div>
+<p>Es gibt weitere Möglichkeiten, die Anzahl der Beobachtungen zu ermitteln. Eine ganz einfache ist es, einfach den Namen des Objekts einzugeben, das den Datensatz in R repräsentiert:</p>
+<div class="cell">
+<div id="lst-surveys-tibble-name" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-surveys-tibble-name-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;1.1: Wir können einfach den Namen des Tibbles aufrufen, um an wichtige Informationen zu kommen.
+</figcaption>
+<div aria-describedby="lst-surveys-tibble-name-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 813
+   q001hheinkauf q002geburt q003land q004geschlecht q005os v041nofleisch
+           &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;
+ 1             2       1970        1              1      0             0
+ 2             1       1990        7              1      0             0
+ 3             2       1963        6              1      0             0
+ 4             2       1989       13              2      0             1
+ 5             2       1965        4              1      0             1
+ 6             2       1957        2              1      0             0
+ 7             2       1960       14              2      0             1
+ 8             2       1984       13              1      0             0
+ 9             2       1974        1              2      0             0
+10             2       1954       13              2      0             0
+# ℹ 2,801 more rows
+# ℹ 807 more variables: v041nofleisch_other &lt;chr&gt;, v041diaet_0nodiaet &lt;dbl&gt;,
+#   v041diaet_1lowcarb &lt;dbl&gt;, v041diaet_2laktose &lt;dbl&gt;,
+#   v041diaet_3gluten &lt;dbl&gt;, v041diaet_4paleo &lt;dbl&gt;, v041diaet_5ketogen &lt;dbl&gt;,
+#   v041diaet_6rohkost &lt;dbl&gt;, v041diaet_7makro &lt;dbl&gt;, v041diaet_8trenn &lt;dbl&gt;,
+#   v041diaet_9frutarisch &lt;dbl&gt;, v041diaet_10fleisch &lt;dbl&gt;,
+#   v041diaet_11mediterran &lt;dbl&gt;, v041diaet_12histaminarm &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Durch die Verwendung des Tidyverse und den dazugehörigen Tibbles bekommen wir diese kompakte und informative Ausgabe. Die erste Zeile der Ausgabe enthält die Dimensionierung der Daten in der Form <code>Zeilen x Spalten</code>. Wir bekommen also nicht nur die Information, wie viele Beobachtungen (2.811), sodnern auch, wie viele Spalten (813). Dazu gibt uns ein Tibble gleich noch eine Vorschau seiner ersten zehn Zeilen aus, die so viele Variablen beinhaltet, wie auf die aktuelle Größe der Konsole passen. Die restlichen Variablennamen werden darunter aufgelistet, zumindest ein Teil davon. Ein Tibble achtet darauf, die Konsole nicht komplett mit Text zu fluten und schneidet daher irgendwann ab.</p>
+<p>Es gibt dedizierte Werkzeuge, um mehr über die Variablen herauszufinden. Die schauen wir uns jetzt an.</p>
+</section>
+<section id="variablen-spalten" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="variablen-spalten"><span class="header-section-number">1.3</span> Variablen (Spalten)</h2>
+<section id="was-ist-eine-variable" class="level3">
+<h3 class="anchored" data-anchor-id="was-ist-eine-variable">Was ist eine Variable?</h3>
+<blockquote class="blockquote">
+<p>A variable, in the context of empirical research, is a bunch of observations of the same measurement. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
+</blockquote>
+<p>Neben der Frage, was eine Zeile darstellt, sollten wir auch wissen, was jede Variable genau misst. Während wir Beobachtungen typischerweise horizontal, also in Zeilen, darstellen, sind Variablen das, was wir vertikal, also in Spalten, darstellen.</p>
+<div id="fig-surveys-observation-variable" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-surveys-observation-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\images/observation_variable.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;1.1: Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten."><img src="..\images/observation_variable.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surveys-observation-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;1.1: Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten.
+</figcaption>
+</figure>
+</div>
+<p>Auch die Informationen über die gemessenen Variablen gehören zu den Metainformationen eines Datensatzes. Und im besten Fall gibt es ein so genanntes <em>Data Dictionary</em>, eine Art Wörterbuch, in dem jede Variable aufgeführt und inhaltlich erläutert ist. Leider ist das nicht immer der Fall, in diesem Beispiel jedoch schon, wie wir später sehen werden.</p>
+<p>Unabhängig davon, ob es ein Data Dictionary gibt, wollen wir uns im Folgenden anschauen, wie wir mit R an wichtige Informationen zu den Variablen kommen. Folgende Fragen solltet ihr euch zu Beginn stellen:</p>
+<ul>
+<li>Wie viele Variablen gibt es?</li>
+<li>Welche Arten von Variablen gibt es?</li>
+<li>Welchen Wertebereiche hat eine Variable?</li>
+</ul>
+</section>
+<section id="wie-viele-variablen" class="level3">
+<h3 class="anchored" data-anchor-id="wie-viele-variablen">Wie viele Variablen?</h3>
+<p>Wie viele Variablen der Datensatz hat wissen wir bereits aus <a href="#lst-surveys-tibble-name" class="quarto-xref">Listing&nbsp;<span>1.1</span></a>. Die Anzahl der Variablen ist im vorliegenden Datensatz mit <strong>813</strong> verhältnismäßig hoch. Das ist typisch für Umfragen, insbesondere wenn viele Fragen enthalten sind. Denn jede Antwortoption und deren Ausprägung wird im Ergebnis mit einer eigenen Variable abgebildet, da kommt schnell was zusammen.</p>
+<p>Übrigens können wir mit folgendem Befehl die Anzahl Variablen (oder Spalten) ganz konkret als Wert auslesen, und nicht nur auf der Konsole ausgeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ncol</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 813</code></pre>
+</div>
+</div>
+<p>Diesen Wert können wir auf einem neuen Objekt speichern und später in unserem R-Skript wieder verwenden, was häufig nützlich ist:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>variable_count <span class="ot">&lt;-</span> <span class="fu">ncol</span>(survey)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">str_glue</span>(<span class="st">"Es haben {variable_count} Menschen teilgenommen."</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Mit <code>str_glue</code> können wir Zeichenketten mit Platzhaltern versehen, die zur Ausführung mit den Werten ersetzt werden.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Es haben 813 Menschen teilgenommen.</code></pre>
+</div>
+</div>
+</section>
+<section id="welche-arten-von-variablen-gibt-es" class="level3">
+<h3 class="anchored" data-anchor-id="welche-arten-von-variablen-gibt-es">Welche Arten von Variablen gibt es?</h3>
+<p>Schauen wir uns fürs erste nur die ersten 10 Variablen im Datensatz genauer an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glimpse</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1">Mit <code>select</code> können wir Variablen auswählen. Die Notation <code>1:10</code> bedeutet so viel wie: <em>Variablen an Stelle 1 bis 10</em>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="2">Mit <code>glimpse</code> bekommen wir schnell eine Übersicht der Namen, Datentypen und ersten Werte der Variablen.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,811
+Columns: 10
+$ q001hheinkauf       &lt;dbl&gt; 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 1,…
+$ q002geburt          &lt;dbl&gt; 1970, 1990, 1963, 1989, 1965, 1957, 1960, 1984, 19…
+$ q003land            &lt;dbl&gt; 1, 7, 6, 13, 4, 2, 14, 13, 1, 13, 5, 14, 9, 4, 3, …
+$ q004geschlecht      &lt;dbl&gt; 1, 1, 1, 2, 1, 1, 2, 1, 2, 2, 1, 1, 1, 1, 2, 2, 1,…
+$ q005os              &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ v041nofleisch       &lt;dbl&gt; 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,…
+$ v041nofleisch_other &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+$ v041diaet_0nodiaet  &lt;dbl&gt; 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1,…
+$ v041diaet_1lowcarb  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…</code></pre>
+</div>
+</div>
+<p>Im Codeblock oben lernen wir mit <code>select</code> und <code>glimpse</code> gleich 2 zwei wichtige Funktionen kennen. Beide werden wir in diesem Buch noch sehr häufig verwenden. Mit <code>select</code> können wir aus den vielen Spalten genau die auswählen, an denen wir momentan interessiert sind. Das kann etwa für die Auswertung einer bestimmten Frage sinnvoll sein, bei der wir nur die Variablen benötigen, die sich auf die betroffene Frage beziehen. Die Notation <code>1:10</code> in den Klammern der <code>select</code>-Funktion bedeutet übersetzt <em>wähle die Variablen 1 bis 10 aus</em>. Dazu muss man wissen, dass Variablen in einem Datensatz eine feste Reihenfolge haben. Wir bekommen damit also die ersten 10 Variablen im Datensatz.</p>
+<p>Mit der Flexibilität einer Programmiersprache wie R können wir jede beliebige Menge an Spalten auswählen. Zum Beispiel auch die letzten 10:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">tail</span>(<span class="fu">everything</span>(), <span class="dv">10</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 10
+   M070handeldiff3_1hochwertig M070handeldiff3_2regio M070handeldiff3_3preis
+                         &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;
+ 1                          NA                     NA                     NA
+ 2                          -1                      1                      2
+ 3                          NA                     NA                     NA
+ 4                          NA                     NA                     NA
+ 5                          NA                     NA                     NA
+ 6                          NA                     NA                     NA
+ 7                          NA                     NA                     NA
+ 8                          NA                     NA                     NA
+ 9                           2                      2                     -2
+10                          NA                     NA                     NA
+# ℹ 2,801 more rows
+# ℹ 7 more variables: M070handeldiff3_4tierwohl &lt;dbl&gt;,
+#   M070handeldiff3_5vielfalt &lt;dbl&gt;, M070handeldiff3_6vetrauen &lt;dbl&gt;,
+#   M070handeldiff3_7nachhaltig &lt;dbl&gt;, M070handeldiff3_8gesund &lt;dbl&gt;,
+#   M070handeldiff3_9kauf &lt;dbl&gt;, M070handeldiff3_10trends &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Mit <code>tail</code> ermitteln wir die letzen <code>n</code> Elemente einer Liste. <code>everything</code> gibt uns die Liste aller Spalten zurück, wenn es innerhalb der <code>select</code>-Funktion aufgerufen wird. Somit kann man den Befehl übersetzen mit <em>Gib mir die letzten 10 Elemente (<code>tail</code>) aus der Liste aller Spalten (<code>everything</code>)</em>. Wir werden später noch Werkzeuge im Detail lernen, wie wir geanu die Spalten finden und auswählen, die wir brauchen. Das ist gerade bei Umfragen mit vielen Spalten extrem nützlich.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Variablen haben eine feste Position
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Variablen (oder Spalten) haben eine feste Reihenfolge und Position in einem Datensatz. Wir können also jede Spalte statt über ihren Namen auch über ihre Position ansprechen.</p>
+</div>
+</div>
+<p>Die Funktion <code>glimpse</code> wird unmittelbar nach dem <code>select</code> aufgerufen und bekommt das Ergebnis übergeben. Dafür sorgt das etwas merkwürdig aussehende Symbol <code>|&gt;</code>, das wir den Pipe-Operator oder einfach nur die Pipe nennen. Es sorgt dafür, dass das Ergebnis des ersten Befehls (vor der Pipe) an den nächsten Befehl (nach der Pipe) übergeben wird. Auf diese Weise können wir Ketten von Befehlen aufbauen, in der jeder Befehl sein eigenes Ergebnis an den nächsten übergibt. Eine dedizierte Einfürhung in den Pipe-Operator findet ihr in <a href="../r-basics/pipe.html" class="quarto-xref"><span>Kapitel 8</span></a>.</p>
+</section>
+<section id="welchen-wertebereich-hat-eine-variable" class="level3">
+<h3 class="anchored" data-anchor-id="welchen-wertebereich-hat-eine-variable">Welchen Wertebereich hat eine Variable?</h3>
+<p>Zurück zur Ausgabe vom <code>glimpse</code> oben. Was genau bedeutet das, was wir auf der Konsole sehen? Die ersten beiden Zeilen geben Auskunft über die Anzahl an Zeilen und Spalten im Datensatz. Warum sind es hier nur 10 Zeilen, statt der 813 Spalten, wie oben geschrieben? Weil wir <code>glimpse</code> nicht mehr für den ursprünglichen Datensatz aufrufen, sondern für den, der als Ergebnis des vorgelagerten <code>select(1:10)</code> entsteht. Und der hat nur noch 10 Spalten, was wir aber genau so wollten.</p>
+<p>Darunter folgen Zeilenweise die Spalten mit den Informationen Spaltenname, Datentyp und Auflistung der ersten Werte für jede Spalte. Was genau die Datentypen wie <code>&lt;dbl&gt;</code> oder <code>&lt;chr&gt;</code> bedeuten lernen wir später noch. Nach dem Datentyp sehen wir eine komma-getrennte Liste der ersten Werte, soweit sie auf die Konsole passen. Für die erste Spalte im Datensatz, <code>q001hheinkauf</code>, sind die ersten Werte also 2, 1, 2, 2 usw. Was das genau bedeutet können wir nicht wissen, sondern müssen es nachschlagen. Dazu gibt es üblicherweise zu einem Fragebogen ein entsprechendes Codebuch, in dem die Antwortkodierungen in sprechende Werte übersetzt werden. Das ist meistens Teil des Data Dictionary.</p>
+<p>Bei der ersten Frage, zu der die Spalte <code>q001hheinkauf</code> gehört, geht es um die Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Der Wert 1 steht hier kurz gesagt für “allein verantwortlich” und 2 für “geteilte Verantwortung”. Aber sind das die einzigen Werte, die die Variable annimmt? Das können wir aus der Ausgabe der <code>glimpse</code>-Funktion nicht ableiten.</p>
+<p>Wir könnten die Spalte einfach auswählen und uns das Ergebnis ausgeben lassen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   q001hheinkauf
+           &lt;dbl&gt;
+ 1             2
+ 2             1
+ 3             2
+ 4             2
+ 5             2
+ 6             2
+ 7             2
+ 8             2
+ 9             2
+10             2
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Das Ergebnis ist ein Tibble, der auf der Konsole standardmäßig seine ersten 10 Werte ausgibt. Dieses Verhalten können wir ändern und den Tibble um mehr Werte bitten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q001hheinkauf) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   q001hheinkauf
+           &lt;dbl&gt;
+ 1             2
+ 2             1
+ 3             2
+ 4             2
+ 5             2
+ 6             2
+ 7             2
+ 8             2
+ 9             2
+10             2
+11             2
+12             1
+13             2
+14             1
+15             2
+16             2
+17             1
+18             1
+19             2
+20             1
+# ℹ 2,791 more rows</code></pre>
+</div>
+</div>
+<p>Damit sind des schon doppelt so viele Beobachtungen für die Variable <code>q001hheinkauf</code>, und immernoch sehen wir nur die Ausprägungen 1 und 2. Um wirklich sicher zu wissen, welche Werteausprägungen existieren, geben wir die eindeutigen Werte aus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  q001hheinkauf
+          &lt;dbl&gt;
+1             2
+2             1</code></pre>
+</div>
+</div>
+<p>Und siehe da: Es ist tatsächlich so, dass nur diese beiden Werte vorkommen. Wie oft? Auch das bekommen wir schnell raus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  q001hheinkauf     n
+          &lt;dbl&gt; &lt;int&gt;
+1             1   919
+2             2  1892</code></pre>
+</div>
+</div>
+<p>Die Funktion <code>count</code> kennen wir bereits von oben. Wenn wir ihr eine Variable übergeben, dann ermittelt sie, wie häufig jede Ausprägung der Variable in den Daten vorkommt. Technisch gruppiert sie die Daten nach der übergebenen Variable und zählt die Beobachtungen für jede Gruppe.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Aggregieren von Daten
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Funktion <code>count</code> zählt zu den Aggregationsfunktionen. Eine dedizierte Einführung, wie man mit R und dem <code>dplyr</code>-Paket Daten zusammenfasst, findet ihr in <a href="../r-basics/summarize.html" class="quarto-xref"><span>Kapitel 10</span></a></p>
+</div>
+</div>
+</section>
+</section>
+<section id="beobachtungen-zeilen" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="beobachtungen-zeilen"><span class="header-section-number">1.4</span> Beobachtungen (Zeilen)</h2>
+<p>Was für Variablen gilt, gilt auch für Zeilen. Jede hat eine feste Position. Bei den Zeilen nennen wir das auch die <em>row number</em> (Zeilennummer), und es gibt eine Funktion, um diese zu ermitteln:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">10</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="1">Mit <code>row_number</code> bekommen wir die Position (oder Nummer) für eine Zeile.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 10
+   q001hheinkauf q002geburt q003land q004geschlecht q005os v041nofleisch
+           &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;
+ 1             2       1970        1              1      0             0
+ 2             1       1990        7              1      0             0
+ 3             2       1963        6              1      0             0
+ 4             2       1989       13              2      0             1
+ 5             2       1965        4              1      0             1
+ 6             2       1957        2              1      0             0
+ 7             2       1960       14              2      0             1
+ 8             2       1984       13              1      0             0
+ 9             2       1974        1              2      0             0
+10             2       1954       13              2      0             0
+# ℹ 4 more variables: v041nofleisch_other &lt;chr&gt;, v041diaet_0nodiaet &lt;dbl&gt;,
+#   v041diaet_1lowcarb &lt;dbl&gt;, v041diaet_2laktose &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Die Funktion <code>filter</code> verwenden wir, um die Beobachtungen nach bestimmten Kriterien einzugrenzen. Zum Beispiel um nur weibliche Personen zu betrachten. Wir können mit der <code>row_number</code>-Funktion die Beobachtungen auch nach ihrer Position im Datensatz eingrenzen. Das obige Beispiel behält nur jene Zeilen im Ergebnis, deren Position kleiner oder gleich (<code>&lt;=</code>) 10 ist.</p>
+<p>Statt kleiner-gleich können wir auch andere Operatoren verwenden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">42</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q004geschlecht)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  q004geschlecht
+           &lt;dbl&gt;
+1              2</code></pre>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-effect_2026" class="csl-entry" role="listitem">
+Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design and causality</em>. Second edition. A <span>Chapman</span> &amp; <span>Hall</span> <span>Book</span>. Boca Raton London New York: CRC Press.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Vorwort">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Vorwort</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../project-1-survey/types-of-variables.html" class="pagination-link" aria-label="Arten von Variablen">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

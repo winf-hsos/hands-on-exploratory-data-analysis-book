@@ -1,0 +1,3 @@
+# Anhang A: Scraping {.unnumbered}
+
+In diesem Anhang findest du eine detaillierte Beschreibung der Python-Skripte, die für die Erstellung des Datensatzes aus @sec-tagesschau verwendet wurden. Diese Skripte wurden entwickelt, um die Nachrichtenbeiträge von [Tagesschau.de](https://www.tagesschau.de/) zu sammeln und in einem strukturierten Format zu speichern.

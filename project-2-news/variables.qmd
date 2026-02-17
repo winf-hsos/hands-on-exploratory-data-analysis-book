@@ -1,0 +1,142 @@
+﻿# Variablen {sec-news-variables}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Nachdem wir in @sec-news-load die Tagesschau-Daten geladen und einen ersten Überblick über die enthaltenen Informationen gewonnen haben, wollen wir uns nun genauer mit den einzelnen Variablen beschäftigen.
+
+## Übersicht der Variablen
+
+Um eine Übersicht über die in einem Datensatz enthaltenen Variablen zu bekommen, können wir die Funktion `glimpse()` verwenden. Sie gibt uns einen schnellen Überblick über die Struktur des Datensatzes, einschließlich der Namen der Variablen, ihrer Datentypen und einiger Beispielwerte.
+
+```{r}
+ts |>
+  glimpse()
+```
+
+## Fehlende Werte
+
+Fehlende Werte (*missing values*) sind in realen Datensätzen völlig normal: Manche Informationen sind für einen Beitrag nicht vorhanden (z.B. kein:e Autor:in), wurden beim Scraping nicht gefunden oder sind nur für bestimmte Ressorts sinnvoll.
+
+Ein erster, sehr nützlicher Schritt ist ein „Missingness-Profil“: Welche Spalten haben überhaupt fehlende Werte – und wie viele?
+
+```{r}
+ts |>
+  summarise(
+    across(
+      everything(),
+      list(n_missing = ~ sum(is.na(.x)), pct_missing = ~ mean(is.na(.x))),
+      .names = "{.col}__{.fn}"
+    )
+  ) |>
+  pivot_longer(everything(), names_to = "metric", values_to = "value") |>
+  separate(metric, into = c("variable", "metric"), sep = "__") |>
+  pivot_wider(names_from = metric, values_from = value) |>
+  arrange(desc(pct_missing))
+```
+
+Das Ergebnis hilft dir analytisch sofort weiter:
+
+- Spalten mit *sehr vielen* fehlenden Werten eignen sich oft eher als optionale Zusatzinformationen.
+- Spalten mit *wenigen* fehlenden Werten sind meist robuste „Kernvariablen“.
+- Wenn wichtige Variablen viele NAs enthalten, lohnt sich Ursachenforschung (Erhebung, Scraper, Parsing, Definition der Variable).
+
+Wenn du eine kompakte, gut lesbare Gesamtsicht möchtest, ist `skimr` sehr praktisch (inkl. Missingness, Verteilungen, Beispiele). Damit die Kapitel auch ohne das Paket rendern, ist es hier optional:
+
+```{r}
+#| message: false
+if (requireNamespace("skimr", quietly = TRUE)) {
+  skimr::skim(ts)
+} else {
+  cat("Optional: install.packages('skimr') für eine kompakte Variable-Übersicht.\n")
+}
+```
+
+## Duplikate
+
+Duplikate können in News-Daten aus verschiedenen Gründen entstehen: ein Artikel wurde mehrfach gespeichert, die gleiche URL taucht in mehreren Quellfiles auf, oder Inhalte sind sehr ähnlich.
+
+In der Praxis definieren wir Duplikate über eine eindeutige ID. Bei Webdaten ist das häufig die `url` (oder `canonical_url`). Schauen wir zuerst, ob es URLs gibt, die mehrfach vorkommen:
+
+```{r}
+ts |>
+  count(url, sort = TRUE) |>
+  filter(!is.na(url), n > 1)
+```
+
+Wenn du wissen willst, *welche* Datensätze dahinterstehen, kannst du dir einzelne Fälle anzeigen lassen. Das ist ein typischer Debugging-Schritt in der Datenbereinigung:
+
+```{r}
+ts |>
+  add_count(url, name = "n_url") |>
+  filter(!is.na(url), n_url > 1) |>
+  select(url, date_time, ressort, title, n_url) |>
+  arrange(desc(n_url), url, date_time)
+```
+
+Für viele Analysen (z.B. Zählen, Zeitreihen) willst du Duplikate entfernen, damit Ergebnisse nicht „aufgeblasen“ werden. Wenn `url` eindeutig sein soll, kannst du eine deduplizierte Version erzeugen:
+
+```{r}
+ts_dedup <- ts |>
+  arrange(date_time) |>
+  distinct(url, .keep_all = TRUE)
+
+ts |>
+  summarise(n_rows = n()) |>
+  bind_cols(ts_dedup |> summarise(n_rows_dedup = n()))
+```
+
+Wichtig: Welche Zeile du bei Duplikaten behältst (erste/letzte, nach `date_modified`, nach Datenqualität) ist eine fachliche Entscheidung. `arrange()` vor `distinct()` macht diese Entscheidung explizit und reproduzierbar.
+
+## Wertebereiche
+
+Wertebereiche (*ranges*) sind ein schneller Plausibilitätscheck. Gerade numerische Variablen enthalten manchmal Ausreißer oder „kaputte“ Werte (z.B. negative Längen, extrem große Zählwerte), die aus Parsing- oder Scraping-Problemen stammen.
+
+Im Datensatz gibt es z.B. `word_count` (Wortanzahl) und oft auch `paragraphs` (Absatzanzahl). Wir schauen uns typische Kennzahlen und Ausreißer an:
+
+```{r}
+ts |>
+  summarise(
+    n = n(),
+    word_count_min = min(word_count, na.rm = TRUE),
+    word_count_p25 = quantile(word_count, 0.25, na.rm = TRUE),
+    word_count_median = median(word_count, na.rm = TRUE),
+    word_count_p75 = quantile(word_count, 0.75, na.rm = TRUE),
+    word_count_max = max(word_count, na.rm = TRUE),
+    paragraphs_min = min(paragraphs, na.rm = TRUE),
+    paragraphs_median = median(paragraphs, na.rm = TRUE),
+    paragraphs_max = max(paragraphs, na.rm = TRUE)
+  )
+```
+
+Eine Visualisierung macht Verteilungen und Ausreißer noch schneller greifbar. Ein Histogramm zeigt dir, wie „lang“ Tagesschau-Beiträge typischerweise sind:
+
+```{r}
+ts |>
+  ggplot(aes(x = word_count)) +
+  geom_histogram(bins = 50, na.rm = TRUE) +
+  theme_bw() +
+  labs(x = "Wortanzahl", y = "Anzahl der Beiträge")
+```
+
+Und ein Boxplot nach Ressort ist nützlich, um Unterschiede zwischen Kategorien sichtbar zu machen (z.B. sind Wirtschaftsartikel im Schnitt länger?):
+
+```{r}
+ts |>
+  filter(!is.na(ressort), !is.na(word_count)) |>
+  mutate(ressort = fct_lump_n(ressort, n = 10)) |>
+  ggplot(aes(x = ressort, y = word_count)) +
+  geom_boxplot(outlier.alpha = 0.2) +
+  coord_flip() +
+  theme_bw() +
+  labs(x = "Ressort (Top 10 + Other)", y = "Wortanzahl")
+```
+
+Warum ist das für Data Analytics hilfreich?
+
+- Du bekommst ein Gefühl für „typische“ Inhalte (Baseline), bevor du Modelle baust.
+- Ausreißer-Fälle sind oft inhaltlich spannend (Breaking News) *oder* Datenprobleme.
+- Kategorienvergleiche liefern schnell Hypothesen für tiefergehende Analysen (z.B. Trends je Ressort).
+

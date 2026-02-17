@@ -25,5 +25,8 @@ Thumbs.db
 
 # Common rendered artifacts in source folders
 *_files/
+
+# Project data folder
+/data/
 /.quarto/
 **/*.quarto_ipynb

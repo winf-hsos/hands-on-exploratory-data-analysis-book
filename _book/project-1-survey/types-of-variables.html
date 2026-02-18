@@ -279,20 +279,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -331,6 +337,7 @@ window.Quarto = {
   <li><a href="#ordinale-variablen" id="toc-ordinale-variablen" class="nav-link" data-scroll-target="#ordinale-variablen">Ordinale Variablen</a></li>
   </ul></li>
   <li><a href="#qualitative-variablen" id="toc-qualitative-variablen" class="nav-link" data-scroll-target="#qualitative-variablen"><span class="header-section-number">2.4</span> Qualitative Variablen</a></li>
+  <li><a href="#zusammenfassung-welcher-typ-welche-werkzeuge" id="toc-zusammenfassung-welcher-typ-welche-werkzeuge" class="nav-link" data-scroll-target="#zusammenfassung-welcher-typ-welche-werkzeuge"><span class="header-section-number">2.5</span> Zusammenfassung: Welcher Typ → welche Werkzeuge?</a></li>
   </ul>
 </nav>
     </div>
@@ -356,18 +363,46 @@ window.Quarto = {
 </header>
 
 
-<p>Wie haben in <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> schon Beispiele für eine Arten von Variablen gesehen. In Umfragen begegnen wir häufig nominalskalierten Variablen, seltener sind numerische oder gar qualitative Variablen. Aber was genau unterscheidet diese Variablentypen?</p>
+<p>In <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> haben wir schon gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“ – der Variablentyp entscheidet ganz praktisch darüber,</p>
+<ul>
+<li>welche Kennzahlen sinnvoll sind (Mittelwert? Median? Anteil?),</li>
+<li>welche Visualisierung passt (Histogramm? Balkendiagramm? Boxplot?),</li>
+<li>und worauf ihr bei der Interpretation achten müsst (z. B. Codes, Ausreißer, fehlende Werte).</li>
+</ul>
+<p>Lasst uns deshalb Ordnung in die Spalten bringen: Welche Arten von Variablen gibt es – und woran erkennt ihr sie in R?</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Lernziele in diesem Abschnitt
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Ihr könnt die wichtigsten Variablentypen unterscheiden (numerisch, kategorial, ordinal, qualitativ).</li>
+<li>Ihr könnt in R schnell prüfen, welche Werte in einer Variable vorkommen.</li>
+<li>Ihr versteht den Unterschied zwischen <em>Bedeutung</em> einer Variable (Messniveau) und dem <em>Datentyp</em> in R (<code>dbl</code>, <code>int</code>, <code>chr</code>, …).</li>
+<li>Ihr wisst, welche typischen Probleme je Typ auftreten (NA, Ausreißer, Kodierungen).</li>
+</ul>
+</div>
+</div>
 <section id="ein-schema-zur-orientierung" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="ein-schema-zur-orientierung"><span class="header-section-number">2.1</span> Ein Schema zur Orientierung</h2>
-<p>Um das besser zu verstehen wollen wir katgeoriale Variablen gegenüber anderen Arten von Variablen abgrenzen. Laut <span class="citation" data-cites="effect_2026">Huntington-Klein (<a href="../references.html#ref-effect_2026" role="doc-biblioref">2026</a>)</span> unterscheiden wir in der empirischen Forschung zwischen den folgenden Typen von Variablen:</p>
+<p>Um Variablen sauber abzugrenzen, hilft ein einfaches Schema. Laut <span class="citation" data-cites="effect_2026">Huntington-Klein (<a href="../references.html#ref-effect_2026" role="doc-biblioref">2026</a>)</span> unterscheiden wir in der empirischen Forschung zwischen:</p>
 <ul>
-<li>Kontinuierliche Variablen</li>
+<li>Kontinuierlichen Variablen</li>
 <li>Zählvariablen</li>
-<li>Ordinale Variablen</li>
-<li>Kategoriale Variablen</li>
-<li>Qualitative Variablen</li>
+<li>Ordinalen Variablen</li>
+<li>Kategorialen Variablen</li>
+<li>Qualitativen Variablen</li>
 </ul>
-<p>Ich finde diese Einteilung trifft es sehr gut und verwende sie daher in diesem Buch weiter. Man kann noch eine Ebene darüber einziehen und kontinuierliche Variablen und Zählvariablen als numerische Variablen zusammenfassen. Parallel dazu sind ordinale Variablen genau genommen eine Form von kategorialen Variablen und eine weitere wären die nominalskalierten Variablen.</p>
+<p>Für die Praxis ist außerdem eine „Zusammenfassungsebene“ nützlich:</p>
+<ul>
+<li><strong>Numerisch</strong>: kontinuierlich + Zählvariablen</li>
+<li><strong>Kategorial</strong>: nominal + ordinal</li>
+</ul>
 <div id="fig-surveys-types-of-variables" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -378,22 +413,23 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 </figcaption>
 </figure>
 </div>
-<p>Schauen wir uns für jeden Typ Beispiele an, um ihn besser zu verstehen.</p>
+<p>Wichtig: Diese Einteilung beschreibt das <em>Messniveau</em> (also: was wird gemessen?). Der Datentyp in R (<code>&lt;dbl&gt;</code>, <code>&lt;int&gt;</code>, <code>&lt;chr&gt;</code>, …) ist ein Hinweis, aber nicht die ganze Wahrheit. In Umfragen werden Kategorien z. B. oft als Zahlen kodiert (1, 2, 3 …) oder als viele 0/1‑Spalten (Mehrfachauswahl). Ohne Codebuch/Data Dictionary kann man das leicht falsch lesen.</p>
+<p>Schauen wir uns jetzt die Typen nacheinander an – jeweils mit Beispielen aus unserem Datensatz.</p>
 </section>
 <section id="numerische-variablen" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="numerische-variablen"><span class="header-section-number">2.2</span> Numerische Variablen</h2>
-<p>Bei den numerischen Variablen könnte man auch von quantitativen Variablen sprechen. Wir unterscheiden dabei solche, die prinzipiell jeden beliebigen Wert als reelle Zahl annehmen können und solche, die nur ganze, also natürliche, Zahlen annehmen können. Erstere nennen wir <em>kontinuierlich</em>, weil jeder Wert auf einem Kontinuum möglich ist.</p>
+<p>Numerische (quantitative) Variablen messen eine Menge oder Größe. Hier sind Kennzahlen wie Mittelwert, Median oder Standardabweichung oft sinnvoll – aber nur, wenn die Daten plausibel sind und ihr Ausreißer/fehlende Werte berücksichtigt.</p>
 <section id="kontinuierliche-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="kontinuierliche-variablen">Kontinuierliche Variablen</h3>
 <blockquote class="blockquote">
 <p>Continuous variables are variables that could take any value (perhaps within some range). <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
-<p>Im vorliegenden Umfragedatensatz fragt die Frage 13 nach der Eingabe eines Preises, den die Teilnehmenden bereit wären, für einen Liter Milch vorgegebener Marken auszugeben:</p>
+<p>Im Umfragedatensatz fragt eine Frage nach der Eingabe eines Preises, den die Teilnehmenden bereit wären, für einen Liter Milch einer vorgegebenen Marke zu bezahlen:</p>
 <p><em>“Geben Sie für die 3 Marken bitte den Preis an, den Sie für angemessen halten und bei dem Sie zugreifen würden! Als Dezimaltrennzeichen verwenden Sie bitte das Komma.”</em></p>
-<p>Schauen wir auf ein paar Beobachtungen zu dieser Frage. Wie sehen die Antworten aus?</p>
+<p>Schauen wir auf ein paar Beobachtungen. Wie sehen die Antworten aus?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(u013pzahl_1weihen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 1
    u013pzahl_1weihen
@@ -411,17 +447,19 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 # ℹ 2,801 more rows</code></pre>
 </div>
 </div>
-<p>Anhand der Ausgabe sehen wir 3 Dinge:</p>
+<p>Anhand der Ausgabe erkennt ihr typischerweise drei Dinge:</p>
 <ol type="1">
-<li>Der Datentyp der Spalte ist als <code>&lt;dbl&gt;</code> angegeben. Das ist typisch für kontinuierliche Varialen, denn das steht für den Datentyp <em>double</em>, der in der Programmierung für Dezimalzahlen (mit Nachkommastellen) verwendet wird.</li>
-<li>Viele Werte sind mit <code>NA</code> angegeben, was bedeutet, dass hier kein Wert existiert. In der Auswertung der Daten stellt sich die Frage, was das im Kontext des Datensatzes bedeutet und wie wir damit umgehen.</li>
-<li>Die beiden einzigen Werte sind 1,49 € und 150 €. Letzteres dürfte ein Tippfehler sein und wirft auch hier die Frage auf, wie wir damit umgehen.</li>
+<li>Der Datentyp ist <code>&lt;dbl&gt;</code> (<em>double</em>). Das passt zu Dezimalzahlen und ist daher typisch für kontinuierliche Variablen.</li>
+<li>Viele Werte sind <code>NA</code> – es fehlen also Angaben. Später müssen wir klären, <em>warum</em> Werte fehlen und wie wir damit umgehen.</li>
+<li>Manchmal seht ihr sehr ungewöhnliche Werte (z. B. 150 €). Das sind oft Ausreißer – z. B. durch Tippfehler.</li>
 </ol>
-<p>Den zweiten Punkt in der Liste könnten wir einfach abhaken, indem wir die <code>NA</code>-Werte herausfiltern (auch wenn das kein Patentrezept ist). Dafür gibt es die <code>drop_na</code>-Funktion:</p>
+<section id="fehlende-werte-na-kurz-behandeln" class="level4">
+<h4 class="anchored" data-anchor-id="fehlende-werte-na-kurz-behandeln">Fehlende Werte („NA“) kurz behandeln</h4>
+<p>Für einen ersten Überblick können wir fehlende Werte herausfiltern (auch wenn das nicht immer die richtige Entscheidung für eine echte Analyse ist). Das geht mit <code>drop_na()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 231 × 1
    u013pzahl_1weihen
@@ -439,12 +477,12 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 # ℹ 221 more rows</code></pre>
 </div>
 </div>
-<p>Die Ausgabe enthält jetzt keine fehlenden Werte mehr und wir bekommen ein paar mehr “echte” Werte angezeigt. Wir zu erwarten gibt es fast beliebige Werte mit zwei Nachkommastellen, die als Antwort auf die Frage zulässig sind. Solche Daten sind typisch für kontinuierliche Variablen; es gibt keine feste Liste an Werten, sondern theoretisch existiert jeder Wert auf einem Kontinuum. Das kann man sich verdeutlichen, wenn man versucht, die eindeutigen Werte zu ermitteln. Dafür haben wir in <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> die Funktion <code>distinct</code> kennengelernt:</p>
+<p>Jetzt sehen wir mehr „echte“ Preise. Für kontinuierliche Variablen ist typisch: Es gibt <em>keine feste Liste</em> an Ausprägungen, sondern (theoretisch) unendlich viele Werte auf einem Kontinuum. Das merkt ihr auch daran, dass <code>distinct()</code> bei solchen Variablen schnell sehr viele unterschiedliche Werte liefern kann:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 48 × 1
    u013pzahl_1weihen
@@ -462,13 +500,15 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 # ℹ 38 more rows</code></pre>
 </div>
 </div>
-<p>Zwar sieht es hier so aus, als wären die eindeutigen Werte mit 48 nicht so viele, als das sie nicht auch eine feste Menge an Kategorien darstellen könnten. Allerdings ist es klar, dass <em>theoretisch</em> viel mehr unterschiedliche Preise hätten eingegeben werden können und dass es sich bei der Abfrage eines Preises von Natur her um eine numerische Größe handelt.</p>
-<section id="ausreißer" class="level4">
-<h4 class="anchored" data-anchor-id="ausreißer">Ausreißer</h4>
-<p>Bei kontinuierlichen Variablen spielt häufig das Problem der Ausreißer eine Rolle. Es gibt verschiedene Gründe für Ausreißer, bei Umfragen kommt etwa ein einfacher Tippfehler als Ursache infrage. Je nach Ursprung sind unterschiedliche Maßnahmen möglich. Tippfehler sollten wir entweder korrigieren, oder, wenn wir das nicht können, herausfiltern. Veranschaulichen wir uns die Problematik kurz an einem Beispiel und berechnen den Durchschnittspreis, den die Probanden eingegeben haben:</p>
+<p>Zwar sieht es hier so aus, als wären die eindeutigen Werte mit 48 gar nicht so zahlreich. Trotzdem ist klar: <em>theoretisch</em> könnten viel mehr unterschiedliche Preise eingegeben werden – und „Preis“ ist von Natur aus eine numerische Größe.</p>
+</section>
+<section id="ausreißer-mittelwert-und-median" class="level4">
+<h4 class="anchored" data-anchor-id="ausreißer-mittelwert-und-median">Ausreißer, Mittelwert und Median</h4>
+<p>Bei kontinuierlichen Variablen spielt häufig das Problem der Ausreißer eine Rolle. Gerade in Umfragen ist ein Tippfehler eine naheliegende Ursache. Je nach Ursprung sind unterschiedliche Maßnahmen möglich: Tippfehler sollten wir korrigieren – oder (wenn wir nicht sicher korrigieren können) pragmatisch filtern.</p>
+<p>Starten wir mit dem Durchschnittspreis als arithmetischem Mittel:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   avg_price
@@ -476,17 +516,16 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 1        NA</code></pre>
 </div>
 </div>
-<p>Die <code>mean</code>-Funktion berechnet das arithemtische Mittel und mit <code>summarize</code> erzeugen wir eine neue, aggregierte Spalte. Die neue Spalte <code>avg_price</code> sollte also den Durchschnittspreis (als arithmetisches Mittel) über alle Probanden enthalten. Wie wir sehen, ist der Wert aber <code>NA</code>.</p>
-<p>Der Grund dafür ist einfach: R weiß nicht, wie es <code>NA</code>-Werte in einer Berechnung behandeln soll. Daher wird jede Berechnung, in der ein <code>NA</code> vorkommt, im Ergebnis sofort auch <code>NA</code>. Die Lösung: Die <code>NA</code>-Werte müssen weg:</p>
+<p>Warum steht dort <code>NA</code>? Weil R nicht „raten“ will, wie <code>NA</code> in Berechnungen behandelt werden soll. Sobald ein <code>NA</code> in die Rechnung eingeht, wird das Ergebnis <code>NA</code>. Für einen ersten Blick entfernen wir also die fehlenden Werte:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Die <code>drop_na</code>-Funktion entfernt alle Zeilen mit <code>NA</code>-Werten. Wenn eine oder mehrere Spalten übergeben werden, dann bezieht sich die <code>NA</code>-Filterung nur auf diese. Sobald eine in der Liste den Wert <code>NA</code> aufweist, wird die Zeile entfernt.</span>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1"><code>drop_na()</code> entfernt alle Zeilen mit fehlenden Werten. Wenn ihr Spalten angebt, bezieht sich das Entfernen nur auf diese Spalten.</span>
 </dd>
 </dl>
 </div>
@@ -497,11 +536,11 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 1      4.58</code></pre>
 </div>
 </div>
-<p>Und schon funktioniert es! Was sagt uns der Wert? Im Durchschnitt halten die Probanden also einen Preis von 4,58 € für einen Liter Milch für gerechtfertigt. Kann das sein? Haben die alle zu viel Geld? Berechnen wir den Durchschnitt mit einer anderen Kenngröße, dem Median:</p>
+<p>Im Durchschnitt halten die Probanden also einen Preis von 4,58 € für einen Liter Milch für gerechtfertigt. Klingt das plausibel? Prüfen wir das mit einer robusteren Kenngröße: dem Median.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">median</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">median</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   avg_price
@@ -509,11 +548,12 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 1      1.49</code></pre>
 </div>
 </div>
-<p>Oha! Der Median ist mit 1,49 € deutlich kleiner. Wie kommt es dazu? Die Antwort ist einfach: Der Median ist robust gegenüber Ausreißern, das arithmetische Mittel dagegen nicht. Das arithmetische Mittel ist einfach die Summe aller Werte geteilt durch die Anzahl Werte:</p>
+<p>Der Median ist mit 1,49 € deutlich kleiner. Woran liegt das? Der Median ist robust gegenüber Ausreißern, das arithmetische Mittel dagegen nicht.</p>
+<p>Das arithmetische Mittel ist:</p>
 <p><span class="math display">\[
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
 \]</span></p>
-<p>Der Median ist dagegen einfach der mittlere Wert der sortierten Preise; bei geradem <span class="math inline">\(n\)</span> ist er der Mittelwert der beiden mittleren Werte. Und ihm ist es egal, ob am Ende der Liste ein paar riesige Werte folgen.</p>
+<p>Der Median ist der mittlere Wert der sortierten Daten; bei geradem <span class="math inline">\(n\)</span> ist er der Mittelwert der beiden mittleren Werte:</p>
 <p><span class="math display">\[
 \tilde{x} =
 \begin{cases}
@@ -521,11 +561,11 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 \frac{1}{2}\left(x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}\right), &amp; \text{falls } n \text{ gerade ist}.
 \end{cases}
 \]</span></p>
-<p>Was also tun? Da wir nicht wissen können, was die Probanden eigentlich eingeben wollten, filtern wir die unangemessen hohen Werte heraus. Schauen wir zunächst einmal, welche das überhaupt sind:</p>
+<p>Was also tun? Da wir nicht sicher wissen, welche Eingabe „eigentlich gemeint“ war, entscheiden wir uns hier pragmatisch für ein Filtern unplausibler Werte. Schauen wir zuerst, welche extrem hohen Werte vorkommen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 1
    u013pzahl_1weihen
@@ -543,11 +583,11 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 # ℹ 2,801 more rows</code></pre>
 </div>
 </div>
-<p>Was meint ihr? Gar nicht so einfach, zu entscheiden, welche Werte ernst gemeint sind und welche auf Tippfehler schließen lassen. Pragmatisch entscheiden wir uns für die 10 € als Grenze:</p>
+<p>Gar nicht so einfach, eine Grenze festzulegen. Für dieses Beispiel wählen wir 10 € als Obergrenze:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   avg_price
@@ -555,11 +595,11 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 1      1.56</code></pre>
 </div>
 </div>
-<p>Durch das Herausfiltern der Ausreißer nähert sich das arithmetische Mittel dem Median deutlich an. Jetzt haben wir die Ausreißer nach oben, also die extrem hohen Werte, betrachtet und behandelt. Gibt es auch Ausreißer nach unten?</p>
+<p>Gibt es auch Ausreißer nach unten?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(u013pzahl_1weihen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(u013pzahl_1weihen) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(u013pzahl_1weihen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 1
    u013pzahl_1weihen
@@ -577,12 +617,12 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 # ℹ 2,801 more rows</code></pre>
 </div>
 </div>
-<p>Die <code>desc</code>-Funktion hat zuvor dafür gesorgt, dass die Werte absteigend sortiert werden (<em>descending</em> = absteigend). Lassen wir sie weg, dann wird standardmäßig aufsteigend sortiert. Die kleinsten Werte sind jetzt oben in der Liste und wir können erkennen, dass auch hier offensichtlich unplausible Werte existieren. Ein Preis von Null Euro oder nur 9 Cent? Auch die sollten wir vielleicht herausfiltern. Biedes zusammen sieht dann so aus:</p>
+<p>Auch hier sehen wir unplausible Werte (z. B. 0 €). Filtern wir beide Seiten:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&gt;</span> <span class="fl">0.1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&gt;</span> <span class="fl">0.1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(u013pzahl_1weihen))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   avg_price
@@ -590,7 +630,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 1      1.59</code></pre>
 </div>
 </div>
-<p>Durch den Aufbau einer Pipeline von <code>filter</code>-Anweisungen werden diese nacheinander angewendet. Zuerst fliegen alle Preise raus, die über 10 € liegen, danach alle, die kleiner als 10 Cent sind. Am Ende berechnen wir auf Basis der gefilterten Werte erneut das arithmetische Mittel.</p>
+<p>Durch die Pipeline werden die Filter nacheinander angewendet: zuerst „zu groß“, danach „zu klein“. Danach berechnen wir erneut den Mittelwert.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -601,15 +641,18 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Die Funktion <code>filter</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>-Paket Daten filtert, findet ihr in <a href="../r-basics/filter.html" class="quarto-xref"><span>Kapitel 9</span></a></p>
+<p>Die Funktion <code>filter()</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten filtert, findet ihr in <a href="../r-basics/filter.html" class="quarto-xref"><span>Kapitel 10</span></a>.</p>
 </div>
 </div>
-<p>Übrigens stellt die Visualisierung eine geeignete Methode dar, um Ausreißer schnell zu erkennen. Ein Boxplot etwa stellt Ausreißer als Punkte außerhalb der Box dar:</p>
+</section>
+<section id="ausreißer-sehen-boxplot-und-histogramm" class="level4">
+<h4 class="anchored" data-anchor-id="ausreißer-sehen-boxplot-und-histogramm">Ausreißer sehen: Boxplot und Histogramm</h4>
+<p>Visualisierungen helfen, Ausreißer schnell zu erkennen. Ein Boxplot stellt Ausreißer als Punkte außerhalb der Box dar:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -618,14 +661,14 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Man erkennt hier sehr schön die handvoll Ausreißer ab der 50€-Marke. Die Box des Plots ist durch die Ausreißer nur als dicker Strich zu erkennen. Was tun? Ein einfaches Filtern ist im Fall eines Boxplots nicht zulässig, nur um den Plot besser zu sehen. Das liegt daran, dass der Boxplot verschiedene Werte berechnet und als Größen der Box darstellt. Darunter auch der Median. Filtern wir aber Werte heraus und berechnen dann den Median, dann ändert sich dadurch die Grundlage für die Berechnung, und damit auch der Plot selbst. Was also tun, damit wir dennoch eine sinnvolle Visualisierung bekommen?</p>
-<p>Die Anwort ist: Reinzoomem statt filtern! Reinzoomen bedeutet, wir betrachten nur den Teil der x-Achse, in dem der wichtigste Teil des Plots liegt. Versuchen wir es und legen einen Bereich zwischen 0 und 10 € fest:</p>
+<p>Man erkennt hier sehr schön die Handvoll Ausreißer. Die Box selbst ist dadurch kaum sichtbar. Was tun? Bei einem Boxplot solltet ihr nicht einfach filtern, „nur damit es schöner aussieht“, weil der Boxplot Kennzahlen wie den Median und Quartile aus <em>den gefilterten Daten</em> berechnen würde – und ihr damit den Plot inhaltlich verändert.</p>
+<p>Die Lösung: <strong>Reinzoomen statt filtern.</strong> Wir begrenzen nur die Achsenansicht:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -634,21 +677,21 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Schon besser, die Box wird sichtbar. Allerdings ist rechts daneben noch immer viel Platz, den wir in der Visualisierung für die Darstellung der Box verwenden könnten. Wenn man sich vergegegwärtigt, dass die Begrenzungen der Box den 25% bzw. 75%-Punkt der Werte bedeuten, und er Strich in der Mitte der 50%-Punkt (Median), dann liegt die Hälfte der Werte in der Box selbst. Ein Viertel liegt jeweils links und rechts von der Box. Die sogenannten Whisker, also die Linien die aus der Box herauslaufen, stellen Werte dar, die noch 1,5-fachen Interquartilsabstand zu den Punkten <span class="math inline">\(Q_1\)</span> und <span class="math inline">\(Q_3\)</span> liegen:</p>
+<p>Schon besser. Die „Whisker“ des Boxplots reichen typischerweise bis zum 1,5‑fachen Interquartilsabstand (IQR) über/unter die Quartile:</p>
 <p><span class="math display">\[
 \left[\, Q_1 - 1.5\cdot\mathrm{IQR},\; Q_3 + 1.5\cdot\mathrm{IQR} \,\right]
 \]</span></p>
-<p>Wobei gilt:</p>
+<p>wobei gilt:</p>
 <p><span class="math display">\[
 \mathrm{IQR} = Q_3 - Q_1
 \]</span></p>
-<p>Zoomen wir also noch ein Stück weiter hinein:</p>
+<p>Zoomen wir noch ein Stück weiter hinein:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -657,12 +700,12 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Eine Alternative für die Darstellung der Verteilung einer kontinuierlichen Variable ist das Histogram:</p>
+<p>Eine Alternative ist ein Histogramm:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -671,13 +714,13 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Auch hier leiden wir erneut unter den Ausreißern. Anders als beim Boxplot können wir hier aber einfach filtern, schließlich berechnet das Histogramm lediglich die Häufigkeiten pro Klasse, die wir dadurch nicht verändern:</p>
+<p>Auch hier „ziehen“ Ausreißer die Skala auseinander. Beim Histogramm dürft ihr für die Darstellung pragmatisch filtern, weil es nur Häufigkeiten pro Klasse zählt:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -686,13 +729,13 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Wenn wir nichts angeben, dann wählt <code>ggplot2</code> für uns eine passende Klassengröße basierend auf den Daten. Diese können wir beeinflussen, vielleicht wollen wir Klassengrößen von 50 Cent betrachten:</p>
+<p>Wenn ihr keine Klassenbreite angebt, wählt <code>ggplot2</code> etwas Passendes. Ihr könnt das aber steuern, z. B. mit 50‑Cent‑Klassen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(u013pzahl_1weihen <span class="sc">&lt;</span> <span class="fl">10.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> u013pzahl_1weihen) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -701,7 +744,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Wir kommen im Verlauf des Projekts auf unterschiedliche kontinuierliche Variablen zurück. Für jetzt merken wir uns, dass bei ihen Vorsicht mit Ausreißern geboten ist und dass wir mit Boxplots und Histogrammen ihre Verteilung schnell überblicken können.</p>
+<p>Für jetzt merken wir uns: Kontinuierliche Variablen sind oft <code>&lt;dbl&gt;</code>, können viele Ausprägungen haben und sind empfindlich gegenüber Ausreißern. Boxplot/Histogramm geben euch schnell ein Gefühl für die Verteilung.</p>
 </section>
 </section>
 <section id="zählvariablen" class="level3">
@@ -709,14 +752,16 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 <blockquote class="blockquote">
 <p>Count variables are those that, well, count something. Perhaps how many times something happened or how many of something there are. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
-<p>Kurz gesagt sind der Unterschied zwischen kontinuierlichen Variablen und Zählvariablen die Stellen nach dem Komma. Letztere haben keine. Und das ist typisch für Dinge, die einfach abzählbar sind:</p>
+<p>Der Unterschied zur kontinuierlichen Variable ist (ganz pragmatisch): Zählvariablen haben keine Nachkommastellen. Typische Beispiele:</p>
 <ul>
-<li>Die Jahre, die ein Mensch schon lebt (Alter)</li>
-<li>Die Häufigkeit, wie oft man im Jahr im Fitnessstudio war</li>
-<li>Die Anzahl Produkte, die verkauft wurden</li>
+<li>Alter (in Jahren)</li>
+<li>Anzahl Käufe pro Monat</li>
+<li>Anzahl verkaufter Produkte</li>
 </ul>
-<p>Zählvariablen können sehr viele unterschiedliche Ausprägungen haben und unterscheiden sich dann oft nicht großartig von kontinuierlichen Variablen. Zumindest nicht in der Auswertung. Dennoch gibt es wichtig Unterschiede. Betrachten wir ein Beispiel aus dem Umfragedaten: Das Alter der Probanden.</p>
-<p>Das Alter ist keine Variable, die direkt in der Umfrage gemessen wurde. Es steckt aber indirekt in der Antwort auf die Frage 2: <em>“In welchem Jahr sind Sie geboren?”</em> Wenn wir das Geburtsjahr kennen, dann können wir das Alter mit einer kleinen Restunsicherheit schätzen.</p>
+<p>Zählvariablen können sehr viele Ausprägungen haben und werden dann in der explorativen Analyse oft ähnlich behandelt wie kontinuierliche Variablen. Trotzdem ist das Messniveau ein anderes: Es sind diskrete, abzählbare Werte.</p>
+<section id="beispiel-alter-aus-dem-geburtsjahr-ableiten" class="level4">
+<h4 class="anchored" data-anchor-id="beispiel-alter-aus-dem-geburtsjahr-ableiten">Beispiel: Alter aus dem Geburtsjahr ableiten</h4>
+<p>Das Alter wurde nicht direkt gefragt, steckt aber indirekt in der Frage: <em>„In welchem Jahr sind Sie geboren?“</em>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q002geburt)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -737,7 +782,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 # ℹ 2,801 more rows</code></pre>
 </div>
 </div>
-<p>Das Geburtsjahr ist numerisch (<code>&lt;dbl&gt;</code>), wir müssen es nur noch von der Jahreszahl abziehen, in der die Umfrage stattgefunden hat:</p>
+<p>Wenn wir das Geburtsjahr kennen, können wir das Alter (mit kleiner Restunsicherheit) schätzen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">age =</span> <span class="dv">2025</span> <span class="sc">-</span> q002geburt)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -758,7 +803,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 # ℹ 2,801 more rows</code></pre>
 </div>
 </div>
-<p>Sehr schön, wir haben unsere Zählvariable <code>age</code>! Wie verschaffen wir uns einen Überblick? Wir könnten für die Variable <code>age</code> die selben Analysen durchführen, wie wir sie oben für die kontinuierliche Variable eines Preises angewendet haben. Schließlich gibt es ähnlich viele Ausprägungen für das Alter einer Person:</p>
+<p>Wie viele unterschiedliche Alterswerte gibt es?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">age =</span> <span class="dv">2025</span> <span class="sc">-</span> q002geburt) <span class="sc">|&gt;</span></span>
@@ -780,14 +825,14 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 # ℹ 51 more rows</code></pre>
 </div>
 </div>
-<p>Es sind mit 61 sogar noch mehr Ausprägungen als für den Preis. Betrachten wir also auch hier ein Histogramm, um einen Eindruck über die Alterverteilung der Probanden im Datensatz zu bekommen. Eine Klassenbreite von 5 Jahren erscheint mir sinnvoll:</p>
+<p>Es sind mit 61 sogar noch mehr Ausprägungen als beim Preis. Ein Histogramm mit 5‑Jahres‑Klassen gibt schnell einen Überblick:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">age =</span> <span class="dv">2025</span> <span class="sc">-</span> q002geburt) <span class="sc">|&gt;</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> age) <span class="sc">+</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Häufigeit"</span>, <span class="at">x =</span> <span class="st">"Alter"</span>, <span class="at">title =</span> <span class="st">"Altersverteilung der Probanden"</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Häufigkeit"</span>, <span class="at">x =</span> <span class="st">"Alter"</span>, <span class="at">title =</span> <span class="st">"Altersverteilung der Probanden"</span>) <span class="sc">+</span></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
@@ -797,12 +842,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 </div>
-<p>Ich habe mir in diesem Plot etwas mehr Mühe gemacht und ganz nebenbei ein paar Extras eingebaut, um das Ergebnis ansprechender zu gestalten:</p>
-<ul>
-<li>Füllfarbe Hellblau (<code>fill</code>) mit 80%-iger Deckkraft (<code>alpha</code>) für die Balken des Histogramms.</li>
-<li>Beschriftungen der Achsen und ein sprechender Titel mittels der <code>labs</code>-Funktion.</li>
-<li>Anwendung eines Themes mithilfe von <code>theme_bw</code>, was einen helleren Hintergrund bewirkt.</li>
-</ul>
+<p>Hier steckt nebenbei ein wichtiger Punkt: Auch in der explorativen Analyse lohnt es sich manchmal, Visualisierungen kurz lesbarer zu machen (Beschriftungen, Theme, Farben).</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -813,29 +853,28 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../r-basics/visualizations-polish.html" class="quarto-xref"><span>Kapitel 11</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
+<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../r-basics/visualizations-polish.html" class="quarto-xref"><span>Kapitel 12</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
 </div>
 </div>
+</section>
 <section id="ganze-zahlen-int" class="level4">
 <h4 class="anchored" data-anchor-id="ganze-zahlen-int">Ganze Zahlen (<code>int</code>)</h4>
-<p>Zählvariablen besitzen verglichen mit kontinuierlichen Variablen einen wesentlichen Unterschied. Es handelt sich um so genannte ganze Zahlen, die wir in der Mathematik auch <em>natürliche Zahlen</em> nennen. Normalerweise würden wir eine Variable, die nur ganze Zahlen annehmen kann, als diskret und nicht als kontinuierlich bezeichnen. Mit diskret meinen wir gang einfach, dass es eine abzählbare Menge an möglichen Werten gibt und nicht unendlich viele denkbare. Beim Alter sind das die ganzen Zahlen zwischen 0 und dem maximalen Alter, das Menschen erreichen können. Pragmatisch nehmen wir hier mal 140 an, meines Wissens gab es bis jetzt keinen Menschen, der so alt wurde.</p>
-<p>Für diskrete Variablen würden wir in der Regel keinen Boxplot und auch kein Histogramm verwenden, weil diese für kontinuierliche Variablen entwickelt wurden. Wie oben schon beschrieben gibt es bei Zählvariablen Fälle, bei denen wir sie ganz ähnlich wie kontinuierliche Variablen behandeln. Die Variable Alter ist so ein Fall, weil es hier sehr viele Ausprägungen gibt, die zwar diskret sind, aber dennoch eher einer kontinuierlichen Größe ähneln.</p>
-<p>Für ganze Zahlen gibt es in R den Datentyp <code>int</code>, der in der <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>2.1</span></a> auch für Zählvariablen angegeben ist. In der Praxis macht es fast keinen Unterschied, ob wir eine Zählvariable als <code>double</code> oder als <code>int</code> speichern. Die einzeigen beiden, die mir einfallen, sind:</p>
+<p>Zählvariablen bestehen aus ganzen Zahlen (mathematisch: natürlichen Zahlen). In R gibt es dafür den Datentyp <code>int</code>, der in <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>2.1</span></a> auch für Zählvariablen angegeben ist.</p>
+<p>In der Praxis macht es oft keinen großen Unterschied, ob ihr eine Zählvariable als <code>double</code> oder <code>int</code> speichert. Zwei Vorteile von <code>int</code> sind:</p>
 <ol type="1">
-<li>Der Datentyp <code>int</code> benötigt weniger Speicherplatz, was bei sehr großen Datensätzen interessant werden könnte.</li>
-<li>Durch die Verwendung des Datentyps <code>int</code> stellen wir auf der Ebene von R sicher, dass die Variable nur ganze Zahlen annehmen kann. Und es macht es für Personen, die mit dem Datensatz nicht vertraut sind, ein Stück transparenter und einfacher zu verstehen.</li>
+<li><code>int</code> benötigt weniger Speicher (bei sehr großen Daten relevant).</li>
+<li>Es signalisiert klar: „Hier sind nur ganze Zahlen sinnvoll“ – das hilft auch anderen, die den Datensatz später nutzen.</li>
 </ol>
-<p>Machen wir uns die Mühe und wandeln das Alter in den Datentyp <code>int</code> um. In dem Zuge speichern wir ihn auch gleich als neue Variable im existierenden Tibble:</p>
+<p>Wandeln wir das Alter in <code>int</code> um und speichern es als neue Variable im Tibble:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    survey <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Q002age =</span> <span class="fu">as.integer</span>(<span class="dv">2025</span> <span class="sc">-</span> q002geburt), <span class="at">.after =</span> <span class="st">"q002geburt"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  survey <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Q002age =</span> <span class="fu">as.integer</span>(<span class="dv">2025</span> <span class="sc">-</span> q002geburt), <span class="at">.after =</span> <span class="st">"q002geburt"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Eine neue Spalte können wir mit <code>mutate</code> erzeugen. Eine Umwandlung in eine ganze Zahl klappt mit der <code>as.integer</code>-Funktion, allerdings nur, wenn der übergebene Wert als ganze Zahl darstellbar ist. Ansonsten gibt es einen Fehler. Mit dem Parameter <code>.after</code> können wir die Position der neuen Variable bestimmen, nämlich direkt hinter der Urpsrungsvariable des Geburtsjahres.</p>
-<p>Überprüfen wir das Ganze einmal und geben die neue Spalte aus:</p>
+<p>Mit <code>mutate()</code> erzeugen wir eine neue Spalte. <code>as.integer()</code> klappt nur, wenn der Wert als ganze Zahl darstellbar ist; sonst gibt es einen Fehler. Mit <code>.after</code> steuern wir die Position der neuen Variable.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(q002geburt, Q002age)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q002geburt, Q002age)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 2
    q002geburt Q002age
@@ -856,9 +895,9 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 <p>Wie alt ist der älteste Teilnehmende?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Q002age)) <span class="sc">|&gt;</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Q002age)) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   Q002age
@@ -869,9 +908,9 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 <p>Und der jüngste?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Q002age) <span class="sc">|&gt;</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Q002age) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   Q002age
@@ -881,8 +920,8 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </section>
 <section id="schneller-überblick-über-eine-spalte-mit-skim" class="level4">
-<h4 class="anchored" data-anchor-id="schneller-überblick-über-eine-spalte-mit-skim">Schneller Überblick über eine Spalte mit <code>skim</code></h4>
-<p>Es gibt ein nützliches Paket mit dem Nmen <code>skimr</code>, das unter anderem die gleichnamige Funktion <code>skim</code> bereitstellt. Sie gibt uns einen schnellen Überblick über einzelne Variablen oder sogar den gesamten Datensatz.</p>
+<h4 class="anchored" data-anchor-id="schneller-überblick-über-eine-spalte-mit-skim">Schneller Überblick über eine Spalte mit <code>skim()</code></h4>
+<p>Es gibt ein nützliches Paket namens <code>skimr</code>, das unter anderem die Funktion <code>skim()</code> bereitstellt. Sie gibt euch einen schnellen Überblick über einzelne Variablen oder sogar den gesamten Datensatz.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
@@ -898,22 +937,15 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 #   numeric.p75 &lt;dbl&gt;, numeric.p100 &lt;dbl&gt;, numeric.hist &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>Den letzten Schritt <code>as_tibble()</code> benötigt ihr nicht, er ist nur notwendig, um die Ausgabe in diesem Buch als Konsolenausgabe zu erzeugen. Wenn ihr <code>skim</code> in eurerm RStudio verwendet, dann wir automatisch eine Konsolenausgabe erzeugt.</p>
-<p>Was sehen wir? Die Funktion <code>skim</code> erzeugt einen Tibble, der eine Reihe von berechneten Variablen in Bezug auf die von uns genannte Spalte <code>Q002age</code> hat:</p>
+<p>Den letzten Schritt <code>as_tibble()</code> benötigt ihr nicht – er ist nur notwendig, damit in diesem Buch eine Konsolenausgabe entsteht. In RStudio wird die Ausgabe automatisch passend dargestellt.</p>
+<p><code>skim()</code> erzeugt einen Tibble mit Kennzahlen zur Variable <code>Q002age</code>, z. B.:</p>
 <ul>
-<li>Den Datentyp (<code>skim_type</code>), der als <code>numeric</code> erkannt wurde</li>
-<li>Anzahl fehlender Werte (<code>n_missing</code>) - hier fehlt kein Wert</li>
-<li>Füllgrad (<code>complete_rate</code>), hier dementsprechend 1 oder 100%</li>
-<li>Arithmetisches Mittel: <code>numeric.mean</code></li>
-<li>Standardabweichung: <code>numeric.sd</code></li>
-<li>Kleinster Wert: <code>numeric.p0</code></li>
-<li>Unteres Quartil (Q1 oder 25%-Wert): <code>numeric.p25</code></li>
-<li>Median (Q2 oder 50%-Wert): <code>numeric.p50</code></li>
-<li>Oberes Quartil (Q3 oder 75%-Wert): <code>numeric.p75</code></li>
-<li>Größter Wert: <code>numeric.p100</code></li>
-<li>ASCII-Histogram: <code>numeric.hist</code></li>
+<li>Datentyp (<code>skim_type</code>)</li>
+<li>Anzahl fehlender Werte (<code>n_missing</code>) und Füllgrad (<code>complete_rate</code>)</li>
+<li>Mittelwert, Standardabweichung, Quartile, Minimum/Maximum</li>
+<li>ein kleines ASCII‑Histogramm (<code>numeric.hist</code>)</li>
 </ul>
-<p>Das sind eine ganze Menge interessanter Werte, die wir mit einem Befehl errechnen können. Und es wird noch besser: Dadurch, dass es sich im Ergebnis um einen Tibble handelt, also einen weiteren Datensatz, können wir mit ihm wie mit jedem anderen Tibble arbeiten. Zum Beispiel nur die beiden Varianten des Durchschnitts auswwählen:</p>
+<p>Und weil es ein Tibble ist, könnt ihr damit wie mit jedem anderen Datensatz weiterarbeiten – zum Beispiel nur Mittelwert und Median auswählen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Q002age) <span class="sc">|&gt;</span> </span>
@@ -943,18 +975,77 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </section>
 <section id="kategoriale-variablen" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="kategoriale-variablen"><span class="header-section-number">2.3</span> Kategoriale Variablen</h2>
+<p>Kategoriale Variablen ordnen Beobachtungen in Kategorien ein. Oft sind sie in Umfragen sogar der häufigste Typ.</p>
 <section id="nominale-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="nominale-variablen">Nominale Variablen</h3>
 <blockquote class="blockquote">
 <p>Categorical variables are variables recording which category an observation is in - simple enough! The color of a flower is an example of a categorical variable. Is the flower white, orange, or red? None of those options is “more” than the others; they’re just different. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
-<p>Wie der Name schon sagt verwenden wir kategoriale Variablen dann, wenn es definierte Kategorien gibt, in die eine Messung eingruppiert werden kann. Gleichzeitig ist keine Gruppe besser oder schlechter als die andere, sie sind nur unterschiedlich.</p>
+<p>Nominale Variablen haben Kategorien ohne natürliche Reihenfolge. Typische Beispiele in Umfragen sind Geschlecht, Bundesland oder „Hauptverantwortlich für den Einkauf: ja/nein“.</p>
+<p>In R wollt ihr bei nominalen Variablen meist wissen:</p>
+<ul>
+<li>Welche Kategorien kommen vor?</li>
+<li>Wie häufig sind sie?</li>
+</ul>
+<p>Das geht schnell mit <code>distinct()</code> oder (noch praktischer) <code>count()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(q004geschlecht)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  q004geschlecht     n
+           &lt;dbl&gt; &lt;int&gt;
+1              1  1328
+2              2  1481
+3              3     2</code></pre>
+</div>
+</div>
+<p>Viele nominale Variablen sind als Zahlen kodiert (z. B. 1/2/3). Ohne Codebuch wisst ihr dann noch nicht, welche Zahl für welche Kategorie steht – ihr könnt aber trotzdem schon prüfen, ob es „unerwartete“ Codes gibt.</p>
 </section>
 <section id="ordinale-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="ordinale-variablen">Ordinale Variablen</h3>
 <blockquote class="blockquote">
 <p>Ordinal variables are variables where some values are “more” and others are “less,” but there’s not necessarily a rule as to how much more “more” is. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
+<p>Ordinale Variablen haben eine Reihenfolge (z. B. Zustimmung von 1 bis 7), aber die Abstände zwischen den Stufen sind nicht zwingend gleich groß. Das ist wichtig für die Auswertung: Häufig sind <strong>Median</strong> und <strong>Häufigkeiten</strong> sinnvoller als ein Mittelwert, und Visualisierungen sind oft Balkendiagramme.</p>
+<p>In unserem Datensatz tauchen solche Skalenfragen z. B. in Variablen mit „…diff7…“ im Namen auf. Ein schneller Check:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ax010midiff7, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 2
+  ax010midiff7     n
+         &lt;dbl&gt; &lt;int&gt;
+1           NA   478
+2            5   345
+3            6   341
+4            7   340
+5            1   339
+6            4   329
+7            3   323
+8            2   316</code></pre>
+</div>
+</div>
+<p>Wenn ihr ordinale Variablen später modellieren oder sauber visualisieren wollt, ist es oft sinnvoll, sie als <em>ordered factor</em> zu behandeln (statt als „normale“ Zahl). Das machen wir an anderer Stelle im Buch noch ausführlicher.</p>
+<section id="sonderfall-mehrfachauswahl-als-viele-01spalten" class="level4">
+<h4 class="anchored" data-anchor-id="sonderfall-mehrfachauswahl-als-viele-01spalten">Sonderfall: Mehrfachauswahl als viele 0/1‑Spalten</h4>
+<p>In Umfragen werden Mehrfachauswahl‑Fragen häufig als mehrere Dummy‑Spalten gespeichert (0/1). Inhaltlich sind das kategoriale Informationen – gespeichert als Zahlen.</p>
+<p>Zum Beispiel gibt es im Datensatz mehrere Spalten, die mit <code>v008ort_</code> beginnen (Einkaufsorte). Ein erster Blick auf ein paar davon:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(v008ort_1discount, v008ort_2super, v008ort_9online, v008ort_other) <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 2,811
+Columns: 4
+$ v008ort_1discount &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0…
+$ v008ort_2super    &lt;dbl&gt; 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0…
+$ v008ort_9online   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0…
+$ v008ort_other     &lt;chr&gt; "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0…</code></pre>
+</div>
+</div>
+<p>Die Interpretation ist hier: „Hat Person X diese Option gewählt – ja/nein?“.</p>
+</section>
 </section>
 </section>
 <section id="qualitative-variablen" class="level2" data-number="2.4">
@@ -962,6 +1053,43 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 <blockquote class="blockquote">
 <p>Qualitative variables are a sort of catch-all category for everything else. They aren’t numeric in nature, but also they’re not categorical. The text of a Washington Post headline is an example of a qualitative variable. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
+<p>Qualitative Variablen sind häufig Freitext: Antworten, die nicht in eine feste Kategorienliste passen. In Umfragen sind das oft „Other“-Felder. In unserem Datensatz findet ihr solche Spalten z. B. an Namen wie <code>…_other</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(v041nofleisch_other)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 1
+   v041nofleisch_other
+   &lt;chr&gt;              
+ 1 &lt;NA&gt;               
+ 2 &lt;NA&gt;               
+ 3 &lt;NA&gt;               
+ 4 &lt;NA&gt;               
+ 5 &lt;NA&gt;               
+ 6 &lt;NA&gt;               
+ 7 &lt;NA&gt;               
+ 8 &lt;NA&gt;               
+ 9 &lt;NA&gt;               
+10 &lt;NA&gt;               
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Für qualitative Variablen ist in der explorativen Analyse oft ein sinnvoller Start:</p>
+<ul>
+<li>zuerst die häufigsten Texte anschauen,</li>
+<li>Tippfehler/Varianten vereinheitlichen,</li>
+<li>und dann entscheiden, ob man Kategorien daraus macht oder Textanalyse einsetzt.</li>
+</ul>
+</section>
+<section id="zusammenfassung-welcher-typ-welche-werkzeuge" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="zusammenfassung-welcher-typ-welche-werkzeuge"><span class="header-section-number">2.5</span> Zusammenfassung: Welcher Typ → welche Werkzeuge?</h2>
+<ul>
+<li><strong>Kontinuierlich (<code>dbl</code>)</strong>: NA/Ausreißer prüfen, Histogramm/Boxplot, Median als robuste Ergänzung.</li>
+<li><strong>Zählvariable (diskret, oft <code>int</code>)</strong>: Häufig wie kontinuierlich auswerten, aber „ganzzahlig“ im Kopf behalten.</li>
+<li><strong>Nominal (Kategorien)</strong>: <code>count()</code>/Balkenplot, Kodierungen über Codebuch prüfen.</li>
+<li><strong>Ordinal (geordnete Kategorien)</strong>: Häufigkeiten + Median; vorsichtig mit Mittelwert/Standardabweichung.</li>
+<li><strong>Qualitativ (Text)</strong>: erst sichten/aufräumen, dann strukturieren.</li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

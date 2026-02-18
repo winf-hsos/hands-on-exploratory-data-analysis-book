@@ -1,0 +1,9 @@
+---
+title: Der Pipe-Operator
+format: revealjs
+snippet_file: ../pipe.qmd
+---
+
+## Übersicht
+
+- Der Pipe-Operator `|>`

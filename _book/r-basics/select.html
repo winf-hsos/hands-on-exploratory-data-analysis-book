@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; Visualisuerungen polieren – Hands-On Exploratory Data Analytics</title>
+<title>9&nbsp; Spalten auswählen – Hands-On Exploratory Data Analytics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../appendix/appendix-a-scraping.html" rel="next">
-<link href="../r-basics/summarize.html" rel="prev">
+<link href="../r-basics/filter.html" rel="next">
+<link href="../r-basics/pipe.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/loading-data.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/visualizations-polish.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/loading-data.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/select.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -195,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
   </div>
 </li>
@@ -213,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link active">
+  <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
@@ -242,9 +242,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/loading-data.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/visualizations-polish.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/loading-data.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/select.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-visualizations-polish" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></h1>
+<h1 class="title"><span id="sec-basics-select" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></h1>
 </div>
 
 
@@ -706,13 +706,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../r-basics/summarize.html" class="pagination-link" aria-label="Aggregieren">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span>
+      <a href="../r-basics/pipe.html" class="pagination-link" aria-label="Pipe-Operator">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../appendix/appendix-a-scraping.html" class="pagination-link" aria-label="Anhang A: Scraping">
-        <span class="nav-page-text">Anhang A: Scraping</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../r-basics/filter.html" class="pagination-link" aria-label="Filtern">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

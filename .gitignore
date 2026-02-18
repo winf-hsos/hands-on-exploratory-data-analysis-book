@@ -25,8 +25,12 @@ Thumbs.db
 
 # Common rendered artifacts in source folders
 *_files/
+**/slides/_generated/
 
 # Project data folder
 /data/
 /.quarto/
 **/*.quarto_ipynb
+
+/.luarc.json
+/_agent_instructions/

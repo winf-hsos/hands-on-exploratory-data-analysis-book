@@ -1,27 +1,34 @@
 # Umfragedaten {#sec-surveys-data}
 
-In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein geeignetes Mittel für unterschiedliche Forschungsfragen und kommen in der Praxis häufig zum Einsatz, um etwas über Präferenzen von Menschen herauszufinden. Umfrageergebnisse analysieren zu können stellt deshalb eine wichtige Kompetenz dar. Die Werkzeuge, die wir dafür kennenlernen, lassen sich ohne Weiteres auf andere, anders geartete Daten, übertragen.
+In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein praktisches Werkzeug, wenn wir etwas über Einstellungen, Präferenzen oder Verhalten von Menschen herausfinden wollen – und genau solche Datensätze begegnen euch später auch im Job ziemlich häufig.
+
+Bevor wir loslegen, eine Leitfrage: Wenn ihr eine Tabelle mit hunderten Spalten vor euch habt – woher wisst ihr eigentlich, *was* ihr da seht? Was ist eine Zeile? Was ist eine Spalte? Und wie könnt ihr schnell prüfen, ob die Daten überhaupt korrekt in R angekommen sind? Genau darum geht es in diesem Abschnitt.
 
 ::: {.callout-note appearance="simple"}
 
 ## Lernziele in diesem Abschnitt
 
+::: {.reuse #learning-objectives}
+
 - Wie lade ich einen Datensatz mit R?
-- Was sind Metainformationen eines Datensatzes?
-- Woher weiß ich, wie viele Beobachtungen in meinem Datensatz stecken?
-- Wie bekomme ich raus, welche Variablen es gibt?
-- Worin unterscheiden sich Variablen?
+- Welche Metainformationen (Kontext) sollte ich zu einem Datensatz kennen?
+- Wie finde ich heraus, wie viele Beobachtungen und Variablen in den Daten stecken?
+- Welche Werkzeuge helfen mir, Variablen schnell zu überblicken?
+- Wie prüfe ich, welche Werte in einer Variable vorkommen?
+
+:::
 
 :::
 
 ## Daten laden mit R
 
-In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz vorliegt, der bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches, es geht primär um die Daten*analyse*.
+In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches – es geht primär um die Daten*analyse*.
 
 Die Umfrageergebnisse wurden mit der Software [Limesurvey](https://www.limesurvey.org/) erhoben und als CSV-Datei exportiert. Wenn ihr das GitHub-Repository für dieses Buch auf euren Rechner heruntergeladen habt, dann liegen die Daten im Ordner `/data` und können so geladen werden:
 
 ```{r}
 #| eval: false
+#| label: lst-surveys-load-data
 library(tidyverse)
 survey <- read_csv("data/mds12_schoko_milch.csv")
 ```
@@ -32,151 +39,159 @@ survey <- read_csv("data/mds12_schoko_milch.csv")
 Bitte achtet auf die Verwendung der richtigen Funktion `read_csv`. Es gibt in R auch eine Funktion mit dem Namen `read.csv`, die sehr ähnlich ist, aber keinen Tibble erzeugt. Wir verwenden in diesem Buch durchgehend das Tidyverse und Tibbles.
 :::
 
-Nach Ausführung des Codeblocks stehen die Daten auf dem Objekt mit dem Namen `survey` als Tibble bereit. Es ist eine gute Idee, für Objekte, die wir häufig verwenden, möglichst kurze Namen zu vergeben. Gleichzeitig sollten Namen sprechend sein, damit man anhand des Namens schnell erkennt, worum es sich handelt. Beim Objektnamen `survey` wurde beides berücksichtigt.
+Nach Ausführung des Codeblocks stehen die Daten auf dem Objekt `survey` als Tibble bereit. Es ist eine gute Idee, für häufig verwendete Objekte kurze, aber sprechende Namen zu wählen – `survey` ist hier ein guter Kompromiss.
 
-Zum Laden der Daten gehört auch eine Prüfung, ob es alles geklappt hat. Insbesodere zu wissen, ob alle Beobachtungen und alle Variablen geladen wurden, ist essenziell, um mit den Daten weiterzuarbeiten. Beovr wir uns damit beschäftigen schauen wir uns an, was man abseits von den Möglichkeiten, mit R etwas über die Daten zu erfahren, sonst noch wissen sollte.
+Zum Laden der Daten gehört immer auch ein kurzer Reality-Check: Sind wirklich alle Beobachtungen (Zeilen) und Variablen (Spalten) da? Genau diese Frage beantworten wir im nächsten Abschnitt.
 
 ::: {.callout-note appearance="simple"}
-## Daten laden
+## Mehr zum Laden von Daten laden (auch weitere Formate)
 
-An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten aus verschiedenen Formaten ein. Einen detaillierten Einblick findet ihr in @sec-basics-load-data.
+An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Formate ein. Einen detaillierten Einblick findet ihr in @sec-basics-load-data.
 :::
-
-
-## Metainformationen eines Datensatzes
 
 ```{r}
 #| include: false
 source("project-1-survey/setup.R")
 
-n <- survey |> count() |> mutate(n = format(n, big.mark = ".", decimal.mark = ","))
+n <- nrow(survey)
+n_fmt <- format(n, big.mark = ".", decimal.mark = ",")
 ```
 
- Der verwendete Datensatz wurde am Fachgebiet Agrarökonomie der Hochschule Osnabrück unter Leitung von [Prof. Dr. Ulrich Enneking](https://www.hs-osnabrueck.de/prof-dr-ulrich-enneking/) im Jahr 2025 erhoben. In einer umfangreichen, mehrteiligen Online-Umfrage wurden deutschlandweit Menschen zu Einstellungen und Kaufverhalten bei Lebensmitteln befragt. An der Umfrage haben `r n` Personen teilgenommen. 
- 
- Der vorherige Absatz enthält wichtige Informationen über den vorliegenden Datensatz. Wir nennen diese Art von Information auch *Metainformation* (meta = über) oder Kontexinformation. Schauen wir mal drauf, welche Informationen in dem Absatz stecken. @tbl-survey-context fasst das zusammen:
+## Kontext und Metainformationen
+
+::: {.reuse #slides-setup}
+Stellt euch vor, ihr bekommt eine Excel-Datei per Mail – ohne Begleittext. Ihr könnt sie öffnen, aber ihr wisst nicht, wer befragt wurde, wann die Erhebung stattgefunden hat oder was die Antwortcodes bedeuten. Ihr *könnt* dann zwar rechnen, aber ihr lauft Gefahr, das Falsche zu interpretieren. Ein paar Begleitinformationen in der E-Mail wären daher nicht schlecht. Vielleicht so etwas:
+:::
+
+*"Der verwendete Datensatz wurde am Fachgebiet Agrarökonomie der Hochschule Osnabrück unter Leitung von Prof. Dr. Ulrich Enneking im Jahr 2025 erhoben. In einer umfangreichen, mehrteiligen Online-Umfrage wurden deutschlandweit Menschen zu Einstellungen und Kaufverhalten bei Lebensmitteln befragt. An der Umfrage haben `r n_fmt` Personen teilgenommen."*
+
+Solche Informationen nennen wir *Metainformationen* (meta = über) oder *Kontextinformationen*. Häufig lassen sie sich als W‑Fragen formulieren. @tbl-survey-context fasst die wichtigsten für unseren Datensatz zusammen:
 
 | W‑Frage | Antwort |
 |:---|:----|
-| Wer hat die Daten erhoben? | Professor Enneking |
+| Wer hat die Daten erhoben? | Prof. Dr. Enneking |
 | Wie wurden die Daten erhoben? | Online-Umfrage |
 | Wann wurden die Daten erhoben? | 2025 |
 | Wo wurden die Daten erhoben? | online |
-| Wer wurde befragt? | `r n` Menschen deutschlandweit |
+| Wer wurde befragt? | `r n_fmt` Menschen deutschlandweit |
 | Was wurde erhoben? | Einstellungen und Kaufverhalten bei Lebensmitteln |
 
 : Metainformationen zum Umfragedatensatz {#tbl-survey-context}
 
-Ihr seht es handelt sich um eine Reihe von W-Fragen, auf die sich die Kontextinformationen beziehen. Warum sind diese Informationen überhaupt wichtig? Dazu werden wir später noch mehr erfahren, aber hier verdeutlichen wir es uns anhand einer Frage, auf die wir in der obigen @tbl-survey-context noch keine Antwort finden, die aber extrem wichtig ist: *Was repräsentiert eine Zeile in den Daten?*
-
-Was sehen wir eigentlich, wenn wir eine Zeile betrachten? Auf diese Frage benötigen wir eine Antwort, bevor wir mit der Datenanalyse beginnen. Zwar können wir oft durch scharfes Hinsehen diese Frage selbst beantworten, aber der Schein kann trügen. Wenn wir nicht selbst Urheber der Daten sind, dann sollten wir diese Information aus sicherer Quelle erfragen. Im vorliegenden Beispiel habe ich das getan und habe meinen geschätzen Kollegn gefragt. Ich weiß nun, dass eine Zeile im Datensatz den Antworten einer Person auf die Online-Umfrage entspricht. Allgemein sprechen wir in der empirischen Forschung von *Beobachtungen*. Eine Beobachtung in unserem Fall ist also eine ausgefüllte Umfrage, die uns in einer Zeile vorliegt. Systematisch zu beobachten und diese Beobachtungen für die Beantwortung von Forschungsfragen zu analysieren ist der Kern der emprischen Forschung.
+Eine Frage ist dabei besonders wichtig, weil sie bestimmt, *wie* wir später Zahlen interpretieren: Was repräsentiert eine Zeile in den Daten? Was sehen wir eigentlich, wenn wir eine Zeile betrachten? Auf diese Frage brauchen wir eine klare Antwort, bevor wir mit der Analyse beginnen. Manchmal kann man es durch genaues Hinschauen erraten – aber der Schein kann trügen. Wenn wir die Daten nicht selbst erhoben haben, sollten wir diese Information aus sicherer Quelle bekommen. In diesem Beispiel habe ich nachgefragt: Eine Zeile entspricht den Antworten *einer Person* auf die Online‑Umfrage. In der empirischen Forschung sprechen wir dann von *Beobachtungen*.
 
 > Empirical research is any research that uses structured observations from the real world to attempt to answer questions. [@effect_2026]
 
- Wenn wir wissen, was eine Zeile bedeutet, dann können wir auch herausfinden, wie viele Personen teilgenommen haben. Oder allgemein, wie viele Beobachtungen wir vorliegen haben. Wie? Mit der Funktion `count`, die einfach die Anzahl der Zeilen (oder Beobachtungen) im Datensatz zählt. Dazu muss man wissen, dass jede Zeile einer Person entspricht, die an der Umfrage teilgenommen hat.
+Wenn wir wissen, dass jede Zeile eine befragte Person ist, können wir auch sauber begründen, warum die Anzahl der Zeilen gleich der Anzahl der Teilnehmenden ist.
+
+## Dimensionierung der Daten
+
+Es gibt mehrere Wege, die Anzahl der Beobachtungen zu bestimmen. Ein sehr direkter ist `count()`: Wenn wir `count()` ohne Variable aufrufen, zählt R schlicht die Zeilen.
 
 ```{r}
+#| label: lst-surveys-count
 survey |>
   count() # <1>
 ```
-1. Der Befehl `count` zählt die Beobachtungen (oder Zeilen) in einem Datensatz.
+1. Der Befehl `count()` zählt die Beobachtungen (Zeilen) in einem Datensatz.
 
-Es gibt weitere Möglichkeiten, die Anzahl der Beobachtungen zu ermitteln. Eine ganz einfache ist es, einfach den Namen des Objekts einzugeben, das den Datensatz in R repräsentiert:
+Eine zweite, oft sehr praktische Möglichkeit ist: Gebt einfach den Namen des Tibbles aus. Tibbles zeigen euch direkt eine kompakte Zusammenfassung inkl. Dimensionen (`Zeilen x Spalten`) und eine Vorschau.
 
 ```{r}
-#| lst-label: lst-surveys-tibble-name
+#| label: lst-surveys-tibble-name
 #| lst-cap: "Wir können einfach den Namen des Tibbles aufrufen, um an wichtige Informationen zu kommen."
 survey
 ```
 
-Durch die Verwendung des Tidyverse und den dazugehörigen Tibbles bekommen wir diese kompakte und informative Ausgabe. Die erste Zeile der Ausgabe enthält die Dimensionierung der Daten in der Form `Zeilen x Spalten`. Wir bekommen also nicht nur die Information, wie viele Beobachtungen (`r n`), sodnern auch, wie viele Spalten (`r survey |> ncol()`). Dazu gibt uns ein Tibble gleich noch eine Vorschau seiner ersten zehn Zeilen aus, die so viele Variablen beinhaltet, wie auf die aktuelle Größe der Konsole passen. Die restlichen Variablennamen werden darunter aufgelistet, zumindest ein Teil davon. Ein Tibble achtet darauf, die Konsole nicht komplett mit Text zu fluten und schneidet daher irgendwann ab.
+In der ersten Zeile der Ausgabe steht die Dimensionierung der Daten. Wir bekommen also nicht nur die Information, wie viele Beobachtungen (`r n_fmt`) vorhanden sind, sondern auch, wie viele Variablen der Datensatz hat (`r survey |> ncol()`). Danach folgen die ersten Zeilen (und so viele Spalten, wie auf die Konsole passen). Tibbles achten darauf, die Konsole nicht komplett mit Text zu fluten, und schneiden daher irgendwann ab.
 
-Es gibt dedizierte Werkzeuge, um mehr über die Variablen herauszufinden. Die schauen wir uns jetzt an.
+Manchmal wollen wir die Anzahl Zeilen und Spalten nicht nur wissen, sondern weiterverwenden. Wir können sie dann auf Objekten speichern:
+
+```{r}
+rows <- nrow(survey)
+cols <- ncol(survey)
+
+print(str_glue("Der Datensatz hat {rows} Zeilen und {cols} Spalten."))
+```
 
 ## Variablen (Spalten)
 
-### Was ist eine Variable?
+Neben der Frage „Was ist eine Zeile?“ ist die zweite Kernfrage: „Was misst jede Spalte?“ In Umfragen steckt hinter fast jeder Frage (und oft hinter jeder Antwortoption) eine eigene Variable – deshalb werden solche Datensätze schnell sehr „spaltenreich“.
 
 > A variable, in the context of empirical research, is a bunch of observations of the same measurement. [@effect_2026]
 
-Neben der Frage, was eine Zeile darstellt, sollten wir auch wissen, was jede Variable genau misst. Während wir Beobachtungen typischerweise horizontal, also in Zeilen, darstellen, sind Variablen das, was wir vertikal, also in Spalten, darstellen.
+Beobachtungen stellen wir typischerweise horizontal (in Zeilen) dar, Variablen vertikal (in Spalten).
 
 ![Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten.](/images/observation_variable.png){#fig-surveys-observation-variable .lightbox}
 
-Auch die Informationen über die gemessenen Variablen gehören zu den Metainformationen eines Datensatzes. Und im besten Fall gibt es ein so genanntes *Data Dictionary*, eine Art Wörterbuch, in dem jede Variable aufgeführt und inhaltlich erläutert ist. Leider ist das nicht immer der Fall, in diesem Beispiel jedoch schon, wie wir später sehen werden. 
+Im Idealfall gibt es zu einem Datensatz ein *Data Dictionary* (oder Codebuch): eine Art Wörterbuch, in dem jede Variable aufgeführt und inhaltlich erläutert ist. Das ist Gold wert – denn aus reinen Spaltennamen wie `q001hheinkauf` könnt ihr die Bedeutung oft nicht zuverlässig ableiten.
 
-Unabhängig davon, ob es ein Data Dictionary gibt, wollen wir uns im Folgenden anschauen, wie wir mit R an wichtige Informationen zu den Variablen kommen. Folgende Fragen solltet ihr euch zu Beginn stellen:
+Damit ihr trotzdem schnell arbeitsfähig werdet, schauen wir uns jetzt Werkzeuge an, mit denen ihr Variablen in R systematisch „abklopfen“ könnt:
 
 - Wie viele Variablen gibt es?
-- Welche Arten von Variablen gibt es?
-- Welchen Wertebereiche hat eine Variable?
+- Welche Namen und Datentypen haben sie?
+- Welche Werte kommen in einer Variable überhaupt vor?
 
 ### Wie viele Variablen?
 
-Wie viele Variablen der Datensatz hat wissen wir bereits aus @lst-surveys-tibble-name. Die Anzahl der Variablen ist im vorliegenden Datensatz mit **`r survey |> ncol()`** verhältnismäßig hoch. Das ist typisch für Umfragen, insbesondere wenn viele Fragen enthalten sind. Denn jede Antwortoption und deren Ausprägung wird im Ergebnis mit einer eigenen Variable abgebildet, da kommt schnell was zusammen.
-
-Übrigens können wir mit folgendem Befehl die Anzahl Variablen (oder Spalten) ganz konkret als Wert auslesen, und nicht nur auf der Konsole ausgeben:
+Die Anzahl der Variablen habt ihr bereits über die Tibble-Ausgabe gesehen. Ihr könnt sie aber auch direkt als Wert auslesen. Hier die Variante mit der Pipe:
 
 ```{r}
 survey |>
   ncol()
 ```
 
-Diesen Wert können wir auf einem neuen Objekt speichern und später in unserem R-Skript wieder verwenden, was häufig nützlich ist:
+Den Wert könnt ihr auf einem neuen Objekt speichern und später wiederverwenden , das ist in Skripten häufig nützlich:
 
 ```{r}
 variable_count <- ncol(survey)
-print(str_glue("Es haben {variable_count} Menschen teilgenommen.")) # <1>
+print(str_glue("Der Datensatz hat {variable_count} Variablen.")) # <1>
 ```
-1. Mit `str_glue` können wir Zeichenketten mit Platzhaltern versehen, die zur Ausführung mit den Werten ersetzt werden.
+1. Mit `str_glue()` könnt ihr Zeichenketten mit Platzhaltern versehen, die bei der Ausführung mit Werten ersetzt werden.
 
-### Welche Arten von Variablen gibt es? 
+### Namen, Typen, erste Werte: `select()` + `glimpse()`
 
-Schauen wir uns fürs erste nur die ersten 10 Variablen im Datensatz genauer an:
+Schauen wir uns fürs Erste nur die ersten 10 Variablen im Datensatz an:
 
 ```{r}
 survey |>
-    select(1:10) |> # <1>
-    glimpse() # <2>
+  select(1:10) |> # <1>
+  glimpse() # <2>
 ```
-1. Mit `select` können wir Variablen auswählen. Die Notation `1:10` bedeutet so viel wie: *Variablen an Stelle 1 bis 10*.
-2. Mit `glimpse` bekommen wir schnell eine Übersicht der Namen, Datentypen und ersten Werte der Variablen.
+1. Mit `select()` könnt ihr Variablen auswählen. Die Notation `1:10` bedeutet: *Variablen an Position 1 bis 10*.
+2. Mit `glimpse()` bekommt ihr schnell eine Übersicht der Namen, Datentypen und ersten Werte der Variablen.
 
-Im Codeblock oben lernen wir mit `select` und `glimpse` gleich 2 zwei wichtige Funktionen kennen. Beide werden wir in diesem Buch noch sehr häufig verwenden. Mit `select` können wir aus den vielen Spalten genau die auswählen, an denen wir momentan interessiert sind. Das kann etwa für die Auswertung einer bestimmten Frage sinnvoll sein, bei der wir nur die Variablen benötigen, die sich auf die betroffene Frage beziehen. Die Notation `1:10` in den Klammern der `select`-Funktion bedeutet übersetzt *wähle die Variablen 1 bis 10 aus*. Dazu muss man wissen, dass Variablen in einem Datensatz eine feste Reihenfolge haben. Wir bekommen damit also die ersten 10 Variablen im Datensatz.
+Hier steckt direkt ein wichtiges Muster drin: Wir bauen eine kleine „Befehlskette“. Das etwas merkwürdig aussehende Symbol `|>` (Pipe) sorgt dafür, dass das Ergebnis links an den nächsten Befehl rechts übergeben wird. Eine dedizierte Einführung in die Pipe findet ihr in @sec-survey-pipe.
 
-Mit der Flexibilität einer Programmiersprache wie R können wir jede beliebige Menge an Spalten auswählen. Zum Beispiel auch die letzten 10:
+Mit der Flexibilität einer Programmiersprache wie R könnt ihr jede beliebige Menge an Spalten auswählen – zum Beispiel auch die letzten 10:
 
 ```{r}
 survey |>
   select(tail(everything(), 10))
 ```
 
-Mit `tail` ermitteln wir die letzen `n` Elemente einer Liste. `everything` gibt uns die Liste aller Spalten zurück, wenn es innerhalb der `select`-Funktion aufgerufen wird. Somit kann man den Befehl übersetzen mit *Gib mir die letzten 10 Elemente (`tail`) aus der Liste aller Spalten (`everything`)*. Wir werden später noch Werkzeuge im Detail lernen, wie wir geanu die Spalten finden und auswählen, die wir brauchen. Das ist gerade bei Umfragen mit vielen Spalten extrem nützlich.
+Mit `tail()` ermitteln wir die letzten `n` Elemente einer Liste. `everything()` gibt uns (innerhalb von `select()`) die Liste aller Spalten. Der Ausdruck lässt sich also übersetzen als: *Gib mir die letzten 10 Elemente aus der Liste aller Spalten.* Gerade bei Umfragen mit vielen Spalten ist dieses gezielte Auswählen extrem nützlich. Noch mehr Möglichkeiten, Spalten auszuwählen, lernen wir im Verlauf des Projekts und im dedizierten @sec-basics-select.
 
 ::: {.callout-note appearance="simple"}
 ## Variablen haben eine feste Position
 
-Variablen (oder Spalten) haben eine feste Reihenfolge und Position in einem Datensatz. Wir können also jede Spalte statt über ihren Namen auch über ihre Position ansprechen.
+Variablen (Spalten) haben eine feste Reihenfolge und Position in einem Datensatz. Ihr könnt eine Spalte daher nicht nur über ihren Namen, sondern auch über ihre Position ansprechen.
 :::
-
-Die Funktion `glimpse` wird unmittelbar nach dem `select` aufgerufen und bekommt das Ergebnis übergeben. Dafür sorgt das etwas merkwürdig aussehende Symbol `|>`, das wir den Pipe-Operator oder einfach nur die Pipe nennen. Es sorgt dafür, dass das Ergebnis des ersten Befehls (vor der Pipe) an den nächsten Befehl (nach der Pipe) übergeben wird. Auf diese Weise können wir Ketten von Befehlen aufbauen, in der jeder Befehl sein eigenes Ergebnis an den nächsten übergibt. Eine dedizierte Einfürhung in den Pipe-Operator findet ihr in @sec-survey-pipe.
 
 ### Welchen Wertebereich hat eine Variable?
 
-Zurück zur Ausgabe vom `glimpse` oben. Was genau bedeutet das, was wir auf der Konsole sehen? Die ersten beiden Zeilen geben Auskunft über die Anzahl an Zeilen und Spalten im Datensatz. Warum sind es hier nur 10 Zeilen, statt der `r survey |> ncol()` Spalten, wie oben geschrieben? Weil wir `glimpse` nicht mehr für den ursprünglichen Datensatz aufrufen, sondern für den, der als Ergebnis des vorgelagerten `select(1:10)` entsteht. Und der hat nur noch 10 Spalten, was wir aber genau so wollten.
+`glimpse()` ist super, um *schnell* einen Eindruck zu bekommen – aber es zeigt euch nur die ersten Werte. Wenn ihr wirklich wissen wollt, welche Ausprägungen vorkommen, müsst ihr gezielt nachsehen.
 
-Darunter folgen Zeilenweise die Spalten mit den Informationen Spaltenname, Datentyp und Auflistung der ersten Werte für jede Spalte. Was genau die Datentypen wie `<dbl>` oder `<chr>` bedeuten lernen wir später noch. Nach dem Datentyp sehen wir eine komma-getrennte Liste der ersten Werte, soweit sie auf die Konsole passen. Für die erste Spalte im Datensatz, `q001hheinkauf`, sind die ersten Werte also 2, 1, 2, 2 usw. Was das genau bedeutet können wir nicht wissen, sondern müssen es nachschlagen. Dazu gibt es üblicherweise zu einem Fragebogen ein entsprechendes Codebuch, in dem die Antwortkodierungen in sprechende Werte übersetzt werden. Das ist meistens Teil des Data Dictionary.
+Nehmen wir die Variable `q001hheinkauf`. Sie gehört zur Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Im Codebuch zur Umfrage lesen wir nach, dass "1" für "Ich selbst und eine andere Person" steht, während "2" für  "Hauptsächlich ich selbst" steht. Der Wert "0" stünde für "Fast immer eine andere Person".  Aber kommen wirklich nur diese Werte vor? Oder kommen überhaupt alle vor?
 
-Bei der ersten Frage, zu der die Spalte `q001hheinkauf` gehört, geht es um die Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Der Wert 1 steht hier kurz gesagt für "allein verantwortlich" und 2 für "geteilte Verantwortung". Aber sind das die einzigen Werte, die die Variable annimmt? Das können wir aus der Ausgabe der `glimpse`-Funktion nicht ableiten.
-
-Wir könnten die Spalte einfach auswählen und uns das Ergebnis ausgeben lassen:
+Zuerst können wir uns die Spalte als Tibble ausgeben lassen:
 
 ```{r}
 survey |>
   select(q001hheinkauf)
 ```
 
-Das Ergebnis ist ein Tibble, der auf der Konsole standardmäßig seine ersten 10 Werte ausgibt. Dieses Verhalten können wir ändern und den Tibble um mehr Werte bitten:
+Standardmäßig zeigt R dabei nur die ersten 10 Zeilen. Das könnt ihr ändern:
 
 ```{r}
 survey |>
@@ -184,48 +199,60 @@ survey |>
   print(n = 20)
 ```
 
-Damit sind des schon doppelt so viele Beobachtungen für die Variable `q001hheinkauf`, und immernoch sehen wir nur die Ausprägungen 1 und 2. Um wirklich sicher zu wissen, welche Werteausprägungen existieren, geben wir die eindeutigen Werte aus:
+Alle Zeilen auszugeben würde dieses Kapitel sehr lang machen und wäre gleichzeitig aufwändig zu prüfen. Um dennoch sicher zu wissen, welche Werteausprägungen existieren, können wir uns die eindeutigen Werte ausgeben lassen:
 
 ```{r}
 survey |>
   distinct(q001hheinkauf)
 ```
 
-Und siehe da: Es ist tatsächlich so, dass nur diese beiden Werte vorkommen. Wie oft? Auch das bekommen wir schnell raus:
+Eine kleine Überraschung, denn die "0" ist nicht vertreten. Hat scheinbar niemand geantwortet. Wenn ihr zusätzlich wissen wollt, wie häufig die Ausprägungen angekreuzt wurden:
 
 ```{r}
 survey |>
   count(q001hheinkauf)
 ```
 
-Die Funktion `count` kennen wir bereits von oben. Wenn wir ihr eine Variable übergeben, dann ermittelt sie, wie häufig jede Ausprägung der Variable in den Daten vorkommt. Technisch gruppiert sie die Daten nach der übergebenen Variable und zählt die Beobachtungen für jede Gruppe.
+Die Funktion `count()` gruppiert die Daten nach der übergebenen Variable und zählt die Beobachtungen pro Gruppe. Wir stecken schon mittem in der Analyse der Daten 🤓.
 
 ::: {.callout-note appearance="simple"}
 ## Aggregieren von Daten
 
-Die Funktion `count` zählt zu den Aggregationsfunktionen. Eine dedizierte Einführung, wie man mit R und dem `dplyr`-Paket Daten zusammenfasst, findet ihr in @sec-basics-summarize
-
+Die Funktion `count()` ist eine Aggregationsfunktion. Eine dedizierte Einführung, wie man mit R und dem `dplyr`‑Paket Daten zusammenfasst, findet ihr in @sec-basics-summarize.
 :::
 
+Und weil es gerade passt: Wenn wir Daten analysieren, dann bevorzugen wir in dem allermeisten Fällen eine aussagekräftige Visualisierung über eine tabellarische Ausgabe. Die Häufigkeiten der beiden Antwortmöglichkeiten können wir wunderbar als Balkendiagramm visualisieren:
+
+```{r}
+survey |>
+  count(q001hheinkauf) |>
+  ggplot() +
+  aes(x = q001hheinkauf, y = n) +
+  geom_col()
+```
+
+Zugegeben: Das Balkendiagramm ist verbesserungswürdig, dennoch zeigt es einen wichtigen Aspekt der explorativen Datenanalyse und warum R dafür so gut geeignet ist. Mit nur drei Zeilen Code erstellen wir ein Balkendiagramm, das uns die Verhältnisse der Anworten zur ersten Frage im Datensatz visuell aufzeigt. Und das Diagramm ist inhaltlich korrekt, dafür sorgt die Bibliothek `ggplot2`, die wir hier verwenden. Es ist dafür nicht wirklich ansprechend (schaut etwas mal die Labels auf der x-Achse an). Aber darum geht es in der explorativen Datenanalyse nicht. Wir wollen schhnell Ergebnisse sehen und flexibel in den Daten wühlen können. Das funktioniert mit R und dem Tidyverse perfekt!
 
 ## Beobachtungen (Zeilen)
 
-Was für Variablen gilt, gilt auch für Zeilen. Jede hat eine feste Position. Bei den Zeilen nennen wir das auch die *row number* (Zeilennummer), und es gibt eine Funktion, um diese zu ermitteln:
+Was für Variablen gilt, gilt auch für Zeilen: Jede hat eine feste Position. Bei Zeilen nennen wir das auch die *row number* (Zeilennummer). Mit `row_number()` könnt ihr diese Position abfragen und damit gezielt Zeilen auswählen.
 
 ```{r}
 survey |>
   select(1:10) |>
   filter(row_number() <= 10) # <1>
 ```
-1. Mit `row_number` bekommen wir die Position (oder Nummer) für eine Zeile.
+1. Mit `row_number()` bekommen wir die Position (Zeilennummer) einer Beobachtung.
 
-Die Funktion `filter` verwenden wir, um die Beobachtungen nach bestimmten Kriterien einzugrenzen. Zum Beispiel um nur weibliche Personen zu betrachten. Wir können mit der `row_number`-Funktion die Beobachtungen auch nach ihrer Position im Datensatz eingrenzen. Das obige Beispiel behält nur jene Zeilen im Ergebnis, deren Position kleiner oder gleich (`<=`) 10 ist. 
+Die Funktion `filter()` verwenden wir, um Beobachtungen nach Kriterien einzugrenzen – zum Beispiel um nur weibliche Personen zu betrachten. Mit `row_number()` könnt ihr stattdessen nach Position filtern, z. B. um „Beispielzeilen“ für einen ersten Blick zu nehmen.
 
-Statt kleiner-gleich können wir auch andere Operatoren verwenden:
+Statt „kleiner-gleich“ (`<=`) könnt ihr natürlich auch andere Operatoren verwenden:
 
 ```{r}
 survey |>
   filter(row_number() == 42) |>
   select(q004geschlecht)
 ```
+
+Damit habt ihr jetzt die wichtigsten Werkzeuge für den Start: Daten laden, Kontext verstehen, Dimensionen prüfen, Variablen überblicken und Wertebereiche testen. Im nächsten Schritt geht es darum, die Variablen inhaltlich zu interpretieren (Codebuch/Data Dictionary) und die Daten für Analysen vorzubereiten.
 

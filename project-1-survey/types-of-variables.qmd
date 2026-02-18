@@ -5,124 +5,147 @@
 source("project-1-survey/setup.R")
 ```
 
-Wie haben in @sec-surveys-data schon Beispiele für eine Arten von Variablen gesehen. In Umfragen begegnen wir häufig nominalskalierten Variablen, seltener sind numerische oder gar qualitative Variablen. Aber was genau unterscheidet diese Variablentypen?
+In @sec-surveys-data haben wir schon gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“ – der Variablentyp entscheidet ganz praktisch darüber,
 
+- welche Kennzahlen sinnvoll sind (Mittelwert? Median? Anteil?),
+- welche Visualisierung passt (Histogramm? Balkendiagramm? Boxplot?),
+- und worauf ihr bei der Interpretation achten müsst (z. B. Codes, Ausreißer, fehlende Werte).
+
+Lasst uns deshalb Ordnung in die Spalten bringen: Welche Arten von Variablen gibt es – und woran erkennt ihr sie in R?
+
+::: {.callout-note appearance="simple"}
+## Lernziele in diesem Abschnitt
+
+- Ihr könnt die wichtigsten Variablentypen unterscheiden (numerisch, kategorial, ordinal, qualitativ).
+- Ihr könnt in R schnell prüfen, welche Werte in einer Variable vorkommen.
+- Ihr versteht den Unterschied zwischen *Bedeutung* einer Variable (Messniveau) und dem *Datentyp* in R (`dbl`, `int`, `chr`, …).
+- Ihr wisst, welche typischen Probleme je Typ auftreten (NA, Ausreißer, Kodierungen).
+:::
 
 ## Ein Schema zur Orientierung
 
-Um das besser zu verstehen wollen wir katgeoriale Variablen gegenüber anderen Arten von Variablen abgrenzen. Laut @effect_2026 unterscheiden wir in der empirischen Forschung zwischen den folgenden Typen von Variablen:
+Um Variablen sauber abzugrenzen, hilft ein einfaches Schema. Laut @effect_2026 unterscheiden wir in der empirischen Forschung zwischen:
 
-- Kontinuierliche Variablen
+- Kontinuierlichen Variablen
 - Zählvariablen
-- Ordinale Variablen
-- Kategoriale Variablen
-- Qualitative Variablen
+- Ordinalen Variablen
+- Kategorialen Variablen
+- Qualitativen Variablen
 
-Ich finde diese Einteilung trifft es sehr gut und verwende sie daher in diesem Buch weiter. Man kann noch eine Ebene darüber einziehen und kontinuierliche Variablen und Zählvariablen als numerische Variablen zusammenfassen. Parallel dazu sind ordinale Variablen genau genommen eine Form von kategorialen Variablen und eine weitere wären die nominalskalierten Variablen. 
+Für die Praxis ist außerdem eine „Zusammenfassungsebene“ nützlich:
+
+- **Numerisch**: kontinuierlich + Zählvariablen
+- **Kategorial**: nominal + ordinal
 
 ![Arten von Variablen und typische verwendete Datentypen in R.](/images/types-of-variables.png){#fig-surveys-types-of-variables}
 
-Schauen wir uns für jeden Typ Beispiele an, um ihn besser zu verstehen.
+Wichtig: Diese Einteilung beschreibt das *Messniveau* (also: was wird gemessen?). Der Datentyp in R (`<dbl>`, `<int>`, `<chr>`, …) ist ein Hinweis, aber nicht die ganze Wahrheit. In Umfragen werden Kategorien z. B. oft als Zahlen kodiert (1, 2, 3 …) oder als viele 0/1‑Spalten (Mehrfachauswahl). Ohne Codebuch/Data Dictionary kann man das leicht falsch lesen.
+
+Schauen wir uns jetzt die Typen nacheinander an – jeweils mit Beispielen aus unserem Datensatz.
 
 ## Numerische Variablen
 
-Bei den numerischen Variablen könnte man auch von quantitativen Variablen sprechen. Wir unterscheiden dabei solche, die prinzipiell jeden beliebigen Wert als reelle Zahl annehmen können und solche, die nur ganze, also natürliche, Zahlen annehmen können. Erstere nennen wir *kontinuierlich*, weil jeder Wert auf einem Kontinuum möglich ist.
+Numerische (quantitative) Variablen messen eine Menge oder Größe. Hier sind Kennzahlen wie Mittelwert, Median oder Standardabweichung oft sinnvoll – aber nur, wenn die Daten plausibel sind und ihr Ausreißer/fehlende Werte berücksichtigt.
 
 ### Kontinuierliche Variablen
 
 > Continuous variables are variables that could take any value (perhaps within some range). [@effect_2026]
 
-Im vorliegenden Umfragedatensatz fragt die Frage 13 nach der Eingabe eines Preises, den die Teilnehmenden bereit wären, für einen Liter Milch vorgegebener Marken auszugeben:
+Im Umfragedatensatz fragt eine Frage nach der Eingabe eines Preises, den die Teilnehmenden bereit wären, für einen Liter Milch einer vorgegebenen Marke zu bezahlen:
 
 *"Geben Sie für die 3 Marken bitte den Preis an, den Sie für angemessen halten und bei dem Sie zugreifen würden! Als Dezimaltrennzeichen verwenden Sie bitte das Komma."*
 
-Schauen wir auf ein paar Beobachtungen zu dieser Frage. Wie sehen die Antworten aus?
+Schauen wir auf ein paar Beobachtungen. Wie sehen die Antworten aus?
 
 ```{r}
 survey |>
-    select(u013pzahl_1weihen)
+  select(u013pzahl_1weihen)
 ```
 
-Anhand der Ausgabe sehen wir 3 Dinge: 
+Anhand der Ausgabe erkennt ihr typischerweise drei Dinge:
 
-1. Der Datentyp der Spalte ist als `<dbl>` angegeben. Das ist typisch für kontinuierliche Varialen, denn das steht für den Datentyp *double*, der in der Programmierung für Dezimalzahlen (mit Nachkommastellen) verwendet wird.
-2. Viele Werte sind mit `NA` angegeben, was bedeutet, dass hier kein Wert existiert. In der Auswertung der Daten stellt sich die Frage, was das im Kontext des Datensatzes bedeutet und wie wir damit umgehen.
-3. Die beiden einzigen Werte sind 1,49 € und 150 €. Letzteres dürfte ein Tippfehler sein und wirft auch hier die Frage auf, wie wir damit umgehen.
+1. Der Datentyp ist `<dbl>` (*double*). Das passt zu Dezimalzahlen und ist daher typisch für kontinuierliche Variablen.
+2. Viele Werte sind `NA` – es fehlen also Angaben. Später müssen wir klären, *warum* Werte fehlen und wie wir damit umgehen.
+3. Manchmal seht ihr sehr ungewöhnliche Werte (z. B. 150 €). Das sind oft Ausreißer – z. B. durch Tippfehler.
 
-Den zweiten Punkt in der Liste könnten wir einfach abhaken, indem wir die `NA`-Werte herausfiltern (auch wenn das kein Patentrezept ist). Dafür gibt es die `drop_na`-Funktion:
+#### Fehlende Werte („NA“) kurz behandeln
+
+Für einen ersten Überblick können wir fehlende Werte herausfiltern (auch wenn das nicht immer die richtige Entscheidung für eine echte Analyse ist). Das geht mit `drop_na()`:
 
 ```{r}
 survey |>
-    select(u013pzahl_1weihen) |>
-    drop_na()
+  select(u013pzahl_1weihen) |>
+  drop_na()
 ```
 
-Die Ausgabe enthält jetzt keine fehlenden Werte mehr und wir bekommen ein paar mehr "echte" Werte angezeigt. Wir zu erwarten gibt es fast beliebige Werte mit zwei Nachkommastellen, die als Antwort auf die Frage zulässig sind. Solche Daten sind typisch für kontinuierliche Variablen; es gibt keine feste Liste an Werten, sondern theoretisch existiert jeder Wert auf einem Kontinuum. Das kann man sich verdeutlichen, wenn man versucht, die eindeutigen Werte zu ermitteln. Dafür haben wir in @sec-surveys-data die Funktion `distinct` kennengelernt:
+Jetzt sehen wir mehr „echte“ Preise. Für kontinuierliche Variablen ist typisch: Es gibt *keine feste Liste* an Ausprägungen, sondern (theoretisch) unendlich viele Werte auf einem Kontinuum. Das merkt ihr auch daran, dass `distinct()` bei solchen Variablen schnell sehr viele unterschiedliche Werte liefern kann:
 
 ```{r}
 survey |>
-    select(u013pzahl_1weihen) |>
-    drop_na() |>
-    distinct()
+  select(u013pzahl_1weihen) |>
+  drop_na() |>
+  distinct()
 ```
 
-Zwar sieht es hier so aus, als wären die eindeutigen Werte mit `r survey |> drop_na(u013pzahl_1weihen) |> distinct(u013pzahl_1weihen) |> count()` nicht so viele, als das sie nicht auch eine feste Menge an Kategorien darstellen könnten. Allerdings ist es klar, dass *theoretisch*  viel mehr unterschiedliche Preise hätten eingegeben werden können und dass es sich bei der Abfrage eines Preises von Natur her um eine numerische Größe handelt.
+Zwar sieht es hier so aus, als wären die eindeutigen Werte mit `r survey |> drop_na(u013pzahl_1weihen) |> distinct(u013pzahl_1weihen) |> count()` gar nicht so zahlreich. Trotzdem ist klar: *theoretisch* könnten viel mehr unterschiedliche Preise eingegeben werden – und „Preis“ ist von Natur aus eine numerische Größe.
 
-#### Ausreißer
+#### Ausreißer, Mittelwert und Median
 
-Bei kontinuierlichen Variablen spielt häufig das Problem der Ausreißer eine Rolle. Es gibt verschiedene Gründe für Ausreißer, bei Umfragen kommt etwa ein einfacher Tippfehler als Ursache infrage. Je nach Ursprung sind unterschiedliche Maßnahmen möglich. Tippfehler sollten wir entweder korrigieren, oder, wenn wir das nicht können, herausfiltern. Veranschaulichen wir uns die Problematik kurz an einem Beispiel und berechnen den Durchschnittspreis, den die Probanden eingegeben haben:
+Bei kontinuierlichen Variablen spielt häufig das Problem der Ausreißer eine Rolle. Gerade in Umfragen ist ein Tippfehler eine naheliegende Ursache. Je nach Ursprung sind unterschiedliche Maßnahmen möglich: Tippfehler sollten wir korrigieren – oder (wenn wir nicht sicher korrigieren können) pragmatisch filtern.
+
+Starten wir mit dem Durchschnittspreis als arithmetischem Mittel:
 
 ```{r}
 survey |>
-    summarize(avg_price = mean(u013pzahl_1weihen))
+  summarize(avg_price = mean(u013pzahl_1weihen))
 ```
 
-Die `mean`-Funktion berechnet das arithemtische Mittel und mit `summarize` erzeugen wir eine neue, aggregierte Spalte. Die neue Spalte `avg_price` sollte also den Durchschnittspreis (als arithmetisches Mittel) über alle Probanden enthalten. Wie wir sehen, ist der Wert aber `NA`. 
-
-Der Grund dafür ist einfach: R weiß nicht, wie es `NA`-Werte in einer Berechnung behandeln soll. Daher wird jede Berechnung, in der ein `NA` vorkommt, im Ergebnis sofort auch `NA`. Die Lösung: Die `NA`-Werte müssen weg:
+Warum steht dort `NA`? Weil R nicht „raten“ will, wie `NA` in Berechnungen behandelt werden soll. Sobald ein `NA` in die Rechnung eingeht, wird das Ergebnis `NA`. Für einen ersten Blick entfernen wir also die fehlenden Werte:
 
 ```{r}
 survey |>
-    drop_na(u013pzahl_1weihen) |> # <1>
-    summarize(avg_price = mean(u013pzahl_1weihen))
+  drop_na(u013pzahl_1weihen) |> # <1>
+  summarize(avg_price = mean(u013pzahl_1weihen))
 ```
-1. Die `drop_na`-Funktion entfernt alle Zeilen mit `NA`-Werten. Wenn eine oder mehrere Spalten übergeben werden, dann bezieht sich die `NA`-Filterung nur auf diese. Sobald eine in der Liste den Wert `NA` aufweist, wird die Zeile entfernt.
+1. `drop_na()` entfernt alle Zeilen mit fehlenden Werten. Wenn ihr Spalten angebt, bezieht sich das Entfernen nur auf diese Spalten.
 
 ```{r}
 #| include: false
 accepted_price <- survey |>
-    drop_na(u013pzahl_1weihen) |>
-    summarize(avg_price = mean(u013pzahl_1weihen)) |>
-    pull() |>
-    round(2) |>
-    format(big.mark = ".", decimal.mark = ",", nsmall = 2)
+  drop_na(u013pzahl_1weihen) |>
+  summarize(avg_price = mean(u013pzahl_1weihen)) |>
+  pull() |>
+  round(2) |>
+  format(big.mark = ".", decimal.mark = ",", nsmall = 2)
 ```
 
-Und schon funktioniert es! Was sagt uns der Wert? Im Durchschnitt halten die Probanden also einen Preis von `r accepted_price` € für einen Liter Milch für gerechtfertigt. Kann das sein? Haben die alle zu viel Geld? Berechnen wir den Durchschnitt mit einer anderen Kenngröße, dem Median:
+Im Durchschnitt halten die Probanden also einen Preis von `r accepted_price` € für einen Liter Milch für gerechtfertigt. Klingt das plausibel? Prüfen wir das mit einer robusteren Kenngröße: dem Median.
 
 ```{r}
 survey |>
-    drop_na(u013pzahl_1weihen) |>
-    summarize(avg_price = median(u013pzahl_1weihen))
+  drop_na(u013pzahl_1weihen) |>
+  summarize(avg_price = median(u013pzahl_1weihen))
 ```
 
 ```{r}
 #| include: false
 accepted_price_median <- survey |>
-    drop_na(u013pzahl_1weihen) |>
-    summarize(avg_price = median(u013pzahl_1weihen)) |>
-    pull() |>
-    round(2) |>
-    format(big.mark = ".", decimal.mark = ",", nsmall = 2)
+  drop_na(u013pzahl_1weihen) |>
+  summarize(avg_price = median(u013pzahl_1weihen)) |>
+  pull() |>
+  round(2) |>
+  format(big.mark = ".", decimal.mark = ",", nsmall = 2)
 ```
 
-Oha! Der Median ist mit `r accepted_price_median` € deutlich kleiner. Wie kommt es dazu? Die Antwort ist einfach: Der Median ist robust gegenüber Ausreißern, das arithmetische Mittel dagegen nicht. Das arithmetische Mittel ist einfach die Summe aller Werte geteilt durch die Anzahl Werte:
+Der Median ist mit `r accepted_price_median` € deutlich kleiner. Woran liegt das? Der Median ist robust gegenüber Ausreißern, das arithmetische Mittel dagegen nicht.
+
+Das arithmetische Mittel ist:
 
 $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
 $$
 
-Der Median ist dagegen einfach der mittlere Wert der sortierten Preise; bei geradem $n$ ist er der Mittelwert der beiden mittleren Werte. Und ihm ist es egal, ob am Ende der Liste ein paar riesige Werte folgen.
+Der Median ist der mittlere Wert der sortierten Daten; bei geradem $n$ ist er der Mittelwert der beiden mittleren Werte:
 
 $$
 \tilde{x} =
@@ -132,150 +155,152 @@ x_{\left(\frac{n+1}{2}\right)}, & \text{falls } n \text{ ungerade ist},\\[6pt]
 \end{cases}
 $$
 
-Was also tun? Da wir nicht wissen können, was die Probanden eigentlich eingeben wollten, filtern wir die unangemessen hohen Werte heraus. Schauen wir zunächst einmal, welche das überhaupt sind:
+Was also tun? Da wir nicht sicher wissen, welche Eingabe „eigentlich gemeint“ war, entscheiden wir uns hier pragmatisch für ein Filtern unplausibler Werte. Schauen wir zuerst, welche extrem hohen Werte vorkommen:
 
 ```{r}
 survey |>
-    select(u013pzahl_1weihen) |>
-    arrange(desc(u013pzahl_1weihen))
+  select(u013pzahl_1weihen) |>
+  arrange(desc(u013pzahl_1weihen))
 ```
 
-Was meint ihr? Gar nicht so einfach, zu entscheiden, welche Werte ernst gemeint sind und welche auf Tippfehler schließen lassen. Pragmatisch entscheiden wir uns für die 10 € als Grenze:
+Gar nicht so einfach, eine Grenze festzulegen. Für dieses Beispiel wählen wir 10 € als Obergrenze:
 
 ```{r}
 survey |>
-    filter(u013pzahl_1weihen < 10.0) |>
-    summarize(avg_price = mean(u013pzahl_1weihen))
+  filter(u013pzahl_1weihen < 10.0) |>
+  summarize(avg_price = mean(u013pzahl_1weihen))
 ```
 
-Durch das Herausfiltern der Ausreißer nähert sich das arithmetische Mittel dem Median deutlich an. Jetzt haben wir die Ausreißer nach oben, also die extrem hohen Werte, betrachtet und behandelt. Gibt es auch Ausreißer nach unten?
+Gibt es auch Ausreißer nach unten?
 
 ```{r}
 survey |>
-    select(u013pzahl_1weihen) |>
-    arrange(u013pzahl_1weihen)
+  select(u013pzahl_1weihen) |>
+  arrange(u013pzahl_1weihen)
 ```
 
-Die `desc`-Funktion hat zuvor dafür gesorgt, dass die Werte absteigend sortiert werden (*descending* = absteigend). Lassen wir sie weg, dann wird standardmäßig aufsteigend sortiert. Die kleinsten Werte sind jetzt oben in der Liste und wir können erkennen, dass auch hier offensichtlich unplausible Werte existieren. Ein Preis von Null Euro oder nur 9 Cent? Auch die sollten wir vielleicht herausfiltern. Biedes zusammen sieht dann so aus:
+Auch hier sehen wir unplausible Werte (z. B. 0 €). Filtern wir beide Seiten:
 
 ```{r}
 survey |>
-    filter(u013pzahl_1weihen < 10.0) |>
-    filter(u013pzahl_1weihen > 0.1) |>
-    summarize(avg_price = mean(u013pzahl_1weihen))
+  filter(u013pzahl_1weihen < 10.0) |>
+  filter(u013pzahl_1weihen > 0.1) |>
+  summarize(avg_price = mean(u013pzahl_1weihen))
 ```
 
-Durch den Aufbau einer Pipeline von `filter`-Anweisungen werden diese nacheinander angewendet. Zuerst fliegen alle Preise raus, die über 10 € liegen, danach alle, die kleiner als 10 Cent sind. Am Ende berechnen wir auf Basis der gefilterten Werte erneut das arithmetische Mittel.
+Durch die Pipeline werden die Filter nacheinander angewendet: zuerst „zu groß“, danach „zu klein“. Danach berechnen wir erneut den Mittelwert.
 
 ::: {.callout-note appearance="simple"}
 ## Filtern von Daten
 
-Die Funktion `filter` ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem `dplyr`-Paket Daten filtert, findet ihr in @sec-basics-filter
-
+Die Funktion `filter()` ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem `dplyr`‑Paket Daten filtert, findet ihr in @sec-basics-filter.
 :::
 
-Übrigens stellt die Visualisierung eine geeignete Methode dar, um Ausreißer schnell zu erkennen. Ein Boxplot etwa stellt Ausreißer als Punkte außerhalb der Box dar:
+#### Ausreißer sehen: Boxplot und Histogramm
+
+Visualisierungen helfen, Ausreißer schnell zu erkennen. Ein Boxplot stellt Ausreißer als Punkte außerhalb der Box dar:
 
 ```{r}
 survey |>
-    ggplot() +
-    aes(x = u013pzahl_1weihen) +
-    geom_boxplot()
+  ggplot() +
+  aes(x = u013pzahl_1weihen) +
+  geom_boxplot()
 ```
 
-Man erkennt hier sehr schön die handvoll Ausreißer ab der 50€-Marke. Die Box des Plots ist durch die Ausreißer nur als dicker Strich zu erkennen. Was tun? Ein einfaches Filtern ist im Fall eines Boxplots nicht zulässig, nur um den Plot besser zu sehen. Das liegt daran, dass der Boxplot verschiedene Werte berechnet und als Größen der Box darstellt. Darunter auch der Median. Filtern wir aber Werte heraus und berechnen dann den Median, dann ändert sich dadurch die Grundlage für die Berechnung, und damit auch der Plot selbst. Was also tun, damit wir dennoch eine sinnvolle Visualisierung bekommen?
+Man erkennt hier sehr schön die Handvoll Ausreißer. Die Box selbst ist dadurch kaum sichtbar. Was tun? Bei einem Boxplot solltet ihr nicht einfach filtern, „nur damit es schöner aussieht“, weil der Boxplot Kennzahlen wie den Median und Quartile aus *den gefilterten Daten* berechnen würde – und ihr damit den Plot inhaltlich verändert.
 
-Die Anwort ist: Reinzoomem statt filtern! Reinzoomen bedeutet, wir betrachten nur den Teil der x-Achse, in dem der wichtigste Teil des Plots liegt. Versuchen wir es und legen einen Bereich zwischen 0 und 10 € fest:
+Die Lösung: **Reinzoomen statt filtern.** Wir begrenzen nur die Achsenansicht:
 
 ```{r}
 survey |>
-    ggplot() +
-    aes(x = u013pzahl_1weihen) +
-    geom_boxplot() +
-    coord_cartesian(xlim = c(0, 10))
+  ggplot() +
+  aes(x = u013pzahl_1weihen) +
+  geom_boxplot() +
+  coord_cartesian(xlim = c(0, 10))
 ```
 
-Schon besser, die Box wird sichtbar. Allerdings ist rechts daneben noch immer viel Platz, den wir in der Visualisierung für die Darstellung der Box verwenden könnten. Wenn man sich vergegegwärtigt, dass die Begrenzungen der Box den 25% bzw. 75%-Punkt der Werte bedeuten, und er Strich in der Mitte der 50%-Punkt (Median), dann liegt die Hälfte der Werte in der Box selbst. Ein Viertel liegt jeweils links und rechts von der Box. Die sogenannten Whisker, also die Linien die aus der Box herauslaufen, stellen Werte dar, die noch 1,5-fachen Interquartilsabstand zu den Punkten $Q_1$ und $Q_3$ liegen:
+Schon besser. Die „Whisker“ des Boxplots reichen typischerweise bis zum 1,5‑fachen Interquartilsabstand (IQR) über/unter die Quartile:
 
 $$
 \left[\, Q_1 - 1.5\cdot\mathrm{IQR},\; Q_3 + 1.5\cdot\mathrm{IQR} \,\right]
 $$
 
-Wobei gilt:
+wobei gilt:
 
 $$
 \mathrm{IQR} = Q_3 - Q_1
 $$
 
-
-Zoomen wir also noch ein Stück weiter hinein:
-
-```{r}
-survey |>
-    ggplot() +
-    aes(x = u013pzahl_1weihen) +
-    geom_boxplot() +
-    coord_cartesian(xlim = c(0, 5))
-```
-
-Eine Alternative für die Darstellung der Verteilung einer kontinuierlichen Variable ist das Histogram:
+Zoomen wir noch ein Stück weiter hinein:
 
 ```{r}
 survey |>
-    ggplot() +
-    aes(x = u013pzahl_1weihen) +
-    geom_histogram()
+  ggplot() +
+  aes(x = u013pzahl_1weihen) +
+  geom_boxplot() +
+  coord_cartesian(xlim = c(0, 5))
 ```
 
-Auch hier leiden wir erneut unter den Ausreißern. Anders als beim Boxplot können wir hier aber einfach filtern, schließlich berechnet das Histogramm lediglich die Häufigkeiten pro Klasse, die wir dadurch nicht verändern:
+Eine Alternative ist ein Histogramm:
 
 ```{r}
 survey |>
-    filter(u013pzahl_1weihen < 10.0) |>
-    ggplot() +
-    aes(x = u013pzahl_1weihen) +
-    geom_histogram()
+  ggplot() +
+  aes(x = u013pzahl_1weihen) +
+  geom_histogram()
 ```
 
-Wenn wir nichts angeben, dann wählt `ggplot2` für uns eine passende Klassengröße basierend auf den Daten. Diese können wir beeinflussen, vielleicht wollen wir Klassengrößen von 50 Cent betrachten:
+Auch hier „ziehen“ Ausreißer die Skala auseinander. Beim Histogramm dürft ihr für die Darstellung pragmatisch filtern, weil es nur Häufigkeiten pro Klasse zählt:
 
 ```{r}
 survey |>
-    filter(u013pzahl_1weihen < 10.0) |>
-    ggplot() +
-    aes(x = u013pzahl_1weihen) +
-    geom_histogram(binwidth = 0.5)
+  filter(u013pzahl_1weihen < 10.0) |>
+  ggplot() +
+  aes(x = u013pzahl_1weihen) +
+  geom_histogram()
 ```
 
-Wir kommen im Verlauf des Projekts auf unterschiedliche kontinuierliche Variablen zurück. Für jetzt merken wir uns, dass bei ihen Vorsicht mit Ausreißern geboten ist und dass wir mit Boxplots und Histogrammen ihre Verteilung schnell überblicken können.
+Wenn ihr keine Klassenbreite angebt, wählt `ggplot2` etwas Passendes. Ihr könnt das aber steuern, z. B. mit 50‑Cent‑Klassen:
+
+```{r}
+survey |>
+  filter(u013pzahl_1weihen < 10.0) |>
+  ggplot() +
+  aes(x = u013pzahl_1weihen) +
+  geom_histogram(binwidth = 0.5)
+```
+
+Für jetzt merken wir uns: Kontinuierliche Variablen sind oft `<dbl>`, können viele Ausprägungen haben und sind empfindlich gegenüber Ausreißern. Boxplot/Histogramm geben euch schnell ein Gefühl für die Verteilung.
 
 ### Zählvariablen
 
 > Count variables are those that, well, count something. Perhaps how many times something happened or how many of something there are. [@effect_2026]
 
-Kurz gesagt sind der Unterschied zwischen kontinuierlichen Variablen und Zählvariablen die Stellen nach dem Komma. Letztere haben keine. Und das ist typisch für Dinge, die einfach abzählbar sind:
+Der Unterschied zur kontinuierlichen Variable ist (ganz pragmatisch): Zählvariablen haben keine Nachkommastellen. Typische Beispiele:
 
-- Die Jahre, die ein Mensch schon lebt (Alter)
-- Die Häufigkeit, wie oft man im Jahr im Fitnessstudio war
-- Die Anzahl Produkte, die verkauft wurden
+- Alter (in Jahren)
+- Anzahl Käufe pro Monat
+- Anzahl verkaufter Produkte
 
-Zählvariablen können sehr viele unterschiedliche Ausprägungen haben und unterscheiden sich dann oft nicht großartig von kontinuierlichen Variablen. Zumindest nicht in der Auswertung. Dennoch gibt es wichtig Unterschiede. Betrachten wir ein Beispiel aus dem Umfragedaten: Das Alter der Probanden.
+Zählvariablen können sehr viele Ausprägungen haben und werden dann in der explorativen Analyse oft ähnlich behandelt wie kontinuierliche Variablen. Trotzdem ist das Messniveau ein anderes: Es sind diskrete, abzählbare Werte.
 
-Das Alter ist keine Variable, die direkt in der Umfrage gemessen wurde. Es steckt aber indirekt in der Antwort auf die Frage 2: *"In welchem Jahr sind Sie geboren?"* Wenn wir das Geburtsjahr kennen, dann können wir das Alter mit einer kleinen Restunsicherheit schätzen.
+#### Beispiel: Alter aus dem Geburtsjahr ableiten
+
+Das Alter wurde nicht direkt gefragt, steckt aber indirekt in der Frage: *„In welchem Jahr sind Sie geboren?“*.
 
 ```{r}
 survey |> 
   select(q002geburt)
 ```
 
-Das Geburtsjahr ist numerisch (`<dbl>`), wir müssen es nur noch von der Jahreszahl abziehen, in der die Umfrage stattgefunden hat:
+Wenn wir das Geburtsjahr kennen, können wir das Alter (mit kleiner Restunsicherheit) schätzen:
 
 ```{r}
 survey |>
   transmute(age = 2025 - q002geburt)
 ```
 
-Sehr schön, wir haben unsere Zählvariable `age`! Wie verschaffen wir uns einen Überblick? Wir könnten für die Variable `age` die selben Analysen durchführen, wie wir sie oben für die kontinuierliche Variable eines Preises angewendet haben. Schließlich gibt es ähnlich viele Ausprägungen für das Alter einer Person:
+Wie viele unterschiedliche Alterswerte gibt es?
 
 ```{r}
 survey |>
@@ -286,13 +311,13 @@ survey |>
 ```{r}
 #| include: false
 num_ages <- 
-survey |>
+  survey |>
   transmute(age = 2025 - q002geburt) |>
   distinct() |>
   count()
 ```
 
-Es sind mit `r num_ages` sogar noch mehr Ausprägungen als für den Preis. Betrachten wir also auch hier ein Histogramm, um einen Eindruck über die Alterverteilung der Probanden im Datensatz zu bekommen. Eine Klassenbreite von 5 Jahren erscheint mir sinnvoll:
+Es sind mit `r num_ages` sogar noch mehr Ausprägungen als beim Preis. Ein Histogramm mit 5‑Jahres‑Klassen gibt schnell einen Überblick:
 
 ```{r}
 survey |>
@@ -300,15 +325,11 @@ survey |>
   ggplot() +
   aes(x = age) +
   geom_histogram(binwidth = 5, fill = "lightblue", alpha = 0.8) +
-  labs(y = "Häufigeit", x = "Alter", title = "Altersverteilung der Probanden") +
+  labs(y = "Häufigkeit", x = "Alter", title = "Altersverteilung der Probanden") +
   theme_bw()
 ```
 
-Ich habe mir in diesem Plot etwas mehr Mühe gemacht und ganz nebenbei ein paar Extras eingebaut, um das Ergebnis ansprechender zu gestalten:
-
-- Füllfarbe Hellblau (`fill`) mit 80%-iger Deckkraft (`alpha`)  für die Balken des Histogramms.
-- Beschriftungen der Achsen und ein sprechender Titel mittels der `labs`-Funktion.
-- Anwendung eines Themes mithilfe von `theme_bw`, was einen helleren Hintergrund bewirkt.
+Hier steckt nebenbei ein wichtiger Punkt: Auch in der explorativen Analyse lohnt es sich manchmal, Visualisierungen kurz lesbarer zu machen (Beschriftungen, Theme, Farben).
 
 ::: {.callout-note appearance="simple"}
 ## Visualisierungen polieren
@@ -318,53 +339,49 @@ Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen
 
 #### Ganze Zahlen (`int`)
 
-Zählvariablen besitzen verglichen mit kontinuierlichen Variablen einen wesentlichen Unterschied. Es handelt sich um so genannte ganze Zahlen, die wir in der Mathematik auch *natürliche Zahlen* nennen. Normalerweise würden wir eine Variable, die nur ganze Zahlen annehmen kann, als diskret und nicht als kontinuierlich bezeichnen. Mit diskret meinen wir gang einfach, dass es eine abzählbare Menge an möglichen Werten gibt und nicht unendlich viele denkbare. Beim Alter sind das die ganzen Zahlen zwischen 0 und dem maximalen Alter, das Menschen erreichen können. Pragmatisch nehmen wir hier mal 140 an, meines Wissens gab es bis jetzt keinen Menschen, der so alt wurde. 
+Zählvariablen bestehen aus ganzen Zahlen (mathematisch: natürlichen Zahlen). In R gibt es dafür den Datentyp `int`, der in @fig-surveys-types-of-variables auch für Zählvariablen angegeben ist.
 
-Für diskrete Variablen würden wir in der Regel keinen Boxplot und auch kein Histogramm verwenden, weil diese für kontinuierliche Variablen entwickelt wurden. Wie oben schon beschrieben gibt es bei Zählvariablen Fälle, bei denen wir sie ganz ähnlich wie kontinuierliche Variablen behandeln. Die Variable Alter ist so ein Fall, weil es hier sehr viele Ausprägungen gibt, die zwar diskret sind, aber dennoch eher einer kontinuierlichen Größe ähneln.
+In der Praxis macht es oft keinen großen Unterschied, ob ihr eine Zählvariable als `double` oder `int` speichert. Zwei Vorteile von `int` sind:
 
-Für ganze Zahlen gibt es in R den Datentyp `int`, der in der @fig-surveys-types-of-variables auch für Zählvariablen angegeben ist. In der Praxis macht es fast keinen Unterschied, ob wir eine Zählvariable als `double` oder als `int` speichern. Die einzeigen beiden, die mir einfallen, sind:
+1. `int` benötigt weniger Speicher (bei sehr großen Daten relevant).
+2. Es signalisiert klar: „Hier sind nur ganze Zahlen sinnvoll“ – das hilft auch anderen, die den Datensatz später nutzen.
 
-1. Der Datentyp `int` benötigt weniger Speicherplatz, was bei sehr großen Datensätzen interessant werden könnte.
-2. Durch die Verwendung des Datentyps `int` stellen wir auf der Ebene von R sicher, dass die Variable nur ganze Zahlen annehmen kann. Und es macht es für Personen, die mit dem Datensatz nicht vertraut sind, ein Stück transparenter und einfacher zu verstehen.
-
-Machen wir uns die Mühe und wandeln das Alter in den Datentyp `int` um. In dem Zuge speichern wir ihn auch gleich als neue Variable im existierenden Tibble:
+Wandeln wir das Alter in `int` um und speichern es als neue Variable im Tibble:
 
 ```{r}
 survey <- 
-    survey |>
-        mutate(Q002age = as.integer(2025 - q002geburt), .after = "q002geburt")
+  survey |>
+  mutate(Q002age = as.integer(2025 - q002geburt), .after = "q002geburt")
 ```
 
-Eine neue Spalte können wir mit `mutate` erzeugen. Eine Umwandlung in eine ganze Zahl klappt mit der `as.integer`-Funktion, allerdings nur, wenn der übergebene Wert als ganze Zahl darstellbar ist. Ansonsten gibt es einen Fehler. Mit dem Parameter `.after` können wir die Position der neuen Variable bestimmen, nämlich direkt hinter der Urpsrungsvariable des Geburtsjahres.
-
-Überprüfen wir das Ganze einmal und geben die neue Spalte aus:
+Mit `mutate()` erzeugen wir eine neue Spalte. `as.integer()` klappt nur, wenn der Wert als ganze Zahl darstellbar ist; sonst gibt es einen Fehler. Mit `.after` steuern wir die Position der neuen Variable.
 
 ```{r}
 survey |>
-    select(q002geburt, Q002age)
+  select(q002geburt, Q002age)
 ```
 
 Wie alt ist der älteste Teilnehmende?
 
 ```{r}
 survey |>
-    select(Q002age) |>
-    arrange(desc(Q002age)) |>
-    head(1)
+  select(Q002age) |>
+  arrange(desc(Q002age)) |>
+  head(1)
 ```
 
 Und der jüngste?
 
 ```{r}
 survey |>
-    select(Q002age) |>
-    arrange(Q002age) |>
-    head(1)
+  select(Q002age) |>
+  arrange(Q002age) |>
+  head(1)
 ```
 
-#### Schneller Überblick über eine Spalte mit `skim`
+#### Schneller Überblick über eine Spalte mit `skim()`
 
-Es gibt ein nützliches Paket mit dem Nmen `skimr`, das unter anderem die gleichnamige Funktion `skim` bereitstellt. Sie gibt uns einen schnellen Überblick über einzelne Variablen oder sogar den gesamten Datensatz.
+Es gibt ein nützliches Paket namens `skimr`, das unter anderem die Funktion `skim()` bereitstellt. Sie gibt euch einen schnellen Überblick über einzelne Variablen oder sogar den gesamten Datensatz.
 
 ```{r}
 library(skimr)
@@ -374,23 +391,16 @@ survey |>
   as_tibble()
 ```
 
-Den letzten Schritt `as_tibble()` benötigt ihr nicht, er ist nur notwendig, um die Ausgabe in diesem Buch als Konsolenausgabe zu erzeugen. Wenn ihr `skim` in eurerm RStudio verwendet, dann wir automatisch eine Konsolenausgabe erzeugt.
+Den letzten Schritt `as_tibble()` benötigt ihr nicht – er ist nur notwendig, damit in diesem Buch eine Konsolenausgabe entsteht. In RStudio wird die Ausgabe automatisch passend dargestellt.
 
-Was sehen wir? Die Funktion `skim` erzeugt einen Tibble, der eine Reihe von berechneten Variablen in Bezug auf die von uns genannte Spalte `Q002age` hat:
+`skim()` erzeugt einen Tibble mit Kennzahlen zur Variable `Q002age`, z. B.:
 
-- Den Datentyp (`skim_type`), der als `numeric` erkannt wurde
-- Anzahl fehlender Werte (`n_missing`) - hier fehlt kein Wert
-- Füllgrad (`complete_rate`), hier dementsprechend 1 oder 100%
-- Arithmetisches Mittel: `numeric.mean`
-- Standardabweichung: `numeric.sd`
-- Kleinster Wert: `numeric.p0`
-- Unteres Quartil (Q1 oder 25%-Wert): `numeric.p25`
-- Median (Q2 oder 50%-Wert): `numeric.p50`
-- Oberes Quartil (Q3 oder 75%-Wert): `numeric.p75`
-- Größter Wert: `numeric.p100`
-- ASCII-Histogram: `numeric.hist`
+- Datentyp (`skim_type`)
+- Anzahl fehlender Werte (`n_missing`) und Füllgrad (`complete_rate`)
+- Mittelwert, Standardabweichung, Quartile, Minimum/Maximum
+- ein kleines ASCII‑Histogramm (`numeric.hist`)
 
-Das sind eine ganze Menge interessanter Werte, die wir mit einem Befehl errechnen können. Und es wird noch besser: Dadurch, dass es sich im Ergebnis um einen Tibble handelt, also einen weiteren Datensatz, können wir mit ihm wie mit jedem anderen Tibble arbeiten. Zum Beispiel nur die beiden Varianten des Durchschnitts auswwählen:
+Und weil es ein Tibble ist, könnt ihr damit wie mit jedem anderen Datensatz weiterarbeiten – zum Beispiel nur Mittelwert und Median auswählen:
 
 ```{r}
 survey |> 
@@ -400,19 +410,81 @@ survey |>
   select(mean_age = mean, median_age = p50) 
 ```
 
-
 ## Kategoriale Variablen
+
+Kategoriale Variablen ordnen Beobachtungen in Kategorien ein. Oft sind sie in Umfragen sogar der häufigste Typ.
 
 ### Nominale Variablen
 
 > Categorical variables are variables recording which category an observation is in - simple enough! The color of a flower is an example of a categorical variable. Is the flower white, orange, or red? None of those options is “more” than the others; they’re just different. [@effect_2026]
 
-Wie der Name schon sagt verwenden wir kategoriale Variablen dann, wenn es definierte Kategorien gibt, in die eine Messung eingruppiert werden kann. Gleichzeitig ist keine Gruppe besser oder schlechter als die andere, sie sind nur unterschiedlich.
+Nominale Variablen haben Kategorien ohne natürliche Reihenfolge. Typische Beispiele in Umfragen sind Geschlecht, Bundesland oder „Hauptverantwortlich für den Einkauf: ja/nein“.
+
+In R wollt ihr bei nominalen Variablen meist wissen:
+
+- Welche Kategorien kommen vor?
+- Wie häufig sind sie?
+
+Das geht schnell mit `distinct()` oder (noch praktischer) `count()`:
+
+```{r}
+survey |>
+  count(q004geschlecht)
+```
+
+Viele nominale Variablen sind als Zahlen kodiert (z. B. 1/2/3). Ohne Codebuch wisst ihr dann noch nicht, welche Zahl für welche Kategorie steht – ihr könnt aber trotzdem schon prüfen, ob es „unerwartete“ Codes gibt.
 
 ### Ordinale Variablen
 
 > Ordinal variables are variables where some values are “more” and others are “less,” but there’s not necessarily a rule as to how much more “more” is. [@effect_2026]
 
+Ordinale Variablen haben eine Reihenfolge (z. B. Zustimmung von 1 bis 7), aber die Abstände zwischen den Stufen sind nicht zwingend gleich groß. Das ist wichtig für die Auswertung: Häufig sind **Median** und **Häufigkeiten** sinnvoller als ein Mittelwert, und Visualisierungen sind oft Balkendiagramme.
+
+In unserem Datensatz tauchen solche Skalenfragen z. B. in Variablen mit „…diff7…“ im Namen auf. Ein schneller Check:
+
+```{r}
+survey |>
+  count(ax010midiff7, sort = TRUE)
+```
+
+Wenn ihr ordinale Variablen später modellieren oder sauber visualisieren wollt, ist es oft sinnvoll, sie als *ordered factor* zu behandeln (statt als „normale“ Zahl). Das machen wir an anderer Stelle im Buch noch ausführlicher.
+
+#### Sonderfall: Mehrfachauswahl als viele 0/1‑Spalten
+
+In Umfragen werden Mehrfachauswahl‑Fragen häufig als mehrere Dummy‑Spalten gespeichert (0/1). Inhaltlich sind das kategoriale Informationen – gespeichert als Zahlen.
+
+Zum Beispiel gibt es im Datensatz mehrere Spalten, die mit `v008ort_` beginnen (Einkaufsorte). Ein erster Blick auf ein paar davon:
+
+```{r}
+survey |>
+  select(v008ort_1discount, v008ort_2super, v008ort_9online, v008ort_other) |>
+  glimpse()
+```
+
+Die Interpretation ist hier: „Hat Person X diese Option gewählt – ja/nein?“.
+
 ## Qualitative Variablen
 
 > Qualitative variables are a sort of catch-all category for everything else. They aren’t numeric in nature, but also they’re not categorical. The text of a Washington Post headline is an example of a qualitative variable. [@effect_2026]
+
+Qualitative Variablen sind häufig Freitext: Antworten, die nicht in eine feste Kategorienliste passen. In Umfragen sind das oft „Other“-Felder. In unserem Datensatz findet ihr solche Spalten z. B. an Namen wie `…_other`:
+
+```{r}
+survey |>
+  select(v041nofleisch_other)
+```
+
+Für qualitative Variablen ist in der explorativen Analyse oft ein sinnvoller Start:
+
+- zuerst die häufigsten Texte anschauen,
+- Tippfehler/Varianten vereinheitlichen,
+- und dann entscheiden, ob man Kategorien daraus macht oder Textanalyse einsetzt.
+
+## Zusammenfassung: Welcher Typ → welche Werkzeuge?
+
+- **Kontinuierlich (`dbl`)**: NA/Ausreißer prüfen, Histogramm/Boxplot, Median als robuste Ergänzung.
+- **Zählvariable (diskret, oft `int`)**: Häufig wie kontinuierlich auswerten, aber „ganzzahlig“ im Kopf behalten.
+- **Nominal (Kategorien)**: `count()`/Balkenplot, Kodierungen über Codebuch prüfen.
+- **Ordinal (geordnete Kategorien)**: Häufigkeiten + Median; vorsichtig mit Mittelwert/Standardabweichung.
+- **Qualitativ (Text)**: erst sichten/aufräumen, dann strukturieren.
+

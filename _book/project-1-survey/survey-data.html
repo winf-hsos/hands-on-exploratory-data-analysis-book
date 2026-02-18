@@ -253,20 +253,26 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -294,15 +300,15 @@ div.csl-indent {
    
   <ul>
   <li><a href="#daten-laden-mit-r" id="toc-daten-laden-mit-r" class="nav-link active" data-scroll-target="#daten-laden-mit-r"><span class="header-section-number">1.1</span> Daten laden mit R</a></li>
-  <li><a href="#metainformationen-eines-datensatzes" id="toc-metainformationen-eines-datensatzes" class="nav-link" data-scroll-target="#metainformationen-eines-datensatzes"><span class="header-section-number">1.2</span> Metainformationen eines Datensatzes</a></li>
-  <li><a href="#variablen-spalten" id="toc-variablen-spalten" class="nav-link" data-scroll-target="#variablen-spalten"><span class="header-section-number">1.3</span> Variablen (Spalten)</a>
+  <li><a href="#kontext-und-metainformationen" id="toc-kontext-und-metainformationen" class="nav-link" data-scroll-target="#kontext-und-metainformationen"><span class="header-section-number">1.2</span> Kontext und Metainformationen</a></li>
+  <li><a href="#dimensionierung-der-daten" id="toc-dimensionierung-der-daten" class="nav-link" data-scroll-target="#dimensionierung-der-daten"><span class="header-section-number">1.3</span> Dimensionierung der Daten</a></li>
+  <li><a href="#variablen-spalten" id="toc-variablen-spalten" class="nav-link" data-scroll-target="#variablen-spalten"><span class="header-section-number">1.4</span> Variablen (Spalten)</a>
   <ul class="collapse">
-  <li><a href="#was-ist-eine-variable" id="toc-was-ist-eine-variable" class="nav-link" data-scroll-target="#was-ist-eine-variable">Was ist eine Variable?</a></li>
   <li><a href="#wie-viele-variablen" id="toc-wie-viele-variablen" class="nav-link" data-scroll-target="#wie-viele-variablen">Wie viele Variablen?</a></li>
-  <li><a href="#welche-arten-von-variablen-gibt-es" id="toc-welche-arten-von-variablen-gibt-es" class="nav-link" data-scroll-target="#welche-arten-von-variablen-gibt-es">Welche Arten von Variablen gibt es?</a></li>
+  <li><a href="#namen-typen-erste-werte-select-glimpse" id="toc-namen-typen-erste-werte-select-glimpse" class="nav-link" data-scroll-target="#namen-typen-erste-werte-select-glimpse">Namen, Typen, erste Werte: <code>select()</code> + <code>glimpse()</code></a></li>
   <li><a href="#welchen-wertebereich-hat-eine-variable" id="toc-welchen-wertebereich-hat-eine-variable" class="nav-link" data-scroll-target="#welchen-wertebereich-hat-eine-variable">Welchen Wertebereich hat eine Variable?</a></li>
   </ul></li>
-  <li><a href="#beobachtungen-zeilen" id="toc-beobachtungen-zeilen" class="nav-link" data-scroll-target="#beobachtungen-zeilen"><span class="header-section-number">1.4</span> Beobachtungen (Zeilen)</a></li>
+  <li><a href="#beobachtungen-zeilen" id="toc-beobachtungen-zeilen" class="nav-link" data-scroll-target="#beobachtungen-zeilen"><span class="header-section-number">1.5</span> Beobachtungen (Zeilen)</a></li>
   </ul>
 </nav>
     </div>
@@ -328,7 +334,8 @@ div.csl-indent {
 </header>
 
 
-<p>In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein geeignetes Mittel für unterschiedliche Forschungsfragen und kommen in der Praxis häufig zum Einsatz, um etwas über Präferenzen von Menschen herauszufinden. Umfrageergebnisse analysieren zu können stellt deshalb eine wichtige Kompetenz dar. Die Werkzeuge, die wir dafür kennenlernen, lassen sich ohne Weiteres auf andere, anders geartete Daten, übertragen.</p>
+<p>In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein praktisches Werkzeug, wenn wir etwas über Einstellungen, Präferenzen oder Verhalten von Menschen herausfinden wollen – und genau solche Datensätze begegnen euch später auch im Job ziemlich häufig.</p>
+<p>Bevor wir loslegen, eine Leitfrage: Wenn ihr eine Tabelle mit hunderten Spalten vor euch habt – woher wisst ihr eigentlich, <em>was</em> ihr da seht? Was ist eine Zeile? Was ist eine Spalte? Und wie könnt ihr schnell prüfen, ob die Daten überhaupt korrekt in R angekommen sind? Genau darum geht es in diesem Abschnitt.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -339,18 +346,20 @@ div.csl-indent {
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div id="learning-objectives" class="reuse">
 <ul>
 <li>Wie lade ich einen Datensatz mit R?</li>
-<li>Was sind Metainformationen eines Datensatzes?</li>
-<li>Woher weiß ich, wie viele Beobachtungen in meinem Datensatz stecken?</li>
-<li>Wie bekomme ich raus, welche Variablen es gibt?</li>
-<li>Worin unterscheiden sich Variablen?</li>
+<li>Welche Metainformationen (Kontext) sollte ich zu einem Datensatz kennen?</li>
+<li>Wie finde ich heraus, wie viele Beobachtungen und Variablen in den Daten stecken?</li>
+<li>Welche Werkzeuge helfen mir, Variablen schnell zu überblicken?</li>
+<li>Wie prüfe ich, welche Werte in einer Variable vorkommen?</li>
 </ul>
+</div>
 </div>
 </div>
 <section id="daten-laden-mit-r" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="daten-laden-mit-r"><span class="header-section-number">1.1</span> Daten laden mit R</h2>
-<p>In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz vorliegt, der bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches, es geht primär um die Daten<em>analyse</em>.</p>
+<p>In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches – es geht primär um die Daten<em>analyse</em>.</p>
 <p>Die Umfrageergebnisse wurden mit der Software <a href="https://www.limesurvey.org/">Limesurvey</a> erhoben und als CSV-Datei exportiert. Wenn ihr das GitHub-Repository für dieses Buch auf euren Rechner heruntergeladen habt, dann liegen die Daten im Ordner <code>/data</code> und können so geladen werden:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -369,26 +378,29 @@ div.csl-indent {
 <p>Bitte achtet auf die Verwendung der richtigen Funktion <code>read_csv</code>. Es gibt in R auch eine Funktion mit dem Namen <code>read.csv</code>, die sehr ähnlich ist, aber keinen Tibble erzeugt. Wir verwenden in diesem Buch durchgehend das Tidyverse und Tibbles.</p>
 </div>
 </div>
-<p>Nach Ausführung des Codeblocks stehen die Daten auf dem Objekt mit dem Namen <code>survey</code> als Tibble bereit. Es ist eine gute Idee, für Objekte, die wir häufig verwenden, möglichst kurze Namen zu vergeben. Gleichzeitig sollten Namen sprechend sein, damit man anhand des Namens schnell erkennt, worum es sich handelt. Beim Objektnamen <code>survey</code> wurde beides berücksichtigt.</p>
-<p>Zum Laden der Daten gehört auch eine Prüfung, ob es alles geklappt hat. Insbesodere zu wissen, ob alle Beobachtungen und alle Variablen geladen wurden, ist essenziell, um mit den Daten weiterzuarbeiten. Beovr wir uns damit beschäftigen schauen wir uns an, was man abseits von den Möglichkeiten, mit R etwas über die Daten zu erfahren, sonst noch wissen sollte.</p>
+<p>Nach Ausführung des Codeblocks stehen die Daten auf dem Objekt <code>survey</code> als Tibble bereit. Es ist eine gute Idee, für häufig verwendete Objekte kurze, aber sprechende Namen zu wählen – <code>survey</code> ist hier ein guter Kompromiss.</p>
+<p>Zum Laden der Daten gehört immer auch ein kurzer Reality-Check: Sind wirklich alle Beobachtungen (Zeilen) und Variablen (Spalten) da? Genau diese Frage beantworten wir im nächsten Abschnitt.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Hinweis</span>Daten laden
+<span class="screen-reader-only">Hinweis</span>Mehr zum Laden von Daten laden (auch weitere Formate)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten aus verschiedenen Formaten ein. Einen detaillierten Einblick findet ihr in <a href="../r-basics/loading-data.html" class="quarto-xref"><span>Kapitel 7</span></a>.</p>
+<p>An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Formate ein. Einen detaillierten Einblick findet ihr in <a href="../r-basics/loading-data.html" class="quarto-xref"><span>Kapitel 7</span></a>.</p>
 </div>
 </div>
 </section>
-<section id="metainformationen-eines-datensatzes" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="metainformationen-eines-datensatzes"><span class="header-section-number">1.2</span> Metainformationen eines Datensatzes</h2>
-<p>Der verwendete Datensatz wurde am Fachgebiet Agrarökonomie der Hochschule Osnabrück unter Leitung von <a href="https://www.hs-osnabrueck.de/prof-dr-ulrich-enneking/">Prof.&nbsp;Dr.&nbsp;Ulrich Enneking</a> im Jahr 2025 erhoben. In einer umfangreichen, mehrteiligen Online-Umfrage wurden deutschlandweit Menschen zu Einstellungen und Kaufverhalten bei Lebensmitteln befragt. An der Umfrage haben 2.811 Personen teilgenommen.</p>
-<p>Der vorherige Absatz enthält wichtige Informationen über den vorliegenden Datensatz. Wir nennen diese Art von Information auch <em>Metainformation</em> (meta = über) oder Kontexinformation. Schauen wir mal drauf, welche Informationen in dem Absatz stecken. <a href="#tbl-survey-context" class="quarto-xref">Tabelle&nbsp;<span>1.1</span></a> fasst das zusammen:</p>
+<section id="kontext-und-metainformationen" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="kontext-und-metainformationen"><span class="header-section-number">1.2</span> Kontext und Metainformationen</h2>
+<div id="slides-setup" class="reuse">
+<p>Stellt euch vor, ihr bekommt eine Excel-Datei per Mail – ohne Begleittext. Ihr könnt sie öffnen, aber ihr wisst nicht, wer befragt wurde, wann die Erhebung stattgefunden hat oder was die Antwortcodes bedeuten. Ihr <em>könnt</em> dann zwar rechnen, aber ihr lauft Gefahr, das Falsche zu interpretieren. Ein paar Begleitinformationen in der E-Mail wären daher nicht schlecht. Vielleicht so etwas:</p>
+</div>
+<p><em>“Der verwendete Datensatz wurde am Fachgebiet Agrarökonomie der Hochschule Osnabrück unter Leitung von Prof.&nbsp;Dr.&nbsp;Ulrich Enneking im Jahr 2025 erhoben. In einer umfangreichen, mehrteiligen Online-Umfrage wurden deutschlandweit Menschen zu Einstellungen und Kaufverhalten bei Lebensmitteln befragt. An der Umfrage haben 2.811 Personen teilgenommen.”</em></p>
+<p>Solche Informationen nennen wir <em>Metainformationen</em> (meta = über) oder <em>Kontextinformationen</em>. Häufig lassen sie sich als W‑Fragen formulieren. <a href="#tbl-survey-context" class="quarto-xref">Tabelle&nbsp;<span>1.1</span></a> fasst die wichtigsten für unseren Datensatz zusammen:</p>
 <div id="tbl-survey-context" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-survey-context-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -409,7 +421,7 @@ Tabelle&nbsp;1.1: Metainformationen zum Umfragedatensatz
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Wer hat die Daten erhoben?</td>
-<td style="text-align: left;">Professor Enneking</td>
+<td style="text-align: left;">Prof.&nbsp;Dr.&nbsp;Enneking</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Wie wurden die Daten erhoben?</td>
@@ -436,12 +448,15 @@ Tabelle&nbsp;1.1: Metainformationen zum Umfragedatensatz
 </div>
 </figure>
 </div>
-<p>Ihr seht es handelt sich um eine Reihe von W-Fragen, auf die sich die Kontextinformationen beziehen. Warum sind diese Informationen überhaupt wichtig? Dazu werden wir später noch mehr erfahren, aber hier verdeutlichen wir es uns anhand einer Frage, auf die wir in der obigen <a href="#tbl-survey-context" class="quarto-xref">Tabelle&nbsp;<span>1.1</span></a> noch keine Antwort finden, die aber extrem wichtig ist: <em>Was repräsentiert eine Zeile in den Daten?</em></p>
-<p>Was sehen wir eigentlich, wenn wir eine Zeile betrachten? Auf diese Frage benötigen wir eine Antwort, bevor wir mit der Datenanalyse beginnen. Zwar können wir oft durch scharfes Hinsehen diese Frage selbst beantworten, aber der Schein kann trügen. Wenn wir nicht selbst Urheber der Daten sind, dann sollten wir diese Information aus sicherer Quelle erfragen. Im vorliegenden Beispiel habe ich das getan und habe meinen geschätzen Kollegn gefragt. Ich weiß nun, dass eine Zeile im Datensatz den Antworten einer Person auf die Online-Umfrage entspricht. Allgemein sprechen wir in der empirischen Forschung von <em>Beobachtungen</em>. Eine Beobachtung in unserem Fall ist also eine ausgefüllte Umfrage, die uns in einer Zeile vorliegt. Systematisch zu beobachten und diese Beobachtungen für die Beantwortung von Forschungsfragen zu analysieren ist der Kern der emprischen Forschung.</p>
+<p>Eine Frage ist dabei besonders wichtig, weil sie bestimmt, <em>wie</em> wir später Zahlen interpretieren: Was repräsentiert eine Zeile in den Daten? Was sehen wir eigentlich, wenn wir eine Zeile betrachten? Auf diese Frage brauchen wir eine klare Antwort, bevor wir mit der Analyse beginnen. Manchmal kann man es durch genaues Hinschauen erraten – aber der Schein kann trügen. Wenn wir die Daten nicht selbst erhoben haben, sollten wir diese Information aus sicherer Quelle bekommen. In diesem Beispiel habe ich nachgefragt: Eine Zeile entspricht den Antworten <em>einer Person</em> auf die Online‑Umfrage. In der empirischen Forschung sprechen wir dann von <em>Beobachtungen</em>.</p>
 <blockquote class="blockquote">
 <p>Empirical research is any research that uses structured observations from the real world to attempt to answer questions. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
-<p>Wenn wir wissen, was eine Zeile bedeutet, dann können wir auch herausfinden, wie viele Personen teilgenommen haben. Oder allgemein, wie viele Beobachtungen wir vorliegen haben. Wie? Mit der Funktion <code>count</code>, die einfach die Anzahl der Zeilen (oder Beobachtungen) im Datensatz zählt. Dazu muss man wissen, dass jede Zeile einer Person entspricht, die an der Umfrage teilgenommen hat.</p>
+<p>Wenn wir wissen, dass jede Zeile eine befragte Person ist, können wir auch sauber begründen, warum die Anzahl der Zeilen gleich der Anzahl der Teilnehmenden ist.</p>
+</section>
+<section id="dimensionierung-der-daten" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="dimensionierung-der-daten"><span class="header-section-number">1.3</span> Dimensionierung der Daten</h2>
+<p>Es gibt mehrere Wege, die Anzahl der Beobachtungen zu bestimmen. Ein sehr direkter ist <code>count()</code>: Wenn wir <code>count()</code> ohne Variable aufrufen, zählt R schlicht die Zeilen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -449,7 +464,7 @@ Tabelle&nbsp;1.1: Metainformationen zum Umfragedatensatz
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Der Befehl <code>count</code> zählt die Beobachtungen (oder Zeilen) in einem Datensatz.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">Der Befehl <code>count()</code> zählt die Beobachtungen (Zeilen) in einem Datensatz.</span>
 </dd>
 </dl>
 </div>
@@ -460,18 +475,9 @@ Tabelle&nbsp;1.1: Metainformationen zum Umfragedatensatz
 1  2811</code></pre>
 </div>
 </div>
-<p>Es gibt weitere Möglichkeiten, die Anzahl der Beobachtungen zu ermitteln. Eine ganz einfache ist es, einfach den Namen des Objekts einzugeben, das den Datensatz in R repräsentiert:</p>
+<p>Eine zweite, oft sehr praktische Möglichkeit ist: Gebt einfach den Namen des Tibbles aus. Tibbles zeigen euch direkt eine kompakte Zusammenfassung inkl. Dimensionen (<code>Zeilen x Spalten</code>) und eine Vorschau.</p>
 <div class="cell">
-<div id="lst-surveys-tibble-name" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-surveys-tibble-name-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;1.1: Wir können einfach den Namen des Tibbles aufrufen, um an wichtige Informationen zu kommen.
-</figcaption>
-<div aria-describedby="lst-surveys-tibble-name-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</figure>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" data-lst-cap="Wir können einfach den Namen des Tibbles aufrufen, um an wichtige Informationen zu kommen."><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 813
    q001hheinkauf q002geburt q003land q004geschlecht q005os v041nofleisch
@@ -495,17 +501,25 @@ Listing&nbsp;1.1: Wir können einfach den Namen des Tibbles aufrufen, um an wich
 #   v041diaet_11mediterran &lt;dbl&gt;, v041diaet_12histaminarm &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>Durch die Verwendung des Tidyverse und den dazugehörigen Tibbles bekommen wir diese kompakte und informative Ausgabe. Die erste Zeile der Ausgabe enthält die Dimensionierung der Daten in der Form <code>Zeilen x Spalten</code>. Wir bekommen also nicht nur die Information, wie viele Beobachtungen (2.811), sodnern auch, wie viele Spalten (813). Dazu gibt uns ein Tibble gleich noch eine Vorschau seiner ersten zehn Zeilen aus, die so viele Variablen beinhaltet, wie auf die aktuelle Größe der Konsole passen. Die restlichen Variablennamen werden darunter aufgelistet, zumindest ein Teil davon. Ein Tibble achtet darauf, die Konsole nicht komplett mit Text zu fluten und schneidet daher irgendwann ab.</p>
-<p>Es gibt dedizierte Werkzeuge, um mehr über die Variablen herauszufinden. Die schauen wir uns jetzt an.</p>
+<p>In der ersten Zeile der Ausgabe steht die Dimensionierung der Daten. Wir bekommen also nicht nur die Information, wie viele Beobachtungen (2.811) vorhanden sind, sondern auch, wie viele Variablen der Datensatz hat (813). Danach folgen die ersten Zeilen (und so viele Spalten, wie auf die Konsole passen). Tibbles achten darauf, die Konsole nicht komplett mit Text zu fluten, und schneiden daher irgendwann ab.</p>
+<p>Manchmal wollen wir die Anzahl Zeilen und Spalten nicht nur wissen, sondern weiterverwenden. Wir können sie dann auf Objekten speichern:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rows <span class="ot">&lt;-</span> <span class="fu">nrow</span>(survey)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">ncol</span>(survey)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">str_glue</span>(<span class="st">"Der Datensatz hat {rows} Zeilen und {cols} Spalten."</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Der Datensatz hat 2811 Zeilen und 813 Spalten.</code></pre>
+</div>
+</div>
 </section>
-<section id="variablen-spalten" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="variablen-spalten"><span class="header-section-number">1.3</span> Variablen (Spalten)</h2>
-<section id="was-ist-eine-variable" class="level3">
-<h3 class="anchored" data-anchor-id="was-ist-eine-variable">Was ist eine Variable?</h3>
+<section id="variablen-spalten" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="variablen-spalten"><span class="header-section-number">1.4</span> Variablen (Spalten)</h2>
+<p>Neben der Frage „Was ist eine Zeile?“ ist die zweite Kernfrage: „Was misst jede Spalte?“ In Umfragen steckt hinter fast jeder Frage (und oft hinter jeder Antwortoption) eine eigene Variable – deshalb werden solche Datensätze schnell sehr „spaltenreich“.</p>
 <blockquote class="blockquote">
 <p>A variable, in the context of empirical research, is a bunch of observations of the same measurement. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
-<p>Neben der Frage, was eine Zeile darstellt, sollten wir auch wissen, was jede Variable genau misst. Während wir Beobachtungen typischerweise horizontal, also in Zeilen, darstellen, sind Variablen das, was wir vertikal, also in Spalten, darstellen.</p>
+<p>Beobachtungen stellen wir typischerweise horizontal (in Zeilen) dar, Variablen vertikal (in Spalten).</p>
 <div id="fig-surveys-observation-variable" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-surveys-observation-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -516,58 +530,56 @@ Abbildung&nbsp;1.1: Beobachtungen repräsentieren wir als Zeilen, Variablen als 
 </figcaption>
 </figure>
 </div>
-<p>Auch die Informationen über die gemessenen Variablen gehören zu den Metainformationen eines Datensatzes. Und im besten Fall gibt es ein so genanntes <em>Data Dictionary</em>, eine Art Wörterbuch, in dem jede Variable aufgeführt und inhaltlich erläutert ist. Leider ist das nicht immer der Fall, in diesem Beispiel jedoch schon, wie wir später sehen werden.</p>
-<p>Unabhängig davon, ob es ein Data Dictionary gibt, wollen wir uns im Folgenden anschauen, wie wir mit R an wichtige Informationen zu den Variablen kommen. Folgende Fragen solltet ihr euch zu Beginn stellen:</p>
+<p>Im Idealfall gibt es zu einem Datensatz ein <em>Data Dictionary</em> (oder Codebuch): eine Art Wörterbuch, in dem jede Variable aufgeführt und inhaltlich erläutert ist. Das ist Gold wert – denn aus reinen Spaltennamen wie <code>q001hheinkauf</code> könnt ihr die Bedeutung oft nicht zuverlässig ableiten.</p>
+<p>Damit ihr trotzdem schnell arbeitsfähig werdet, schauen wir uns jetzt Werkzeuge an, mit denen ihr Variablen in R systematisch „abklopfen“ könnt:</p>
 <ul>
 <li>Wie viele Variablen gibt es?</li>
-<li>Welche Arten von Variablen gibt es?</li>
-<li>Welchen Wertebereiche hat eine Variable?</li>
+<li>Welche Namen und Datentypen haben sie?</li>
+<li>Welche Werte kommen in einer Variable überhaupt vor?</li>
 </ul>
-</section>
 <section id="wie-viele-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="wie-viele-variablen">Wie viele Variablen?</h3>
-<p>Wie viele Variablen der Datensatz hat wissen wir bereits aus <a href="#lst-surveys-tibble-name" class="quarto-xref">Listing&nbsp;<span>1.1</span></a>. Die Anzahl der Variablen ist im vorliegenden Datensatz mit <strong>813</strong> verhältnismäßig hoch. Das ist typisch für Umfragen, insbesondere wenn viele Fragen enthalten sind. Denn jede Antwortoption und deren Ausprägung wird im Ergebnis mit einer eigenen Variable abgebildet, da kommt schnell was zusammen.</p>
-<p>Übrigens können wir mit folgendem Befehl die Anzahl Variablen (oder Spalten) ganz konkret als Wert auslesen, und nicht nur auf der Konsole ausgeben:</p>
+<p>Die Anzahl der Variablen habt ihr bereits über die Tibble-Ausgabe gesehen. Ihr könnt sie aber auch direkt als Wert auslesen. Hier die Variante mit der Pipe:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ncol</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ncol</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 813</code></pre>
 </div>
 </div>
-<p>Diesen Wert können wir auf einem neuen Objekt speichern und später in unserem R-Skript wieder verwenden, was häufig nützlich ist:</p>
+<p>Den Wert könnt ihr auf einem neuen Objekt speichern und später wiederverwenden , das ist in Skripten häufig nützlich:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>variable_count <span class="ot">&lt;-</span> <span class="fu">ncol</span>(survey)</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">str_glue</span>(<span class="st">"Es haben {variable_count} Menschen teilgenommen."</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Mit <code>str_glue</code> können wir Zeichenketten mit Platzhaltern versehen, die zur Ausführung mit den Werten ersetzt werden.</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Es haben 813 Menschen teilgenommen.</code></pre>
-</div>
-</div>
-</section>
-<section id="welche-arten-von-variablen-gibt-es" class="level3">
-<h3 class="anchored" data-anchor-id="welche-arten-von-variablen-gibt-es">Welche Arten von Variablen gibt es?</h3>
-<p>Schauen wir uns fürs erste nur die ersten 10 Variablen im Datensatz genauer an:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glimpse</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>variable_count <span class="ot">&lt;-</span> <span class="fu">ncol</span>(survey)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">str_glue</span>(<span class="st">"Der Datensatz hat {variable_count} Variablen."</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1">Mit <code>select</code> können wir Variablen auswählen. Die Notation <code>1:10</code> bedeutet so viel wie: <em>Variablen an Stelle 1 bis 10</em>.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1">Mit <code>str_glue()</code> könnt ihr Zeichenketten mit Platzhaltern versehen, die bei der Ausführung mit Werten ersetzt werden.</span>
 </dd>
-<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Der Datensatz hat 813 Variablen.</code></pre>
+</div>
+</div>
+</section>
+<section id="namen-typen-erste-werte-select-glimpse" class="level3">
+<h3 class="anchored" data-anchor-id="namen-typen-erste-werte-select-glimpse">Namen, Typen, erste Werte: <code>select()</code> + <code>glimpse()</code></h3>
+<p>Schauen wir uns fürs Erste nur die ersten 10 Variablen im Datensatz an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="2">Mit <code>glimpse</code> bekommen wir schnell eine Übersicht der Namen, Datentypen und ersten Werte der Variablen.</span>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1">Mit <code>select()</code> könnt ihr Variablen auswählen. Die Notation <code>1:10</code> bedeutet: <em>Variablen an Position 1 bis 10</em>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="2">Mit <code>glimpse()</code> bekommt ihr schnell eine Übersicht der Namen, Datentypen und ersten Werte der Variablen.</span>
 </dd>
 </dl>
 </div>
@@ -586,11 +598,11 @@ $ v041diaet_1lowcarb  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0
 $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…</code></pre>
 </div>
 </div>
-<p>Im Codeblock oben lernen wir mit <code>select</code> und <code>glimpse</code> gleich 2 zwei wichtige Funktionen kennen. Beide werden wir in diesem Buch noch sehr häufig verwenden. Mit <code>select</code> können wir aus den vielen Spalten genau die auswählen, an denen wir momentan interessiert sind. Das kann etwa für die Auswertung einer bestimmten Frage sinnvoll sein, bei der wir nur die Variablen benötigen, die sich auf die betroffene Frage beziehen. Die Notation <code>1:10</code> in den Klammern der <code>select</code>-Funktion bedeutet übersetzt <em>wähle die Variablen 1 bis 10 aus</em>. Dazu muss man wissen, dass Variablen in einem Datensatz eine feste Reihenfolge haben. Wir bekommen damit also die ersten 10 Variablen im Datensatz.</p>
-<p>Mit der Flexibilität einer Programmiersprache wie R können wir jede beliebige Menge an Spalten auswählen. Zum Beispiel auch die letzten 10:</p>
+<p>Hier steckt direkt ein wichtiges Muster drin: Wir bauen eine kleine „Befehlskette“. Das etwas merkwürdig aussehende Symbol <code>|&gt;</code> (Pipe) sorgt dafür, dass das Ergebnis links an den nächsten Befehl rechts übergeben wird. Eine dedizierte Einführung in die Pipe findet ihr in <a href="../r-basics/pipe.html" class="quarto-xref"><span>Kapitel 8</span></a>.</p>
+<p>Mit der Flexibilität einer Programmiersprache wie R könnt ihr jede beliebige Menge an Spalten auswählen – zum Beispiel auch die letzten 10:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">tail</span>(<span class="fu">everything</span>(), <span class="dv">10</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">tail</span>(<span class="fu">everything</span>(), <span class="dv">10</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 10
    M070handeldiff3_1hochwertig M070handeldiff3_2regio M070handeldiff3_3preis
@@ -612,7 +624,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 #   M070handeldiff3_9kauf &lt;dbl&gt;, M070handeldiff3_10trends &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Mit <code>tail</code> ermitteln wir die letzen <code>n</code> Elemente einer Liste. <code>everything</code> gibt uns die Liste aller Spalten zurück, wenn es innerhalb der <code>select</code>-Funktion aufgerufen wird. Somit kann man den Befehl übersetzen mit <em>Gib mir die letzten 10 Elemente (<code>tail</code>) aus der Liste aller Spalten (<code>everything</code>)</em>. Wir werden später noch Werkzeuge im Detail lernen, wie wir geanu die Spalten finden und auswählen, die wir brauchen. Das ist gerade bei Umfragen mit vielen Spalten extrem nützlich.</p>
+<p>Mit <code>tail()</code> ermitteln wir die letzten <code>n</code> Elemente einer Liste. <code>everything()</code> gibt uns (innerhalb von <code>select()</code>) die Liste aller Spalten. Der Ausdruck lässt sich also übersetzen als: <em>Gib mir die letzten 10 Elemente aus der Liste aller Spalten.</em> Gerade bei Umfragen mit vielen Spalten ist dieses gezielte Auswählen extrem nützlich. Noch mehr Möglichkeiten, Spalten auszuwählen, lernen wir im Verlauf des Projekts und im dedizierten <a href="../r-basics/select.html" class="quarto-xref"><span>Kapitel 9</span></a>.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -623,20 +635,18 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Variablen (oder Spalten) haben eine feste Reihenfolge und Position in einem Datensatz. Wir können also jede Spalte statt über ihren Namen auch über ihre Position ansprechen.</p>
+<p>Variablen (Spalten) haben eine feste Reihenfolge und Position in einem Datensatz. Ihr könnt eine Spalte daher nicht nur über ihren Namen, sondern auch über ihre Position ansprechen.</p>
 </div>
 </div>
-<p>Die Funktion <code>glimpse</code> wird unmittelbar nach dem <code>select</code> aufgerufen und bekommt das Ergebnis übergeben. Dafür sorgt das etwas merkwürdig aussehende Symbol <code>|&gt;</code>, das wir den Pipe-Operator oder einfach nur die Pipe nennen. Es sorgt dafür, dass das Ergebnis des ersten Befehls (vor der Pipe) an den nächsten Befehl (nach der Pipe) übergeben wird. Auf diese Weise können wir Ketten von Befehlen aufbauen, in der jeder Befehl sein eigenes Ergebnis an den nächsten übergibt. Eine dedizierte Einfürhung in den Pipe-Operator findet ihr in <a href="../r-basics/pipe.html" class="quarto-xref"><span>Kapitel 8</span></a>.</p>
 </section>
 <section id="welchen-wertebereich-hat-eine-variable" class="level3">
 <h3 class="anchored" data-anchor-id="welchen-wertebereich-hat-eine-variable">Welchen Wertebereich hat eine Variable?</h3>
-<p>Zurück zur Ausgabe vom <code>glimpse</code> oben. Was genau bedeutet das, was wir auf der Konsole sehen? Die ersten beiden Zeilen geben Auskunft über die Anzahl an Zeilen und Spalten im Datensatz. Warum sind es hier nur 10 Zeilen, statt der 813 Spalten, wie oben geschrieben? Weil wir <code>glimpse</code> nicht mehr für den ursprünglichen Datensatz aufrufen, sondern für den, der als Ergebnis des vorgelagerten <code>select(1:10)</code> entsteht. Und der hat nur noch 10 Spalten, was wir aber genau so wollten.</p>
-<p>Darunter folgen Zeilenweise die Spalten mit den Informationen Spaltenname, Datentyp und Auflistung der ersten Werte für jede Spalte. Was genau die Datentypen wie <code>&lt;dbl&gt;</code> oder <code>&lt;chr&gt;</code> bedeuten lernen wir später noch. Nach dem Datentyp sehen wir eine komma-getrennte Liste der ersten Werte, soweit sie auf die Konsole passen. Für die erste Spalte im Datensatz, <code>q001hheinkauf</code>, sind die ersten Werte also 2, 1, 2, 2 usw. Was das genau bedeutet können wir nicht wissen, sondern müssen es nachschlagen. Dazu gibt es üblicherweise zu einem Fragebogen ein entsprechendes Codebuch, in dem die Antwortkodierungen in sprechende Werte übersetzt werden. Das ist meistens Teil des Data Dictionary.</p>
-<p>Bei der ersten Frage, zu der die Spalte <code>q001hheinkauf</code> gehört, geht es um die Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Der Wert 1 steht hier kurz gesagt für “allein verantwortlich” und 2 für “geteilte Verantwortung”. Aber sind das die einzigen Werte, die die Variable annimmt? Das können wir aus der Ausgabe der <code>glimpse</code>-Funktion nicht ableiten.</p>
-<p>Wir könnten die Spalte einfach auswählen und uns das Ergebnis ausgeben lassen:</p>
+<p><code>glimpse()</code> ist super, um <em>schnell</em> einen Eindruck zu bekommen – aber es zeigt euch nur die ersten Werte. Wenn ihr wirklich wissen wollt, welche Ausprägungen vorkommen, müsst ihr gezielt nachsehen.</p>
+<p>Nehmen wir die Variable <code>q001hheinkauf</code>. Sie gehört zur Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Im Codebuch zur Umfrage lesen wir nach, dass “1” für “Ich selbst und eine andere Person” steht, während “2” für “Hauptsächlich ich selbst” steht. Der Wert “0” stünde für “Fast immer eine andere Person”. Aber kommen wirklich nur diese Werte vor? Oder kommen überhaupt alle vor?</p>
+<p>Zuerst können wir uns die Spalte als Tibble ausgeben lassen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 1
    q001hheinkauf
@@ -654,11 +664,11 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 # ℹ 2,801 more rows</code></pre>
 </div>
 </div>
-<p>Das Ergebnis ist ein Tibble, der auf der Konsole standardmäßig seine ersten 10 Werte ausgibt. Dieses Verhalten können wir ändern und den Tibble um mehr Werte bitten:</p>
+<p>Standardmäßig zeigt R dabei nur die ersten 10 Zeilen. Das könnt ihr ändern:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q001hheinkauf) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q001hheinkauf) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,811 × 1
    q001hheinkauf
@@ -686,10 +696,10 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 # ℹ 2,791 more rows</code></pre>
 </div>
 </div>
-<p>Damit sind des schon doppelt so viele Beobachtungen für die Variable <code>q001hheinkauf</code>, und immernoch sehen wir nur die Ausprägungen 1 und 2. Um wirklich sicher zu wissen, welche Werteausprägungen existieren, geben wir die eindeutigen Werte aus:</p>
+<p>Alle Zeilen auszugeben würde dieses Kapitel sehr lang machen und wäre gleichzeitig aufwändig zu prüfen. Um dennoch sicher zu wissen, welche Werteausprägungen existieren, können wir uns die eindeutigen Werte ausgeben lassen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   q001hheinkauf
@@ -698,10 +708,10 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 2             1</code></pre>
 </div>
 </div>
-<p>Und siehe da: Es ist tatsächlich so, dass nur diese beiden Werte vorkommen. Wie oft? Auch das bekommen wir schnell raus:</p>
+<p>Eine kleine Überraschung, denn die “0” ist nicht vertreten. Hat scheinbar niemand geantwortet. Wenn ihr zusätzlich wissen wollt, wie häufig die Ausprägungen angekreuzt wurden:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(q001hheinkauf)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   q001hheinkauf     n
@@ -710,7 +720,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 2             2  1892</code></pre>
 </div>
 </div>
-<p>Die Funktion <code>count</code> kennen wir bereits von oben. Wenn wir ihr eine Variable übergeben, dann ermittelt sie, wie häufig jede Ausprägung der Variable in den Daten vorkommt. Technisch gruppiert sie die Daten nach der übergebenen Variable und zählt die Beobachtungen für jede Gruppe.</p>
+<p>Die Funktion <code>count()</code> gruppiert die Daten nach der übergebenen Variable und zählt die Beobachtungen pro Gruppe. Wir stecken schon mittem in der Analyse der Daten 🤓.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -721,23 +731,39 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Die Funktion <code>count</code> zählt zu den Aggregationsfunktionen. Eine dedizierte Einführung, wie man mit R und dem <code>dplyr</code>-Paket Daten zusammenfasst, findet ihr in <a href="../r-basics/summarize.html" class="quarto-xref"><span>Kapitel 10</span></a></p>
+<p>Die Funktion <code>count()</code> ist eine Aggregationsfunktion. Eine dedizierte Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten zusammenfasst, findet ihr in <a href="../r-basics/summarize.html" class="quarto-xref"><span>Kapitel 11</span></a>.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="beobachtungen-zeilen" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="beobachtungen-zeilen"><span class="header-section-number">1.4</span> Beobachtungen (Zeilen)</h2>
-<p>Was für Variablen gilt, gilt auch für Zeilen. Jede hat eine feste Position. Bei den Zeilen nennen wir das auch die <em>row number</em> (Zeilennummer), und es gibt eine Funktion, um diese zu ermitteln:</p>
+<p>Und weil es gerade passt: Wenn wir Daten analysieren, dann bevorzugen wir in dem allermeisten Fällen eine aussagekräftige Visualisierung über eine tabellarische Ausgabe. Die Häufigkeiten der beiden Antwortmöglichkeiten können wir wunderbar als Balkendiagramm visualisieren:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">10</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(q001hheinkauf) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> q001hheinkauf, <span class="at">y =</span> n) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survey-data_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Zugegeben: Das Balkendiagramm ist verbesserungswürdig, dennoch zeigt es einen wichtigen Aspekt der explorativen Datenanalyse und warum R dafür so gut geeignet ist. Mit nur drei Zeilen Code erstellen wir ein Balkendiagramm, das uns die Verhältnisse der Anworten zur ersten Frage im Datensatz visuell aufzeigt. Und das Diagramm ist inhaltlich korrekt, dafür sorgt die Bibliothek <code>ggplot2</code>, die wir hier verwenden. Es ist dafür nicht wirklich ansprechend (schaut etwas mal die Labels auf der x-Achse an). Aber darum geht es in der explorativen Datenanalyse nicht. Wir wollen schhnell Ergebnisse sehen und flexibel in den Daten wühlen können. Das funktioniert mit R und dem Tidyverse perfekt!</p>
+</section>
+</section>
+<section id="beobachtungen-zeilen" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="beobachtungen-zeilen"><span class="header-section-number">1.5</span> Beobachtungen (Zeilen)</h2>
+<p>Was für Variablen gilt, gilt auch für Zeilen: Jede hat eine feste Position. Bei Zeilen nennen wir das auch die <em>row number</em> (Zeilennummer). Mit <code>row_number()</code> könnt ihr diese Position abfragen und damit gezielt Zeilen auswählen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">10</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="1">Mit <code>row_number</code> bekommen wir die Position (oder Nummer) für eine Zeile.</span>
+<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="1">Mit <code>row_number()</code> bekommen wir die Position (Zeilennummer) einer Beobachtung.</span>
 </dd>
 </dl>
 </div>
@@ -759,12 +785,12 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 #   v041diaet_1lowcarb &lt;dbl&gt;, v041diaet_2laktose &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Die Funktion <code>filter</code> verwenden wir, um die Beobachtungen nach bestimmten Kriterien einzugrenzen. Zum Beispiel um nur weibliche Personen zu betrachten. Wir können mit der <code>row_number</code>-Funktion die Beobachtungen auch nach ihrer Position im Datensatz eingrenzen. Das obige Beispiel behält nur jene Zeilen im Ergebnis, deren Position kleiner oder gleich (<code>&lt;=</code>) 10 ist.</p>
-<p>Statt kleiner-gleich können wir auch andere Operatoren verwenden:</p>
+<p>Die Funktion <code>filter()</code> verwenden wir, um Beobachtungen nach Kriterien einzugrenzen – zum Beispiel um nur weibliche Personen zu betrachten. Mit <code>row_number()</code> könnt ihr stattdessen nach Position filtern, z. B. um „Beispielzeilen“ für einen ersten Blick zu nehmen.</p>
+<p>Statt „kleiner-gleich“ (<code>&lt;=</code>) könnt ihr natürlich auch andere Operatoren verwenden:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">42</span>) <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q004geschlecht)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">42</span>) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(q004geschlecht)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   q004geschlecht
@@ -772,6 +798,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 1              2</code></pre>
 </div>
 </div>
+<p>Damit habt ihr jetzt die wichtigsten Werkzeuge für den Start: Daten laden, Kontext verstehen, Dimensionen prüfen, Variablen überblicken und Wertebereiche testen. Im nächsten Schritt geht es darum, die Variablen inhaltlich zu interpretieren (Codebuch/Data Dictionary) und die Daten für Analysen vorzubereiten.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

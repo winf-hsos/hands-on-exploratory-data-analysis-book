@@ -1,0 +1,34 @@
+# _quarto-slides.yml
+project:
+  type: default
+  execute-dir: project
+  pre-render:
+    - powershell -ExecutionPolicy Bypass -File scripts/generate-slide-snippets.ps1
+  post-render:
+    - powershell -ExecutionPolicy Bypass -File scripts/collect-rendered-slides.ps1
+  render:
+    - project-1-survey/slides/_generated/survey-data-slides.qmd
+    - r-basics/slides/_generated/pipe-slides.qmd
+
+execute:
+  echo: true
+  freeze: false
+
+knitr:
+  opts_chunk:
+    echo: true
+
+format:
+  revealjs:
+    slide-level: 2
+    #incremental: true
+    theme: dark
+    embed-resources: true
+
+# so referenced assets/bibliography work regardless of where slides live
+bibliography: references.bib
+
+author: "Prof. Dr. Nicolas Meseth"
+
+
+   

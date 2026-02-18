@@ -1,0 +1,48 @@
+---
+title: Survey Data
+format: revealjs
+snippet_file: ../survey-data.qmd
+---
+
+```{r}
+#| include: false
+source("project-1-survey/setup.R")
+```
+
+## Lernziele 
+
+{{< snippet id="learning-objectives" >}}
+
+## Daten laden
+
+{{< snippet label="lst-surveys-load-data" >}}
+
+## Tibbles
+
+{{< snippet label="lst-surveys-tibble-name" >}}
+
+## Load data
+
+- With `count`, we can count rows
+
+{{< snippet label="lst-surveys-count" >}}
+
+## Lernziele
+
+{{< snippet id="slides-setup" >}}
+
+
+
+
+
+## Second slide
+
+- Test
+- Test this
+
+## Last slide
+
+```{r}
+#| echo: true
+print("Hello")
+```

@@ -7,3 +7,30 @@ snippet_file: ../pipe.qmd
 ## Übersicht
 
 - Der Pipe-Operator `|>`
+
+## Funktionsweise
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Ohne Pipe
+
+```
+f(g(h(x)))
+```
+:::
+
+::: {.column width="50%"}
+Mit Pipe
+
+```
+x |> h() |> g() |> f()
+```
+:::
+
+::::
+
+## Test
+
+{{< snippet id="pipe-with-without" >}}
+

@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -239,8 +274,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#was-macht-die-pipe-eigentlich" id="toc-was-macht-die-pipe-eigentlich" class="nav-link active" data-scroll-target="#was-macht-die-pipe-eigentlich"><span class="header-section-number">8.1</span> Was macht die Pipe eigentlich?</a></li>
+  <li><a href="#warum-die-pipe-euren-code-besser-macht" id="toc-warum-die-pipe-euren-code-besser-macht" class="nav-link" data-scroll-target="#warum-die-pipe-euren-code-besser-macht"><span class="header-section-number">8.2</span> Warum die Pipe euren Code besser macht</a></li>
+  <li><a href="#sonderfälle-wenn-es-nicht-das-erste-argument-ist" id="toc-sonderfälle-wenn-es-nicht-das-erste-argument-ist" class="nav-link" data-scroll-target="#sonderfälle-wenn-es-nicht-das-erste-argument-ist"><span class="header-section-number">8.3</span> Sonderfälle: wenn es nicht das erste Argument ist</a></li>
+  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">8.4</span> Kurz zusammengefasst</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -264,18 +308,241 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div id="fig-surveys-pipe" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<p>Wenn ihr Daten analysiert, arbeitet ihr fast nie mit <em>einem</em> Befehl. Stattdessen baut ihr eine kleine Kette aus vielen Schritten: Spalten auswählen, Zeilen filtern, neue Variablen berechnen, sortieren, zusammenfassen und zwischendurch kurz prüfen, ob alles so aussieht wie gedacht.</p>
+<p>Ohne Pipe werden solche Schrittketten schnell unübersichtlich. Mit der Pipe schreibt ihr eure Analyse so, dass ihr sie wie einen Text von oben nach unten lesen könnt.</p>
+<p>In diesem Kapitel klären wir drei Fragen:</p>
+<ul>
+<li>Was macht die Pipe <code>|&gt;</code> genau?</li>
+<li>Warum wird Code damit lesbarer und leichter zu ändern?</li>
+<li>Was macht ihr, wenn eine Funktion den Datensatz nicht als erstes Argument erwartet?</li>
+</ul>
+<section id="was-macht-die-pipe-eigentlich" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="was-macht-die-pipe-eigentlich"><span class="header-section-number">8.1</span> Was macht die Pipe eigentlich?</h2>
+<p>Die wichtigste Regel ist kurz:</p>
+<ul>
+<li>Die Pipe nimmt das Ergebnis links und setzt es rechts als <strong>erstes Argument</strong> ein.</li>
+</ul>
+<p>Das sieht zum Beispiel so aus:</p>
+<pre><code>x |&gt; f(a, b)</code></pre>
+<p>und bedeutet:</p>
+<pre><code>f(x, a, b)</code></pre>
+<p>Schauen wir uns das in einem kleinen Beispiel an. Die Funktion <code>nrow()</code> gibt euch die Anzahl Zeilen eines Datensatzes zurück. Ohne Pipe schreibt ihr:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tweets)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58421</code></pre>
+</div>
+</div>
+<p>Mit Pipe rückt der Datensatz nach links und wird rechts automatisch in <code>nrow()</code> eingesetzt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58421</code></pre>
+</div>
+</div>
+<p>Das Ergebnis einer Pipe muss übrigens nicht immer ein Tibble bleiben. Nach <code>nrow()</code> ist das Ergebnis eine Zahl, in diesem Datensatz also 58.421. Diese Zahl könnt ihr direkt in den nächsten Schritt weiterreichen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 241.7044</code></pre>
+</div>
+</div>
+<p>Inhaltlich ist das Beispiel etwas künstlich. Es zeigt aber gut, dass die Pipe einfach Ergebnisse weiterreicht, egal ob es ein Tibble, eine Zahl oder ein Text ist.</p>
+<div id="fig-r-basics-pipe" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-surveys-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-r-basics-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="..\images/select_pipe_glimpse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;8.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter."><img src="..\images/select_pipe_glimpse.png" class="img-fluid figure-img"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surveys-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-basics-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;8.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.
 </figcaption>
 </figure>
 </div>
+<p>In <a href="#fig-r-basics-pipe" class="quarto-xref">Abbildung&nbsp;<span>8.1</span></a> seht ihr das typische Muster, das euch im ganzen Buch immer wieder begegnet: Am Anfang steht ein Datensatz als Tibble, danach folgen mehrere Schritte, am Ende kommt oft eine kurze Ausgabe zur Kontrolle.</p>
+<div class="cell">
+<div id="lst-r-basics-glimpse" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-basics-glimpse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;8.1: Am Anfang steht immer ein Tibble, der durch die Pipe weitergereicht wird.
+</figcaption>
+<div aria-describedby="lst-r-basics-glimpse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(screen_name, favorite_count, retweet_count) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 58,421
+Columns: 3
+$ screen_name    &lt;chr&gt; "cem_oezdemir", "W_Schmidt_", "lisapaus", "lisapaus", "…
+$ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103, 266…
+$ retweet_count  &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10, 13, 26,…</code></pre>
+</div>
+</div>
+<p>In <a href="#lst-r-basics-glimpse" class="quarto-xref">Listing&nbsp;<span>8.1</span></a> ist <code>tweets</code> der Startpunkt. <code>select()</code> nimmt den Tibble und reduziert ihn auf die gewünschten Spalten. <code>glimpse()</code> bekommt dann das Ergebnis und zeigt euch schnell Struktur und erste Werte.</p>
+<p>Wenn ihr es formeller mögt, könnt ihr euch eine Pipe-Kette wie eine verschachtelte Funktionsanwendung vorstellen:</p>
+<div id="pipe-with-without" class="reuse">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Ohne Pipe</th>
+<th>Mit Pipe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>f(g(h(x)))</code></td>
+<td><code>x |&gt; h() |&gt; g() |&gt; f()</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="warum-die-pipe-euren-code-besser-macht" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="warum-die-pipe-euren-code-besser-macht"><span class="header-section-number">8.2</span> Warum die Pipe euren Code besser macht</h2>
+<p>Die Pipe hilft euch vor allem bei drei Dingen:</p>
+<ul>
+<li><strong>Lesbarkeit:</strong> Ihr könnt den Code von oben nach unten lesen.</li>
+<li><strong>Wartbarkeit:</strong> Ihr könnt einzelne Schritte leicht austauschen.</li>
+<li><strong>Struktur:</strong> Jeder Schritt steht in einer eigenen Zeile.</li>
+</ul>
+<p>Das merkt ihr spätestens dann, wenn eine Transformation etwas länger wird. Ohne Pipe wird daraus schnell ein Klammermonster:</p>
+<div class="cell">
+<div id="lst-r-basics-no-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored" data-code-line-numbers="true">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-basics-no-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;8.2: Ohne die Pipe werden komplexe Transformationen schnell unübersichtlich.
+</figcaption>
+<div aria-describedby="lst-r-basics-no-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">head</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">arrange</span>(</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="fu">select</span>(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>      <span class="fu">filter</span>(</span>
+<span id="cb11-5"><a href="#cb11-5"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb11-6"><a href="#cb11-6"></a>          <span class="fu">filter</span>(tweets, <span class="sc">!</span>is_retweet),</span>
+<span id="cb11-7"><a href="#cb11-7"></a>          <span class="at">is_top_tweet =</span> retweet_count <span class="sc">&gt;=</span> <span class="fu">quantile</span>(retweet_count, <span class="fl">0.99</span>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a>        ),</span>
+<span id="cb11-9"><a href="#cb11-9"></a>        is_top_tweet</span>
+<span id="cb11-10"><a href="#cb11-10"></a>      ),</span>
+<span id="cb11-11"><a href="#cb11-11"></a>      retweet_count, screen_name, text</span>
+<span id="cb11-12"><a href="#cb11-12"></a>    ),</span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="sc">-</span>retweet_count</span>
+<span id="cb11-14"><a href="#cb11-14"></a>  ),</span>
+<span id="cb11-15"><a href="#cb11-15"></a>  <span class="dv">5</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  retweet_count screen_name     text                                            
+          &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                                           
+1         12652 Bundeskanzler   Der russische Überfall markiert eine Zeitenwend…
+2          8032 Bundeskanzler   The Russian invasion marks a turning point. It …
+3          7152 ABaerbockArchiv Klimakrise ist jetzt. Hören wir auf, nur zu red…
+4          5407 ABaerbock       #MohammadMehdiKarami &amp;amp; #MohammadHosseini - …
+5          5363 Karl_Lauterbach Ich möchte mich bei allen bedanken, die mich al…</code></pre>
+</div>
+</div>
+<p>Beim ersten Blick wirkt das wie ein Rätsel. Der Code funktioniert, aber um zu verstehen, was passiert, müsst ihr von innen nach außen lesen. Die eigentliche Schrittfolge ist:</p>
+<pre><code>filter (6) → mutate (5) → filter (4) → select (3) → arrange (2) → head (1)</code></pre>
+<p>Mit Pipe schreibt ihr genau diese Reihenfolge direkt so auf, wie ihr sie gedanklich sowieso abarbeitet:</p>
+<div class="cell">
+<div id="lst-r-basics-with-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored" data-code-line-numbers="true">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-basics-with-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und erlaubt schnelle Änderungen.
+</figcaption>
+<div aria-describedby="lst-r-basics-with-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>tweets <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">filter</span>(<span class="sc">!</span>is_retweet) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">mutate</span>(<span class="at">is_top_tweet =</span> retweet_count <span class="sc">&gt;=</span> <span class="fu">quantile</span>(retweet_count, <span class="fl">0.99</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">filter</span>(is_top_tweet) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">select</span>(retweet_count, screen_name, text) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>retweet_count) <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  retweet_count screen_name     text                                            
+          &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                                           
+1         12652 Bundeskanzler   Der russische Überfall markiert eine Zeitenwend…
+2          8032 Bundeskanzler   The Russian invasion marks a turning point. It …
+3          7152 ABaerbockArchiv Klimakrise ist jetzt. Hören wir auf, nur zu red…
+4          5407 ABaerbock       #MohammadMehdiKarami &amp;amp; #MohammadHosseini - …
+5          5363 Karl_Lauterbach Ich möchte mich bei allen bedanken, die mich al…</code></pre>
+</div>
+</div>
+<p>Das Ergebnis ist identisch, aber ihr könnt jetzt jeden Schritt einzeln lesen. Außerdem könnt ihr sehr schnell ausprobieren, welchen Effekt ein Schritt hat. Kommentiert ihn dafür einfach temporär aus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(!is_retweet) |&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_top_tweet =</span> retweet_count <span class="sc">&gt;=</span> <span class="fu">quantile</span>(retweet_count, <span class="fl">0.99</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(is_top_tweet) <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(retweet_count, screen_name, text) <span class="sc">|&gt;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">-</span>retweet_count) <span class="sc">|&gt;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  retweet_count screen_name     text                                            
+          &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;                                           
+1        434571 cem_oezdemir    RT @Schwarzenegger: I love the Russian people. …
+2        276452 klara_geywitz   RT @Twitter: Twitter is built by immigrants of …
+3        271059 SteffiLemke     RT @KamalaHarris: While I may be the first woma…
+4        188454 ABaerbockArchiv RT @verygooster: every woman in this pic tho ht…
+5        169437 W_Schmidt_      RT @MarcusRashford: https://t.co/bs9lksGM4q     </code></pre>
+</div>
+</div>
+<p>Wenn ihr Retweets nicht herausfiltert, landet ein geteilter Tweet von Cem Özdemir auf Platz 1. Genau solche schnellen Checks sind in der explorativen Datenanalyse Gold wert.</p>
+</section>
+<section id="sonderfälle-wenn-es-nicht-das-erste-argument-ist" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sonderfälle-wenn-es-nicht-das-erste-argument-ist"><span class="header-section-number">8.3</span> Sonderfälle: wenn es nicht das erste Argument ist</h2>
+<p>Im Tidyverse klappt die Pipe fast immer reibungslos, weil die Funktionen so gestaltet sind, dass der Datensatz als erstes Argument kommt. Manchmal ist das aber anders, vor allem bei Base-R-Funktionen.</p>
+<p>Nehmen wir an, ihr wollt einen Text aus einem Online-Fragebogen bereinigen. Da entstehen schnell doppelte Leerzeichen, die euch später beim Auswerten nerven können.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Jemand  hat unsaubere Werte   eingegeben. "</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>text <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trimws</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tolower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  (\(x) <span class="fu">gsub</span>(<span class="st">"[[:punct:]]+"</span>, <span class="st">""</span>, x))() <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  (\(x) <span class="fu">gsub</span>(<span class="st">"[[:space:]]+"</span>, <span class="st">" "</span>, x))()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "jemand hat unsaubere werte eingegeben"</code></pre>
+</div>
+</div>
+<p><code>gsub()</code> (<em>global substitute</em>) ersetzt alle Vorkommnisse eines gesuchten Teilstrings durch einen anderen String. Im Beispiel entfernt die erste Ersetzung Satzzeichen. Die zweite fasst mehrere Leerzeichen zu einem einzelnen zusammen.</p>
+<p>Der Haken ist: Bei <code>gsub()</code> ist der Text, in dem ersetzt werden soll, das <strong>dritte</strong> Argument. Die Pipe kann ihn also nicht automatisch als erstes Argument einsetzen. Die Lösung ist eine anonyme Funktion <code>\(x) ...</code>, in der ihr selbst festlegt, wo <code>x</code> eingesetzt wird.</p>
+<p>Wenn ihr solche Dinge häufiger macht, lohnt sich oft der Griff zu einer Tidyverse-Variante. Das Paket <code>stringr</code> bietet dafür Funktionen, bei denen der zu bearbeitende Text als erstes Argument kommt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>text <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_to_lower</span>() <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove_all</span>(<span class="st">"[[:punct:]]+"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">"[[:space:]]+"</span>, <span class="st">" "</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "jemand hat unsaubere werte eingegeben"</code></pre>
+</div>
+</div>
+<p>Merkt euch: Wenn es eine passende Tidyverse-Funktion gibt, ist das Piping meistens am angenehmsten. Wenn nicht, könnt ihr mit anonymen Funktionen trotzdem sauber weiter pipen.</p>
+</section>
+<section id="kurz-zusammengefasst" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="kurz-zusammengefasst"><span class="header-section-number">8.4</span> Kurz zusammengefasst</h2>
+<ul>
+<li>Die Pipe <code>|&gt;</code> reicht das Ergebnis links an den nächsten Schritt rechts weiter.</li>
+<li>Standardmäßig wird der linke Wert als erstes Argument eingesetzt.</li>
+<li>In längeren Transformationen bringt die Pipe Lesbarkeit und macht Experimente leicht.</li>
+<li>Wenn eine Funktion den Wert nicht als erstes Argument erwartet, helfen anonyme Funktionen oder Tidyverse-Alternativen.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

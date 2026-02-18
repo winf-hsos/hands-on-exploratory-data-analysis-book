@@ -1002,7 +1002,37 @@ Prof. Dr. Nicolas Meseth
 <ul>
 <li>Der Pipe-Operator <code>|&gt;</code></li>
 </ul>
+</section>
+<section id="funktionsweise" class="slide level2">
+<h2>Funktionsweise</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Ohne Pipe</p>
+<pre><code>f(g(h(x)))</code></pre>
+</div><div class="column" style="width:50%;">
+<p>Mit Pipe</p>
+<pre><code>x |&gt; h() |&gt; g() |&gt; f()</code></pre>
+</div></div>
+</section>
+<section id="test" class="slide level2">
+<h2>Test</h2>
+<div class="fullwidth">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Ohne Pipe</th>
+<th>Mit Pipe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>f(g(h(x)))</code></td>
+<td><code>x |&gt; h() |&gt; g() |&gt; f()</code></td>
+</tr>
+</tbody>
+</table>
 
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

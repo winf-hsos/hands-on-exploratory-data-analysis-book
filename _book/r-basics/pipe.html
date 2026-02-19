@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Pipe-Operator – Hands-On Exploratory Data Analytics</title>
+<title>9&nbsp; Pipe-Operator – Hands-On Exploratory Data Analytics</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -74,10 +77,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -121,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/loading-data.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/pipe.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/ide.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/pipe.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -221,38 +224,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,6 +282,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -279,19 +306,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#was-macht-die-pipe-eigentlich" id="toc-was-macht-die-pipe-eigentlich" class="nav-link active" data-scroll-target="#was-macht-die-pipe-eigentlich"><span class="header-section-number">8.1</span> Was macht die Pipe eigentlich?</a></li>
-  <li><a href="#warum-die-pipe-euren-code-besser-macht" id="toc-warum-die-pipe-euren-code-besser-macht" class="nav-link" data-scroll-target="#warum-die-pipe-euren-code-besser-macht"><span class="header-section-number">8.2</span> Warum die Pipe euren Code besser macht</a></li>
-  <li><a href="#sonderfälle-wenn-es-nicht-das-erste-argument-ist" id="toc-sonderfälle-wenn-es-nicht-das-erste-argument-ist" class="nav-link" data-scroll-target="#sonderfälle-wenn-es-nicht-das-erste-argument-ist"><span class="header-section-number">8.3</span> Sonderfälle: wenn es nicht das erste Argument ist</a></li>
-  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">8.4</span> Kurz zusammengefasst</a></li>
+  <li><a href="#was-macht-die-pipe-eigentlich" id="toc-was-macht-die-pipe-eigentlich" class="nav-link active" data-scroll-target="#was-macht-die-pipe-eigentlich"><span class="header-section-number">9.1</span> Was macht die Pipe eigentlich?</a></li>
+  <li><a href="#warum-die-pipe-euren-code-besser-macht" id="toc-warum-die-pipe-euren-code-besser-macht" class="nav-link" data-scroll-target="#warum-die-pipe-euren-code-besser-macht"><span class="header-section-number">9.2</span> Warum die Pipe euren Code besser macht</a></li>
+  <li><a href="#sonderfälle-wenn-es-nicht-das-erste-argument-ist" id="toc-sonderfälle-wenn-es-nicht-das-erste-argument-ist" class="nav-link" data-scroll-target="#sonderfälle-wenn-es-nicht-das-erste-argument-ist"><span class="header-section-number">9.3</span> Sonderfälle: wenn es nicht das erste Argument ist</a></li>
+  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">9.4</span> Kurz zusammengefasst</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/loading-data.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/pipe.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/ide.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/pipe.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-survey-pipe" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></h1>
+<h1 class="title"><span id="sec-survey-pipe" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></h1>
 </div>
 
 
@@ -311,14 +338,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wenn ihr Daten analysiert, arbeitet ihr fast nie mit <em>einem</em> Befehl. Stattdessen baut ihr eine kleine Kette aus vielen Schritten: Spalten auswählen, Zeilen filtern, neue Variablen berechnen, sortieren, zusammenfassen und zwischendurch kurz prüfen, ob alles so aussieht wie gedacht.</p>
 <p>Ohne Pipe werden solche Schrittketten schnell unübersichtlich. Mit der Pipe schreibt ihr eure Analyse so, dass ihr sie wie einen Text von oben nach unten lesen könnt.</p>
 <p>In diesem Kapitel klären wir drei Fragen:</p>
+<div id="pipe-learning-objectives" class="reuse">
 <ul>
 <li>Was macht die Pipe <code>|&gt;</code> genau?</li>
 <li>Warum wird Code damit lesbarer und leichter zu ändern?</li>
 <li>Was macht ihr, wenn eine Funktion den Datensatz nicht als erstes Argument erwartet?</li>
 </ul>
-<section id="was-macht-die-pipe-eigentlich" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="was-macht-die-pipe-eigentlich"><span class="header-section-number">8.1</span> Was macht die Pipe eigentlich?</h2>
+</div>
+<section id="was-macht-die-pipe-eigentlich" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="was-macht-die-pipe-eigentlich"><span class="header-section-number">9.1</span> Was macht die Pipe eigentlich?</h2>
 <p>Die wichtigste Regel ist kurz:</p>
+<div id="pipe-first-argument" class="reuse">
 <ul>
 <li>Die Pipe nimmt das Ergebnis links und setzt es rechts als <strong>erstes Argument</strong> ein.</li>
 </ul>
@@ -326,14 +356,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>x |&gt; f(a, b)</code></pre>
 <p>und bedeutet:</p>
 <pre><code>f(x, a, b)</code></pre>
+</div>
 <p>Schauen wir uns das in einem kleinen Beispiel an. Die Funktion <code>nrow()</code> gibt euch die Anzahl Zeilen eines Datensatzes zurück. Ohne Pipe schreibt ihr:</p>
+<div id="pipe-nrow-no-pipe" class="reuse">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(tweets)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 58421</code></pre>
 </div>
 </div>
+</div>
 <p>Mit Pipe rückt der Datensatz nach links und wird rechts automatisch in <code>nrow()</code> eingesetzt:</p>
+<div id="pipe-nrow-with-pipe" class="reuse">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -341,7 +375,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 58421</code></pre>
 </div>
 </div>
+</div>
 <p>Das Ergebnis einer Pipe muss übrigens nicht immer ein Tibble bleiben. Nach <code>nrow()</code> ist das Ergebnis eine Zahl, in diesem Datensatz also 58.421. Diese Zahl könnt ihr direkt in den nächsten Schritt weiterreichen:</p>
+<div id="pipe-nrow-sqrt" class="reuse">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>() <span class="sc">|&gt;</span></span>
@@ -350,23 +386,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 241.7044</code></pre>
 </div>
 </div>
+</div>
 <p>Inhaltlich ist das Beispiel etwas künstlich. Es zeigt aber gut, dass die Pipe einfach Ergebnisse weiterreicht, egal ob es ein Tibble, eine Zahl oder ein Text ist.</p>
+<div id="pipe-fig-flow" class="reuse">
 <div id="fig-r-basics-pipe" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-r-basics-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\images/select_pipe_glimpse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;8.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter."><img src="..\images/select_pipe_glimpse.png" class="img-fluid figure-img"></a>
+<a href="..\images/select_pipe_glimpse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;9.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter."><img src="..\images/select_pipe_glimpse.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-basics-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;8.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.
+Abbildung&nbsp;9.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.
 </figcaption>
 </figure>
 </div>
-<p>In <a href="#fig-r-basics-pipe" class="quarto-xref">Abbildung&nbsp;<span>8.1</span></a> seht ihr das typische Muster, das euch im ganzen Buch immer wieder begegnet: Am Anfang steht ein Datensatz als Tibble, danach folgen mehrere Schritte, am Ende kommt oft eine kurze Ausgabe zur Kontrolle.</p>
+</div>
+<p>In <a href="#fig-r-basics-pipe" class="quarto-xref">Abbildung&nbsp;<span>9.1</span></a> seht ihr das typische Muster, das euch im ganzen Buch immer wieder begegnet: Am Anfang steht ein Datensatz als Tibble, danach folgen mehrere Schritte, am Ende kommt oft eine kurze Ausgabe zur Kontrolle.</p>
+<div id="pipe-glimpse-chain" class="reuse">
 <div class="cell">
 <div id="lst-r-basics-glimpse" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-basics-glimpse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.1: Am Anfang steht immer ein Tibble, der durch die Pipe weitergereicht wird.
+Listing&nbsp;9.1: Am Anfang steht immer ein Tibble, der durch die Pipe weitergereicht wird.
 </figcaption>
 <div aria-describedby="lst-r-basics-glimpse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
@@ -383,7 +423,8 @@ $ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103,
 $ retweet_count  &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10, 13, 26,…</code></pre>
 </div>
 </div>
-<p>In <a href="#lst-r-basics-glimpse" class="quarto-xref">Listing&nbsp;<span>8.1</span></a> ist <code>tweets</code> der Startpunkt. <code>select()</code> nimmt den Tibble und reduziert ihn auf die gewünschten Spalten. <code>glimpse()</code> bekommt dann das Ergebnis und zeigt euch schnell Struktur und erste Werte.</p>
+</div>
+<p>In <a href="#lst-r-basics-glimpse" class="quarto-xref">Listing&nbsp;<span>9.1</span></a> ist <code>tweets</code> der Startpunkt. <code>select()</code> nimmt den Tibble und reduziert ihn auf die gewünschten Spalten. <code>glimpse()</code> bekommt dann das Ergebnis und zeigt euch schnell Struktur und erste Werte.</p>
 <p>Wenn ihr es formeller mögt, könnt ihr euch eine Pipe-Kette wie eine verschachtelte Funktionsanwendung vorstellen:</p>
 <div id="pipe-with-without" class="reuse">
 <table class="caption-top table">
@@ -402,20 +443,23 @@ $ retweet_count  &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10, 13,
 </table>
 </div>
 </section>
-<section id="warum-die-pipe-euren-code-besser-macht" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="warum-die-pipe-euren-code-besser-macht"><span class="header-section-number">8.2</span> Warum die Pipe euren Code besser macht</h2>
+<section id="warum-die-pipe-euren-code-besser-macht" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="warum-die-pipe-euren-code-besser-macht"><span class="header-section-number">9.2</span> Warum die Pipe euren Code besser macht</h2>
 <p>Die Pipe hilft euch vor allem bei drei Dingen:</p>
+<div id="pipe-benefits" class="reuse">
 <ul>
 <li><strong>Lesbarkeit:</strong> Ihr könnt den Code von oben nach unten lesen.</li>
 <li><strong>Wartbarkeit:</strong> Ihr könnt einzelne Schritte leicht austauschen.</li>
 <li><strong>Struktur:</strong> Jeder Schritt steht in einer eigenen Zeile.</li>
 </ul>
+</div>
 <p>Das merkt ihr spätestens dann, wenn eine Transformation etwas länger wird. Ohne Pipe wird daraus schnell ein Klammermonster:</p>
+<div id="pipe-no-pipe" class="reuse">
 <div class="cell">
 <div id="lst-r-basics-no-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored" data-code-line-numbers="true">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-basics-no-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.2: Ohne die Pipe werden komplexe Transformationen schnell unübersichtlich.
+Listing&nbsp;9.2: Ohne die Pipe werden komplexe Transformationen schnell unübersichtlich.
 </figcaption>
 <div aria-describedby="lst-r-basics-no-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">head</span>(</span>
@@ -448,14 +492,16 @@ Listing&nbsp;8.2: Ohne die Pipe werden komplexe Transformationen schnell unüber
 5          5363 Karl_Lauterbach Ich möchte mich bei allen bedanken, die mich al…</code></pre>
 </div>
 </div>
+</div>
 <p>Beim ersten Blick wirkt das wie ein Rätsel. Der Code funktioniert, aber um zu verstehen, was passiert, müsst ihr von innen nach außen lesen. Die eigentliche Schrittfolge ist:</p>
 <pre><code>filter (6) → mutate (5) → filter (4) → select (3) → arrange (2) → head (1)</code></pre>
 <p>Mit Pipe schreibt ihr genau diese Reihenfolge direkt so auf, wie ihr sie gedanklich sowieso abarbeitet:</p>
+<div id="pipe-with-pipe" class="reuse">
 <div class="cell">
 <div id="lst-r-basics-with-pipe" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored" data-code-line-numbers="true">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-basics-with-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und erlaubt schnelle Änderungen.
+Listing&nbsp;9.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und erlaubt schnelle Änderungen.
 </figcaption>
 <div aria-describedby="lst-r-basics-with-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>tweets <span class="sc">|&gt;</span></span>
@@ -479,7 +525,9 @@ Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und e
 5          5363 Karl_Lauterbach Ich möchte mich bei allen bedanken, die mich al…</code></pre>
 </div>
 </div>
+</div>
 <p>Das Ergebnis ist identisch, aber ihr könnt jetzt jeden Schritt einzeln lesen. Außerdem könnt ihr sehr schnell ausprobieren, welchen Effekt ein Schritt hat. Kommentiert ihn dafür einfach temporär aus:</p>
+<div id="pipe-comment-out" class="reuse">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tweets <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># filter(!is_retweet) |&gt;</span></span>
@@ -499,12 +547,14 @@ Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und e
 5        169437 W_Schmidt_      RT @MarcusRashford: https://t.co/bs9lksGM4q     </code></pre>
 </div>
 </div>
+</div>
 <p>Wenn ihr Retweets nicht herausfiltert, landet ein geteilter Tweet von Cem Özdemir auf Platz 1. Genau solche schnellen Checks sind in der explorativen Datenanalyse Gold wert.</p>
 </section>
-<section id="sonderfälle-wenn-es-nicht-das-erste-argument-ist" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="sonderfälle-wenn-es-nicht-das-erste-argument-ist"><span class="header-section-number">8.3</span> Sonderfälle: wenn es nicht das erste Argument ist</h2>
+<section id="sonderfälle-wenn-es-nicht-das-erste-argument-ist" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="sonderfälle-wenn-es-nicht-das-erste-argument-ist"><span class="header-section-number">9.3</span> Sonderfälle: wenn es nicht das erste Argument ist</h2>
 <p>Im Tidyverse klappt die Pipe fast immer reibungslos, weil die Funktionen so gestaltet sind, dass der Datensatz als erstes Argument kommt. Manchmal ist das aber anders, vor allem bei Base-R-Funktionen.</p>
 <p>Nehmen wir an, ihr wollt einen Text aus einem Online-Fragebogen bereinigen. Da entstehen schnell doppelte Leerzeichen, die euch später beim Auswerten nerven können.</p>
+<div id="pipe-gsub-anon" class="reuse">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">"Jemand  hat unsaubere Werte   eingegeben. "</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -517,9 +567,11 @@ Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und e
 <pre><code>[1] "jemand hat unsaubere werte eingegeben"</code></pre>
 </div>
 </div>
+</div>
 <p><code>gsub()</code> (<em>global substitute</em>) ersetzt alle Vorkommnisse eines gesuchten Teilstrings durch einen anderen String. Im Beispiel entfernt die erste Ersetzung Satzzeichen. Die zweite fasst mehrere Leerzeichen zu einem einzelnen zusammen.</p>
 <p>Der Haken ist: Bei <code>gsub()</code> ist der Text, in dem ersetzt werden soll, das <strong>dritte</strong> Argument. Die Pipe kann ihn also nicht automatisch als erstes Argument einsetzen. Die Lösung ist eine anonyme Funktion <code>\(x) ...</code>, in der ihr selbst festlegt, wo <code>x</code> eingesetzt wird.</p>
 <p>Wenn ihr solche Dinge häufiger macht, lohnt sich oft der Griff zu einer Tidyverse-Variante. Das Paket <code>stringr</code> bietet dafür Funktionen, bei denen der zu bearbeitende Text als erstes Argument kommt:</p>
+<div id="pipe-stringr" class="reuse">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>text <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>() <span class="sc">|&gt;</span></span>
@@ -530,16 +582,19 @@ Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und e
 <pre><code>[1] "jemand hat unsaubere werte eingegeben"</code></pre>
 </div>
 </div>
+</div>
 <p>Merkt euch: Wenn es eine passende Tidyverse-Funktion gibt, ist das Piping meistens am angenehmsten. Wenn nicht, könnt ihr mit anonymen Funktionen trotzdem sauber weiter pipen.</p>
 </section>
-<section id="kurz-zusammengefasst" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="kurz-zusammengefasst"><span class="header-section-number">8.4</span> Kurz zusammengefasst</h2>
+<section id="kurz-zusammengefasst" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="kurz-zusammengefasst"><span class="header-section-number">9.4</span> Kurz zusammengefasst</h2>
+<div id="pipe-summary" class="reuse">
 <ul>
 <li>Die Pipe <code>|&gt;</code> reicht das Ergebnis links an den nächsten Schritt rechts weiter.</li>
 <li>Standardmäßig wird der linke Wert als erstes Argument eingesetzt.</li>
 <li>In längeren Transformationen bringt die Pipe Lesbarkeit und macht Experimente leicht.</li>
 <li>Wenn eine Funktion den Wert nicht als erstes Argument erwartet, helfen anonyme Funktionen oder Tidyverse-Alternativen.</li>
 </ul>
+</div>
 
 
 </section>
@@ -987,12 +1042,12 @@ Listing&nbsp;8.3: Die Pipe gibt eine klare Struktur, macht den Code lesbar und e
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../r-basics/loading-data.html" class="pagination-link" aria-label="Daten laden">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../r-basics/select.html" class="pagination-link" aria-label="Spalten auswählen">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../r-basics/select.html" class="pagination-link" aria-label="Variablen auswählen">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

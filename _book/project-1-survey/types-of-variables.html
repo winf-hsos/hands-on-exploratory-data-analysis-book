@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>2&nbsp; Arten von Variablen – Hands-On Exploratory Data Analytics</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -94,10 +96,13 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -127,7 +132,7 @@ div.csl-indent {
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -267,38 +272,56 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -307,6 +330,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -346,7 +375,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></h1>
+<h1 class="title"><span id="sec-surveys-types-of-variables" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></h1>
 </div>
 
 
@@ -363,13 +392,13 @@ window.Quarto = {
 </header>
 
 
-<p>In <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> haben wir schon gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“ – der Variablentyp entscheidet ganz praktisch darüber,</p>
+<p>In <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> haben wir gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“, der Variablentyp entscheidet ganz praktisch darüber,</p>
 <ul>
 <li>welche Kennzahlen sinnvoll sind (Mittelwert? Median? Anteil?),</li>
 <li>welche Visualisierung passt (Histogramm? Balkendiagramm? Boxplot?),</li>
 <li>und worauf ihr bei der Interpretation achten müsst (z. B. Codes, Ausreißer, fehlende Werte).</li>
 </ul>
-<p>Lasst uns deshalb Ordnung in die Spalten bringen: Welche Arten von Variablen gibt es – und woran erkennt ihr sie in R?</p>
+<p>Lasst uns deshalb Ordnung in die Spalten bringen: Welche Arten von Variablen gibt es und woran erkennt ihr sie in R?</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -398,18 +427,14 @@ window.Quarto = {
 <li>Kategorialen Variablen</li>
 <li>Qualitativen Variablen</li>
 </ul>
-<p>Für die Praxis ist außerdem eine „Zusammenfassungsebene“ nützlich:</p>
-<ul>
-<li><strong>Numerisch</strong>: kontinuierlich + Zählvariablen</li>
-<li><strong>Kategorial</strong>: nominal + ordinal</li>
-</ul>
-<div id="fig-surveys-types-of-variables" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>Ich würde einen Schritt weiter gehen und kontinuierliche und Zählvariablen zur Klasse der <strong>numerischen Variablen</strong> zusammenfassen. Da ordinale Variablen ebenfalls Katgeorien darstellen, die zusätzlich geordnet sind, werden Sie ihnen untergeordnet. Daneben gibt es dann die kategorialien Variablen ohne Reihenfolge, die wir <strong>nominale Variablen</strong> nennen. Qualitative Variablen (sowas wie Texte) bilden ihre eigene Klasse. In <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>2.1</span></a> ist das Schema zusammengefasst dargestellt.</p>
+<div id="fig-surveys-types-of-variables" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="..\images/types-of-variables.png" class="img-fluid figure-img">
+<a href="..\images/types-of-variables.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;2.1: Klassifizierungsschema für Arten von Variablen."><img src="..\images/types-of-variables.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
+Abbildung&nbsp;2.1: Klassifizierungsschema für Arten von Variablen.
 </figcaption>
 </figure>
 </div>
@@ -418,7 +443,7 @@ Abbildung&nbsp;2.1: Arten von Variablen und typische verwendete Datentypen in R.
 </section>
 <section id="numerische-variablen" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="numerische-variablen"><span class="header-section-number">2.2</span> Numerische Variablen</h2>
-<p>Numerische (quantitative) Variablen messen eine Menge oder Größe. Hier sind Kennzahlen wie Mittelwert, Median oder Standardabweichung oft sinnvoll – aber nur, wenn die Daten plausibel sind und ihr Ausreißer/fehlende Werte berücksichtigt.</p>
+<p>Numerische (quantitative) Variablen messen eine Menge oder Größe. Mit ihnen können wir rechnen, im Sinne von Mittelwerte bilden, den Median bestimmen oder eine Spannweite berechnen. Wir unterscheiden dabei zwei grundlende numerische Arten: kontinuierlich und diskret. Anders ausgedrückt: Zahlen mit Kommastelle und ganze Zahlen (ohne Kommastellen)</p>
 <section id="kontinuierliche-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="kontinuierliche-variablen">Kontinuierliche Variablen</h3>
 <blockquote class="blockquote">
@@ -641,7 +666,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Die Funktion <code>filter()</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten filtert, findet ihr in <a href="../r-basics/filter.html" class="quarto-xref"><span>Kapitel 10</span></a>.</p>
+<p>Die Funktion <code>filter()</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten filtert, findet ihr in <a href="../r-basics/filter.html" class="quarto-xref"><span>Kapitel 13</span></a>.</p>
 </div>
 </div>
 </section>
@@ -853,7 +878,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../r-basics/visualizations-polish.html" class="quarto-xref"><span>Kapitel 12</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
+<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../r-basics/visualizations-polish.html" class="quarto-xref"><span>Kapitel 15</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
 </div>
 </div>
 </section>
@@ -1092,9 +1117,9 @@ $ v008ort_other     &lt;chr&gt; "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-effect_2026" class="csl-entry" role="listitem">
-Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design and causality</em>. Second edition. A <span>Chapman</span> &amp; <span>Hall</span> <span>Book</span>. Boca Raton London New York: CRC Press.
+Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design and causality</em>. Second edition. A <span>Chapman</span> &amp; <span>Hall</span> <span>Book</span>. CRC Press.
 </div>
 </div>
 </section>
@@ -1552,6 +1577,38 @@ Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

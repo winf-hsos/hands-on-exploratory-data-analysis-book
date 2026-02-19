@@ -9,9 +9,12 @@ snippet_file: ../survey-data.qmd
 source("project-1-survey/setup.R")
 ```
 
-## Lernziele 
+## Übersicht
 
-{{< snippet id="learning-objectives" >}}
+-   [x] Literature Review
+-   [x] Prepare Data
+-   [ ] Exploratory Data Analysis
+
 
 ## Daten laden
 
@@ -21,28 +24,5 @@ source("project-1-survey/setup.R")
 
 {{< snippet label="lst-surveys-tibble-name" >}}
 
-## Load data
-
-- With `count`, we can count rows
-
+## Beobachtungen zählen
 {{< snippet label="lst-surveys-count" >}}
-
-## Lernziele
-
-{{< snippet id="slides-setup" >}}
-
-
-
-
-
-## Second slide
-
-- Test
-- Test this
-
-## Last slide
-
-```{r}
-#| echo: true
-print("Hello")
-```

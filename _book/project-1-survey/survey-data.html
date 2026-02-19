@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>1&nbsp; Umfragedaten – Hands-On Exploratory Data Analytics</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -94,10 +96,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -241,38 +243,56 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,6 +301,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -390,7 +416,7 @@ div.csl-indent {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Formate ein. Einen detaillierten Einblick findet ihr in <a href="../r-basics/loading-data.html" class="quarto-xref"><span>Kapitel 7</span></a>.</p>
+<p>An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Formate ein. Einen detaillierten Einblick findet ihr in <a href="../r-basics/loading-data.html" class="quarto-xref"><span>Kapitel 8</span></a>.</p>
 </div>
 </div>
 </section>
@@ -523,7 +549,7 @@ Tabelle&nbsp;1.1: Metainformationen zum Umfragedatensatz
 <div id="fig-surveys-observation-variable" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-surveys-observation-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\images/observation_variable.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;1.1: Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten."><img src="..\images/observation_variable.png" class="img-fluid figure-img"></a>
+<a href="..\images/observation_variable.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;1.1: Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten."><img src="..\images/observation_variable.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surveys-observation-variable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;1.1: Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten.
@@ -598,7 +624,7 @@ $ v041diaet_1lowcarb  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0
 $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…</code></pre>
 </div>
 </div>
-<p>Hier steckt direkt ein wichtiges Muster drin: Wir bauen eine kleine „Befehlskette“. Das etwas merkwürdig aussehende Symbol <code>|&gt;</code> (Pipe) sorgt dafür, dass das Ergebnis links an den nächsten Befehl rechts übergeben wird. Eine dedizierte Einführung in die Pipe findet ihr in <a href="../r-basics/pipe.html" class="quarto-xref"><span>Kapitel 8</span></a>.</p>
+<p>Hier steckt direkt ein wichtiges Muster drin: Wir bauen eine kleine „Befehlskette“. Das etwas merkwürdig aussehende Symbol <code>|&gt;</code> (Pipe) sorgt dafür, dass das Ergebnis links an den nächsten Befehl rechts übergeben wird. Eine dedizierte Einführung in die Pipe findet ihr in <a href="../r-basics/pipe.html" class="quarto-xref"><span>Kapitel 9</span></a>.</p>
 <p>Mit der Flexibilität einer Programmiersprache wie R könnt ihr jede beliebige Menge an Spalten auswählen – zum Beispiel auch die letzten 10:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
@@ -624,7 +650,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 #   M070handeldiff3_9kauf &lt;dbl&gt;, M070handeldiff3_10trends &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Mit <code>tail()</code> ermitteln wir die letzten <code>n</code> Elemente einer Liste. <code>everything()</code> gibt uns (innerhalb von <code>select()</code>) die Liste aller Spalten. Der Ausdruck lässt sich also übersetzen als: <em>Gib mir die letzten 10 Elemente aus der Liste aller Spalten.</em> Gerade bei Umfragen mit vielen Spalten ist dieses gezielte Auswählen extrem nützlich. Noch mehr Möglichkeiten, Spalten auszuwählen, lernen wir im Verlauf des Projekts und im dedizierten <a href="../r-basics/select.html" class="quarto-xref"><span>Kapitel 9</span></a>.</p>
+<p>Mit <code>tail()</code> ermitteln wir die letzten <code>n</code> Elemente einer Liste. <code>everything()</code> gibt uns (innerhalb von <code>select()</code>) die Liste aller Spalten. Der Ausdruck lässt sich also übersetzen als: <em>Gib mir die letzten 10 Elemente aus der Liste aller Spalten.</em> Gerade bei Umfragen mit vielen Spalten ist dieses gezielte Auswählen extrem nützlich. Noch mehr Möglichkeiten, Spalten auszuwählen, lernen wir im Verlauf des Projekts und im dedizierten <a href="../r-basics/select.html" class="quarto-xref"><span>Kapitel 10</span></a>.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -641,7 +667,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 </section>
 <section id="welchen-wertebereich-hat-eine-variable" class="level3">
 <h3 class="anchored" data-anchor-id="welchen-wertebereich-hat-eine-variable">Welchen Wertebereich hat eine Variable?</h3>
-<p><code>glimpse()</code> ist super, um <em>schnell</em> einen Eindruck zu bekommen – aber es zeigt euch nur die ersten Werte. Wenn ihr wirklich wissen wollt, welche Ausprägungen vorkommen, müsst ihr gezielt nachsehen.</p>
+<p><code>glimpse()</code> ist super, um <em>schnell</em> einen Eindruck zu bekommen, aber es zeigt euch nur die ersten Werte. Wenn ihr wirklich wissen wollt, welche Ausprägungen vorkommen, müsst ihr gezielt nachsehen.</p>
 <p>Nehmen wir die Variable <code>q001hheinkauf</code>. Sie gehört zur Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Im Codebuch zur Umfrage lesen wir nach, dass “1” für “Ich selbst und eine andere Person” steht, während “2” für “Hauptsächlich ich selbst” steht. Der Wert “0” stünde für “Fast immer eine andere Person”. Aber kommen wirklich nur diese Werte vor? Oder kommen überhaupt alle vor?</p>
 <p>Zuerst können wir uns die Spalte als Tibble ausgeben lassen:</p>
 <div class="cell">
@@ -731,7 +757,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Die Funktion <code>count()</code> ist eine Aggregationsfunktion. Eine dedizierte Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten zusammenfasst, findet ihr in <a href="../r-basics/summarize.html" class="quarto-xref"><span>Kapitel 11</span></a>.</p>
+<p>Die Funktion <code>count()</code> ist eine Aggregationsfunktion. Eine dedizierte Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten zusammenfasst, findet ihr in <a href="../r-basics/summarize.html" class="quarto-xref"><span>Kapitel 14</span></a>.</p>
 </div>
 </div>
 <p>Und weil es gerade passt: Wenn wir Daten analysieren, dann bevorzugen wir in dem allermeisten Fällen eine aussagekräftige Visualisierung über eine tabellarische Ausgabe. Die Häufigkeiten der beiden Antwortmöglichkeiten können wir wunderbar als Balkendiagramm visualisieren:</p>
@@ -750,6 +776,7 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 </div>
 </div>
 <p>Zugegeben: Das Balkendiagramm ist verbesserungswürdig, dennoch zeigt es einen wichtigen Aspekt der explorativen Datenanalyse und warum R dafür so gut geeignet ist. Mit nur drei Zeilen Code erstellen wir ein Balkendiagramm, das uns die Verhältnisse der Anworten zur ersten Frage im Datensatz visuell aufzeigt. Und das Diagramm ist inhaltlich korrekt, dafür sorgt die Bibliothek <code>ggplot2</code>, die wir hier verwenden. Es ist dafür nicht wirklich ansprechend (schaut etwas mal die Labels auf der x-Achse an). Aber darum geht es in der explorativen Datenanalyse nicht. Wir wollen schhnell Ergebnisse sehen und flexibel in den Daten wühlen können. Das funktioniert mit R und dem Tidyverse perfekt!</p>
+<p>Wir lernen in <a href="types-of-variables.html" class="quarto-xref"><span>Kapitel 2</span></a> noch mehr darüber, wie wir schnell den Wertebereich einer Variable überblicken können. Als nächstes schauen wir auf den zweiten wichtigen Aspekt: Die Beobachtungen.</p>
 </section>
 </section>
 <section id="beobachtungen-zeilen" class="level2" data-number="1.5">
@@ -801,9 +828,9 @@ $ v041diaet_2laktose  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0
 <p>Damit habt ihr jetzt die wichtigsten Werkzeuge für den Start: Daten laden, Kontext verstehen, Dimensionen prüfen, Variablen überblicken und Wertebereiche testen. Im nächsten Schritt geht es darum, die Variablen inhaltlich zu interpretieren (Codebuch/Data Dictionary) und die Daten für Analysen vorzubereiten.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-effect_2026" class="csl-entry" role="listitem">
-Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design and causality</em>. Second edition. A <span>Chapman</span> &amp; <span>Hall</span> <span>Book</span>. Boca Raton London New York: CRC Press.
+Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design and causality</em>. Second edition. A <span>Chapman</span> &amp; <span>Hall</span> <span>Book</span>. CRC Press.
 </div>
 </div>
 </section>

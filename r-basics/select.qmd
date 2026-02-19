@@ -1,1 +1,1 @@
-# Spalten auswählen {#sec-basics-select}
+# Variablen auswählen {#sec-basics-select}

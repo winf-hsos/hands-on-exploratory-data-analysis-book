@@ -1,0 +1,16 @@
+# Anhang A: Material {.unnumbered}
+
+## Slides
+
+### Projekt 1: Umfragen
+
+- [Umfragedaten](/slides/project-1-survey/survey-data-slides.html)
+
+### Grundlagen
+
+- [Der Pipe-Operator](/slides/r-basics/pipe-slides.html)
+
+
+## Online
+
+- [Posit Cheatsheets](https://posit.co/resources/cheatsheets/)

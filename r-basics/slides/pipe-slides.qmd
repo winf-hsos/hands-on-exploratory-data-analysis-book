@@ -2,35 +2,84 @@
 title: Der Pipe-Operator
 format: revealjs
 snippet_file: ../pipe.qmd
+footer: "The Pipe-Operator in R"
 ---
 
-## Übersicht
+```{r}
+#| include: false
+source("r-basics/setup.R")
+```
 
-- Der Pipe-Operator `|>`
+## Pipe Example
+
+![](/images/slides/pipe.svg)
+
+## Überblick
+
+{{< snippet id="pipe-learning-objectives" >}}
 
 ## Funktionsweise
+
+{{< snippet id="pipe-first-argument" >}}
+
+## Ohne vs. mit Pipe
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 Ohne Pipe
 
-```
-f(g(h(x)))
-```
+{{< snippet id="pipe-nrow-no-pipe" >}}
 :::
 
 ::: {.column width="50%"}
 Mit Pipe
 
-```
-x |> h() |> g() |> f()
-```
+{{< snippet id="pipe-nrow-with-pipe" >}}
 :::
 
 ::::
 
-## Test
-
 {{< snippet id="pipe-with-without" >}}
 
+## Pipe-Ketten
+
+- Das Ergebnis einer Pipe kann auch eine Zahl sein.
+
+{{< snippet id="pipe-nrow-sqrt" >}}
+
+## Typisches Muster
+
+{{< snippet id="pipe-fig-flow" >}}
+
+## Beispiel: `select()` + `glimpse()`
+
+{{< snippet id="pipe-glimpse-chain" >}}
+
+## Warum die Pipe hilft
+
+{{< snippet id="pipe-benefits" >}}
+
+## Ohne Pipe: schwer lesbar
+
+{{< snippet id="pipe-no-pipe" >}}
+
+## Mit Pipe: klarer Ablauf
+
+{{< snippet id="pipe-with-pipe" >}}
+
+## Schnelles Ausprobieren
+
+{{< snippet id="pipe-comment-out" >}}
+
+## Sonderfall: nicht erstes Argument
+
+{{< snippet id="pipe-gsub-anon" >}}
+
+## Alternative: `stringr`
+
+{{< snippet id="pipe-stringr" >}}
+
+## Kurz zusammengefasst
+
+{{< snippet id="pipe-summary" >}}

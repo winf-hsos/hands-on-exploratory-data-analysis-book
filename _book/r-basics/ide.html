@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Beobachtungen auswählen – Hands-On Exploratory Data Analytics</title>
+<title>7&nbsp; Entwicklungsumgebung – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,8 +68,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../r-basics/summarize.html" rel="next">
-<link href="../r-basics/mutate-add.html" rel="prev">
+<link href="../r-basics/loading-data.html" rel="next">
+<link href="../project-2-news/time.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -86,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/ide.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/filter.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/ide.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/ide.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -186,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
+  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
@@ -222,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link active">
+  <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
@@ -263,15 +298,26 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#ein-projekt-anlegen" id="toc-ein-projekt-anlegen" class="nav-link active" data-scroll-target="#ein-projekt-anlegen"><span class="header-section-number">7.1</span> Ein Projekt anlegen</a></li>
+  <li><a href="#ein-erstes-r-skript" id="toc-ein-erstes-r-skript" class="nav-link" data-scroll-target="#ein-erstes-r-skript"><span class="header-section-number">7.2</span> Ein erstes R-Skript</a>
+  <ul class="collapse">
+  <li><a href="#dateien-anlegen" id="toc-dateien-anlegen" class="nav-link" data-scroll-target="#dateien-anlegen">Dateien anlegen</a></li>
+  <li><a href="#code-ausführen" id="toc-code-ausführen" class="nav-link" data-scroll-target="#code-ausführen">Code ausführen</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/ide.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/filter.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../r-basics/ide.html">Grundlagen</a></li><li class="breadcrumb-item"><a href="../r-basics/ide.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-basics-filter" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></h1>
 </div>
 
 
@@ -288,8 +334,89 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Für das Programmieren benötigen wir ein Programm, dass uns dabei unterstützt. Ein einfacher Texteditor wie Notpad würde ausreichen, denn ein Programm in R ist nichts anderes als eine einfache Textdatei. Allerdings wäre die Arbeit mit Notepad wenig komfortabel im Vergleich zu professionellen Entwicklungsumgebungen (auch IDE = <em>Integrated Development Environment</em>) für das Programmieren.</p>
+<p>Eine weit verbreitete Entwicklungsumgebung für die Arbeit mit R ist das Positron. Es ist kostenlose nutzbar und bietet eine komplette Data Science-Entwicklungsumgebung, die ähnlich zu Visual Studio Code funktioniert. Ich empfehle daher, <a href="https://positron.posit.co/download.html">Positron in der neuesten Version herunterzuladen</a> und auf eurem Rechner zu installieren. Startet es danach direkt und macht unten weiter.</p>
+<section id="ein-projekt-anlegen" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="ein-projekt-anlegen"><span class="header-section-number">7.1</span> Ein Projekt anlegen</h2>
+<p>In Positron arbeiten wir in Projekten. Ein Projekt ist einfach ein Ordner auf eurem Computer, in dem alle zum Projekt gehörenden Dateien gespeichert werden. Es ist eine gute Praxis, für jedes neue Projekt einen neuen Ordner anzulegen. So behaltet ihr den Überblick über eure Dateien und könnt sie leicht organisieren.</p>
+<p>Einen neuen Ordner könnt ihr am einfasten über den Windows Explorer (oder das Äquivalent in MacOS) anlegen und anschließend in Positron öffnen. Das ist der einfachste Weg. Ich persönlich habe auf meinem Rechner einen Ordner angelegt, in dem ich alle meine R-Projekte als Unterordner speichere. So habe ich alles an einem Ort, kann einfach Sicherungen anlegen und finde meine Projekt schnell wieder.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Sicherung eurer Projekte
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es gibt verschiedene Möglichkeiten, eure Projekte zu sichern. Ich persönlich checke alle Codeprojekt, die wichtig sind, auf <a href="https://github.com/winf-hsos">GitHub</a> ein. Daneben liegt mein übergeordneter Projektordner in meinem OneDrive-Ordner, so dass er automatisch gesichert wird.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="..\images/projects-folders.svg" class="img-fluid figure-img"></p>
+<figcaption>Meine Projekte liegen in einem gemeinsamen Ordner.</figcaption>
+</figure>
+</div>
+</section>
+<section id="ein-erstes-r-skript" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="ein-erstes-r-skript"><span class="header-section-number">7.2</span> Ein erstes R-Skript</h2>
+<section id="dateien-anlegen" class="level3">
+<h3 class="anchored" data-anchor-id="dateien-anlegen">Dateien anlegen</h3>
+<p>Das wichtigste Feature einer integrierten Entwicklungsumgebung ist die Möglichkeit, Skripte anzulegen, zu schreiben und zu speichern. Wenn ihr einen Projektornder in Positron geöffne habt, könnt ihr ganz einfach neue Dateien anlegen. Entweder geht ihr dazu über das Hauptmenü (“File” &gt; “New File”) oder ihr klickt mit der rechten Maustaste in den Projektordner und wählt “New File”. Es gibt in der Explorer-Ansicht auch ein kleines Symbol, um eine neue Datei anzulegen. Egal wie ihr die Datei angelegt habt, ihr werden aufgefordert, einen Namen zu vergeben. Wählt einen sprechenden Namen und die passende Dateiendung:</p>
+<ul>
+<li><code>.R</code> für R-Skripte</li>
+<li><code>.qmd</code> für Quarto-Dateien (ähnlich wie R Markdown, aber mit einigen zusätzlichen Funktionen und Möglichkeiten)</li>
+<li><code>.py</code> für Python-Skripte</li>
+</ul>
+<p>Das sind die drei Formate, die wir in diesem Buch kennenlernen und verwenden werden. Anhand der Dateiendung erkennt Positron, um welche Art von Datei es sich handelt, und bietet euch die passenden Funktionen und Möglichkeiten zum Schreiben und Ausführen eures Codes. Testet es einmal aus und legt ein leeres R-Skript an. Das Dokument öffnet sich sofort nach dem Anlegen und ihr könnt loslegen. Schreibt einmal folgenden Code hinein:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">64</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Beim Tippen werden ihr bemerken, dass Positron scheinbar mitdenkt. Sobald ihr das “sqr” getippt habt, öffnet sich ein kleines Pop-Up-Fenster, das euch mögliche Objekte und Funktionen anzeigt, die mit “sqr” beginnen. Das kann sehr praktisch sein, wenn man sich schnell vergewissern möchte, wie eine Funktion heißt oder welche Argumente sie erwartet. Ihr könnt mit den Pfeiltasten aus den gezeigten Vorschlägen auswählen und mit der Tab-Taste automatisch vervollständigen lassen. Probiert es einmal aus und tippt “sqr” ein, um die Funktion <code>sqrt()</code> zu finden und automatisch zu vervollständigen.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wenn euch mal nichts angezeigt wird, dann könnt ihr mit der Tastenkombination <code>Strg+Space</code> (Windows) bzw. <code>Cmd+Space</code> (MacOS) das Pop-Up-Fenster manuell öffnen und euch die Vorschläge anzeigen lassen.</p>
+</div>
+</div>
+<p>Sobald die Funktion <code>sqrt()</code>automatisch vervollständigt wurde, springt der Cursor automatisch in die Klammern, so dass ihr direkt die Zahl eingeben könnt, von der ihr die Quadratwurzel berechnen möchtet. Gleichzeitig erscheint ein weiteres Overlay, das euch die Argumente der Funktion anzeigt. In diesem Fall ist es nur ein Argument, nämlich <code>x</code>, aber bei anderen Funktionen kann es mehrere Argumente geben. Das Overlay zeigt euch auch die Standardwerte der Argumente an, falls vorhanden. Das ist besonders hilfreich, wenn ihr euch nicht sicher seid, welche Argumente eine Funktion erwartet oder welche Standardwerte sie haben.</p>
+<p>Mit der Eingabe eures ersten Befehls habt ihr die Datei verändert. Sobald ihr etwas in einer Datei verändert, seht ihr, dass der Dateiname oben im Editor mit einem Punkt versehen wird. Das bedeutet, dass die Datei noch nicht gespeichert ist. Speichert die Datei, indem ihr auf das Disketten-Symbol klickt oder die Tastenkombination <code>Strg + S</code> (Windows) bzw. <code>Cmd + S</code> (MacOS) verwendet. Sobald die Datei gespeichert ist, verschwindet der Punkt und ihr könnt sicher sein, dass eure Änderungen gesichert sind.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Dateien und Ordner organisieren
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Über den Explorer in Positron könnt ihr nicht nur Dateien anlegen, sondern auch umbenennen, verschieben und löschen. Das selbe gilt für Ordner Eigentlich müsst ihr Positron nicht mehr verlassen, habt ihr einmal euren Projektordner angelegt und geöffnet.</p>
+</div>
+</div>
+</section>
+<section id="code-ausführen" class="level3">
+<h3 class="anchored" data-anchor-id="code-ausführen">Code ausführen</h3>
+<p>Wie können wir jetzt den Befehl ausführen? Auch hier gibt es mehrere Wege, wovon ich euch den schnellsten empfehle: Mit der Tastenkombination <code>Strg+Enter</code> (Windows) bzw. <code>Cmd+Enter</code> (MacOS) könnt ihr den aktuellen Befehl, in dem sich der Cursor befindet, direkt ausführen. Das Ergebnis wird dann im Konsolenfenster unten angezeigt. Probiert es einmal aus und führt den Befehl <code>sqrt(64)</code> aus. Ihr solltet das Ergebnis <code>8</code> in der Konsole sehen.</p>
+<p>Alternativ könnt ihr im Editor auf das Icon, das aussieht wie ein Play-Button, klicken. Dahinter verbergen sich drei Optionen:</p>
+<ul>
+<li><code>Source R File with Echo</code>: Führt das gesamte Skript aus und zeigt den Code in der Konsole an.</li>
+<li><code>Source R File</code>: Führt das gesamte Skript aus, ohne den Code in der Konsole anzuzeigen.</li>
+<li><code>Execute Code</code>: Führt nur den aktuellen Befehl aus, genau wie die Tastenkombination <code>Strg+Enter</code> bzw. <code>Cmd+Enter</code>.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -733,13 +860,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../r-basics/mutate-add.html" class="pagination-link" aria-label="Variablen erstellen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span>
+      <a href="../project-2-news/time.html" class="pagination-link" aria-label="Zeit">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Zeit</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../r-basics/summarize.html" class="pagination-link" aria-label="Daten zusammenfassen">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../r-basics/loading-data.html" class="pagination-link" aria-label="Daten laden">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

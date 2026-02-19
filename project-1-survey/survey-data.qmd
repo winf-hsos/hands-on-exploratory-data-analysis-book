@@ -122,7 +122,7 @@ Neben der Frage „Was ist eine Zeile?“ ist die zweite Kernfrage: „Was misst
 
 Beobachtungen stellen wir typischerweise horizontal (in Zeilen) dar, Variablen vertikal (in Spalten).
 
-![Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten.](/images/observation_variable.png){#fig-surveys-observation-variable .lightbox}
+![Beobachtungen repräsentieren wir als Zeilen, Variablen als Spalten.](/images/observation_variable.svg){#fig-surveys-observation-variable .lightbox}
 
 Im Idealfall gibt es zu einem Datensatz ein *Data Dictionary* (oder Codebuch): eine Art Wörterbuch, in dem jede Variable aufgeführt und inhaltlich erläutert ist. Das ist Gold wert – denn aus reinen Spaltennamen wie `q001hheinkauf` könnt ihr die Bedeutung oft nicht zuverlässig ableiten.
 
@@ -180,7 +180,7 @@ Variablen (Spalten) haben eine feste Reihenfolge und Position in einem Datensatz
 
 ### Welchen Wertebereich hat eine Variable?
 
-`glimpse()` ist super, um *schnell* einen Eindruck zu bekommen – aber es zeigt euch nur die ersten Werte. Wenn ihr wirklich wissen wollt, welche Ausprägungen vorkommen, müsst ihr gezielt nachsehen.
+`glimpse()` ist super, um *schnell* einen Eindruck zu bekommen, aber es zeigt euch nur die ersten Werte. Wenn ihr wirklich wissen wollt, welche Ausprägungen vorkommen, müsst ihr gezielt nachsehen.
 
 Nehmen wir die Variable `q001hheinkauf`. Sie gehört zur Frage, ob die teilnehmende Person für den Lebensmitteleinkauf hauptverantwortlich ist oder ob die Aufgabe mit einer anderen Person geteilt wird. Im Codebuch zur Umfrage lesen wir nach, dass "1" für "Ich selbst und eine andere Person" steht, während "2" für  "Hauptsächlich ich selbst" steht. Der Wert "0" stünde für "Fast immer eine andere Person".  Aber kommen wirklich nur diese Werte vor? Oder kommen überhaupt alle vor?
 
@@ -232,6 +232,8 @@ survey |>
 ```
 
 Zugegeben: Das Balkendiagramm ist verbesserungswürdig, dennoch zeigt es einen wichtigen Aspekt der explorativen Datenanalyse und warum R dafür so gut geeignet ist. Mit nur drei Zeilen Code erstellen wir ein Balkendiagramm, das uns die Verhältnisse der Anworten zur ersten Frage im Datensatz visuell aufzeigt. Und das Diagramm ist inhaltlich korrekt, dafür sorgt die Bibliothek `ggplot2`, die wir hier verwenden. Es ist dafür nicht wirklich ansprechend (schaut etwas mal die Labels auf der x-Achse an). Aber darum geht es in der explorativen Datenanalyse nicht. Wir wollen schhnell Ergebnisse sehen und flexibel in den Daten wühlen können. Das funktioniert mit R und dem Tidyverse perfekt!
+
+Wir lernen in @sec-surveys-types-of-variables noch mehr darüber, wie wir schnell den Wertebereich einer Variable überblicken können. Als nächstes schauen wir auf den zweiten wichtigen Aspekt: Die Beobachtungen.
 
 ## Beobachtungen (Zeilen)
 

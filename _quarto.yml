@@ -41,14 +41,18 @@ book:
 
     - part: "Grundlagen"
       chapters:
+      - r-basics/ide.qmd  
       - r-basics/loading-data.qmd
       - r-basics/pipe.qmd
       - r-basics/select.qmd
+      - r-basics/mutate-modify.qmd
+      - r-basics/mutate-add.qmd  
       - r-basics/filter.qmd
       - r-basics/summarize.qmd
       - r-basics/visualizations-polish.qmd
       
     - appendix/appendix-a-scraping.qmd
+    - appendix/appendix-b-supplemental.qmd
     - references.qmd
 
 bibliography: references.bib

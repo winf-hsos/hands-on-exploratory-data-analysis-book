@@ -1,1 +1,1 @@
-# Filtern {#sec-basics-filter}
+# Beobachtungen auswählen {#sec-basics-filter}

@@ -11,13 +11,19 @@ Ohne Pipe werden solche Schrittketten schnell unübersichtlich. Mit der Pipe sch
 
 In diesem Kapitel klären wir drei Fragen:
 
+::: {.reuse #pipe-learning-objectives}
+
 - Was macht die Pipe `|>` genau?
 - Warum wird Code damit lesbarer und leichter zu ändern?
 - Was macht ihr, wenn eine Funktion den Datensatz nicht als erstes Argument erwartet?
 
+:::
+
 ## Was macht die Pipe eigentlich?
 
 Die wichtigste Regel ist kurz:
+
+::: {.reuse #pipe-first-argument}
 
 - Die Pipe nimmt das Ergebnis links und setzt es rechts als **erstes Argument** ein.
 
@@ -33,20 +39,32 @@ und bedeutet:
 f(x, a, b)
 ```
 
+:::
+
 Schauen wir uns das in einem kleinen Beispiel an. Die Funktion `nrow()` gibt euch die Anzahl Zeilen eines Datensatzes zurück. Ohne Pipe schreibt ihr:
+
+::: {.reuse #pipe-nrow-no-pipe}
 
 ```{r}
 nrow(tweets)
 ```
 
+:::
+
 Mit Pipe rückt der Datensatz nach links und wird rechts automatisch in `nrow()` eingesetzt:
+
+::: {.reuse #pipe-nrow-with-pipe}
 
 ```{r}
 tweets |>
   nrow()
 ```
 
+:::
+
 Das Ergebnis einer Pipe muss übrigens nicht immer ein Tibble bleiben. Nach `nrow()` ist das Ergebnis eine Zahl, in diesem Datensatz also `r tweets |> nrow() |> format(big.mark = ".", decimal.mark = ",")`. Diese Zahl könnt ihr direkt in den nächsten Schritt weiterreichen:
+
+::: {.reuse #pipe-nrow-sqrt}
 
 ```{r}
 tweets |>
@@ -54,11 +72,19 @@ tweets |>
   sqrt()
 ```
 
+:::
+
 Inhaltlich ist das Beispiel etwas künstlich. Es zeigt aber gut, dass die Pipe einfach Ergebnisse weiterreicht, egal ob es ein Tibble, eine Zahl oder ein Text ist.
+
+::: {.reuse #pipe-fig-flow}
 
 ![Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.](/images/select_pipe_glimpse.png){#fig-r-basics-pipe .lightbox}
 
+:::
+
 In @fig-r-basics-pipe seht ihr das typische Muster, das euch im ganzen Buch immer wieder begegnet: Am Anfang steht ein Datensatz als Tibble, danach folgen mehrere Schritte, am Ende kommt oft eine kurze Ausgabe zur Kontrolle.
+
+::: {.reuse #pipe-glimpse-chain}
 
 ```{r}
 #| lst-label: lst-r-basics-glimpse
@@ -67,6 +93,8 @@ tweets |>
   select(screen_name, favorite_count, retweet_count) |>
   glimpse()
 ```
+
+:::
 
 In @lst-r-basics-glimpse ist `tweets` der Startpunkt. `select()` nimmt den Tibble und reduziert ihn auf die gewünschten Spalten. `glimpse()` bekommt dann das Ergebnis und zeigt euch schnell Struktur und erste Werte.
 
@@ -84,11 +112,17 @@ Wenn ihr es formeller mögt, könnt ihr euch eine Pipe-Kette wie eine verschacht
 
 Die Pipe hilft euch vor allem bei drei Dingen:
 
+::: {.reuse #pipe-benefits}
+
 - **Lesbarkeit:** Ihr könnt den Code von oben nach unten lesen.
 - **Wartbarkeit:** Ihr könnt einzelne Schritte leicht austauschen.
 - **Struktur:** Jeder Schritt steht in einer eigenen Zeile.
 
+:::
+
 Das merkt ihr spätestens dann, wenn eine Transformation etwas länger wird. Ohne Pipe wird daraus schnell ein Klammermonster:
+
+::: {.reuse #pipe-no-pipe}
 
 ```{r}
 #| lst-label: lst-r-basics-no-pipe
@@ -112,6 +146,8 @@ head(
 )
 ```
 
+:::
+
 Beim ersten Blick wirkt das wie ein Rätsel. Der Code funktioniert, aber um zu verstehen, was passiert, müsst ihr von innen nach außen lesen. Die eigentliche Schrittfolge ist:
 
 ```
@@ -119,6 +155,8 @@ filter (6) → mutate (5) → filter (4) → select (3) → arrange (2) → head
 ```
 
 Mit Pipe schreibt ihr genau diese Reihenfolge direkt so auf, wie ihr sie gedanklich sowieso abarbeitet:
+
+::: {.reuse #pipe-with-pipe}
 
 ```{r}
 #| lst-label: lst-r-basics-with-pipe
@@ -133,7 +171,11 @@ tweets |>
   head(5)
 ```
 
+:::
+
 Das Ergebnis ist identisch, aber ihr könnt jetzt jeden Schritt einzeln lesen. Außerdem könnt ihr sehr schnell ausprobieren, welchen Effekt ein Schritt hat. Kommentiert ihn dafür einfach temporär aus:
+
+::: {.reuse #pipe-comment-out}
 
 ```{r}
 tweets |>
@@ -145,6 +187,8 @@ tweets |>
   head(5)
 ```
 
+:::
+
 Wenn ihr Retweets nicht herausfiltert, landet ein geteilter Tweet von Cem Özdemir auf Platz 1. Genau solche schnellen Checks sind in der explorativen Datenanalyse Gold wert.
 
 ## Sonderfälle: wenn es nicht das erste Argument ist
@@ -152,6 +196,8 @@ Wenn ihr Retweets nicht herausfiltert, landet ein geteilter Tweet von Cem Özdem
 Im Tidyverse klappt die Pipe fast immer reibungslos, weil die Funktionen so gestaltet sind, dass der Datensatz als erstes Argument kommt. Manchmal ist das aber anders, vor allem bei Base-R-Funktionen.
 
 Nehmen wir an, ihr wollt einen Text aus einem Online-Fragebogen bereinigen. Da entstehen schnell doppelte Leerzeichen, die euch später beim Auswerten nerven können.
+
+::: {.reuse #pipe-gsub-anon}
 
 ```{r}
 text <- "Jemand  hat unsaubere Werte   eingegeben. "
@@ -163,11 +209,15 @@ text |>
   (\(x) gsub("[[:space:]]+", " ", x))()
 ```
 
+:::
+
 `gsub()` (*global substitute*) ersetzt alle Vorkommnisse eines gesuchten Teilstrings durch einen anderen String. Im Beispiel entfernt die erste Ersetzung Satzzeichen. Die zweite fasst mehrere Leerzeichen zu einem einzelnen zusammen.
 
 Der Haken ist: Bei `gsub()` ist der Text, in dem ersetzt werden soll, das **dritte** Argument. Die Pipe kann ihn also nicht automatisch als erstes Argument einsetzen. Die Lösung ist eine anonyme Funktion `\(x) ...`, in der ihr selbst festlegt, wo `x` eingesetzt wird.
 
 Wenn ihr solche Dinge häufiger macht, lohnt sich oft der Griff zu einer Tidyverse-Variante. Das Paket `stringr` bietet dafür Funktionen, bei denen der zu bearbeitende Text als erstes Argument kommt:
+
+::: {.reuse #pipe-stringr}
 
 ```{r}
 text |>
@@ -177,11 +227,17 @@ text |>
   str_replace_all("[[:space:]]+", " ")
 ```
 
+:::
+
 Merkt euch: Wenn es eine passende Tidyverse-Funktion gibt, ist das Piping meistens am angenehmsten. Wenn nicht, könnt ihr mit anonymen Funktionen trotzdem sauber weiter pipen.
 
 ## Kurz zusammengefasst
+
+::: {.reuse #pipe-summary}
 
 - Die Pipe `|>` reicht das Ergebnis links an den nächsten Schritt rechts weiter.
 - Standardmäßig wird der linke Wert als erstes Argument eingesetzt.
 - In längeren Transformationen bringt die Pipe Lesbarkeit und macht Experimente leicht.
 - Wenn eine Funktion den Wert nicht als erstes Argument erwartet, helfen anonyme Funktionen oder Tidyverse-Alternativen.
+
+:::

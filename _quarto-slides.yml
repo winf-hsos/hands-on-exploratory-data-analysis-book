@@ -24,6 +24,9 @@ format:
     #incremental: true
     theme: dark
     embed-resources: true
+    logo: ../../../images/slides/hs_logo.svg
+    slide-number: c/t
+    highlight-style: atom-one
 
 # so referenced assets/bibliography work regardless of where slides live
 bibliography: references.bib

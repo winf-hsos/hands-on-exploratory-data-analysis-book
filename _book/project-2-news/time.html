@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.20">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>6&nbsp; Zeit – Hands-On Exploratory Data Analytics</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -85,7 +87,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../r-basics/loading-data.html" rel="next">
+<link href="../r-basics/ide.html" rel="next">
 <link href="../project-2-news/variables.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -94,10 +96,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -238,38 +240,56 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Spalten auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../r-basics/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Filtern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Aggregieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,6 +298,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -346,7 +372,7 @@ div.csl-indent {
 </div>
 </div>
 <p>Wir erkennen an der Ausgabe der ersten Zeilen wie genau ein Wert vom <em>datetime</em>-Datentyp aufgebaut ist. Es handelt sich um ein standardisiertes Format mit dem Namen <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a>, das einer festen Syntax folgt. Der erste Teil stellt das Datum mit seinen Bestandteilen Jahr, Monat und Tag dar, jeweils als vierstellige (Jahr) und zweistellige (Monat, Tag) Zahlen, getrennt mit einem Bindestrich. Danach folgt, getrennt durch ein Leerzeichen, die Uhrzeitangabe. Hier ist das Format wie gewohnt: <code>HH:MM:ss</code>, also jeweils zwei Ziffern für die Stunde, Minute und Sekunde, jeweils durch einen Doppelpunkt getrennt.</p>
-<p>Weil das Format standardisiert ist, gibt es entsprechende Funktionen, mit denen wir jeden Bestandteil extrahieren wollen. Mit der Funktion <code>year()</code> bekommen wir etwa nur das Jahr als Zahl. Ensprechende Funktionen gibt es auch für andere Datums- und Zeitbestandteile. Details zur Arbeit mit Datum und Zeit findet ihr im Kapitel <a href="https://r4ds.hadley.nz/datetimes.html">Dates and times</a> aus <span class="citation" data-cites="wickham_r_2023">Wickham, Çetinkaya-Rundel, und Grolemund (<a href="../references.html#ref-wickham_r_2023" role="doc-biblioref">2023</a>)</span>.</p>
+<p>Weil das Format standardisiert ist, gibt es entsprechende Funktionen, mit denen wir jeden Bestandteil extrahieren wollen. Mit der Funktion <code>year()</code> bekommen wir etwa nur das Jahr als Zahl. Ensprechende Funktionen gibt es auch für andere Datums- und Zeitbestandteile. Details zur Arbeit mit Datum und Zeit findet ihr im Kapitel <a href="https://r4ds.hadley.nz/datetimes.html">Dates and times</a> aus <span class="citation" data-cites="wickham_r_2023">Wickham u.&nbsp;a. (<a href="../references.html#ref-wickham_r_2023" role="doc-biblioref">2023</a>)</span>.</p>
 <p>Gleichzeitig können wir ein Datum abrunden - klingt komisch? Dabei schneiden wir einfach den Teil des Zeitstempels ab, der unseren gewünschten Detailgrad überschreitet. Wenn wir etwa eine Analyse auf Monatsbasis erstellen wollen, dann können wir jedes Datum auf den jeweils ersten des Monats runden, im dem sich der Zeitstempel befindet:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ts <span class="sc">|&gt;</span></span>
@@ -388,9 +414,9 @@ div.csl-indent {
 <p>Schaut mal auf die x-Achse. Fällt euch was auf?</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
-Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for data science: import, tidy, transform, visualize, and model data</em>. 2nd edition. Sebastopol, CA: O’Reilly Media, Inc.
+Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for data science: import, tidy, transform, visualize, and model data</em>. 2nd edition. O’Reilly Media, Inc.
 </div>
 </div>
 </section>
@@ -842,8 +868,8 @@ Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for 
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../r-basics/loading-data.html" class="pagination-link" aria-label="Daten laden">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten laden</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../r-basics/ide.html" class="pagination-link" aria-label="Entwicklungsumgebung">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

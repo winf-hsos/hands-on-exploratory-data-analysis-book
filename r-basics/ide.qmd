@@ -1,0 +1,71 @@
+# Entwicklungsumgebung
+
+Für das Programmieren benötigen wir ein Programm, dass uns dabei unterstützt. Ein einfacher Texteditor wie Notpad würde ausreichen, denn ein Programm in R ist nichts anderes als eine einfache Textdatei. Allerdings wäre die Arbeit mit Notepad wenig komfortabel im Vergleich zu professionellen Entwicklungsumgebungen (auch IDE = *Integrated Development Environment*) für das Programmieren.
+
+Eine weit verbreitete Entwicklungsumgebung für die Arbeit mit R ist das Positron. Es ist kostenlose nutzbar und bietet eine komplette Data Science-Entwicklungsumgebung, die ähnlich zu Visual Studio Code funktioniert. Ich empfehle daher, [Positron in der neuesten Version herunterzuladen](https://positron.posit.co/download.html) und auf eurem Rechner zu installieren. Startet es danach direkt und macht unten weiter.
+
+## Ein Projekt anlegen
+
+In Positron arbeiten wir in Projekten. Ein Projekt ist einfach ein Ordner auf eurem Computer, in dem alle zum Projekt gehörenden Dateien gespeichert werden. Es ist eine gute Praxis, für jedes neue Projekt einen neuen Ordner anzulegen. So behaltet ihr den Überblick über eure Dateien und könnt sie leicht organisieren.
+
+Einen neuen Ordner könnt ihr am einfasten über den Windows Explorer (oder das Äquivalent in MacOS) anlegen und anschließend in Positron öffnen. Das ist der einfachste Weg. Ich persönlich habe auf meinem Rechner einen Ordner angelegt, in dem ich alle meine R-Projekte als Unterordner speichere. So habe ich alles an einem Ort, kann einfach Sicherungen anlegen und finde meine Projekt schnell wieder. 
+
+::: {.callout-tip icon="💡"}
+
+## Sicherung eurer Projekte
+
+Es gibt verschiedene Möglichkeiten, eure Projekte zu sichern. Ich persönlich checke alle Codeprojekt, die wichtig sind, auf [GitHub](https://github.com/winf-hsos) ein. Daneben liegt mein übergeordneter Projektordner in meinem OneDrive-Ordner, so dass er automatisch gesichert wird.
+:::
+
+
+![Meine Projekte liegen in einem gemeinsamen Ordner.](/images/projects-folders.svg)
+
+## Ein erstes R-Skript
+
+### Dateien anlegen
+
+Das wichtigste Feature einer integrierten Entwicklungsumgebung ist die Möglichkeit, Skripte anzulegen, zu schreiben und zu speichern. Wenn ihr einen Projektornder in Positron geöffne habt, könnt ihr ganz einfach neue Dateien anlegen. Entweder geht ihr dazu über das Hauptmenü ("File" > "New File") oder ihr klickt mit der rechten Maustaste in den Projektordner und wählt "New File". Es gibt in der Explorer-Ansicht auch ein kleines Symbol, um eine neue Datei anzulegen. Egal wie ihr die Datei angelegt habt, ihr werden aufgefordert, einen Namen zu vergeben. Wählt einen sprechenden Namen und die passende Dateiendung:
+
+- `.R` für R-Skripte
+- `.qmd` für Quarto-Dateien (ähnlich wie R Markdown, aber mit einigen zusätzlichen Funktionen und Möglichkeiten)
+- `.py` für Python-Skripte
+
+Das sind die drei Formate, die wir in diesem Buch kennenlernen und verwenden werden. Anhand der Dateiendung erkennt Positron, um welche Art von Datei es sich handelt, und bietet euch die passenden Funktionen und Möglichkeiten zum Schreiben und Ausführen eures Codes. Testet es einmal aus und legt ein leeres R-Skript an. Das Dokument öffnet sich sofort nach dem Anlegen und ihr könnt loslegen. Schreibt einmal folgenden Code hinein:
+
+```{r}
+#| eval: false
+sqrt(64)
+```
+
+Beim Tippen werden ihr bemerken, dass Positron scheinbar mitdenkt. Sobald ihr das "sqr" getippt habt, öffnet sich ein kleines Pop-Up-Fenster, das euch mögliche Objekte und Funktionen anzeigt, die mit "sqr" beginnen. Das kann sehr praktisch sein, wenn man sich schnell vergewissern möchte, wie eine Funktion heißt oder welche Argumente sie erwartet. Ihr könnt mit den Pfeiltasten aus den gezeigten Vorschlägen auswählen und mit der Tab-Taste automatisch vervollständigen lassen. Probiert es einmal aus und tippt "sqr" ein, um die Funktion `sqrt()` zu finden und automatisch zu vervollständigen. 
+
+::: {.callout-tip icon="💡"}
+Wenn euch mal nichts angezeigt wird, dann könnt ihr mit der Tastenkombination `Strg+Space` (Windows) bzw. `Cmd+Space` (MacOS) das Pop-Up-Fenster manuell öffnen und euch die Vorschläge anzeigen lassen. 
+:::
+
+Sobald die Funktion `sqrt()`automatisch vervollständigt wurde, springt der Cursor automatisch in die Klammern, so dass ihr direkt die Zahl eingeben könnt, von der ihr die Quadratwurzel berechnen möchtet. Gleichzeitig erscheint ein weiteres Overlay, das euch die Argumente der Funktion anzeigt. In diesem Fall ist es nur ein Argument, nämlich `x`, aber bei anderen Funktionen kann es mehrere Argumente geben. Das Overlay zeigt euch auch die Standardwerte der Argumente an, falls vorhanden. Das ist besonders hilfreich, wenn ihr euch nicht sicher seid, welche Argumente eine Funktion erwartet oder welche Standardwerte sie haben.
+
+Mit der Eingabe eures ersten Befehls habt ihr die Datei verändert. Sobald ihr etwas in einer Datei verändert, seht ihr, dass der Dateiname oben im Editor mit einem Punkt versehen wird. Das bedeutet, dass die Datei noch nicht gespeichert ist. Speichert die Datei, indem ihr auf das Disketten-Symbol klickt oder die Tastenkombination `Strg + S` (Windows) bzw. `Cmd + S` (MacOS) verwendet. Sobald die Datei gespeichert ist, verschwindet der Punkt und ihr könnt sicher sein, dass eure Änderungen gesichert sind.
+
+::: {.callout-tip icon="💡"}
+
+## Dateien und Ordner organisieren
+
+Über den Explorer in Positron könnt ihr nicht nur Dateien anlegen, sondern auch umbenennen, verschieben und löschen. Das selbe gilt für Ordner Eigentlich müsst ihr Positron nicht mehr verlassen, habt ihr einmal euren Projektordner angelegt und geöffnet.
+:::
+
+
+### Code ausführen
+
+Wie können wir jetzt den Befehl ausführen? Auch hier gibt es mehrere Wege, wovon ich euch den schnellsten empfehle: Mit der Tastenkombination `Strg+Enter` (Windows) bzw. `Cmd+Enter` (MacOS) könnt ihr den aktuellen Befehl, in dem sich der Cursor befindet, direkt ausführen. Das Ergebnis wird dann im Konsolenfenster unten angezeigt. Probiert es einmal aus und führt den Befehl `sqrt(64)` aus. Ihr solltet das Ergebnis `8` in der Konsole sehen.
+
+Alternativ könnt ihr im Editor auf das Icon, das aussieht wie ein Play-Button, klicken. Dahinter verbergen sich drei Optionen:
+
+- `Source R File with Echo`: Führt das gesamte Skript aus und zeigt den Code in der Konsole an.
+- `Source R File`: Führt das gesamte Skript aus, ohne den Code in der Konsole anzuzeigen.
+- `Execute Code`: Führt nur den aktuellen Befehl aus, genau wie die Tastenkombination `Strg+Enter` bzw. `Cmd+Enter`.
+
+
+
+
+

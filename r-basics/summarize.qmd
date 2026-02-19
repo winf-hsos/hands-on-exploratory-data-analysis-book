@@ -1,1 +1,1 @@
-# Aggregieren {#sec-basics-summarize}
+# Daten zusammenfassen {#sec-basics-summarize}

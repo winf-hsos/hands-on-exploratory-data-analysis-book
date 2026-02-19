@@ -1,17 +1,17 @@
-# Arten von Variablen
+# Arten von Variablen {#sec-surveys-types-of-variables}
 
 ```{r}
 #| include: false
 source("project-1-survey/setup.R")
 ```
 
-In @sec-surveys-data haben wir schon gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“ – der Variablentyp entscheidet ganz praktisch darüber,
+In @sec-surveys-data haben wir gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“, der Variablentyp entscheidet ganz praktisch darüber,
 
 - welche Kennzahlen sinnvoll sind (Mittelwert? Median? Anteil?),
 - welche Visualisierung passt (Histogramm? Balkendiagramm? Boxplot?),
 - und worauf ihr bei der Interpretation achten müsst (z. B. Codes, Ausreißer, fehlende Werte).
 
-Lasst uns deshalb Ordnung in die Spalten bringen: Welche Arten von Variablen gibt es – und woran erkennt ihr sie in R?
+Lasst uns deshalb Ordnung in die Spalten bringen: Welche Arten von Variablen gibt es und woran erkennt ihr sie in R?
 
 ::: {.callout-note appearance="simple"}
 ## Lernziele in diesem Abschnitt
@@ -32,12 +32,9 @@ Um Variablen sauber abzugrenzen, hilft ein einfaches Schema. Laut @effect_2026 u
 - Kategorialen Variablen
 - Qualitativen Variablen
 
-Für die Praxis ist außerdem eine „Zusammenfassungsebene“ nützlich:
+Ich würde einen Schritt weiter gehen und kontinuierliche und Zählvariablen zur Klasse der **numerischen Variablen** zusammenfassen. Da ordinale Variablen ebenfalls Katgeorien darstellen, die zusätzlich geordnet sind, werden Sie ihnen untergeordnet. Daneben gibt es dann die kategorialien Variablen ohne Reihenfolge, die wir **nominale Variablen** nennen. Qualitative Variablen (sowas wie Texte) bilden ihre eigene Klasse. In @fig-surveys-types-of-variables ist das Schema zusammengefasst dargestellt.
 
-- **Numerisch**: kontinuierlich + Zählvariablen
-- **Kategorial**: nominal + ordinal
-
-![Arten von Variablen und typische verwendete Datentypen in R.](/images/types-of-variables.png){#fig-surveys-types-of-variables}
+![Klassifizierungsschema für Arten von Variablen.](/images/types-of-variables.svg){#fig-surveys-types-of-variables .lightbox}
 
 Wichtig: Diese Einteilung beschreibt das *Messniveau* (also: was wird gemessen?). Der Datentyp in R (`<dbl>`, `<int>`, `<chr>`, …) ist ein Hinweis, aber nicht die ganze Wahrheit. In Umfragen werden Kategorien z. B. oft als Zahlen kodiert (1, 2, 3 …) oder als viele 0/1‑Spalten (Mehrfachauswahl). Ohne Codebuch/Data Dictionary kann man das leicht falsch lesen.
 
@@ -45,7 +42,7 @@ Schauen wir uns jetzt die Typen nacheinander an – jeweils mit Beispielen aus u
 
 ## Numerische Variablen
 
-Numerische (quantitative) Variablen messen eine Menge oder Größe. Hier sind Kennzahlen wie Mittelwert, Median oder Standardabweichung oft sinnvoll – aber nur, wenn die Daten plausibel sind und ihr Ausreißer/fehlende Werte berücksichtigt.
+Numerische (quantitative) Variablen messen eine Menge oder Größe. Mit ihnen können wir rechnen, im Sinne von Mittelwerte bilden, den Median bestimmen oder eine Spannweite berechnen. Wir unterscheiden dabei zwei grundlende numerische Arten: kontinuierlich und diskret. Anders ausgedrückt: Zahlen mit Kommastelle und ganze Zahlen (ohne Kommastellen).
 
 ### Kontinuierliche Variablen
 

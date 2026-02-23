@@ -51,7 +51,7 @@ function Get-ConfiguredSlideTargets {
 }
 
 function Build-SlideGenerationJobs {
-  param([System.Collections.Generic.List[string]]$Targets)
+  param([string[]]$Targets)
 
   $jobs = New-Object System.Collections.Generic.List[object]
   foreach ($targetRel in $Targets) {
@@ -192,8 +192,8 @@ function Parse-SnippetAttributes {
   return $dict
 }
 
-$targets = Get-ConfiguredSlideTargets -ConfigPath $slidesConfigPath
-$jobs = Build-SlideGenerationJobs -Targets $targets
+$targets = @(Get-ConfiguredSlideTargets -ConfigPath $slidesConfigPath)
+$jobs = @(Build-SlideGenerationJobs -Targets $targets)
 
 if ($jobs.Count -eq 0) {
   throw "No '/_generated/*.qmd' targets configured under project.render in _quarto-slides.yml"

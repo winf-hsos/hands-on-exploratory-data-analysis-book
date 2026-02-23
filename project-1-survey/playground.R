@@ -1,15 +1,78 @@
-library(tidyverse)
-library(janitor)
+#renv::install("pacman")
+pacman::p_load(tidyverse, janitor, skimr, lubridate, infer, rstatix, gtsummary, summarytools, broom, googlesheets4, readxl)
+
+install.packages("xml2")
+install.packages("downlit")
+
 md <- read_csv("data/mds12_schoko_milch.csv", show_col_types = FALSE) |> 
   clean_names()
 
-library(tidyverse)
 survey <- read_csv("data/mds12_schoko_milch.csv", show_col_types = FALSE)
 
+limo_meta <- read_sheet("1Sq_CWA-oTN90d0EpA6rEDB3C77dyIXv0HZTq3YWuyy8")
+
+limo_meta |> 
+  mutate(data_type = as_factor(data_type)) |>
+  pull(data_type) |> 
+  levels()
+
+
+datatypes <- factor(
+  levels = c("int", "string", "double", "character", "logical"), 
+  labels = c("Integer", "String", "Double", "Character", "Logical")
+)
+
+
+read_sheet("https://docs.google.com/spreadsheets/d/1Sq_CWA-oTN90d0EpA6rEDB3C77dyIXv0HZTq3YWuyy8/edit")
+
+survey |> 
+  select(q001hheinkauf, q004geschlecht) |>
+  tbl_summary()
+
+survey |> 
+  select(q001hheinkauf, q004geschlecht) |>
+  tbl_summary(by = q004geschlecht)
+
+survey |> 
+  select(q001hheinkauf) |>
+  freq() |> 
+  broom::tidy()
+  
+survey %>%
+  drop_na(U015p1reaktion4_1weihen, AD015p1reaktion4f) |> 
+  anova_test(U015p1reaktion4_1weihen ~ AD015p1reaktion4f) |> 
+  as_tibble() |> 
+  clean_names() 
+
+
+survey |>  
+  drop_na(U027kaufalpro5, Q002altergru4f) |> 
+  anova_test(U027kaufalpro5 ~ Q002altergru4f)
 
 
 md |> 
   colnames()
+
+survey |> 
+  count(q001hheinkauf)
+
+
+survey |> 
+  count(q001hheinkauf, v041diaet_1lowcarb)
+
+survey |> 
+  tabyl(q001hheinkauf)
+
+survey |> 
+  tabyl(q001hheinkauf, v041diaet_1lowcarb) 
+  adorn_percentages("row") |> 
+  adorn_pct_formatting()
+
+
+
+survey |> 
+  glimpse()
+
 
 
 names(md) %>%

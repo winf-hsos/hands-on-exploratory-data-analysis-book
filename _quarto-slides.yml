@@ -7,12 +7,15 @@ project:
   post-render:
     - powershell -ExecutionPolicy Bypass -File scripts/collect-rendered-slides.ps1
   render:
-    - project-1-survey/slides/_generated/survey-data-slides.qmd
-    - r-basics/slides/_generated/pipe-slides.qmd
+    - r-basics/slides/_generated/loading-data-slides.qmd
+    #- project-1-survey/slides/_generated/survey-data-slides.qmd
+    #- r-basics/slides/_generated/pipe-slides.qmd
+    
 
 execute:
   echo: true
   freeze: false
+
 
 knitr:
   opts_chunk:
@@ -27,11 +30,14 @@ format:
     logo: ../../../images/slides/hs_logo.svg
     slide-number: c/t
     highlight-style: atom-one
+    code-line-numbers: false
+    code-link: true
 
 # so referenced assets/bibliography work regardless of where slides live
 bibliography: references.bib
 
 author: "Prof. Dr. Nicolas Meseth"
+lang: en
 
 
    

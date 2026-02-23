@@ -1,1 +1,157 @@
 # Daten laden {#sec-basics-load-data}
+
+```{r}
+#| include: false
+source("r-basics/setup.R")
+```
+
+
+Jeder Analyseprozess beginnt mit dem Laden der Daten (s. @fig-loading-data-eda-process). In diesem Abschnitt schauen wir uns an, wie wir die gängigsten Datenformate in R laden können. Dabei werden wir uns auf die Funktionen aus dem `readr`-Paket konzentrieren, das Teil des `tidyverse` ist.
+
+![Der Prozess der explorativen Datenanalyse im Überblick.](https://winf-hsos.github.io/university-docs/images/eda_process.png){#fig-loading-data-eda-process .lightbox}
+
+## Dateiformate
+
+Daten im Computer speichern wir üblicherweise in Dateien. Eimn Datensatz kann so aus einer oder mehreren Dateien bestehen. Eine Datei enthält auf der untersten Ebene Daten in Form von Nullen und Einsen, denn der Computer arbitet mit Bits und dem Binärsystem. Somit ist auch jeder Datensatz grundsätzlich als Nullen und Einsen gespeichert. 
+
+In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern:
+
+- Als Textdatei
+- Als Binärdatei
+
+![Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.](/images/data-file-formats.svg)
+
+Was ist der Unterschied? Eine Textdatei speichert die Daten in einem Format, das für Menschen lesbar ist. Das bedeutet, dass die Daten in einer Textdatei als Zeichenfolge (String) gespeichert werden, die von Menschen verstanden werden kann. Dazu verwendet man ein gängiges Kodierungssystem wie etwa UTF-8, im dem jedes Symbol (Buchstaben, Zahlen, Satzzeichen etc.) einer Fole von Nullen und Einsen zugewiesen wird. Beispiele für textbasierte Formate sind CSV (Comma-Separated Values), TSV (Tab-Separated Values) und JSON (JavaScript Object Notation). Textbasierte Formate können wir in jedem beliebigen Texteditor öffnen und lesen, wie zum Beispiel Notepad, dem Windows Editor oder auch Word. Eine Textdatei enthält die Information, mit welchem Kodierungssystem sie erstellt wurde, und der Texteditor kann die Bitfolgen damit in Zeichen umwandeln und uns Menschen anzeigen. Und das ist auch der große Vorteil von textbasierten Formaten: Sie sind einfach zu verstehen und zu bearbeiten, da sie in einem menschenlesbaren Format vorliegen.
+
+Binäre Formate sind solche Formate, die die Daten nicht als Texte kodieren, sondern in einem Format, das für Computer effizienter zu lesen und zu schreiben ist. Beispiele für binäre Formate sind Excel-Dateien (.xlsx), RData-Dateien (.RData) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und zu schreiben als textbasierte Formate, da sie weniger Speicherplatz benötigen und schneller verarbeitet werden können. Allerdings sind sie nicht direkt von Menschen lesbar und erfordern spezielle Software oder Bibliotheken, um sie zu öffnen und zu bearbeiten.
+
+## Textbasierte Formate
+
+Eines der gängisten Datenformate, das auf textueller Basis arbeitet, ist das CSV-Format. CSV steht für "Comma-Separated Values" und ist ein einfaches Format, das Daten in tabellarischer Form speichert. Jede Zeile in einer CSV-Datei entspricht einer Zeile in der Tabelle, und die Werte in jeder Zeile werden durch Kommatas getrennt. CSV-Dateien können von vielen Anwendungen erstellt und gelesen werden, einschließlich Tabellenkalkulationsprogrammen wie Microsoft Excel und Google Sheets.
+
+In R können wir CSV-Dateien mit der Funktion `read_csv()` aus dem `readr`-Paket laden. Hier ist ein Beispiel, wie wir eine CSV-Datei laden können:
+
+```{r}
+tweets <- read_csv("data/orders.csv")
+tweets |> 
+    head(5)
+```
+
+Das hat offensichtlich funktioniert. Es gibt bei CSV-Dateien Dinge, die sich unterscheiden können und die wir berücksichtigen müssen, wenn wir sie laden.
+
+### Das Trennzeichen 
+
+In einigen Ländern, wie zum Beispiel Deutschland, wird anstelle eines Kommas häufig ein Semikolon als Trennzeichen verwendet. In diesem Fall können wir die Funktion `read_csv2()` verwenden, die speziell für dieses Format entwickelt wurde. Ob das Trennzeichen falsch eingestellt ist, erkennt man sofort am Ergebnis beim Laden der Daten: Alle Werte werden in einer einzigen Spalte zusammengefasst, anstatt in mehreren Spalten verteilt zu sein. Schauen wir uns das kurz an:
+
+```{r}
+orders_wrong <- read_csv2("data/orders.csv")
+```
+
+Wie in der Ausgabe zu sehen, wurde genau eine Spalte erkannt. Wenn wir uns noch Beispielwere ausgeben lassen, sehen wir, dass alle Werte in dieser einen Spalte zusammengefasst wurden:
+
+```{r}
+head(orders_wrong)
+```
+
+Die Funktion `read_csv2` verwenden wir nur, wenn wirklich ein Semikolon als Trennzeichen verwendet wird. Bei einem Komma als Trennzeichen müssen wir `read_csv()` verwenden, damit die Werte korrekt in Spalten aufgeteilt werden.
+
+Es gibt mit den Tabulator-Zeichen noch ein weiteres gängiges Trennzeichen, das ebenfalls durch eine eigene Funktion angedeckt wird. Sollte es ein ganz anderes Trennzeichen sein, können wir die allgemeine Funktion `read_delim()` verwenden, bei der wir das Trennzeichen explizit angeben können. Die Tabelle gibt einen Überblick.
+
+| Funktion       | Trennzeichen |
+|----------------|--------------|
+| `read_csv()`   | Komma (`,`)  |
+| `read_csv2()`  | Semikolon (`;`) |
+| `read_tsv()`   | Tabulator (`\t`) |
+| `read_delim()` | Beliebiges Trennzeichen (muss angegeben werden) |
+
+Hier ein Beispiel für die Verwendung von `read_delim()`, wenn das Trennzeichen ein Pipe-Symbol wäre, was auch vorkommt:
+
+```{r}
+orders_delim <- read_delim("data/orders.csv", delim = "|")
+```
+
+### Die Zeichenkodierung
+
+Wie bereits erwähnt, speichern Textdateien die Daten in einem bestimmten Kodierungsformat. In Deutschland ist es üblich, das Kodierungsformat "ISO-8859-1" oder "Latin-1" zu verwenden, während in anderen Ländern häufig "UTF-8" verwendet wird. Wenn die CSV-Datei in einem anderen Kodierungsformat vorliegt, müssen wir dies beim Laden der Datei angeben, damit die Daten korrekt interpretiert werden können.
+
+Da die meisten Dateien heute im UTF-8-Format vorliegen, ist dies auch die Standardeinstellung in den Funktionen von `readr`. Mit UTF-8 können wir auch das häufig ältere, aber immernoch verwendete ASCII-Zeichenset abdecken, weil UTF-8 rückwärtskompatibel ist. Wenn die CSV-Datei jedoch in einem anderen Kodierungsformat vorliegt, müssen wir dies explizit angeben. Hier ein Beispiel, wie wir eine CSV-Datei mit einem anderen Kodierungsformat laden können:
+
+```{r}
+orders_iso <- read_csv(
+    "data/orders.csv", 
+    locale = locale(encoding = "ISO-8859-1")
+)
+```
+
+Das ISO-8859-1-Kodierungsformat ist eine Erweiterung des ASCII-Zeichensatzes und unterstützt die meisten westeuropäischen Sprachen, einschließlich Deutsch mit seinen Umlauten, und ist daher eine häufige Wahl für CSV-Dateien in Deutschland. Wenn die CSV-Datei in diesem Format vorliegt, müssen wir dies beim Laden der Datei angeben, damit die Daten korrekt interpretiert werden können. UTF-8 ist leider nicht vollständig rückwärtskompatibel mit ISO-8859-1.
+
+### Das Dezimaltrennzeichen 
+
+In einigen Ländern, wie zum Beispiel Deutschland, wird anstelle eines Punktes häufig ein Komma als Dezimaltrennzeichen verwendet. In diesem Fall können wir die Funktion `read_csv2()` verwenden, die speziell für dieses Format entwickelt wurde. Wir können das Dezimaltrennzeichen aber auch explizit angeben über den Parameter `locale`. 
+
+Ob das Dezimaltrennzeichen falsch eingestellt ist, erkennt man sofort am Ergebnis beim Laden der Daten: Alle Zahlen, die ein Dezimaltrennzeichen enthalten, werden als Zeichen (Strings) interpretiert, anstatt als numerische Werte. Das liegt daran, dass R das Komma als Trennzeichen für Spalten erwartet und nicht als Dezimaltrennzeichen. Wenn das Komma als Dezimaltrennzeichen verwendet wird, wird die gesamte Zahl als Text interpretiert, da R das Komma nicht als Teil einer Zahl erkennt.
+
+Hier ein Beispiel, wie das aussieht, wenn das Dezimaltrennzeichen falsch eingestellt ist:
+
+```{r}
+orders_wrong_decimal <- read_csv(
+    "data/orders.csv", 
+    locale = locale(decimal_mark = ",")
+)
+```
+
+Im Beispiel oben haben wir absichtlich ein falsches Dezimaltrennzeichen angegeben. Schauen wir uns jetzt die Spalte `total_price`, an die eigentlich eine Dezimalzahl ein müsste:
+
+```{r}
+orders_wrong_decimal |> 
+    select(total_price) |> 
+    head(5)
+```
+
+Achtet auf die Angabe des Datentyps `chr`, was für "character" steht, also Zeichen oder Text. Wir sollten als schleunigst das richtige Dezimaltrennzeichen verwenden.
+
+Manchnal hat nur eine Spalte ein anderes Dezimaltrennzeichen als die anderen Spalten. Dann könnn wir uns damit behelfen, die Spalte nachträglich in den korrekten Datentyp umzuwandeln. Hier ein Beispiel, wie das geht:
+
+```{r}
+orders_fixed_decimal <- orders_wrong_decimal |> 
+    mutate(total_price = as.double(total_price))
+```
+
+Jetzt ist die Spalte `total_price` in einen numerischen Wert überführt worden, da wir das Dezimaltrennzeichen in der Funktion `parse_number()` explizit angegeben haben. Schauen wir uns jetzt die Spalte `total_price` an:
+
+```{r}
+orders_fixed_decimal |> 
+    select(total_price) |> 
+    head(5)
+```
+
+Die Funktion `as-double()` sucht standardmäßig nach einem Punkt als Dezimaltrennzeichen. Sollte es in der Spalte `total_price` tatsächlich ein Komma als Dezimaltrennzeichen geben, müssen wir die Funktion `parse_number` verwenden und das Dezimaltrennzeichen explizit angeben. Hier ein Beispiel, wie das geht:
+
+```{r}
+orders_fixed_decimal <- orders_wrong_decimal |> 
+    mutate(total_price = parse_number(total_price, locale = locale(decimal_mark = ",")))
+```
+
+### Vorhandensein von Kopfzeilen
+
+CSV-Dateien enthalten in der Regel eine Kopfzeile, die die Namen der Spalten angibt. Die Funktionen aus dem Tidyverse und speziell `readr` gehen davon aus, dass diese Zeile vorhanden ist. Wenn die CSV-Datei jedoch keine Kopfzeile enthält, müssen wir dies beim Laden der Datei angeben, damit die Daten korrekt interpretiert werden können. Hier ein Beispiel, wie wir eine CSV-Datei ohne Kopfzeile laden können:
+
+```{r}
+orders_no_header <- read_csv(
+    "data/orders.csv", 
+    col_names = FALSE
+)
+```
+
+Schaut euch das Ergebnis nun an:
+
+```{r}
+orders_no_header |> 
+    head(5)
+```
+
+Was ist passiert? Die Variablen (Spalten) wurden automatisch mit generischen Namen wie `X1`, `X2`, `X3` usw. benannt, da keine Kopfzeile vorhanden war, die die Spaltennamen angibt. Dazu wurde die erste Zeile der CSV-Datei als Datenzeile interpretiert, anstatt als Kopfzeile.
+
+## Binäre Formate
+
+### R-Data-Serialization (RDS)

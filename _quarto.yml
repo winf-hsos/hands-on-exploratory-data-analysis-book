@@ -69,3 +69,4 @@ format:
     number-depth: 2
     code-annotations: hover
     code-line-numbers: false
+    code-link: true

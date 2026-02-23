@@ -33,4 +33,4 @@ Thumbs.db
 **/*.quarto_ipynb
 
 /.luarc.json
-/agent_instructions/
+

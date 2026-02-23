@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>4&nbsp; Faktoren – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
@@ -60,7 +57,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -80,8 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -108,16 +103,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Suchen"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -128,13 +118,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Hands-On Exploratory Data Analytics</a> 
     </div>
@@ -146,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Vorwort</span></a>
@@ -160,8 +146,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
@@ -174,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -183,8 +169,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
@@ -209,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -218,8 +204,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
@@ -274,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
@@ -294,30 +280,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#überblick-welche-variablen-sind-gute-faktoren" id="toc-überblick-welche-variablen-sind-gute-faktoren" class="nav-link active" data-scroll-target="#überblick-welche-variablen-sind-gute-faktoren"><span class="header-section-number">4.1</span> Überblick: Welche Variablen sind gute Faktoren?</a></li>
-  <li><a href="#häufigkeiten-ressorts-zählen-und-visualisieren" id="toc-häufigkeiten-ressorts-zählen-und-visualisieren" class="nav-link" data-scroll-target="#häufigkeiten-ressorts-zählen-und-visualisieren"><span class="header-section-number">4.2</span> Häufigkeiten: Ressorts zählen und visualisieren</a></li>
+<li><a href="#%C3%BCberblick-welche-variablen-sind-gute-faktoren" id="toc-überblick-welche-variablen-sind-gute-faktoren" class="nav-link active" data-scroll-target="#%C3%BCberblick-welche-variablen-sind-gute-faktoren"><span class="header-section-number">4.1</span> Überblick: Welche Variablen sind gute Faktoren?</a></li>
+  <li><a href="#h%C3%A4ufigkeiten-ressorts-z%C3%A4hlen-und-visualisieren" id="toc-häufigkeiten-ressorts-zählen-und-visualisieren" class="nav-link" data-scroll-target="#h%C3%A4ufigkeiten-ressorts-z%C3%A4hlen-und-visualisieren"><span class="header-section-number">4.2</span> Häufigkeiten: Ressorts zählen und visualisieren</a></li>
   <li><a href="#zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" id="toc-zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="nav-link" data-scroll-target="#zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen"><span class="header-section-number">4.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</a></li>
   <li><a href="#sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" id="toc-sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="nav-link" data-scroll-target="#sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen"><span class="header-section-number">4.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</a></li>
   <li><a href="#kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" id="toc-kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="nav-link" data-scroll-target="#kategorien-bereinigen-recoding-und-missingness-sichtbar-machen"><span class="header-section-number">4.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</a></li>
   <li><a href="#abgeleitete-faktoren-wochentag-und-tageszeit" id="toc-abgeleitete-faktoren-wochentag-und-tageszeit" class="nav-link" data-scroll-target="#abgeleitete-faktoren-wochentag-und-tageszeit"><span class="header-section-number">4.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</a></li>
-  </ul>
-</nav>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-2-news/load.html">Projekt 2: News</a></li><li class="breadcrumb-item"><a href="../project-2-news/factors.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-2-news/load.html">Projekt 2: News</a></li><li class="breadcrumb-item"><a href="../project-2-news/factors.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span>
+</h1>
 </div>
 
 
@@ -331,29 +313,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<p>Viele Variablen im Tagesschau-Datensatz sind <em>kategorial</em>: <code>ressort</code>, <code>language</code>, <code>author</code>, manchmal auch <code>tag</code> oder <code>supertitle</code>. In R werden solche Kategorien häufig als <strong>Faktoren</strong> (<em>factors</em>) dargestellt. Ein Faktor ist im Kern ein Vektor mit festen Ausprägungen (<em>levels</em>). Das ist in der Datenanalyse nützlich, weil</p>
+</header><p>Viele Variablen im Tagesschau-Datensatz sind <em>kategorial</em>: <code>ressort</code>, <code>language</code>, <code>author</code>, manchmal auch <code>tag</code> oder <code>supertitle</code>. In R werden solche Kategorien häufig als <strong>Faktoren</strong> (<em>factors</em>) dargestellt. Ein Faktor ist im Kern ein Vektor mit festen Ausprägungen (<em>levels</em>). Das ist in der Datenanalyse nützlich, weil</p>
 <ul>
 <li>Grafiken und Tabellen automatisch sinnvoll gruppieren,</li>
 <li>eine feste Reihenfolge der Kategorien reproduzierbar ist,</li>
 <li>Modelle kategoriale Merkmale korrekt behandeln können.</li>
 </ul>
 <p>Im Tidyverse ist <code>forcats</code> (Teil von <code>tidyverse</code>) das Werkzeug für Faktor-Operationen.</p>
-<section id="überblick-welche-variablen-sind-gute-faktoren" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="überblick-welche-variablen-sind-gute-faktoren"><span class="header-section-number">4.1</span> Überblick: Welche Variablen sind gute Faktoren?</h2>
+<section id="überblick-welche-variablen-sind-gute-faktoren" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="überblick-welche-variablen-sind-gute-faktoren">
+<span class="header-section-number">4.1</span> Überblick: Welche Variablen sind gute Faktoren?</h2>
 <p>Ein schneller Check ist: Welche Spalten sind Text (<code>&lt;chr&gt;</code>) und haben eher wenige unterschiedliche Werte?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anzahl unterschiedlicher Werte je Zeichen-Spalte</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>char_uniques <span class="ot">&lt;-</span> ts <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span> <span class="fu">n_distinct</span>(.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"n_distinct"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(n_distinct)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>char_uniques</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Anzahl unterschiedlicher Werte je Zeichen-Spalte</span></span>
+<span><span class="va">char_uniques</span> <span class="op">&lt;-</span> <span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">~</span> <span class="fu">n_distinct</span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"variable"</span>, values_to <span class="op">=</span> <span class="st">"n_distinct"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">n_distinct</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">char_uniques</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 18 × 2
    variable       n_distinct
@@ -382,17 +361,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Kleine <code>n_distinct</code> (z.B. <code>language</code>) → sehr gute Kandidaten für Faktoren.</li>
 <li>Große <code>n_distinct</code> (z.B. <code>title</code>, <code>url</code>) → eher Identifikatoren/Free-Text, meistens <em>kein</em> Faktor.</li>
-</ul>
-</section>
-<section id="häufigkeiten-ressorts-zählen-und-visualisieren" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="häufigkeiten-ressorts-zählen-und-visualisieren"><span class="header-section-number">4.2</span> Häufigkeiten: Ressorts zählen und visualisieren</h2>
+</ul></section><section id="häufigkeiten-ressorts-zählen-und-visualisieren" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="häufigkeiten-ressorts-zählen-und-visualisieren">
+<span class="header-section-number">4.2</span> Häufigkeiten: Ressorts zählen und visualisieren</h2>
 <p>Bei News-Daten ist <code>ressort</code> meist eine der wichtigsten Kategorien.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Häufigkeitstabelle</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ressort_counts <span class="ot">&lt;-</span> ts <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ressort, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ressort_counts</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Häufigkeitstabelle</span></span>
+<span><span class="va">ressort_counts</span> <span class="op">&lt;-</span> <span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">ressort</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ressort_counts</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 39 × 2
    ressort          n
@@ -412,18 +389,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Für eine Visualisierung ist es hilfreich, <code>ressort</code> als Faktor zu nutzen und nach Häufigkeit zu ordnen.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ressort_counts <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(ressort)) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ressort =</span> <span class="fu">fct_reorder</span>(ressort, n)) <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ressort, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ressort"</span>, <span class="at">y =</span> <span class="st">"Anzahl der Beiträge"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ressort_counts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ressort</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>ressort <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">ressort</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">ressort</span>, y <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Ressort"</span>, y <span class="op">=</span> <span class="st">"Anzahl der Beiträge"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="factors_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -432,21 +408,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Du erkennst sofort, welche Ressorts dominieren (wichtig für Stichproben, Bias, Gewichtung).</li>
 <li>Viele weitere Analysen (Zeitreihen, Textfeatures) lassen sich sinnvoll nach Ressort splitten.</li>
-</ul>
-</section>
-<section id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen"><span class="header-section-number">4.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</h2>
+</ul></section><section id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen">
+<span class="header-section-number">4.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</h2>
 <p>Bei Kategorien wie <code>author</code> gibt es oft sehr viele Ausprägungen. Für Auswertungen und Plots ist es dann sinnvoll, seltene Werte in <code>Other</code> zusammenzufassen.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top-Autor:innen + Other</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (Falls author sehr oft NA ist: NAs explizit als Kategorie behandeln)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ts <span class="sc">|&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">author =</span> <span class="fu">fct_explicit_na</span>(author, <span class="at">na_level =</span> <span class="st">"(fehlend)"</span>),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">author =</span> <span class="fu">fct_lump_n</span>(author, <span class="at">n =</span> <span class="dv">15</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(author, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Top-Autor:innen + Other</span></span>
+<span><span class="co"># (Falls author sehr oft NA ist: NAs explizit als Kategorie behandeln)</span></span>
+<span></span>
+<span><span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    author <span class="op">=</span> <span class="fu">fct_explicit_na</span><span class="op">(</span><span class="va">author</span>, na_level <span class="op">=</span> <span class="st">"(fehlend)"</span><span class="op">)</span>,</span>
+<span>    author <span class="op">=</span> <span class="fu">fct_lump_n</span><span class="op">(</span><span class="va">author</span>, n <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">author</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16 × 2
    author                    n
@@ -474,24 +448,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>reduziert visuelle Unordnung,</li>
 <li>verhindert, dass „Einzelfälle“ die Story dominieren,</li>
 <li>stabilisiert Modelle (zu viele Kategorien führen sonst schnell zu Overfitting).</li>
-</ul>
-</section>
-<section id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen"><span class="header-section-number">4.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</h2>
+</ul></section><section id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen">
+<span class="header-section-number">4.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</h2>
 <p>Ein Faktor muss nicht alphabetisch sortiert sein. Häufig willst du Kategorien nach einer analytischen Kennzahl ordnen.</p>
 <p>Beispiel: Welche Ressorts haben im Median die längsten Texte (über <code>word_count</code>)?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ressort_wordcount <span class="ot">&lt;-</span> ts <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(ressort), <span class="sc">!</span><span class="fu">is.na</span>(word_count)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ressort) <span class="sc">|&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_word_count =</span> <span class="fu">median</span>(word_count),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(median_word_count))</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ressort_wordcount</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ressort_wordcount</span> <span class="op">&lt;-</span> <span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">ressort</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">word_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">ressort</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    median_word_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">word_count</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">median_word_count</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ressort_wordcount</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 32 × 3
    ressort                                   n median_word_count
@@ -511,33 +483,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Und als Plot, nach Median-Wortanzahl geordnet:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ressort_wordcount <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ressort =</span> <span class="fu">fct_reorder</span>(ressort, median_word_count)) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ressort, <span class="at">y =</span> median_word_count)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ressort"</span>, <span class="at">y =</span> <span class="st">"Median Wortanzahl"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ressort_wordcount</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>ressort <span class="op">=</span> <span class="fu">fct_reorder</span><span class="op">(</span><span class="va">ressort</span>, <span class="va">median_word_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">ressort</span>, y <span class="op">=</span> <span class="va">median_word_count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Ressort"</span>, y <span class="op">=</span> <span class="st">"Median Wortanzahl"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="factors_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="factors_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>So ein Plot ist ein guter Einstieg, um Hypothesen zu formulieren (z.B. „Politikartikel sind länger als Sportmeldungen“).</p>
-</section>
-<section id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen"><span class="header-section-number">4.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</h2>
+</section><section id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen">
+<span class="header-section-number">4.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</h2>
 <p>Oft sind Kategorien „nicht sauber“: unterschiedliche Schreibweisen, leere Strings, oder NAs. Für Analytics ist es wichtig, diese Fälle bewusst zu behandeln.</p>
 <p>Beispiel: <code>language</code> sollte im Datensatz meistens <code>de</code> sein.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sprache: NA explizit machen + Häufigkeiten</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ts <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">fct_explicit_na</span>(language, <span class="at">na_level =</span> <span class="st">"(fehlend)"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(language, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Sprache: NA explizit machen + Häufigkeiten</span></span>
+<span></span>
+<span><span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>language <span class="op">=</span> <span class="fu">fct_explicit_na</span><span class="op">(</span><span class="va">language</span>, na_level <span class="op">=</span> <span class="st">"(fehlend)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">language</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   language      n
@@ -551,17 +521,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Wenn du Kategorien zusammenführen möchtest (z.B. Synonyme), hilft <code>fct_recode()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beispiel-Recode (nur als Muster; passe Mapping bei Bedarf an deine Daten an)</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ts <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ressort =</span> <span class="fu">fct_recode</span>(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      ressort,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">inland =</span> <span class="st">"inland"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">ausland =</span> <span class="st">"ausland"</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ressort, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Beispiel-Recode (nur als Muster; passe Mapping bei Bedarf an deine Daten an)</span></span>
+<span></span>
+<span><span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    ressort <span class="op">=</span> <span class="fu">fct_recode</span><span class="op">(</span></span>
+<span>      <span class="va">ressort</span>,</span>
+<span>      inland <span class="op">=</span> <span class="st">"inland"</span>,</span>
+<span>      ausland <span class="op">=</span> <span class="st">"ausland"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">ressort</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 39 × 2
    ressort          n
@@ -579,20 +549,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 29 more rows</code></pre>
 </div>
 </div>
-</section>
-<section id="abgeleitete-faktoren-wochentag-und-tageszeit" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="abgeleitete-faktoren-wochentag-und-tageszeit"><span class="header-section-number">4.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</h2>
+</section><section id="abgeleitete-faktoren-wochentag-und-tageszeit" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="abgeleitete-faktoren-wochentag-und-tageszeit">
+<span class="header-section-number">4.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</h2>
 <p>Faktoren entstehen nicht nur aus Textspalten. Gerade Zeitstempel werden in Analytics oft in kategoriale Einheiten transformiert, um Muster sichtbar zu machen.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wochentag (deutsche Labels) und Stunde</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hinweis: base::weekdays() hängt von der Locale ab; daher nutzen wir lubridate::wday()</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ts <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">weekday =</span> <span class="fu">wday</span>(date_time, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">abbr =</span> <span class="cn">FALSE</span>, <span class="at">week_start =</span> <span class="dv">1</span>),</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">hour =</span> <span class="fu">hour</span>(date_time)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(weekday, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Wochentag (deutsche Labels) und Stunde</span></span>
+<span><span class="co"># Hinweis: base::weekdays() hängt von der Locale ab; daher nutzen wir lubridate::wday()</span></span>
+<span></span>
+<span><span class="va">ts</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    weekday <span class="op">=</span> <span class="fu">wday</span><span class="op">(</span><span class="va">date_time</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, abbr <span class="op">=</span> <span class="cn">FALSE</span>, week_start <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    hour <span class="op">=</span> <span class="fu">hour</span><span class="op">(</span><span class="va">date_time</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">weekday</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   weekday        n
@@ -615,10 +584,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1056,9 +1022,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../project-2-news/load.html" class="pagination-link" aria-label="Laden der Daten">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span>
       </a>          
@@ -1070,7 +1034,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

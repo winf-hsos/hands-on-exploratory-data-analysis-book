@@ -1,4 +1,4 @@
-﻿---
+---
 title: Loading Data
 subtitle: Rectangular Data
 format: revealjs
@@ -7,8 +7,9 @@ footer: "Loding Data with R and `{{readr}}`"
 
 ```{r}
 #| include: false
-source("../../setup.R")
+source("../setup.R")
 ```
+
 
 ## Overview
 

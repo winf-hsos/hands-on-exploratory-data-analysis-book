@@ -1,0 +1,12 @@
+output_dir: images
+presentations:
+  - document_id: 1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ
+    slides:
+
+      - pageid: g3cb03c61121_0_128
+        slide_pageid: g1f51f684b29_0_800
+        filename: select_schema
+
+      - pageid: g3cb03c61121_0_0
+        slide_pageid: g1f51f684b29_0_695
+        filename: filter_schema

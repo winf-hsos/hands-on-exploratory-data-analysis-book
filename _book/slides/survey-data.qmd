@@ -1,0 +1,38 @@
+---
+title: Survey Data
+format: revealjs
+---
+
+```{r}
+#| include: false
+source("../setup.R")
+```
+
+## Übersicht
+
+-   [x] Literature Review
+-   [x] Prepare Data
+-   [ ] Exploratory Data Analysis
+
+
+## Daten laden
+
+```{r}
+#| eval: false
+library(tidyverse)
+survey <- read_csv("data/mds12_schoko_milch.csv")
+```
+
+## Tibbles
+
+```{r}
+survey
+```
+
+## Beobachtungen zählen
+
+```{r}
+survey |>
+  count()
+```
+

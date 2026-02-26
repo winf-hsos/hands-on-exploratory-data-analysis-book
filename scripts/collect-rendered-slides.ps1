@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = (Get-Location).Path
 $slidesConfigPath = Join-Path $projectRoot "_quarto-slides.yml"
-$slidesOutRoot = Join-Path $projectRoot "slides"
+$slidesOutRoot = Join-Path $projectRoot "_book/slides"
 
 function Get-ConfiguredSlideTargets {
   param([string]$ConfigPath)
@@ -32,8 +32,12 @@ function Get-ConfiguredSlideTargets {
         continue
       }
       $p = $matches['path'].Trim().Trim('"').Trim("'")
-      if ($p -like "*.qmd") {
-        $targets.Add(($p -replace '\\', '/'))
+      $normalized = $p -replace '\\', '/'
+      if ($normalized -like "*.qmd") {
+        if ($normalized -notmatch '^slides/[^/]+\.qmd$') {
+          throw "Slide source path must match slides/*.qmd (no subfolders): $normalized"
+        }
+        $targets.Add($normalized)
       }
       continue
     }
@@ -54,24 +58,29 @@ function Get-ConfiguredSlideTargets {
 function Get-DestinationRelativeHtml {
   param([string]$RenderedHtmlRelative)
   $r = $RenderedHtmlRelative -replace '\\', '/'
-  if ($r -like "*/slides/_generated/*.html") {
-    # Legacy generated source path:
-    # project-1-survey/slides/_generated/foo.html -> project-1-survey/foo.html
-    return ($r -replace '/slides/_generated/', '/')
+  if ($r -match '^slides/[^/]+\.html$') {
+    # Flat source path:
+    # slides/foo.html -> foo.html
+    return [IO.Path]::GetFileName($r)
   }
 
-  if ($r -like "*/slides/*.html") {
-    # Direct slide source path:
-    # project-1-survey/slides/foo.html -> project-1-survey/foo.html
-    return ($r -replace '/slides/', '/')
-  }
-
-  throw "Rendered file path does not match expected slide pattern */slides/*.html : $RenderedHtmlRelative"
+  throw "Rendered file path does not match expected slide pattern slides/*.html : $RenderedHtmlRelative"
 }
 
 New-Item -ItemType Directory -Force -Path $slidesOutRoot | Out-Null
 
 $targets = Get-ConfiguredSlideTargets -ConfigPath $slidesConfigPath
+$filter = $env:QUARTO_SLIDES_FILTER
+if (-not [string]::IsNullOrWhiteSpace($filter)) {
+  $requested = @(
+    $filter.Split(';') |
+      ForEach-Object { ($_ -replace '\\', '/').Trim() } |
+      Where-Object { $_ -ne "" }
+  )
+  if ($requested.Count -gt 0) {
+    $targets = $targets | Where-Object { $requested -contains $_ }
+  }
+}
 $htmlTargets = $targets | ForEach-Object { ($_ -replace '\.qmd$', '.html') }
 
 foreach ($htmlRel in $htmlTargets) {
@@ -82,14 +91,12 @@ foreach ($htmlRel in $htmlTargets) {
 
   $dstRel = Get-DestinationRelativeHtml -RenderedHtmlRelative $htmlRel
   $dstHtml = Join-Path $slidesOutRoot $dstRel
-  $dstDir = Split-Path -Parent $dstHtml
-  New-Item -ItemType Directory -Force -Path $dstDir | Out-Null
 
   Copy-Item -Path $srcHtml -Destination $dstHtml -Force
 
-  # Keep only one HTML file per slide deck in slides/ (no copied *_files folders).
+  # Keep only one HTML file per slide deck in _book/slides (no copied *_files folders).
   $baseName = [IO.Path]::GetFileNameWithoutExtension($dstHtml)
-  $dstAssets = Join-Path $dstDir ($baseName + "_files")
+  $dstAssets = Join-Path $slidesOutRoot ($baseName + "_files")
   if (Test-Path $dstAssets) {
     Remove-Item -Path $dstAssets -Recurse -Force
   }

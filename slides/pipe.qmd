@@ -1,15 +1,15 @@
-﻿---
+---
 title: Der Pipe-Operator
+subtitle: Building data pipelines with `|>`
 format: revealjs
 footer: "The Pipe-Operator in R"
 ---
 
 ```{r}
 #| include: false
-source("../../setup.R")
+source("../setup.R")
 ```
 
 ## Pipe Example
 
 ![](/images/slides/pipe.svg)
-

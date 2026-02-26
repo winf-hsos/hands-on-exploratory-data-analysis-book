@@ -16,3 +16,4 @@ project_dir <- find_project_dir()
 
 tweets <- readRDS(file.path(project_dir, "data", "tweets_ampel.rds"))
 orders <- read_csv(file.path(project_dir, "data", "orders.csv"))
+survey <- read_csv(file.path(project_dir, "data", "mds12_schoko_milch.csv"))

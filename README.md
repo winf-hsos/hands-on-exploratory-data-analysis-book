@@ -35,3 +35,41 @@ A workflow at `.github/workflows/deploy-book.yml` deploys the `_book` directory.
 
 - `_book/` is intentionally tracked in Git.
 - Quarto/R caches and local environment folders are ignored via `.gitignore`.
+
+## Download Diagram SVGs From Google Slides
+
+Manage slide exports in:
+
+- `google-slides-images.yml`
+
+Structure:
+
+- `output_dir`: target folder (for example `images`)
+- `presentations`: grouped by `document_id`
+- `slides`: list of objects with:
+- `pageid`: SVG for book image (`images/google_slides/<name>.svg`)
+- optional `slide_pageid`: SVG for slide variant (`images/slides/google_slides/<same-name>.svg`)
+- optional `filename`: base file name without extension
+
+Run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/download-google-slides-svg.ps1
+```
+
+Naming behavior:
+
+- Preferred: set `"filename"` in each slide entry.
+- If omitted, fallback name is `<pageid>.svg`.
+
+Example slide entry:
+
+```yaml
+output_dir: images
+presentations:
+  - document_id: your_google_presentation_id
+    slides:
+      - pageid: gBOOK_ID
+        slide_pageid: gSLIDE_ID
+        filename: select_schema
+```

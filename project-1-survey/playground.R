@@ -1,5 +1,5 @@
 #renv::install("pacman")
-pacman::p_load(tidyverse, janitor, skimr, lubridate, infer, rstatix, gtsummary, summarytools, broom, googlesheets4, readxl)
+pacman::p_load(tidylog, tidyverse, janitor, skimr, lubridate, infer, rstatix, gtsummary, summarytools, broom, googlesheets4, readxl)
 
 install.packages("xml2")
 install.packages("downlit")
@@ -7,7 +7,13 @@ install.packages("downlit")
 md <- read_csv("data/mds12_schoko_milch.csv", show_col_types = FALSE) |> 
   clean_names()
 
-survey <- read_csv("data/mds12_schoko_milch.csv", show_col_types = FALSE)
+survey |> 
+  filter(q001hheinkauf == 1) |> 
+  select(q001hheinkauf, q004geschlecht) |> 
+  filter(q004geschlecht == 1) |> 
+  count(q001hheinkauf)
+
+ survey <- read_csv("data/mds12_schoko_milch.csv", show_col_types = FALSE)
 
 limo_meta <- read_sheet("1Sq_CWA-oTN90d0EpA6rEDB3C77dyIXv0HZTq3YWuyy8")
 

@@ -1,4 +1,4 @@
-project:
+﻿project:
   type: book
   execute-dir: project
   resources:
@@ -24,12 +24,42 @@ book:
   chapters:
     - index.qmd
 
-    - part: "Projekt 1: Umfrage"
+    - part: "Hintergründe"
+      chapters:
+      - 01-background/empirical-research.qmd
+
+    - part: "Erste Schritte mit R"
+      chapters:
+      - 02-r-basics/ide.qmd
+      - 02-r-basics/programming-with-r.qmd
+      - 02-r-basics/data-representation.qmd
+
+    - part: "Datentransformation"
+      chapters:
+      - 03-data-transformation/loading-data.qmd
+      - 03-data-transformation/pipe.qmd
+      - 03-data-transformation/exploring-data.qmd
+      - 03-data-transformation/select.qmd
+      - 03-data-transformation/mutate-modify.qmd
+      - 03-data-transformation/mutate-add.qmd  
+      - 03-data-transformation/filter.qmd
+      - 03-data-transformation/summarize.qmd
+      - 03-data-transformation/joining-data.qmd
+
+    - part: "Datenvisualisierung"
+      chapters:
+      - 04-data-visualization/grammar-of-graphics.qmd
+      - 04-data-visualization/bar-charts.qmd
+      - 04-data-visualization/scatter-plots.qmd
+      - 04-data-visualization/histograms.qmd
+      - 04-data-visualization/boxplots.qmd
+      - 04-data-visualization/line-charts.qmd
+      - 04-data-visualization/visualizations-polish.qmd
+
+    - part: "Projekt 1: Umfragen"
       chapters:
       - project-1-survey/survey-data.qmd
-      #- project-1-survey/REWORKED_survey-data.qmd
       - project-1-survey/types-of-variables.qmd
-      #- project-1-survey/REWORKED_types-of-variables.qmd
       
 
     - part: "Projekt 2: News"
@@ -39,17 +69,7 @@ book:
       - project-2-news/variables.qmd
       - project-2-news/time.qmd
 
-    - part: "Grundlagen"
-      chapters:
-      - r-basics/ide.qmd  
-      - r-basics/loading-data.qmd
-      - r-basics/pipe.qmd
-      - r-basics/select.qmd
-      - r-basics/mutate-modify.qmd
-      - r-basics/mutate-add.qmd  
-      - r-basics/filter.qmd
-      - r-basics/summarize.qmd
-      - r-basics/visualizations-polish.qmd
+
       
     - appendix/appendix-a-scraping.qmd
     - appendix/appendix-b-supplemental.qmd
@@ -59,6 +79,7 @@ bibliography: references.bib
 
 format:
   html:
+    css: styles/sidebar.css
     theme:
       - cosmo
       - brand
@@ -70,3 +91,4 @@ format:
     code-annotations: hover
     code-line-numbers: false
     code-link: true
+    linkcolor: "#009ee3"

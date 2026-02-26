@@ -1,0 +1,225 @@
+﻿---
+title: Loading Data
+subtitle: Rectangular Data
+format: revealjs
+footer: "Loding Data with R and `{{readr}}`"
+---
+
+```{r}
+#| include: false
+source("../../setup.R")
+```
+
+## Overview
+
+- File Formats for Data
+- Reading CSV with `{{readr}}`
+- Reading RDS Files
+- Reading Excel Files with `{{readxl}}`
+- Reading Google Sheets with `{{googlesheets4}}`
+
+# File Formats for Data
+
+## Text vs. Binary Formats
+
+![](/images/slides/data-file-formats.svg)
+
+## Rectangular Data
+
+> The goal of `readr` is to provide a fast and friendly way to read **rectangular data** from delimited files
+
+![Rectangular data is organized in rows and columns.](/images/slides/rectangular-data.svg){#fig-rectangular-data}
+
+## Functions for Reading Delimited Files
+
+| Function       | Delimiter |
+|----------------|--------------|
+| `read_csv()`   | comma (`,`)  |
+| `read_csv2()`  | semicolon (`;`) |
+| `read_tsv()`   | tabulator (`\t`) |
+| `read_delim()` | any delimiter |
+
+
+## International vs. German Standard
+
+:::: {.columns}
+
+::: {.column width="50%"}
+International standard:
+
+```{bash}
+#| eval: false
+#| lst-cap: international.csv
+#| lst-label: lst-international
+a,b,c
+1.5,2.1,3.14
+```
+
+```{r}
+#| eval: false
+read_csv("...")
+```
+:::
+
+::: {.column width="50%"}
+German setting:
+
+```{bash}
+#| eval: false
+#| lst-cap: german.csv
+#| lst-label: lst-test
+a;b;c
+1,5;2,1;3,14
+```
+
+```{r}
+#| eval: false
+read_csv2("...")
+```
+
+:::
+
+::::
+
+## Manual Delimiter and Decimal Mark
+
+With `read_delim()` we can specify the delimiter:
+
+```{r}
+#| eval: false
+data <- read_delim(
+    "data.txt", 
+    delim = "|"
+)
+```
+
+::: {.fragment}
+
+We can specify the decimal mark with the `locale` argument:
+
+```{r}
+#| eval: false
+#| code-line-numbers: "4"
+data <- read_delim(
+    "data.txt", 
+    delim = "|"
+    locale = locale(decimal_mark = ",")
+```
+
+:::
+
+## Text Encoding
+
+If necessary, we can specify the text encoding with the `locale` argument:
+
+```{r}
+#| eval: false
+#| code-line-numbers: "|7"
+data <- read_delim(
+    "data.txt", 
+    delim = "|"
+    locale = 
+        locale(
+            decimal_mark = ",", 
+            encoding = "ISO-8859-1"
+        )
+```
+
+:::{.fragment}
+The default **UTF-8** is usually the right choice!
+:::
+
+
+# Reading RDS Files
+
+## An R-specific Binary Format
+
+RDS (R Data Serialization) is a binary file format. It is used to save a single R object to a file with the ending `.rds`.
+
+Reading RDS files:
+
+```{r}
+#| eval: false
+tweets <- read_rds("data/tweets.rds")
+```
+
+::: {.fragment}
+
+Saving R objects as RDS files:
+
+```{r}
+#| eval: false
+write_rds(tweets, "data/tweets.rds")
+```
+
+:::
+
+# Reading Excel Files with `{{readxl}}`
+
+## The `{{readxl}}`-Package
+
+Read data from the first sheet of an Excel file:
+
+```{r}
+#| eval: false
+library(readxl)
+data <- read_excel("data/survey_data.xlsx")
+```
+
+::: {.fragment}
+Specify the sheet name or number:
+
+```{r}
+#| eval: false
+read_excel("data/survey_data.xlsx", sheet = "Sheet1")
+read_excel("data/survey_data.xlsx", sheet = 2)
+```
+
+:::
+
+::: {.fragment}
+Ranges of cells:
+
+```{r}
+#| eval: false
+read_excel("data/survey_data.xlsx", range = "A1:C10")
+read_excel("data/survey_data.xlsx", range = cell_rows(1:10))
+read_excel("data/survey_data.xlsx", range = cell_cols("A:C"))
+read_excel("data/survey_data.xlsx", range = "data!A1:C10")
+```
+
+:::
+
+# Reading Google Sheets with `{{googlesheets4}}`
+
+## The `{{googlesheets4}}`-Package
+
+You must be logged into my Google account for this:
+
+```{r}
+#| eval: false
+library(googlesheets4)
+read_sheet("https://docs.google.com/spreadsheets/d/1Sq_CWA-oTN90d0EpA6rEDB3C77dyIXv0HZTq3YWuyy8/edit")
+```
+
+See the sheet [here](https://docs.google.com/spreadsheets/d/1Sq_CWA-oTN90d0EpA6rEDB3C77dyIXv0HZTq3YWuyy8/edit?usp=sharing).
+
+::: {.fragment}
+
+Or reference by ID:
+
+```{r}
+#| eval: false
+read_sheet("1Sq_CWA-oTN90d0EpA6rEDB3C77dyIXv0HZTq3YWuyy8")
+```
+
+::: 
+
+## References
+
+- [`The {{readr}}`-Package](https://readr.tidyverse.org/)
+- [`The {{readxl}}`-Package](https://readxl.tidyverse.org/)
+- [The `{{googlesheets4}}`-Package](https://googlesheets4.tidyverse.org/)
+- [Chapter 7 "Data import" from "R for Data Science"](https://r4ds.hadley.nz/data-import.html)
+- [Chapter 20 "Spreadsheets" from "R for Data Science"](https://r4ds.hadley.nz/spreadsheets.html)
+

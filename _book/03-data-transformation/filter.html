@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.20">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>11&nbsp; Beobachtungen auswählen – Hands-On Exploratory Data Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-data-transformation/summarize.html" rel="next">
+<link href="../03-data-transformation/mutate-add.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/filter.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Hands-On Exploratory Data Analytics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Hintergründe</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/empirical-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Erste Schritte mit R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datentransformation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datenvisualisierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfragen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quellen</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#sec-filter-grundprinzip" id="toc-sec-filter-grundprinzip" class="nav-link active" data-scroll-target="#sec-filter-grundprinzip"><span class="header-section-number">11.1</span> Das Grundprinzip</a></li>
+  <li><a href="#sec-filter-vergleich" id="toc-sec-filter-vergleich" class="nav-link" data-scroll-target="#sec-filter-vergleich"><span class="header-section-number">11.2</span> Vergleichsoperatoren</a></li>
+  <li>
+<a href="#sec-filter-kombinieren" id="toc-sec-filter-kombinieren" class="nav-link" data-scroll-target="#sec-filter-kombinieren"><span class="header-section-number">11.3</span> Bedingungen kombinieren</a>
+  <ul class="collapse">
+<li><a href="#und" id="toc-und" class="nav-link" data-scroll-target="#und">UND</a></li>
+  <li><a href="#oder" id="toc-oder" class="nav-link" data-scroll-target="#oder">ODER</a></li>
+  <li><a href="#klammern-setzen" id="toc-klammern-setzen" class="nav-link" data-scroll-target="#klammern-setzen">Klammern setzen</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-filter-bereiche" id="toc-sec-filter-bereiche" class="nav-link" data-scroll-target="#sec-filter-bereiche"><span class="header-section-number">11.4</span> Bereiche und Wertelisten</a>
+  <ul class="collapse">
+<li><a href="#between" id="toc-between" class="nav-link" data-scroll-target="#between"><code>between()</code></a></li>
+  <li><a href="#in" id="toc-in" class="nav-link" data-scroll-target="#in"><code>%in%</code></a></li>
+  <li><a href="#negation-mit" id="toc-negation-mit" class="nav-link" data-scroll-target="#negation-mit">Negation mit <code>!</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-filter-text" id="toc-sec-filter-text" class="nav-link" data-scroll-target="#sec-filter-text"><span class="header-section-number">11.5</span> Textfilter</a>
+  <ul class="collapse">
+<li><a href="#gro%C3%9F--und-kleinschreibung-ignorieren" id="toc-groß--und-kleinschreibung-ignorieren" class="nav-link" data-scroll-target="#gro%C3%9F--und-kleinschreibung-ignorieren">Groß- und Kleinschreibung ignorieren</a></li>
+  <li><a href="#textmuster-ausschlie%C3%9Fen" id="toc-textmuster-ausschließen" class="nav-link" data-scroll-target="#textmuster-ausschlie%C3%9Fen">Textmuster ausschließen</a></li>
+  <li><a href="#text-am-anfang-oder-ende" id="toc-text-am-anfang-oder-ende" class="nav-link" data-scroll-target="#text-am-anfang-oder-ende">Text am Anfang oder Ende</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-filter-na" id="toc-sec-filter-na" class="nav-link" data-scroll-target="#sec-filter-na"><span class="header-section-number">11.6</span> Fehlende Werte</a></li>
+  <li>
+<a href="#sec-filter-mehrere" id="toc-sec-filter-mehrere" class="nav-link" data-scroll-target="#sec-filter-mehrere"><span class="header-section-number">11.7</span> Mehrere Spalten filtern</a>
+  <ul class="collapse">
+<li><a href="#if_any" id="toc-if_any" class="nav-link" data-scroll-target="#if_any"><code>if_any()</code></a></li>
+  <li><a href="#if_all" id="toc-if_all" class="nav-link" data-scroll-target="#if_all"><code>if_all()</code></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-filter-slice" id="toc-sec-filter-slice" class="nav-link" data-scroll-target="#sec-filter-slice"><span class="header-section-number">11.8</span> Zeilen gezielt auswählen mit <code>slice()</code></a>
+  <ul class="collapse">
+<li><a href="#slice_head-und-slice_tail" id="toc-slice_head-und-slice_tail" class="nav-link" data-scroll-target="#slice_head-und-slice_tail"><code>slice_head()</code> und <code>slice_tail()</code></a></li>
+  <li><a href="#slice_max-und-slice_min" id="toc-slice_max-und-slice_min" class="nav-link" data-scroll-target="#slice_max-und-slice_min"><code>slice_max()</code> und <code>slice_min()</code></a></li>
+  <li><a href="#slice_sample" id="toc-slice_sample" class="nav-link" data-scroll-target="#slice_sample"><code>slice_sample()</code></a></li>
+  </ul>
+</li>
+  <li><a href="#sec-filter-distinct" id="toc-sec-filter-distinct" class="nav-link" data-scroll-target="#sec-filter-distinct"><span class="header-section-number">11.9</span> Doppelte Zeilen entfernen mit <code>distinct()</code></a></li>
+  <li>
+<a href="#sec-filter-grouped" id="toc-sec-filter-grouped" class="nav-link" data-scroll-target="#sec-filter-grouped"><span class="header-section-number">11.10</span> Gruppierte Daten</a>
+  <ul class="collapse">
+<li><a href="#gruppen-nach-gr%C3%B6%C3%9Fe-filtern" id="toc-gruppen-nach-größe-filtern" class="nav-link" data-scroll-target="#gruppen-nach-gr%C3%B6%C3%9Fe-filtern">Gruppen nach Größe filtern</a></li>
+  <li><a href="#innerhalb-einer-gruppe-filtern" id="toc-innerhalb-einer-gruppe-filtern" class="nav-link" data-scroll-target="#innerhalb-einer-gruppe-filtern">Innerhalb einer Gruppe filtern</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-filter-probleme" id="toc-sec-filter-probleme" class="nav-link" data-scroll-target="#sec-filter-probleme"><span class="header-section-number">11.11</span> Typische Probleme</a>
+  <ul class="collapse">
+<li><a href="#ergebnis-ist-leer" id="toc-ergebnis-ist-leer" class="nav-link" data-scroll-target="#ergebnis-ist-leer">Ergebnis ist leer</a></li>
+  <li><a href="#zu-viele-zeilen" id="toc-zu-viele-zeilen" class="nav-link" data-scroll-target="#zu-viele-zeilen">Zu viele Zeilen</a></li>
+  <li><a href="#unerwartete-na-verluste" id="toc-unerwartete-na-verluste" class="nav-link" data-scroll-target="#unerwartete-na-verluste">Unerwartete NA-Verluste</a></li>
+  <li><a href="#automatisches-logging-mit-tidylog" id="toc-automatisches-logging-mit-tidylog" class="nav-link" data-scroll-target="#automatisches-logging-mit-tidylog">Automatisches Logging mit <code>tidylog</code></a></li>
+  </ul>
+</li>
+  <li><a href="#sec-filter-zusammenfassung" id="toc-sec-filter-zusammenfassung" class="nav-link" data-scroll-target="#sec-filter-zusammenfassung"><span class="header-section-number">11.12</span> Kurz zusammengefasst</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/filter.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-filter" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Ihr habt jetzt gelernt, wie ihr mit <code>select()</code> den Blick auf die richtigen Spalten richtet und mit <code>mutate()</code> neue Variablen anlegt. In diesem Kapitel widmen wir uns dem Gegenstück zur Spaltenauswahl: Der Auswahl der relevanten Zeilen. Wir zeigen euch, wie ihr mit der Funktion <code>filter()</code> aus <code>dplyr</code> gezielt Beobachtungen behaltet, die bestimmte logische Bedingungen erfüllen, und wie ihr leere oder doppelte Zeilen entfernt.</p>
+<p>Das Filtern von Daten ist einer der wichtigsten Schritte in jeder explorativen Analyse. Reale Datensätze sind fast immer größer und unschärfer als das, was ihr für eine spezifische Forschungsfrage untersuchen möchtet. Erst indem ihr Gruppen isoliert, Ausreißer entfernt oder den Fokus auf einen konkreten Zeitraum beschränkt, könnt ihr präzise Aussagen treffen und den Rausch aus euren Daten entfernen.</p>
+<p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead><tr class="header">
+<th>Funktion</th>
+<th>Beschreibung</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>filter()</code></td>
+<td>Zeilen nach Bedingungen auswählen</td>
+</tr>
+<tr class="even">
+<td><code>between()</code></td>
+<td>Werte in einem Bereich prüfen</td>
+</tr>
+<tr class="odd">
+<td><code>%in%</code></td>
+<td>Werte gegen eine Liste prüfen</td>
+</tr>
+<tr class="even">
+<td><code>str_detect()</code></td>
+<td>Text auf ein Muster prüfen</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code></td>
+<td>Fehlende Werte erkennen</td>
+</tr>
+<tr class="even">
+<td>
+<code>if_any()</code> / <code>if_all()</code>
+</td>
+<td>Bedingungen über mehrere Spalten prüfen</td>
+</tr>
+<tr class="odd">
+<td>
+<code>slice_head()</code> / <code>slice_max()</code> / <code>slice_sample()</code>
+</td>
+<td>Zeilen nach Position oder Rang auswählen</td>
+</tr>
+<tr class="even">
+<td><code>distinct()</code></td>
+<td>Doppelte Zeilen entfernen</td>
+</tr>
+</tbody>
+</table>
+<p>Bevor wir anfangen zu filtern, werfen wir einen kurzen Blick auf unseren Datensatz, damit wir wissen, wonach wir suchen können.</p>
+<p>Wenn ihr euch erst einmal orientieren wollt, schaut euch kurz die Struktur des Datensatzes an:</p>
+<div id="filter-first-glimpse" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 58,421
+Columns: 22
+$ id                      &lt;chr&gt; "1642251945732653057", "1642416819003707397", …
+$ screen_name             &lt;chr&gt; "cem_oezdemir", "W_Schmidt_", "lisapaus", "lis…
+$ text                    &lt;chr&gt; "RT @BriHasselmann: Endlich! Wir sind drangebl…
+$ retweet_count           &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10…
+$ favorite_count          &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58,…
+$ is_quote_status         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALS…
+$ is_retweet              &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ retweeted_status_id     &lt;chr&gt; "1642158717113081856", "1641976869460275201", …
+$ retweeted_user          &lt;chr&gt; "BriHasselmann", "aakashg0", NA, NA, NA, NA, N…
+$ lang                    &lt;chr&gt; "de", "en", "de", "de", "qme", "de", "de", "de…
+$ hashtags                &lt;list&gt; &lt;"Tierhaltungskennzeichnung", "Wettbewerb"&gt;, …
+$ urls                    &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
+$ user_mentions           &lt;list&gt; "BriHasselmann", "aakashg0", &lt;"HassoSuliak", …
+$ photos                  &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
+$ source                  &lt;chr&gt; "&lt;a href=\"http://twitter.com/download/iphone\…
+$ insert_timestamp        &lt;chr&gt; "2023-04-02 03:00:04.749 UTC", "2023-04-02 07:…
+$ created_at              &lt;dttm&gt; 2023-04-01 19:45:50, 2023-04-02 06:40:58, 202…
+$ quote_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ reply_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ in_reply_to_screen_name &lt;chr&gt; NA, NA, "HassoSuliak", "andiewoerle", "Wissing…
+$ in_reply_to_status_id   &lt;chr&gt; NA, NA, "1642059841169502210", "16420886499603…
+$ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "16424095440462397…</code></pre>
+</div>
+</div>
+</div>
+<section id="sec-filter-grundprinzip" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="sec-filter-grundprinzip">
+<span class="header-section-number">11.1</span> Das Grundprinzip</h2>
+<p><code>filter()</code> bekommt einen Tibble, prüft pro Zeile eine oder mehrere Bedingungen und gibt nur die Zeilen zurück, die passen.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><a href="https://winf-hsos.github.io/university-docs/images/filter_schema.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Die filter-Funktion reduziert die Beobachtungen in einem Tibble."><img src="https://winf-hsos.github.io/university-docs/images/filter_schema.png" class="img-fluid figure-img" alt="Die filter-Funktion reduziert die Beobachtungen in einem Tibble."></a></p>
+<figcaption>Die <code>filter</code>-Funktion reduziert die Beobachtungen in einem Tibble.</figcaption></figure>
+</div>
+<p>Die einfachste Variante ist eine einzelne Bedingung. Zum Beispiel: Zeigt nur Tweets, die keine Retweets sind.</p>
+<div id="filter-basics-not-retweet" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  screen_name retweet_count favorite_count text                                 
+  &lt;chr&gt;               &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;                                
+1 lisapaus                1              3 "@HassoSuliak @Storch_i @tagesschau …
+2 lisapaus                1             11 "@andiewoerle @svenlehmann Nein, sie…
+3 Wissing                 6             25 "\U0001f449 https://t.co/NTFHy7j9AT" 
+4 Wissing                 9             93 "Wir folgen Stimmen aus der Wissensc…
+5 Wissing                15            154 "Weshalb wir politische Verantwortun…</code></pre>
+</div>
+</div>
+</div>
+<p>Hier passiert gleich viel auf einmal:</p>
+<ul>
+<li>
+<code>filter(!is_retweet)</code> wählt Zeilen aus, bei denen <code>is_retweet</code> nicht <code>TRUE</code> ist.</li>
+<li>
+<code>select(...)</code> reduziert die Spalten auf das Wesentliche, das kennt ihr schon.</li>
+<li>
+<code>head(5)</code> zeigt euch eine kleine Vorschau, damit ihr schnell prüfen könnt, ob der Filter macht, was ihr erwartet.</li>
+</ul>
+<p><em>Abbildung: Ein Datensatz als Tabelle mit acht Zeilen. Ein Filtersymbol steht links, daneben die Bedingung <code>!is_retweet</code>. Vier Zeilen sind durchgestrichen oder ausgegraut (die Retweets), die übrigen vier bleiben übrig. Rechts sieht man die kleinere Ergebnistabelle mit nur den vier verbliebenen Zeilen.</em></p>
+</section><section id="sec-filter-vergleich" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="sec-filter-vergleich">
+<span class="header-section-number">11.2</span> Vergleichsoperatoren</h2>
+<p>Die meisten Filterbedingungen beruhen auf Vergleichen:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Operator</th>
+<th>Bedeutung</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>gleich</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>ungleich</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>kleiner als</td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td>kleiner oder gleich</td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td>größer als</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>größer oder gleich</td>
+</tr>
+</tbody>
+</table>
+<p>Zum Beispiel: Zeigt nur Tweets mit mindestens 1.000 Retweets.</p>
+<div id="filter-basics-gt" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">retweet_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name     retweet_count text                                            
+  &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;                                           
+1 cem_oezdemir           434571 RT @Schwarzenegger: I love the Russian people. …
+2 klara_geywitz          276452 RT @Twitter: Twitter is built by immigrants of …
+3 SteffiLemke            271059 RT @KamalaHarris: While I may be the first woma…
+4 ABaerbockArchiv        188454 RT @verygooster: every woman in this pic tho ht…
+5 W_Schmidt_             169437 RT @MarcusRashford: https://t.co/bs9lksGM4q     </code></pre>
+</div>
+</div>
+</div>
+<p>Wenn ihr bei einer Bedingung unsicher seid, lohnt sich ein kurzer Check. Zählt einmal, wie viele Zeilen überhaupt übrig bleiben:</p>
+<div id="filter-basics-count" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 866</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="== ist nicht =">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>== ist nicht =
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ein häufiger Anfängerfehler: <code>=</code> ist eine Zuweisung, <code>==</code> ist ein Vergleich. Wenn ihr <code>filter(retweet_count = 1000)</code> schreibt, bekommt ihr eine Fehlermeldung. Ihr braucht <code>filter(retweet_count == 1000)</code>.</p>
+</div>
+</div>
+</section><section id="sec-filter-kombinieren" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="sec-filter-kombinieren">
+<span class="header-section-number">11.3</span> Bedingungen kombinieren</h2>
+<p>In der Praxis filtert ihr fast immer mit mehr als einer Bedingung. Manchmal müssen alle Kriterien erfüllt sein, manchmal reicht eines.</p>
+<section id="und" class="level3"><h3 class="anchored" data-anchor-id="und">UND</h3>
+<p>Wenn ihr mehrere Bedingungen durch Kommas trennt, bedeutet das: Alle Bedingungen müssen wahr sein. Das entspricht einem logischen UND.</p>
+<div id="filter-and-comma" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span>, <span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">500</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name retweet_count text                                                
+  &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;                                               
+1 ABaerbock            1585 "Bewohner*innen von Kiew in Todesangst im Morgenver…
+2 ABaerbock             807 "Die Knüppel und das Tränengas sind kein Ausdruck v…
+3 ABaerbock            3375 "Kaum zu ertragen, was an der #SharifUniversity in …
+4 ABaerbock            1035 "Schwer zu ertragen auch, dass unsere außenpolitisc…
+5 ABaerbock             562 "Als Russland vor 8 Monaten die #Ukraine überfiel, …</code></pre>
+</div>
+</div>
+</div>
+<p>Ihr könnt das auch explizit mit <code>&amp;</code> schreiben. Inhaltlich ist es gleich, aber manchmal ist die <code>&amp;</code>-Schreibweise besser, wenn ihr Klammern setzen wollt:</p>
+<div id="filter-and-amp" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span> <span class="op">&amp;</span> <span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">500</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name retweet_count text                                                
+  &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;                                               
+1 ABaerbock            1585 "Bewohner*innen von Kiew in Todesangst im Morgenver…
+2 ABaerbock             807 "Die Knüppel und das Tränengas sind kein Ausdruck v…
+3 ABaerbock            3375 "Kaum zu ertragen, was an der #SharifUniversity in …
+4 ABaerbock            1035 "Schwer zu ertragen auch, dass unsere außenpolitisc…
+5 ABaerbock             562 "Als Russland vor 8 Monaten die #Ukraine überfiel, …</code></pre>
+</div>
+</div>
+</div>
+</section><section id="oder" class="level3"><h3 class="anchored" data-anchor-id="oder">ODER</h3>
+<p>Mit <code>|</code> verknüpft ihr Bedingungen als logisches ODER. Dann reicht es, wenn mindestens eine Bedingung zutrifft.</p>
+<div id="filter-or" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">2000</span> <span class="op">|</span> <span class="va">favorite_count</span> <span class="op">&gt;=</span> <span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  screen_name retweet_count favorite_count text                                 
+  &lt;chr&gt;               &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;                                
+1 W_Schmidt_          10659              0 "RT @aakashg0: Twitter revealed its …
+2 lisapaus             2970              0 "RT @NatalieAmiri: Oh wow Berlin. He…
+3 ABaerbock            1585          13304 "Bewohner*innen von Kiew in Todesang…
+4 ABaerbock             807           6767 "Die Knüppel und das Tränengas sind …
+5 ABaerbock            3375          15379 "Kaum zu ertragen, was an der #Shari…</code></pre>
+</div>
+</div>
+</div>
+</section><section id="klammern-setzen" class="level3"><h3 class="anchored" data-anchor-id="klammern-setzen">Klammern setzen</h3>
+<p>Wenn ihr UND und ODER kombiniert, sind Klammern entscheidend. Ohne Klammern kann es passieren, dass ihr einen ganz anderen Filter baut, als ihr im Kopf habt.</p>
+<div id="filter-parentheses" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">2000</span> <span class="op">|</span> <span class="va">favorite_count</span> <span class="op">&gt;=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  screen_name retweet_count favorite_count text                                 
+  &lt;chr&gt;               &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;                                
+1 ABaerbock            1585          13304 "Bewohner*innen von Kiew in Todesang…
+2 ABaerbock             807           6767 "Die Knüppel und das Tränengas sind …
+3 ABaerbock            3375          15379 "Kaum zu ertragen, was an der #Shari…
+4 ABaerbock            1035           7550 "Schwer zu ertragen auch, dass unser…
+5 ABaerbock             562           5639 "Als Russland vor 8 Monaten die #Ukr…</code></pre>
+</div>
+</div>
+</div>
+<p>Ohne die Klammern um die ODER-Bedingung würde <code>!is_retweet</code> nur mit <code>retweet_count &gt;= 2000</code> verknüpft, und <code>favorite_count &gt;= 5000</code> würde unabhängig davon gelten. Das Ergebnis wäre ein komplett anderer Datensatz.</p>
+<p><em>Abbildung: Zwei Venn-Diagramme nebeneinander. Links: Zwei Kreise “Retweets &gt;= 2000” und “Likes &gt;= 5000”, die sich überlappen, innerhalb eines Rahmens “keine Retweets”. Die Schnittmenge des Rahmens mit der Vereinigung der Kreise ist hervorgehoben. Rechts: Dieselben Kreise, aber der Rahmen “keine Retweets” umschließt nur den linken Kreis. Die hervorgehobene Fläche ist deutlich größer. Unter dem linken Diagramm steht die Formel mit Klammern, unter dem rechten die Formel ohne Klammern.</em></p>
+</section></section><section id="sec-filter-bereiche" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="sec-filter-bereiche">
+<span class="header-section-number">11.4</span> Bereiche und Wertelisten</h2>
+<section id="between" class="level3"><h3 class="anchored" data-anchor-id="between"><code>between()</code></h3>
+<p>Wenn ihr Werte in einem Bereich behalten wollt, ist <code>between()</code> oft lesbarer als zwei Vergleiche:</p>
+<div id="filter-between" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">between</span><span class="op">(</span><span class="va">retweet_count</span>, <span class="fl">100</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name   retweet_count text                                              
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                             
+1 ABaerbock               176 "Journalismus ist kein Verbrechen. Russland muss …
+2 Bundeskanzler           169 "Moldau ist Teil der europäischen Familie und EU-…
+3 Bundeskanzler           100 "\U0001f1f7\U0001f1f4und \U0001f1e9\U0001f1easind…
+4 lisapaus                168 "RT @BriHasselmann: Wir dürfen uns nicht damit ab…
+5 Wissing                 113 "RT @bmdv: Das #Deutschlandticket kommt! Es ist d…</code></pre>
+</div>
+</div>
+</div>
+<p>Das ist gleichbedeutend mit <code>retweet_count &gt;= 100 &amp; retweet_count &lt;= 500</code>, nur kürzer.</p>
+</section><section id="in" class="level3"><h3 class="anchored" data-anchor-id="in"><code>%in%</code></h3>
+<p>Wenn ihr mehrere konkrete Werte zulassen wollt, ist <code>%in%</code> euer Werkzeug. Stellt es euch wie eine Gästeliste vor:</p>
+<div id="filter-in" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">users</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cem_oezdemir"</span>, <span class="st">"Karl_Lauterbach"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">screen_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">users</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name  retweet_count text                                               
+  &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;                                              
+1 cem_oezdemir            23 RT @BriHasselmann: Endlich! Wir sind drangeblieben…
+2 cem_oezdemir            13 In dieser Woche jähren sich die Morde des #NSU an …
+3 cem_oezdemir             7 RT @DLAMarbach: Fr., 21.4., 17 Uhr: Benefizveranst…
+4 cem_oezdemir             1 @cziedler @StZ_NEWS @StN_News Alles Gute &amp;amp; Dan…
+5 cem_oezdemir             2 @NewsWatchHH Was schee isch, braucht mr ned lang b…</code></pre>
+</div>
+</div>
+</div>
+<p>Wenn ihr nicht sicher seid, ob die Schreibweise der Namen exakt passt, prüft die häufigsten Werte vorher:</p>
+<div id="filter-check-values" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">screen_name</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   screen_name         n
+   &lt;chr&gt;           &lt;int&gt;
+ 1 c_lindner        5172
+ 2 MarcoBuschmann   5171
+ 3 cem_oezdemir     4704
+ 4 lisapaus         4260
+ 5 Karl_Lauterbach  4139
+ 6 W_Schmidt_       3936
+ 7 SvenjaSchulze68  3856
+ 8 starkwatzinger   3848
+ 9 hubertus_heil    3751
+10 SteffiLemke      3581</code></pre>
+</div>
+</div>
+</div>
+</section><section id="negation-mit" class="level3"><h3 class="anchored" data-anchor-id="negation-mit">Negation mit <code>!</code>
+</h3>
+<p>Manchmal wollt ihr das Gegenteil: alle Zeilen, die <em>nicht</em> in einer Liste stehen. Dafür setzt ihr ein <code>!</code> vor die Bedingung:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">screen_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">users</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  screen_name retweet_count
+  &lt;chr&gt;               &lt;dbl&gt;
+1 W_Schmidt_          10659
+2 lisapaus                1
+3 lisapaus                1
+4 Wissing                 6
+5 Wissing                 9</code></pre>
+</div>
+</div>
+<p>Das funktioniert genauso mit <code>str_detect()</code> (dazu gleich mehr) und anderen logischen Ausdrücken.</p>
+</section></section><section id="sec-filter-text" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="sec-filter-text">
+<span class="header-section-number">11.5</span> Textfilter</h2>
+<p>Beim Filtern von Text nutzt ihr Funktionen aus <code>stringr</code>. Der Klassiker ist <code>str_detect()</code>, das prüft, ob ein Text ein bestimmtes Muster enthält.</p>
+<div id="filter-str-detect" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">text</span>, <span class="st">"klima"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name retweet_count text                                                
+  &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;                                               
+1 Wissing                17 RT @fdpbt: Technologieoffen und klimaneutral: Auch …
+2 lisapaus               22 RT @gruenelvnds: Du hast es in der Hand: Wähle eine…
+3 ABaerbock              24 Deshalb steigen wir aus der Kohle aus. Und deshalb …
+4 c_lindner              79 Bei unseren europäischen Partnern treffe ich vielfa…
+5 c_lindner              35 So hätten wir 5 sichere, klimafreundliche Kraftwerk…</code></pre>
+</div>
+</div>
+</div>
+<section id="groß--und-kleinschreibung-ignorieren" class="level3"><h3 class="anchored" data-anchor-id="groß--und-kleinschreibung-ignorieren">Groß- und Kleinschreibung ignorieren</h3>
+<p><code>str_detect()</code> unterscheidet standardmäßig zwischen Groß- und Kleinschreibung. Wenn ihr beides finden wollt, nutzt <code>regex()</code> mit <code>ignore_case = TRUE</code>:</p>
+<div id="filter-str-detect-ignore-case" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">text</span>, <span class="fu">regex</span><span class="op">(</span><span class="st">"klima"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name   retweet_count text                                              
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                             
+1 Wissing                   9 "Wir folgen Stimmen aus der Wissenschaft und führ…
+2 Wissing                  15 "Weshalb wir politische Verantwortung nicht in Se…
+3 klara_geywitz             2 "RT @BMWSB_Bund: Für den Schutz unseres Klimas un…
+4 Wissing                  16 "Die Aktionen von @AufstandLastGen sind massive Ü…
+5 Wissing                   3 "RT @bmdv: Klimaneutral durch #Wasserstoff – bald…</code></pre>
+</div>
+</div>
+</div>
+</section><section id="textmuster-ausschließen" class="level3"><h3 class="anchored" data-anchor-id="textmuster-ausschließen">Textmuster ausschließen</h3>
+<p>Um Zeilen auszuschließen, die ein Muster enthalten, negiert ihr <code>str_detect()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">text</span>, <span class="fu">regex</span><span class="op">(</span><span class="st">"klima"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55383</code></pre>
+</div>
+</div>
+</section><section id="text-am-anfang-oder-ende" class="level3"><h3 class="anchored" data-anchor-id="text-am-anfang-oder-ende">Text am Anfang oder Ende</h3>
+<p>Wenn euch interessiert, ob ein Text mit einem bestimmten Muster beginnt oder endet, gibt es <code>str_starts()</code> und <code>str_ends()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_starts</span><span class="op">(</span><span class="va">text</span>, <span class="st">"RT"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  screen_name  text                                                             
+  &lt;chr&gt;        &lt;chr&gt;                                                            
+1 cem_oezdemir RT @BriHasselmann: Endlich! Wir sind drangeblieben. Die #Tierhal…
+2 W_Schmidt_   RT @aakashg0: Twitter revealed its algorithm to the world. But w…
+3 lisapaus     RT @JSchmitzLeipzig: Die gesellschaftlichen Folgekosten von Kind…</code></pre>
+</div>
+</div>
+</section></section><section id="sec-filter-na" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="sec-filter-na">
+<span class="header-section-number">11.6</span> Fehlende Werte</h2>
+<p>Ein häufiger Stolperstein: <code>NA</code> ist weder wahr noch falsch. Es bedeutet, dass der Wert fehlt. In <code>filter()</code> werden Zeilen mit <code>NA</code> in der Bedingung automatisch entfernt, weil die Bedingung nicht eindeutig wahr ist.</p>
+<p>Wenn euch fehlende Werte wichtig sind, müsst ihr das explizit ausdrücken. Mit <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> findet ihr Zeilen, in denen ein Wert fehlt:</p>
+<div id="filter-is-na" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">in_reply_to_screen_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">in_reply_to_screen_name</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name  in_reply_to_screen_name text                                     
+  &lt;chr&gt;        &lt;chr&gt;                   &lt;chr&gt;                                    
+1 cem_oezdemir &lt;NA&gt;                    "RT @BriHasselmann: Endlich! Wir sind dr…
+2 W_Schmidt_   &lt;NA&gt;                    "RT @aakashg0: Twitter revealed its algo…
+3 Wissing      &lt;NA&gt;                    "Wir folgen Stimmen aus der Wissenschaft…
+4 Wissing      &lt;NA&gt;                    "Weshalb wir politische Verantwortung ni…
+5 c_lindner    &lt;NA&gt;                    "2024 werden wir voraussichtlich erstmal…</code></pre>
+</div>
+</div>
+</div>
+<p>Und das Gegenstück: Behaltet nur Zeilen, in denen der Wert vorhanden ist.</p>
+<div id="filter-not-na" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">in_reply_to_screen_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">in_reply_to_screen_name</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name in_reply_to_screen_name text                                      
+  &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;                                     
+1 lisapaus    HassoSuliak             "@HassoSuliak @Storch_i @tagesschau Die E…
+2 lisapaus    andiewoerle             "@andiewoerle @svenlehmann Nein, sie werd…
+3 Wissing     Wissing                 "\U0001f449 https://t.co/NTFHy7j9AT"      
+4 lisapaus    SBachTax                "@SBachTax @W_SK @APeichl Na ja. Wir rede…
+5 lisapaus    DavidMorawe             "@DavidMorawe @SBachTax @W_SK https://t.c…</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Leere Strings sind nicht NA">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Leere Strings sind nicht NA
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ein fehlender Wert ist <code>NA</code>. Ein leerer Text wie <code>""</code> ist dagegen ein vorhandener Wert, der nur leer ist. Wenn ihr beides ausschließen wollt, kombiniert ihr Bedingungen: <code>filter(!is.na(text), text != "")</code>.</p>
+</div>
+</div>
+</section><section id="sec-filter-mehrere" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="sec-filter-mehrere">
+<span class="header-section-number">11.7</span> Mehrere Spalten filtern</h2>
+<p>Manchmal wollt ihr eine Bedingung nicht nur für eine Spalte prüfen, sondern für mehrere gleichzeitig. Dafür gibt es <code>if_any()</code> und <code>if_all()</code>.</p>
+<section id="if_any" class="level3"><h3 class="anchored" data-anchor-id="if_any"><code>if_any()</code></h3>
+<p>Behaltet Zeilen, wenn die Bedingung für <em>mindestens eine</em> der Spalten wahr ist:</p>
+<div id="filter-if-any" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">if_any</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">retweet_count</span>, <span class="va">favorite_count</span><span class="op">)</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">2000</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  screen_name retweet_count favorite_count text                                 
+  &lt;chr&gt;               &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;                                
+1 W_Schmidt_          10659              0 "RT @aakashg0: Twitter revealed its …
+2 lisapaus             2970              0 "RT @NatalieAmiri: Oh wow Berlin. He…
+3 ABaerbock             438           3289 "Russia’s strategy of violent land-g…
+4 ABaerbock            1585          13304 "Bewohner*innen von Kiew in Todesang…
+5 ABaerbock             807           6767 "Die Knüppel und das Tränengas sind …</code></pre>
+</div>
+</div>
+</div>
+</section><section id="if_all" class="level3"><h3 class="anchored" data-anchor-id="if_all"><code>if_all()</code></h3>
+<p>Behaltet Zeilen, wenn die Bedingung für <em>alle</em> Spalten wahr ist:</p>
+<div id="filter-if-all" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">if_all</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">retweet_count</span>, <span class="va">favorite_count</span><span class="op">)</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">2000</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  screen_name     retweet_count favorite_count text                             
+  &lt;chr&gt;                   &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;                            
+1 ABaerbock                3375          15379 Kaum zu ertragen, was an der #Sh…
+2 ABaerbock                3987           7274 Die Menschenverachtung des irani…
+3 NancyFaeser              2180          29726 #OneLove https://t.co/L5itnDJcsI 
+4 ABaerbock                5407          11736 #MohammadMehdiKarami &amp;amp; #Moha…
+5 ABaerbockArchiv          3860          49703 Ich freue mich, dass Robert Habe…</code></pre>
+</div>
+</div>
+</div>
+</section></section><section id="sec-filter-slice" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="sec-filter-slice">
+<span class="header-section-number">11.8</span> Zeilen gezielt auswählen mit <code>slice()</code>
+</h2>
+<p><code>filter()</code> wählt Zeilen nach einer Bedingung aus. Manchmal wollt ihr aber einfach bestimmte Zeilen nach Position oder Rang. Dafür gibt es die <code>slice()</code>-Familie.</p>
+<section id="slice_head-und-slice_tail" class="level3"><h3 class="anchored" data-anchor-id="slice_head-und-slice_tail">
+<code>slice_head()</code> und <code>slice_tail()</code>
+</h3>
+<p>Die einfachste Variante: Die ersten oder letzten <code>n</code> Zeilen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">slice_head</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 22
+  id              screen_name text  retweet_count favorite_count is_quote_status
+  &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt; &lt;lgl&gt;          
+1 16422519457326… cem_oezdem… RT @…            23              0 FALSE          
+2 16424168190037… W_Schmidt_  RT @…         10659              0 FALSE          
+3 16420826297962… lisapaus    @Has…             1              3 FALSE          
+# ℹ 16 more variables: is_retweet &lt;lgl&gt;, retweeted_status_id &lt;chr&gt;,
+#   retweeted_user &lt;chr&gt;, lang &lt;chr&gt;, hashtags &lt;list&gt;, urls &lt;list&gt;,
+#   user_mentions &lt;list&gt;, photos &lt;list&gt;, source &lt;chr&gt;, insert_timestamp &lt;chr&gt;,
+#   created_at &lt;dttm&gt;, quote_count &lt;dbl&gt;, reply_count &lt;dbl&gt;,
+#   in_reply_to_screen_name &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+#   quoted_status_id &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section><section id="slice_max-und-slice_min" class="level3"><h3 class="anchored" data-anchor-id="slice_max-und-slice_min">
+<code>slice_max()</code> und <code>slice_min()</code>
+</h3>
+<p>Wenn ihr die Zeilen mit den höchsten oder niedrigsten Werten einer Spalte wollt, ist <code>slice_max()</code> eine kompakte Alternative zu <code>arrange()</code> und <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">slice_max</span><span class="op">(</span><span class="va">retweet_count</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name     retweet_count text                                            
+  &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;                                           
+1 Bundeskanzler           12652 Der russische Überfall markiert eine Zeitenwend…
+2 Bundeskanzler            8032 The Russian invasion marks a turning point. It …
+3 ABaerbockArchiv          7152 Klimakrise ist jetzt. Hören wir auf, nur zu red…
+4 ABaerbock                5407 #MohammadMehdiKarami &amp;amp; #MohammadHosseini - …
+5 Karl_Lauterbach          5363 Ich möchte mich bei allen bedanken, die mich al…</code></pre>
+</div>
+</div>
+<p>Das Gleiche funktioniert mit <code>slice_min()</code> für die kleinsten Werte.</p>
+</section><section id="slice_sample" class="level3"><h3 class="anchored" data-anchor-id="slice_sample"><code>slice_sample()</code></h3>
+<p>Für eine zufällige Stichprobe nutzt ihr <code>slice_sample()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">slice_sample</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name     retweet_count text                                            
+  &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;                                           
+1 SteffiLemke                 4 "Die AfD-Fraktion vertritt im Bundestag immer o…
+2 lisapaus                    0 "Die Alternative dazu, die #Kindergrundsicherun…
+3 c_lindner                   4 "RT @fdpbt: Jetzt debattiert der #Bundestag übe…
+4 Karl_Lauterbach           220 "Sehr wichtige Studie zur Wirkung des BionTech …
+5 Karl_Lauterbach            53 "Deutschland hat bisher überzeugend gespielt un…</code></pre>
+</div>
+</div>
+<p>Das ist nützlich, wenn ihr euch schnell einen Eindruck von eurem Datensatz verschaffen wollt, ohne immer nur die ersten Zeilen zu sehen.</p>
+</section></section><section id="sec-filter-distinct" class="level2" data-number="11.9"><h2 data-number="11.9" class="anchored" data-anchor-id="sec-filter-distinct">
+<span class="header-section-number">11.9</span> Doppelte Zeilen entfernen mit <code>distinct()</code>
+</h2>
+<p>Wenn euer Datensatz doppelte Zeilen enthält und ihr nur die eindeutigen behalten wollt, nutzt <code>distinct()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">distinct</span><span class="op">(</span><span class="va">screen_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 1
+   screen_name  
+   &lt;chr&gt;        
+ 1 cem_oezdemir 
+ 2 W_Schmidt_   
+ 3 lisapaus     
+ 4 Wissing      
+ 5 c_lindner    
+ 6 NancyFaeser  
+ 7 klara_geywitz
+ 8 ABaerbock    
+ 9 Bundeskanzler
+10 OlafScholz   </code></pre>
+</div>
+</div>
+<p>Ohne Argumente entfernt <code>distinct()</code> vollständig identische Zeilen. Mit Spaltennamen behält es nur die erste Zeile pro einzigartige Kombination und entfernt die übrigen Spalten. Wenn ihr alle Spalten behalten wollt, nutzt <code>.keep_all = TRUE</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">distinct</span><span class="op">(</span><span class="va">screen_name</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  screen_name  text                                                             
+  &lt;chr&gt;        &lt;chr&gt;                                                            
+1 cem_oezdemir "RT @BriHasselmann: Endlich! Wir sind drangeblieben. Die #Tierha…
+2 W_Schmidt_   "RT @aakashg0: Twitter revealed its algorithm to the world. But …
+3 lisapaus     "@HassoSuliak @Storch_i @tagesschau Die EU Richtlinie ist bereit…
+4 Wissing      "\U0001f449 https://t.co/NTFHy7j9AT"                             
+5 c_lindner    "2024 werden wir voraussichtlich erstmals über 1 Billion Euro ei…</code></pre>
+</div>
+</div>
+</section><section id="sec-filter-grouped" class="level2" data-number="11.10"><h2 data-number="11.10" class="anchored" data-anchor-id="sec-filter-grouped">
+<span class="header-section-number">11.10</span> Gruppierte Daten</h2>
+<p>Wenn ihr mit <code>group_by()</code> arbeitet, ändert sich die Bedeutung mancher Ausdrücke. <code>filter()</code> bleibt genauso nützlich, aber ihr könnt zusätzlich gruppenbezogene Informationen verwenden.</p>
+<section id="gruppen-nach-größe-filtern" class="level3"><h3 class="anchored" data-anchor-id="gruppen-nach-größe-filtern">Gruppen nach Größe filtern</h3>
+<p>Ein typischer Fall ist: Behaltet nur Accounts, die oft im Datensatz vorkommen.</p>
+<div id="filter-group-n" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">screen_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name  retweet_count text                                               
+  &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;                                              
+1 cem_oezdemir            23 "RT @BriHasselmann: Endlich! Wir sind drangebliebe…
+2 W_Schmidt_           10659 "RT @aakashg0: Twitter revealed its algorithm to t…
+3 lisapaus                 1 "@HassoSuliak @Storch_i @tagesschau Die EU Richtli…
+4 lisapaus                 1 "@andiewoerle @svenlehmann Nein, sie werden nicht …
+5 Wissing                  6 "\U0001f449 https://t.co/NTFHy7j9AT"               </code></pre>
+</div>
+</div>
+</div>
+<p><code>n()</code> zählt hier die Zeilen pro Gruppe. Ohne <code>group_by()</code> würde <code>n()</code> die Gesamtzahl aller Zeilen zählen, nicht die Anzahl pro Account.</p>
+</section><section id="innerhalb-einer-gruppe-filtern" class="level3"><h3 class="anchored" data-anchor-id="innerhalb-einer-gruppe-filtern">Innerhalb einer Gruppe filtern</h3>
+<p>Ihr könnt auch innerhalb jeder Gruppe den stärksten Tweet behalten:</p>
+<div id="filter-group-max" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">screen_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">retweet_count</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">retweet_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">retweet_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   screen_name     retweet_count text                                           
+   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;                                          
+ 1 cem_oezdemir           434571 RT @Schwarzenegger: I love the Russian people.…
+ 2 klara_geywitz          276452 RT @Twitter: Twitter is built by immigrants of…
+ 3 SteffiLemke            271059 RT @KamalaHarris: While I may be the first wom…
+ 4 ABaerbockArchiv        188454 RT @verygooster: every woman in this pic tho h…
+ 5 W_Schmidt_             169437 RT @MarcusRashford: https://t.co/bs9lksGM4q    
+ 6 hubertus_heil          149011 RT @BarackObama: I’m proud to endorse my frien…
+ 7 OlafScholz             116422 RT @BarackObama: There are few issues more imp…
+ 8 c_lindner               35685 RT @JoeBiden: We have one shot. One opportunit…
+ 9 NancyFaeser             14694 RT @Podolski10: Amazing win !! Rio we are comi…
+10 lisapaus                12895 RT @rezomusik: Hier ist Teil 2. Dieses Video l…</code></pre>
+</div>
+</div>
+</div>
+<p>Wenn mehrere Tweets denselben Maximalwert haben, bekommt ihr mehrere Zeilen pro Gruppe. Wenn ihr genau eine Zeile pro Gruppe wollt, nutzt <code>slice_max()</code> mit gruppierten Daten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">screen_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">slice_max</span><span class="op">(</span><span class="va">retweet_count</span>, n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">retweet_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   screen_name     retweet_count text                                           
+   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;                                          
+ 1 cem_oezdemir           434571 RT @Schwarzenegger: I love the Russian people.…
+ 2 klara_geywitz          276452 RT @Twitter: Twitter is built by immigrants of…
+ 3 SteffiLemke            271059 RT @KamalaHarris: While I may be the first wom…
+ 4 ABaerbockArchiv        188454 RT @verygooster: every woman in this pic tho h…
+ 5 W_Schmidt_             169437 RT @MarcusRashford: https://t.co/bs9lksGM4q    
+ 6 hubertus_heil          149011 RT @BarackObama: I’m proud to endorse my frien…
+ 7 OlafScholz             116422 RT @BarackObama: There are few issues more imp…
+ 8 c_lindner               35685 RT @JoeBiden: We have one shot. One opportunit…
+ 9 NancyFaeser             14694 RT @Podolski10: Amazing win !! Rio we are comi…
+10 lisapaus                12895 RT @rezomusik: Hier ist Teil 2. Dieses Video l…</code></pre>
+</div>
+</div>
+</section></section><section id="sec-filter-probleme" class="level2" data-number="11.11"><h2 data-number="11.11" class="anchored" data-anchor-id="sec-filter-probleme">
+<span class="header-section-number">11.11</span> Typische Probleme</h2>
+<section id="ergebnis-ist-leer" class="level3"><h3 class="anchored" data-anchor-id="ergebnis-ist-leer">Ergebnis ist leer</h3>
+<p>Wenn ihr nach einem Filter plötzlich null Zeilen habt, stimmt oft eine Annahme nicht. Dann helfen zwei schnelle Checks:</p>
+<div id="filter-debug-checks" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    min_retweets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">retweet_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    max_retweets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">retweet_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    min_likes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">favorite_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    max_likes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">favorite_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  min_retweets max_retweets min_likes max_likes
+         &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1            0       434571         0    105493</code></pre>
+</div>
+</div>
+</div>
+<p>Damit seht ihr den tatsächlichen Wertebereich. Vielleicht habt ihr einen Schwellenwert gewählt, den kein einziger Tweet erreicht.</p>
+<p>Und wenn ihr bei Kategorien unsicher seid:</p>
+<div id="filter-debug-count" class="reuse">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">is_retweet</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  is_retweet     n
+  &lt;lgl&gt;      &lt;int&gt;
+1 FALSE      35757
+2 TRUE       22664</code></pre>
+</div>
+</div>
+</div>
+</section><section id="zu-viele-zeilen" class="level3"><h3 class="anchored" data-anchor-id="zu-viele-zeilen">Zu viele Zeilen</h3>
+<p>Wenn ein Filter immer noch zu viele Zeilen zurückgibt, ist das kein Fehler. Es bedeutet nur, dass eure Bedingung noch zu grob ist. Dann baut ihr Schritt für Schritt weitere Kriterien ein und prüft zwischendurch mit <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35757</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span>, <span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4562</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span>, <span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">100</span>, <span class="fu">str_detect</span><span class="op">(</span><span class="va">text</span>, <span class="fu">regex</span><span class="op">(</span><span class="st">"klima"</span>, ignore_case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 251</code></pre>
+</div>
+</div>
+<p>So seht ihr genau, wie jede zusätzliche Bedingung den Datensatz weiter einschränkt.</p>
+</section><section id="unerwartete-na-verluste" class="level3"><h3 class="anchored" data-anchor-id="unerwartete-na-verluste">Unerwartete NA-Verluste</h3>
+<p>Wenn euer Datensatz nach dem Filtern plötzlich weniger Zeilen hat als erwartet, kann es sein, dass <code>NA</code>-Werte stillschweigend entfernt wurden. Prüft vorher, wie viele <code>NA</code>-Werte in der gefilterten Spalte stecken:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    na_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">in_reply_to_screen_name</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    total <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  na_count total
+     &lt;int&gt; &lt;int&gt;
+1    44922 58421</code></pre>
+</div>
+</div>
+</section><section id="automatisches-logging-mit-tidylog" class="level3"><h3 class="anchored" data-anchor-id="automatisches-logging-mit-tidylog">Automatisches Logging mit <code>tidylog</code>
+</h3>
+<p>Wenn ihr eine längere Pipe mit mehreren Filterschritten baut, kann es mühsam sein, nach jedem Schritt manuell <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> einzufügen. Hier hilft das Paket <code>tidylog</code>: Es gibt euch nach jedem <code>dplyr</code>-Befehl automatisch eine Rückmeldung, wie viele Zeilen betroffen waren.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/elbersb/tidylog/">tidylog</a></span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Nachdem ihr es aktiviert habt, loggt es fleißig mit:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="op">!</span><span class="va">is_retweet</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">retweet_count</span> <span class="op">&gt;=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>filter: removed 22,664 rows (39%), 35,757 rows remaining
+filter: removed 31,195 rows (87%), 4,562 rows remaining
+select: dropped 19 variables (id, favorite_count, is_quote_status, is_retweet, retweeted_status_id, …)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  screen_name   retweet_count text                                              
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                             
+1 ABaerbock               176 "Journalismus ist kein Verbrechen. Russland muss …
+2 Bundeskanzler           169 "Moldau ist Teil der europäischen Familie und EU-…
+3 Bundeskanzler           100 "\U0001f1f7\U0001f1f4und \U0001f1e9\U0001f1easind…
+4 ABaerbock               438 "Russia’s strategy of violent land-grabs and nucl…
+5 ABaerbock              1585 "Bewohner*innen von Kiew in Todesangst im Morgenv…</code></pre>
+</div>
+</div>
+<p>In der Konsole seht ihr jetzt nach jedem Schritt eine Zeile wie <code>filter: removed 42,000 rows (65%), 23,000 rows remaining</code>. So erkennt ihr sofort, wenn ein Filter unerwartet viele oder wenige Zeilen entfernt.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="`tidylog` deaktivieren">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span><code>tidylog</code> deaktivieren
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>tidylog</code> überschreibt die <code>dplyr</code>-Funktionen mit eigenen Versionen, die zusätzliche Ausgaben erzeugen. Wenn die Meldungen stören, entfernt das Paket wieder mit <code>detach("package:tidylog", unload = TRUE)</code> oder startet eine neue R-Sitzung.</p>
+</div>
+</div>
+</section></section><section id="sec-filter-zusammenfassung" class="level2" data-number="11.12"><h2 data-number="11.12" class="anchored" data-anchor-id="sec-filter-zusammenfassung">
+<span class="header-section-number">11.12</span> Kurz zusammengefasst</h2>
+<div id="filter-summary" class="reuse">
+<ul>
+<li>
+<code>filter()</code> wählt Zeilen aus, die eine Bedingung erfüllen.</li>
+<li>Mehrere Bedingungen mit Kommas bedeuten UND, mit <code>|</code> bedeutet ODER. Klammern bei Mischungen sind wichtig.</li>
+<li>Mit <code>between()</code> und <code>%in%</code> drückt ihr Bereiche und Wertelisten gut lesbar aus.</li>
+<li>Für Textsuche nutzt ihr <code>str_detect()</code>, für fehlende Werte <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code>.</li>
+<li>Mit <code>if_any()</code> und <code>if_all()</code> filtert ihr über mehrere Spalten gleichzeitig.</li>
+<li>Die <code>slice()</code>-Familie wählt Zeilen nach Position oder Rang statt nach Bedingung.</li>
+<li>
+<code>distinct()</code> entfernt doppelte Zeilen.</li>
+<li>Mit <code>group_by()</code> könnt ihr in Gruppen filtern, zum Beispiel mit <code>n()</code> oder <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>.</li>
+</ul>
+</div>
+<p>Ihr könnt jetzt Spalten auswählen, verändern, neue berechnen und Zeilen filtern. Im nächsten Kapitel lernt ihr, wie ihr aus vielen Zeilen kompakte Zusammenfassungen erstellt (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 12</span></a>).</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../03-data-transformation/mutate-add.html" class="pagination-link" aria-label="Variablen erstellen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-data-transformation/summarize.html" class="pagination-link" aria-label="Beobachtungen zusammenfassen">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>

@@ -1,0 +1,323 @@
+# Beobachtungen zusammenfassen {#sec-summarize}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Bisher habt ihr gelernt, in welcher Form man Spalten und Zeilen bearbeitet, ohne jedoch die grundsätzliche Struktur des Datensatzes massiv zu verändern. In diesem Kapitel geht es nun um das Verdichten von Daten. Mit der Funktion `summarise()` aus dem `dplyr`-Paket könnt ihr aus hunderten Einzelwerten eine Handvoll aussagekräftiger Kennzahlen berechnen, wie Mittelwerte, Summen oder Anzahlen. Meistens geschieht dies nicht für den gesamten Datensatz, sondern für definierte Untergruppen, wofür wir die Funktion `group_by()` nutzen.
+
+Das Aggregieren von Daten ist ein Schlüsselelement der deskriptiven Statistik und Berichtserstellung. Selten interessiert sich jemand für jede einzelne Transaktion in einem Datensatz. Die wahren Erkenntnisse – und auch die Grundlage für aussagekräftige Visualisierungen – liegen stattdessen in den zusammengefassten Kennzahlen: Welches Produkt hat den höchsten Durchschnittsumsatz? Wie viele Nutzer waren pro Wochentag aktiv? `summarise()` liefert euch genau diese aggregierten Werte prägnant und effizient.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion | Beschreibung |
+|---|---|
+| `summarise()` | Datensatz auf Kennzahlen verdichten |
+| `group_by()` / `ungroup()` | Datensatz gruppieren bzw. Gruppierung aufheben |
+| `n()` / `n_distinct()` | Zeilen bzw. eindeutige Werte zählen |
+| `mean()` / `median()` / `sum()` | Mittelwert, Median, Summe |
+| `min()` / `max()` / `sd()` | Minimum, Maximum, Standardabweichung |
+| `count()` / `tally()` / `add_count()` | Abkürzungen zum Zählen |
+| `across()` | Zusammenfassungen auf mehrere Spalten anwenden |
+
+Sehen wir uns zunächst an, wie wir den kompletten Datensatz auf eine einzige Zeile zusammenfassen können.
+
+## Das Grundprinzip {#sec-summarize-grundprinzip}
+
+`summarise()` nimmt einen Tibble und gibt einen neuen Tibble mit einer einzigen Zeile zurück. In dieser Zeile stehen die Ergebnisse eurer Zusammenfassungsfunktionen.
+
+```{r}
+tweets |>
+  summarise(
+    total_tweets = n(),
+    avg_retweets = mean(retweet_count, na.rm = TRUE),
+    max_likes = max(favorite_count, na.rm = TRUE)
+  )
+```
+
+Drei Dinge fallen auf:
+
+- `n()` zählt die Zeilen. Es braucht kein Argument.
+- `mean()` und `max()` berechnen den Durchschnitt und das Maximum. Das Argument `na.rm = TRUE` sorgt dafür, dass fehlende Werte ignoriert werden.
+- Das Ergebnis ist ein Tibble mit einer Zeile und drei Spalten. Der ursprüngliche Datensatz mit seinen vielen Spalten und Zeilen ist verschwunden.
+
+_Abbildung: Links ein großer Datensatz als Tabelle mit vielen Zeilen und Spalten. In der Mitte ein Trichtersymbol mit der Beschriftung `summarise()`. Rechts ein kleiner Tibble mit einer einzigen Zeile und drei Spalten (total_tweets, avg_retweets, max_likes). Der Fokus liegt darauf, dass viele Zeilen zu einer einzigen Zeile komprimiert werden._
+
+### Häufige Zusammenfassungsfunktionen
+
+Hier sind die Funktionen, die ihr am häufigsten in `summarise()` verwenden werdet:
+
+| Funktion | Beschreibung |
+|---|---|
+| `n()` | Anzahl der Zeilen |
+| `sum()` | Summe |
+| `mean()` | Arithmetisches Mittel |
+| `median()` | Median |
+| `min()` / `max()` | Minimum / Maximum |
+| `sd()` | Standardabweichung |
+| `first()` / `last()` | Erster / letzter Wert |
+| `n_distinct()` | Anzahl eindeutiger Werte |
+
+Die meisten dieser Funktionen brauchen `na.rm = TRUE`, wenn eure Daten fehlende Werte enthalten. Ohne dieses Argument gibt R bei einem einzigen `NA` als Ergebnis `NA` zurück.
+
+::: {.callout-tip icon="💡" title="na.rm nicht vergessen"}
+Wenn `mean()`, `sum()` oder eine andere Aggregatfunktion plötzlich `NA` zurückgibt, obwohl ihr echte Daten habt, liegt es fast immer an fehlenden Werten. Fügt `na.rm = TRUE` hinzu, und das Problem ist gelöst.
+:::
+
+## `summarise()` und `mutate()` im Vergleich {#sec-summarize-vs-mutate}
+
+Was ist eigentlich der Unterschied zwischen `summarise()` und `mutate()`? Beide können mit Aggregatfunktionen wie `mean()` arbeiten, aber sie tun etwas grundlegend Verschiedenes:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  mutate(avg_retweets = mean(retweet_count, na.rm = TRUE)) |>
+  select(screen_name, retweet_count, avg_retweets) |>
+  head(5)
+```
+
+`mutate()` berechnet den Durchschnitt und schreibt ihn in jede Zeile. Der Datensatz bleibt gleich lang. Das ist nützlich, wenn ihr den Durchschnitt als Referenzwert neben jedem einzelnen Tweet sehen wollt.
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  summarise(avg_retweets = mean(retweet_count, na.rm = TRUE))
+```
+
+`summarise()` dagegen komprimiert alles auf eine Zeile. Der Datensatz wird kürzer. Das ist nützlich, wenn euch nur die Kennzahl selbst interessiert.
+
+| | `mutate()` | `summarise()` |
+|---|---|---|
+| Ergebnis | Gleich viele Zeilen wie vorher | Eine Zeile (oder eine pro Gruppe) |
+| Zweck | Wert als neue Spalte neben die bestehenden Daten schreiben | Daten auf Kennzahlen verdichten |
+
+## Gruppieren mit `group_by()` {#sec-summarize-groupby}
+
+![In Kombination mit Gruppierung erzeugt `summarize` mehrere Zeilen statt nur eine.](https://winf-hsos.github.io/university-docs/images/group_by_summarize_schema.png){#fig-r-basics-summarize-groupby-shema .lightbox}
+
+Die eigentliche Stärke von `summarise()` zeigt sich erst in Kombination mit `group_by()`. Ohne Gruppierung bekommt ihr eine einzige Zeile. Mit Gruppierung bekommt ihr eine Zeile pro Gruppe.
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  group_by(screen_name) |>
+  summarise(
+    tweet_count = n(),
+    avg_retweets = mean(retweet_count, na.rm = TRUE),
+    avg_likes = mean(favorite_count, na.rm = TRUE)
+  ) |>
+  arrange(desc(avg_retweets)) |>
+  head(10)
+```
+
+Was passiert hier?
+
+1. `group_by(screen_name)` teilt den Datensatz in Gruppen auf, eine pro Account.
+2. `summarise()` berechnet die Kennzahlen innerhalb jeder Gruppe.
+3. Das Ergebnis hat eine Zeile pro Account statt einer Zeile pro Tweet.
+
+_Abbildung: Links ein Datensatz mit vielen Zeilen, die farblich nach drei Gruppen markiert sind (zum Beispiel rot, blau, grün). In der Mitte steht `group_by() |> summarise()`. Rechts ein kleiner Tibble mit drei Zeilen, eine pro Gruppe, mit den Spalten "group", "count" und "avg_value". Jede Zeile hat die Farbe ihrer Gruppe. Der Fokus liegt darauf, dass die Zusammenfassung pro Gruppe statt über den gesamten Datensatz erfolgt._
+
+### Mehrere Gruppierungsvariablen
+
+Ihr könnt auch nach mehreren Variablen gleichzeitig gruppieren. Dann bekommt ihr eine Zeile pro Kombination:
+
+```{r}
+tweets |>
+  group_by(screen_name, is_retweet) |>
+  summarise(
+    count = n(),
+    avg_likes = mean(favorite_count, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  head(10)
+```
+
+`.groups = "drop"` entfernt die Gruppierung nach dem Zusammenfassen. Ohne diesen Parameter bleibt eine Restgruppierung bestehen, was zu unerwartetem Verhalten bei nachfolgenden Operationen führen kann.
+
+::: {.callout-tip icon="💡" title=".groups kontrollieren"}
+Wenn ihr `.groups` nicht angebt, zeigt `dplyr` eine Meldung an, welche Gruppierung übrig bleibt. Die sicherste Option ist `.groups = "drop"`, damit die Gruppierung danach aufgehoben ist. Alternativ könnt ihr `ungroup()` nach `summarise()` aufrufen.
+:::
+
+### Gruppierung und der Unterschied zu `mutate()`
+
+Im Kapitel über `mutate()` habt ihr gesehen, dass `group_by() |> mutate()` den Datensatz gleich lang lässt und die Kennzahl in jede Zeile schreibt. `group_by() |> summarise()` dagegen komprimiert den Datensatz auf eine Zeile pro Gruppe.
+
+Hier nochmal der Unterschied im direkten Vergleich:
+
+```{r}
+# mutate: gleich viele Zeilen, Gruppenwert in jeder Zeile
+tweets |>
+  filter(!is_retweet) |>
+  group_by(screen_name) |>
+  mutate(group_avg = mean(retweet_count, na.rm = TRUE)) |>
+  select(screen_name, retweet_count, group_avg) |>
+  ungroup() |>
+  head(5)
+```
+
+```{r}
+# summarise: eine Zeile pro Gruppe
+tweets |>
+  filter(!is_retweet) |>
+  group_by(screen_name) |>
+  summarise(group_avg = mean(retweet_count, na.rm = TRUE)) |>
+  head(5)
+```
+
+Welche Variante ihr braucht, hängt von eurer Frage ab: Wollt ihr die Kennzahl neben den Originaldaten sehen (→ `mutate()`), oder braucht ihr eine kompakte Übersicht (→ `summarise()`)?
+
+## Abkürzungen {#sec-summarize-shortcuts}
+
+Für die häufigsten Zusammenfassungen gibt es in `dplyr` kürzere Schreibweisen, die euren Code kompakter und lesbarer machen.
+
+### `count()`
+
+Die mit Abstand häufigste Zusammenfassung ist das Zählen. Wie oft kommt ein bestimmter Wert vor? `count()` ist die Abkürzung dafür:
+
+```{r}
+tweets |>
+  count(screen_name, sort = TRUE) |>
+  head(10)
+```
+
+Das ist gleichbedeutend mit:
+
+```{r}
+tweets |>
+  group_by(screen_name) |>
+  summarise(n = n()) |>
+  arrange(desc(n)) |>
+  head(10)
+```
+
+Der Unterschied: `count()` spart drei Zeilen Code. Das Argument `sort = TRUE` sortiert gleich absteigend nach Häufigkeit.
+
+Ihr könnt auch nach mehreren Variablen gleichzeitig zählen:
+
+```{r}
+tweets |>
+  count(screen_name, is_retweet, sort = TRUE) |>
+  head(10)
+```
+
+### `tally()`
+
+`tally()` ist eine noch einfachere Variante: Es zählt die Zeilen des aktuellen (möglicherweise gruppierten) Datensatzes.
+
+```{r}
+tweets |>
+  group_by(screen_name) |>
+  tally(sort = TRUE) |>
+  head(10)
+```
+
+Der Unterschied zu `count()`: Bei `tally()` müsst ihr vorher selbst `group_by()` aufrufen. `count()` macht das intern für euch. In der Praxis ist `count()` daher oft die bequemere Wahl.
+
+### `add_count()`
+
+Manchmal wollt ihr die Häufigkeit nicht als Zusammenfassung, sondern als zusätzliche Spalte neben den Originaldaten. Dafür gibt es `add_count()`:
+
+```{r}
+tweets |>
+  add_count(screen_name, name = "tweets_per_user") |>
+  select(screen_name, tweets_per_user, text) |>
+  head(5)
+```
+
+`add_count()` verhält sich wie `count()`, aber der Datensatz behält seine ursprüngliche Länge. Es ist die Abkürzung für `group_by() |> mutate(n = n()) |> ungroup()`.
+
+## Mehrere Spalten mit `across()` {#sec-summarize-across}
+
+Wenn ihr dieselbe Zusammenfassung auf mehrere Spalten gleichzeitig anwenden wollt, spart `across()` viel Tipparbeit:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  summarise(across(c(retweet_count, favorite_count), mean, na.rm = TRUE))
+```
+
+`across()` nimmt die Spaltenauswahl und die Funktion als Argumente. Für die Spaltenauswahl könnt ihr die gleichen Helfer wie bei `select()` verwenden:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+```
+
+### Mehrere Funktionen gleichzeitig
+
+Wenn ihr mehr als eine Funktion auf jede Spalte anwenden wollt, übergebt eine benannte Liste:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  summarise(
+    across(
+      c(retweet_count, favorite_count),
+      list(avg = \(x) mean(x, na.rm = TRUE), max = \(x) max(x, na.rm = TRUE))
+    )
+  )
+```
+
+Die Spaltennamen im Ergebnis setzen sich automatisch zusammen: `retweet_count_avg`, `retweet_count_max`, und so weiter.
+
+### `across()` mit Gruppierung
+
+Natürlich funktioniert `across()` auch mit `group_by()`:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  group_by(screen_name) |>
+  summarise(
+    across(c(retweet_count, favorite_count), \(x) mean(x, na.rm = TRUE)),
+    .groups = "drop"
+  ) |>
+  arrange(desc(retweet_count)) |>
+  head(10)
+```
+
+## Zusammenfassungen in der Pipe {#sec-summarize-pipe}
+
+In der Praxis steht `summarise()` selten allein. Es ist fast immer Teil einer Pipe-Kette, die den Datensatz vorher filtert, gruppiert und nachher sortiert oder weiterverarbeitet.
+
+Hier ist ein typisches Muster, das euch im Buch immer wieder begegnen wird:
+
+```{r}
+tweets |>
+  filter(!is_retweet, !is.na(screen_name)) |>
+  group_by(screen_name) |>
+  summarise(
+    tweets = n(),
+    avg_retweets = mean(retweet_count, na.rm = TRUE),
+    avg_likes = mean(favorite_count, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  filter(tweets >= 10) |>
+  arrange(desc(avg_retweets)) |>
+  head(10)
+```
+
+Beobachtet den Aufbau:
+
+1. **Filtern**: Nur Original-Tweets, ohne fehlende Accountnamen.
+2. **Gruppieren**: Pro Account.
+3. **Zusammenfassen**: Zählen, Durchschnitte berechnen.
+4. **Nochmal filtern**: Nur Accounts mit mindestens 10 Tweets, damit der Durchschnitt aussagekräftig ist.
+5. **Sortieren**: Die aktivsten Accounts zuerst.
+
+Dieser Ablauf ist ein Grundmuster der explorativen Datenanalyse: Daten einschränken, verdichten und sortieren.
+
+## Kurz zusammengefasst {#sec-summarize-zusammenfassung}
+
+- `summarise()` verdichtet einen Datensatz auf eine einzige Zeile mit Kennzahlen.
+- `group_by()` teilt den Datensatz in Gruppen auf, sodass `summarise()` eine Zeile pro Gruppe liefert.
+- `mutate()` schreibt Aggregatwerte in jede Zeile, `summarise()` komprimiert den Datensatz.
+- `count()` ist die Abkürzung für `group_by() |> summarise(n = n())` und die häufigste Zusammenfassung.
+- `tally()` zählt Zeilen eines bereits gruppierten Datensatzes, `add_count()` fügt die Zählung als Spalte hinzu.
+- Mit `across()` wendet ihr Zusammenfassungen auf mehrere Spalten gleichzeitig an.
+- Kontrolliert die Gruppierung nach `summarise()` mit `.groups = "drop"` oder `ungroup()`.
+
+Mit `summarise()` könnt ihr eure Daten auf die wesentlichen Kennzahlen verdichten. Im letzten Kapitel dieses Teils lernt ihr, wie ihr mehrere Datensätze über gemeinsame Schlüssel zusammenführt (siehe @sec-joining-data).

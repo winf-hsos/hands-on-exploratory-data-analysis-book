@@ -1,0 +1,212 @@
+# Daten kennenlernen {#sec-exploring-data}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Ihr habt gelernt, wie ihr Daten aus verschiedenen Quellen laden könnt, und ihr kennt die Pipe als Werkzeug, um Schritte sauber aneinanderzureihen. Dieses Kapitel widmet sich dem nächsten logischen Schritt: Euren Datensatz kennenzulernen, bevor ihr ihn verändert. Wir befassen uns damit, wie ihr die Größe des Datensatzes bestimmt, Spalten und Datentypen überblickt, fehlende Werte aufspürt und erste statistische Kennzahlen ermittelt.
+
+Dieser explorative Schritt ist enorm wichtig für den weiteren Verlauf eurer Arbeit, wird aber oft aus Ungeduld übersprungen. Wer sich die Zeit nimmt, seine Daten initial gründlich zu prüfen, versteht nicht nur die inhaltlichen Zusammenhänge besser, sondern erkennt auch Probleme wie verschmutzte Daten frühzeitig. Das spart später viel Zeit, weil ihr genau wisst, wo ihr ansetzen müsst, statt euch mitten in der Analyse über unerwartete Fehler zu wundern.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion | Paket | Beschreibung |
+|---|---|---|
+| `glimpse()` | `dplyr` | Kompakte Spaltenübersicht mit Datentypen und ersten Werten |
+| `head()` / `tail()` | Base R | Erste bzw. letzte Zeilen anzeigen |
+| `nrow()` / `ncol()` | Base R | Anzahl Zeilen bzw. Spalten |
+| `names()` | Base R | Spaltennamen als Vektor |
+| `summary()` | Base R | Statistische Kennzahlen pro Spalte |
+| `count()` | `dplyr` | Häufigkeiten von Werten zählen |
+| `skim()` | `skimr` | Ausführliche Übersicht nach Datentyp |
+
+Beginnen wir damit, die grundlegenden Dimensionen unseres Datensatzes zu erfassen.
+
+## Dimensionen und Spalten {#sec-exploring-data-dimensions}
+
+Die erste Frage bei einem neuen Datensatz ist: Wie groß ist er? Mit `nrow()` und `ncol()` bekommt ihr die Anzahl der Zeilen und Spalten:
+
+```{r}
+nrow(tweets)
+```
+
+```{r}
+ncol(tweets)
+```
+
+Unser Tweets-Datensatz hat also `r format(nrow(tweets), big.mark = ".")` Zeilen und `r ncol(tweets)` Spalten. Jede Zeile steht für einen Tweet, jede Spalte für eine Eigenschaft dieses Tweets.
+
+Welche Spalten gibt es überhaupt? Mit `names()` bekommt ihr die Spaltennamen als Vektor:
+
+```{r}
+names(tweets)
+```
+
+Das ist nützlich, wenn ihr schnell nachschauen wollt, wie eine Spalte genau heißt. Denn Tippfehler in Spaltennamen führen sofort zu Fehlermeldungen.
+
+## Erste Zeilen anschauen {#sec-exploring-data-first-rows}
+
+Ein Blick auf die ersten Zeilen gibt euch ein Gefühl dafür, wie die Daten aussehen. Dafür gibt es `head()`:
+
+```{r}
+tweets |>
+  head(5)
+```
+
+Und wenn ihr lieber die letzten Zeilen sehen wollt, nutzt ihr `tail()`:
+
+```{r}
+tweets |>
+  tail(5)
+```
+
+In der Praxis reichen oft die ersten fünf bis zehn Zeilen, um zu erkennen, ob die Daten plausibel aussehen. Sind die Spalten richtig benannt? Stehen dort Werte, die Sinn ergeben? Sehen Zahlen wie Zahlen aus und Texte wie Texte?
+
+## Struktur mit `glimpse()` {#sec-exploring-data-glimpse}
+
+`glimpse()` aus `dplyr` ist eine der nützlichsten Funktionen, um sich schnell einen Überblick zu verschaffen. Sie zeigt euch für jede Spalte den Namen, den Datentyp und die ersten Werte:
+
+```{r}
+tweets |>
+  glimpse()
+```
+
+Warum ist `glimpse()` so praktisch? Weil ihr auf einen Blick seht, ob die Datentypen stimmen. Wenn eine Spalte, die Zahlen enthalten sollte, als `chr` (Text) angezeigt wird, wisst ihr sofort, dass etwas beim Laden schiefgegangen ist. Und wenn eine Datumsspalte als `dttm` erscheint, könnt ihr sicher sein, dass R sie als Zeitstempel erkannt hat.
+
+Im Tweets-Datensatz seht ihr zum Beispiel:
+
+- `screen_name` und `text` sind Text (`chr`)
+- `retweet_count` und `favorite_count` sind ganze Zahlen (`int`)
+- `created_at` ist ein Zeitstempel (`dttm`)
+- `is_retweet` ist ein logischer Wert (`lgl`), also `TRUE` oder `FALSE`
+
+Diese Information braucht ihr immer wieder, wenn ihr später mit `mutate()` oder `filter()` arbeitet. Deshalb schaut euch `glimpse()` am besten direkt nach dem Laden eurer Daten an.
+
+::: {.callout-tip icon="💡" title="glimpse() vs. str()"}
+Die Base-R-Funktion `str()` liefert ähnliche Informationen wie `glimpse()`, aber in einem weniger lesbaren Format. Im Tidyverse ist `glimpse()` die bevorzugte Wahl.
+:::
+
+## Statistische Übersicht mit `summary()` {#sec-exploring-data-summary}
+
+Während `glimpse()` euch die Struktur zeigt, liefert `summary()` statistische Kennzahlen. Für numerische Spalten bekommt ihr Minimum, Maximum, Mittelwert, Median und Quartile. Für Text- und Faktorspalten bekommt ihr die Häufigkeiten der häufigsten Werte.
+
+```{r}
+tweets |>
+  select(retweet_count, favorite_count, is_retweet) |>
+  summary()
+```
+
+Was sagt euch diese Ausgabe? Schaut euch den Mittelwert und den Median an. Wenn die beiden weit auseinanderliegen, deutet das auf eine schiefe Verteilung hin. Bei `retweet_count` ist das typisch: Die meisten Tweets haben wenige Retweets, aber ein paar wenige haben sehr viele. Der Mittelwert wird von diesen Ausreißern nach oben gezogen, der Median bleibt davon unbeeindruckt.
+
+Auch das Maximum ist aufschlussreich. Wenn dort ein unplausibel hoher Wert steht, habt ihr vielleicht einen Datenfehler entdeckt.
+
+## Fehlende Werte erkennen {#sec-exploring-data-missing}
+
+Fehlende Werte sind in echten Datensätzen völlig normal. Nicht jeder Tweet ist eine Antwort auf einen anderen, also ist `in_reply_to_screen_name` oft leer. Aber ihr solltet wissen, wie viele fehlende Werte es gibt und wo sie auftreten, bevor ihr mit der Analyse beginnt.
+
+Mit `is.na()` und `sum()` könnt ihr die fehlenden Werte pro Spalte zählen:
+
+```{r}
+tweets |>
+  summarise(
+    na_reply_to = sum(is.na(in_reply_to_screen_name)),
+    na_quoted = sum(is.na(quoted_status_id)),
+    na_retweets = sum(is.na(retweet_count))
+  )
+```
+
+Das funktioniert, ist aber mühsam, wenn ihr viele Spalten prüfen wollt. Eleganter geht es mit `across()`, das ihr später noch im Detail kennenlernt (siehe @sec-mutate-modify-across). Hier ein Vorgeschmack:
+
+```{r}
+tweets |>
+  summarise(across(everything(), \(x) sum(is.na(x)))) |>
+  glimpse()
+```
+
+So seht ihr auf einen Blick, welche Spalten fehlende Werte haben und wie viele. Spalten mit null fehlenden Werten sind unkritisch. Bei Spalten mit vielen `NA`-Werten müsst ihr euch überlegen, wie ihr damit umgehen wollt: ignorieren, ersetzen oder die betroffenen Zeilen ausschließen.
+
+::: {.callout-tip icon="💡" title="Fehlende Werte sind Information"}
+Ein `NA` bedeutet nicht, dass etwas kaputt ist. Es bedeutet, dass die Information nicht vorhanden ist. Ein Tweet ohne `in_reply_to_screen_name` ist kein Fehler, sondern einfach kein Reply. Behandelt fehlende Werte also nicht reflexartig als Problem, sondern fragt euch immer, warum sie fehlen.
+:::
+
+## Häufigkeiten mit `count()` {#sec-exploring-data-count}
+
+Bei kategorialen Variablen, also Spalten mit einer begrenzten Anzahl möglicher Werte, wollt ihr wissen, wie die Werte verteilt sind. Welche Accounts twittern am meisten? In welcher Sprache wird getwittert? Wie viele Tweets sind Retweets?
+
+Dafür ist `count()` aus `dplyr` das perfekte Werkzeug:
+
+```{r}
+tweets |>
+  count(is_retweet)
+```
+
+Ungefähr die Hälfte der Tweets sind Retweets. Das ist eine wichtige Information, denn bei vielen Analysen wollt ihr Retweets ausschließen, um nur Original-Inhalte zu betrachten.
+
+Welche Sprachen kommen vor?
+
+```{r}
+tweets |>
+  count(lang, sort = TRUE) |>
+  head(10)
+```
+
+Und welche Accounts sind am aktivsten?
+
+```{r}
+tweets |>
+  count(screen_name, sort = TRUE) |>
+  head(10)
+```
+
+Mit `sort = TRUE` sortiert `count()` direkt absteigend nach Häufigkeit. Das spart euch ein zusätzliches `arrange()`.
+
+Ihr könnt auch nach mehreren Variablen gleichzeitig zählen. Zum Beispiel: Wie verteilen sich Original-Tweets und Retweets auf die Accounts?
+
+```{r}
+tweets |>
+  count(screen_name, is_retweet, sort = TRUE) |>
+  head(10)
+```
+
+`count()` wird euch im ganzen Buch immer wieder begegnen, weil es die schnellste Art ist, sich einen Überblick über kategoriale Variablen zu verschaffen. Mehr zu `count()` und verwandten Funktionen erfahrt ihr im Kapitel über `summarise()` (siehe @sec-summarize).
+
+## Kompakte Übersicht mit `skimr` {#sec-exploring-data-skimr}
+
+Wenn ihr alles auf einmal sehen wollt, ohne einzelne Funktionen nacheinander aufzurufen, ist das Paket `skimr` eine ausgezeichnete Wahl. Die Funktion `skim()` liefert eine umfassende Übersicht, die nach Datentypen gruppiert ist:
+
+```{r}
+library(skimr)
+
+tweets |>
+  select(screen_name, text, retweet_count, favorite_count, is_retweet, created_at) |>
+  skim()
+```
+
+`skim()` zeigt euch für jede Spalte unterschiedliche Kennzahlen, je nach Datentyp:
+
+- Für **numerische Spalten**: Mittelwert, Standardabweichung, Quartile und ein kleines Histogramm
+- Für **Text-Spalten**: Anzahl fehlender Werte, kürzeste und längste Zeichenkette, Anzahl eindeutiger Werte
+- Für **logische Spalten**: Anzahl `TRUE` und `FALSE`
+- Für **Datum/Zeit-Spalten**: Frühestes und spätestes Datum
+
+Das kleine Histogramm in der Spalte `hist` ist besonders praktisch: Es zeigt euch auf einen Blick, ob die Verteilung symmetrisch, schief oder gleichmäßig ist, ganz ohne einen Plot erstellen zu müssen.
+
+::: {.callout-tip icon="💡" title="skimr vs. summary()"}
+`summary()` liefert die klassischen R-Kennzahlen und funktioniert ohne zusätzliches Paket. `skim()` bietet mehr Informationen, eine klarere Struktur und die kleinen Histogramme. Für eine schnelle Prüfung reicht `summary()`, für eine gründliche Erstuntersuchung ist `skim()` die bessere Wahl.
+:::
+
+## Eine Checkliste für neue Datensätze {#sec-exploring-data-checklist}
+
+Wenn ihr einen neuen Datensatz bekommt, könnt ihr euch an dieser Reihenfolge orientieren:
+
+1. **Dimensionen prüfen**: `nrow()` und `ncol()` – wie groß ist der Datensatz?
+2. **Struktur ansehen**: `glimpse()` – welche Spalten gibt es, welche Datentypen liegen vor?
+3. **Erste Zeilen inspizieren**: `head()` – sehen die Werte plausibel aus?
+4. **Fehlende Werte zählen**: `summarise(across(everything(), \(x) sum(is.na(x))))` – wo fehlen Daten?
+5. **Kategorien erkunden**: `count()` – wie sind kategoriale Variablen verteilt?
+6. **Statistische Kennzahlen**: `summary()` oder `skim()` – wie verteilen sich numerische Werte?
+
+Diese Reihenfolge hilft euch, systematisch vorzugehen, statt planlos in den Daten herumzustochern. In den folgenden Kapiteln werden wir den Tweets-Datensatz Stück für Stück auseinandernehmen. Dafür braucht ihr die Werkzeuge, die jetzt kommen: Spalten auswählen mit `select()` (siehe @sec-select), Variablen verändern mit `mutate()` (siehe @sec-mutate-modify) und Zeilen filtern mit `filter()` (siehe @sec-filter).
+
+Jetzt, da ihr den Datensatz kennt und wisst, was euch erwartet, können wir mit der eigentlichen Arbeit beginnen. Im nächsten Kapitel lernt ihr, wie ihr mit `select()` gezielt die Spalten auswählt, die ihr für eine bestimmte Frage braucht.

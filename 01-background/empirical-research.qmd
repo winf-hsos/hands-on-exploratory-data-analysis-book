@@ -1,0 +1,59 @@
+
+# Empirische Forschung
+
+## Datenerhebung
+
+> Empirical research is any research that uses structured observations from the real world to attempt to answer questions. [@effect_2026]
+
+Empirische Forschung verwendet strukturierte Beobachtungen (*structured observations*), um Antworten auf Forschungsfragen zu finden. Wie kommen wir zu diesen Beobachtungen? Mit der passenden **Datenerhebungsmethode**. Es gibt viele Möglichkeiten, Daten zu erheben. Dazu zählen:
+
+- **Umfragen**: Ihr könnt Menschen direkt befragen, zum Beispiel mit einem Online-Fragebogen. Das ist eine der häufigsten Methoden, um Daten zu erheben, und sie eignet sich besonders gut, wenn ihr viele Menschen erreichen wollt.
+
+- **Interviews**: Hierbei sprecht ihr direkt mit Menschen, um tiefere Einblicke zu bekommen.
+
+- **Beobachtungen**: Manchmal ist es am besten, einfach zu beobachten, was Menschen tun, ohne sie zu stören. Das kann zum Beispiel in einem Café sein, um herauszufinden, wie Menschen ihren Kaffee trinken.
+
+- **Experimente**: In einem Experiment könnt ihr gezielt Bedingungen verändern, um zu sehen, wie sich das auf die Ergebnisse auswirkt. Das ist besonders nützlich, wenn ihr Ursache-Wirkungs-Beziehungen untersuchen wollt.
+
+- **Simulationen**: Manchmal könnt ihr auch Computermodelle verwenden, um komplexe Systeme zu simulieren und Daten zu generieren.
+
+- **Sekundärdatenanalyse**: Manchmal ist es nicht nötig, nicht möglich, oder zu teuer, selbst Daten zu erheben. In dem Fall könnt ihr auf Daten zurückgreifen, die bereits erhoben sind.
+
+In diesem Buch geht es nur indirekt um Datenerhebungsmethoden. Sie sind insofern relevant, als dass wir sie berücksichtigen müssen, wenn wir die Ergebniss analysieren und interpretieren. Es ist ein Unterschied, ob ich ein Phänomen nur beobachtet habe, oder ob ich es in einem kontrollierten Experiment isoliert habe. Es hat Auswirkungen auf meine Ergebnisse, wie viele und welche Menschen ich in einer Umfrage befragt habe. Es ist wichtig zu wissen, wir gut ein Simulationsmodell wir Wirklichkeit abbildet, bevor ich Entscheidungen aus den Daten ableite. Weil die Entstehung der Daten wichtig für die Analyse ist, ist auch die Datenerhebung indirekt Thema dieses Buches.
+
+## Von Daten zu Wissen
+
+Das Ziel dieses Buches ist es, der Leserin oder dem Leser wichtige Werkzeuge der Datenanalyse im Kontext empirischer Forschung näherzubringen. Es soll mit vielen praktischen Anwendungen dazu befähigen, eigene Analysen auf neuen Daten durchzuführen und die richtigen Schlüsse zu ziehen, also Wissen zu erzeugen.
+
+Der Begriff "Werkzeuge der Datenanalyse" ist abstrakt. Was meinen wir ganz allgemein und im Kontext dieses Buches damit? Ganz allgemein meinen wir damit Methoden oder Techniken, die wir auf Daten anwenden können, um **Daten in Wissen zu transformieren**.
+
+Was aber sind Daten? Was sind Informationen? Und was unterscheidet das von Wissen? @fig-data-information stellt die Beziehung zwischen den Begriffen dar.
+
+![Der Zusammenhang zwischen Daten, Informationen und Wissen.](/images/data-information.svg){#fig-data-information}
+
+Demnach sind Daten zunächst nur aus Symbolen zusammengesetzte Abfolgen, die für sich genommen noch keine Bedeutung haben. Informationen entstehen erst, wenn wir Daten in einen Kontext setzen und sie interpretieren. Wissen entsteht schließlich, wenn wir Informationen *verwenden* und in Handlungen oder Entscheidungen umsetzen. Und der Begriff *Informationen verwenden* beschreibt das, was wir in diesem Buch erlernen wollen. Wir lernen, Informationen zu verwenden, um daraus Wissen zu geneieren, um unsere Forschungsfragen zu beantworten. Und mit *verwenden* meinen wir konkret die Anwendung von Werkzeugen der Datenanalyse.
+
+> Data, when placed into a relationship with other information, can be synthesized into **knowledge**. Although knowledge is an element of most human endeavors, it is **the central goal of science**. In this model, data are the raw materials, much like grain or metal ores. Although data have potential value, they require refinement by aggregating value in combination with other data, just as grains become bread and metal ores become steel. [@Hewitt2019DataInformationKnowledge]
+
+Die Tabelle unten zeigt eine Analogie aus der realen Welt, um den Unterschied zwischen Daten, Informationen und Werkzeugen zu verdeutlichen:
+
+| Ebene | Analogie | Beispiel |
+|----|----|----|
+| Symbole | Eisenatome | Zahlen von 0 bis 9 und das Komma |
+| Daten | Eine feste Struktur von Eisenatomen, die eine längliche Form mit einer Spitze und einem Kopf bilden. | Eine Abfolge von beliebig vielen Zahlen, gefolgt von einem Komma, gefolgt von zwei Zahlen. |
+| Information | Die Struktur aus Eisenatomen ist ein Nagel. | Die Abfolge von Zahlen ist ein Umsatz eines Kassenbons. |
+| Wissen | Wir hängen etwas am Nagel auf, den wir zuvor in die Wand geschlagen haben. | Der Jahresumsatz ist im Vergleich zum Vorjahr um 2% gestiegen. |
+
+: Analogie zu Symbolen, Daten, Information und Wissen.
+
+Die Analyse von Daten ist die notwendige Zutat, die wir brauchen, um aus den erhobenen Daten neues Wissen oder Antworten auf Forschungsfragen zu erzeugen. Dabei gehen wir immer davon aus, dass uns die Daten bereits vorliegen und dass wir außerdem den Kontext der Daten kennen. Die erhobenen Daten sind somit genau genommen Informationen, vorausgesetzt wir kennne die Bedeutung der gemessenen Variablen und den Kontext der Erhebung. Aus diesem Grund ist die Datenerhebung immer relevant für die Datenanalyse, wie eingangs bereits erwähnt.
+
+## Werkzeuge
+
+Es gibt viele konkrete Werzeuge, mit dem wir unsere Analysen erstellen, ist R in Kombination mit dem Tidyverse. Für manche Aufgaben im Buch verwenden wir auch Python, insbesondere für die Anwendung von Werkzeugen aus dem Bereich des maschinellen Lernens.
+
+## Forschung oder Praxis?
+
+Die Methoden der empirischen Forschung sind gleichermaßen für die akademische Forschung wie für die Praxis relevant. Schließlich streben auch Unternehmen nach besserem Wissen für ihre Entscheidungen. Ein systematischer, wissenschaftlicher Ansatz, ist der einzige Weg, um die Belastbarkeit des gewonnenen Wissens sicherzustellen. Häufig wird dieser aus pragmatischen Gründen vernachlässigt mit den Argumenten, wissenschaftliche Methoden seien zu aufwändig und damit zu teuer, oder sie seien für eine bestimmte Fragestellung nicht notwendig. Das ist zu kurz gedacht.
+
+In der Lehre an der Hochschule Osnabrück vertreten wir die Auffassung, das ein strukturiertes Vorgehen zur Gewinnung von Wissen auch in der Praxis wichtig ist. Um das in diesem Buch zum Ausdruck zu bringen, sind die Projekte bewusst sowohl aus akademischden als auch aus praktischen Kontexten gewählt. Für eine Hochschule angewandter Wissenschaften ist die Schnittstelle zwischen der Forschung und der Praxis besonders im Fokus.

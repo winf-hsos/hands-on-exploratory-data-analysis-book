@@ -38,6 +38,7 @@ Beachte folgende Hinweise zu meinem Schreibstil:
 - Ich nutze gerne Analogien und Bilder, wo sinnvoll. Knüpfe an das Allgemeinwissen junger Menschen an.
 - Vermeide Bindestriche, um Sätze zu verbinden.
 - Verwende möglichst keine Abkürzungen wie "z. B." oder "inkl.", schreibe sie aus.
+- Verwende in Code-Beispielen ausschließlich **englische Variablennamen** (zum Beispiel `age` statt `alter`, `grades` statt `noten`, `passed` statt `bestanden`). Das gilt auch für Spaltennamen in Data Frames und Tibbles sowie für die Werte von Faktoren.
 
 # Ergebnis
 

@@ -46,7 +46,7 @@ Zum Laden der Daten gehört immer auch ein kurzer Reality-Check: Sind wirklich a
 ::: {.callout-note appearance="simple"}
 ## Mehr zum Laden von Daten laden (auch weitere Formate)
 
-An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Formate ein. Einen detaillierten Einblick findet ihr in @sec-basics-load-data.
+An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Formate ein. Einen detaillierten Einblick findet ihr in @sec-loading-data.
 :::
 
 ```{r}
@@ -161,7 +161,7 @@ survey |>
 1. Mit `select()` könnt ihr Variablen auswählen. Die Notation `1:10` bedeutet: *Variablen an Position 1 bis 10*.
 2. Mit `glimpse()` bekommt ihr schnell eine Übersicht der Namen, Datentypen und ersten Werte der Variablen.
 
-Hier steckt direkt ein wichtiges Muster drin: Wir bauen eine kleine „Befehlskette“. Das etwas merkwürdig aussehende Symbol `|>` (Pipe) sorgt dafür, dass das Ergebnis links an den nächsten Befehl rechts übergeben wird. Eine dedizierte Einführung in die Pipe findet ihr in @sec-survey-pipe.
+Hier steckt direkt ein wichtiges Muster drin: Wir bauen eine kleine „Befehlskette“. Das etwas merkwürdig aussehende Symbol `|>` (Pipe) sorgt dafür, dass das Ergebnis links an den nächsten Befehl rechts übergeben wird. Eine dedizierte Einführung in die Pipe findet ihr in @sec-pipe.
 
 Mit der Flexibilität einer Programmiersprache wie R könnt ihr jede beliebige Menge an Spalten auswählen – zum Beispiel auch die letzten 10:
 
@@ -170,7 +170,7 @@ survey |>
   select(tail(everything(), 10))
 ```
 
-Mit `tail()` ermitteln wir die letzten `n` Elemente einer Liste. `everything()` gibt uns (innerhalb von `select()`) die Liste aller Spalten. Der Ausdruck lässt sich also übersetzen als: *Gib mir die letzten 10 Elemente aus der Liste aller Spalten.* Gerade bei Umfragen mit vielen Spalten ist dieses gezielte Auswählen extrem nützlich. Noch mehr Möglichkeiten, Spalten auszuwählen, lernen wir im Verlauf des Projekts und im dedizierten @sec-basics-select.
+Mit `tail()` ermitteln wir die letzten `n` Elemente einer Liste. `everything()` gibt uns (innerhalb von `select()`) die Liste aller Spalten. Der Ausdruck lässt sich also übersetzen als: *Gib mir die letzten 10 Elemente aus der Liste aller Spalten.* Gerade bei Umfragen mit vielen Spalten ist dieses gezielte Auswählen extrem nützlich. Noch mehr Möglichkeiten, Spalten auszuwählen, lernen wir im Verlauf des Projekts und im dedizierten @sec-select.
 
 ::: {.callout-note appearance="simple"}
 ## Variablen haben eine feste Position
@@ -218,7 +218,7 @@ Die Funktion `count()` gruppiert die Daten nach der übergebenen Variable und z�
 ::: {.callout-note appearance="simple"}
 ## Aggregieren von Daten
 
-Die Funktion `count()` ist eine Aggregationsfunktion. Eine dedizierte Einführung, wie man mit R und dem `dplyr`‑Paket Daten zusammenfasst, findet ihr in @sec-basics-summarize.
+Die Funktion `count()` ist eine Aggregationsfunktion. Eine dedizierte Einführung, wie man mit R und dem `dplyr`‑Paket Daten zusammenfasst, findet ihr in @sec-summarize.
 :::
 
 Und weil es gerade passt: Wenn wir Daten analysieren, dann bevorzugen wir in dem allermeisten Fällen eine aussagekräftige Visualisierung über eine tabellarische Ausgabe. Die Häufigkeiten der beiden Antwortmöglichkeiten können wir wunderbar als Balkendiagramm visualisieren:

@@ -190,7 +190,7 @@ Durch die Pipeline werden die Filter nacheinander angewendet: zuerst „zu groß
 ::: {.callout-note appearance="simple"}
 ## Filtern von Daten
 
-Die Funktion `filter()` ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem `dplyr`‑Paket Daten filtert, findet ihr in @sec-basics-filter.
+Die Funktion `filter()` ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem `dplyr`‑Paket Daten filtert, findet ihr in @sec-filter.
 :::
 
 #### Ausreißer sehen: Boxplot und Histogramm

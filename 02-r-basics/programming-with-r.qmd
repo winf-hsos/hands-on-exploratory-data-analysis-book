@@ -1,0 +1,11 @@
+# Programmieren mit R {#sec-basics-programming-with-r}
+
+- Hinweis auf das Buch @grolemund_hands-programming_2014
+- Grundlegende Konzepte des Programmierens in R
+    - Kontrollstrukturen
+    - Schleifen
+    - Funktionen
+    - Fehlerbehandlung
+- Was sonst? Bitte schreibe ein vollständiges Kapitel
+- Zu Ende hin: Fokus auf praktische Beispiele im Zusammenhang mit Datenanalyse und dem Tidyverse
+- Referenz auf das Kapitel [Datenrepräsentation](/r-basics/data-representation.qmd) wo sinnvoll für die Frage, wie man Daten in R abbildet

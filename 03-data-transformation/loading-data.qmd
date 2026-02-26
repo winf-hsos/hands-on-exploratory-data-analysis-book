@@ -1,0 +1,373 @@
+# Daten laden {#sec-loading-data}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Jeder Analyseprozess beginnt mit dem Laden der Daten (s. @fig-loading-data-eda-process). In diesem Kapitel schauen wir uns an, wie ihr die gängigsten Datenformate in R laden könnt. Wir starten mit textbasierten Formaten wie CSV und JSON, gehen dann über zu binären Formaten wie Excel und RDS und werfen zuletzt einen Blick auf das Laden von Daten direkt aus Google Sheets.
+
+![Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten.](https://winf-hsos.github.io/university-docs/images/eda_process.png){#fig-loading-data-eda-process .lightbox}
+
+Zu wissen, wie man Daten aus verschiedenen Quellen importiert, ist grundlegend für jede Analyseaufgabe. In der Realität liegen Daten selten im perfekten R-Format vor, sondern verteilen sich über verschiedene Systeme, Dateitypen und Cloud-Dienste. Wer diese Formate souverän in R überführen kann, spart sich von Anfang an viel Zeit und frustrierende manuelle Zwischenschritte.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion | Paket | Beschreibung |
+|---|---|---|
+| `read_csv()` / `read_csv2()` | `readr` | CSV-Dateien laden |
+| `read_delim()` | `readr` | Textdateien mit beliebigem Trennzeichen laden |
+| `fromJSON()` / `stream_in()` | `jsonlite` | JSON- und JSONL-Dateien laden |
+| `read_excel()` | `readxl` | Excel-Dateien laden |
+| `read_sheet()` | `googlesheets4` | Google Sheets laden |
+| `read_rds()` | `readr` | RDS-Dateien laden |
+
+Zunächst beschäftigen wir uns mit den grundlegenden Dateiformaten, aus denen wir Daten laden können.
+
+## Dateiformate {#sec-loading-data-dateiformate}
+
+Daten im Computer speichern wir üblicherweise in Dateien. Ein Datensatz kann dabei aus einer oder mehreren Dateien bestehen. Auf der untersten Ebene enthält eine Datei Daten in Form von Nullen und Einsen, denn der Computer arbeitet mit Bits und dem Binärsystem.
+
+In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern:
+
+- Als Textdatei
+- Als Binärdatei
+
+![Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.](/images/data-file-formats.svg)
+
+Was ist der Unterschied? Eine Textdatei speichert die Daten in einem Format, das für Menschen lesbar ist. Die Daten werden als Zeichenfolge gespeichert, die über ein gängiges Kodierungssystem wie UTF-8 in lesbare Zeichen übersetzt werden kann. Beispiele für textbasierte Formate sind CSV (Comma-Separated Values), TSV (Tab-Separated Values) und JSON (JavaScript Object Notation). Ihr könnt solche Dateien in jedem beliebigen Texteditor öffnen und lesen. Das ist der große Vorteil: Sie sind einfach zu verstehen und zu bearbeiten.
+
+Binäre Formate kodieren die Daten nicht als Text, sondern in einem Format, das für den Computer effizienter zu lesen und zu schreiben ist. Beispiele sind Excel-Dateien (.xlsx), RDS-Dateien (.rds) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und benötigen weniger Speicherplatz. Allerdings sind sie nicht direkt von Menschen lesbar und erfordern spezielle Software.
+
+## CSV-Dateien {#sec-loading-data-csv}
+
+Eines der gängigsten Datenformate ist CSV. CSV steht für "Comma-Separated Values" und ist ein einfaches textbasiertes Format, das Daten in tabellarischer Form speichert. Jede Zeile in einer CSV-Datei entspricht einer Zeile in der Tabelle, und die Werte werden durch Kommas getrennt. CSV-Dateien können von vielen Anwendungen erstellt und gelesen werden, einschließlich Tabellenkalkulationsprogrammen wie Microsoft Excel und Google Sheets.
+
+In R könnt ihr CSV-Dateien mit der Funktion `read_csv()` aus dem `readr`-Paket laden. Hier ein Beispiel:
+
+```{r}
+orders <- read_csv("data/orders.csv")
+orders |> 
+    head(5)
+```
+
+Das hat funktioniert. Aber bei CSV-Dateien gibt es einige Dinge, die sich unterscheiden können und die ihr beim Laden berücksichtigen müsst.
+
+### Trennzeichen {#sec-loading-data-trennzeichen}
+
+In einigen Ländern, zum Beispiel in Deutschland, wird anstelle eines Kommas häufig ein Semikolon als Trennzeichen verwendet. Für diesen Fall gibt es die Funktion `read_csv2()`. Ob das Trennzeichen falsch eingestellt ist, erkennt ihr sofort am Ergebnis: Alle Werte werden in einer einzigen Spalte zusammengefasst, anstatt in mehreren Spalten verteilt zu sein. Schauen wir uns das kurz an:
+
+```{r}
+orders_wrong <- read_csv2("data/orders.csv")
+```
+
+Wie in der Ausgabe zu sehen, wurde nur eine Spalte erkannt. Wenn wir uns Beispielwerte ausgeben lassen, sehen wir, dass alle Werte in dieser einen Spalte zusammengefasst wurden:
+
+```{r}
+head(orders_wrong)
+```
+
+Die Funktion `read_csv2()` verwenden wir nur, wenn wirklich ein Semikolon als Trennzeichen verwendet wird. Bei einem Komma als Trennzeichen müssen wir `read_csv()` verwenden, damit die Werte korrekt in Spalten aufgeteilt werden.
+
+Neben dem Tabulator-Zeichen als weiterem gängigem Trennzeichen gibt es die allgemeine Funktion `read_delim()`, bei der ihr das Trennzeichen explizit angeben könnt. Die Tabelle gibt einen Überblick:
+
+| Funktion       | Trennzeichen |
+|----------------|--------------|
+| `read_csv()`   | Komma (`,`)  |
+| `read_csv2()`  | Semikolon (`;`) |
+| `read_tsv()`   | Tabulator (`\t`) |
+| `read_delim()` | Beliebiges Trennzeichen (muss angegeben werden) |
+
+Hier ein Beispiel für `read_delim()`, wenn das Trennzeichen ein Pipe-Symbol wäre:
+
+```{r}
+orders_delim <- read_delim("data/orders.csv", delim = "|")
+```
+
+### Zeichenkodierung {#sec-loading-data-encoding}
+
+Textdateien speichern die Daten in einem bestimmten Kodierungsformat. In Deutschland war es lange üblich, das Kodierungsformat "ISO-8859-1" (auch "Latin-1" genannt) zu verwenden, während international "UTF-8" der Standard ist. Wenn die CSV-Datei in einem anderen Kodierungsformat vorliegt als erwartet, müssen wir dies beim Laden angeben.
+
+Da die meisten Dateien heute im UTF-8-Format vorliegen, ist dies auch die Standardeinstellung in den Funktionen von `readr`. Mit UTF-8 könnt ihr auch das ältere, aber immer noch verwendete ASCII-Zeichenset abdecken, weil UTF-8 rückwärtskompatibel ist. Liegt die CSV-Datei jedoch in einem anderen Format vor, gebt ihr es explizit an:
+
+```{r}
+orders_iso <- read_csv(
+    "data/orders.csv", 
+    locale = locale(encoding = "ISO-8859-1")
+)
+```
+
+Das ISO-8859-1-Format ist eine Erweiterung des ASCII-Zeichensatzes und unterstützt die meisten westeuropäischen Sprachen, einschließlich Deutsch mit seinen Umlauten. UTF-8 ist leider nicht vollständig rückwärtskompatibel mit ISO-8859-1: Wenn also ein Datensatz mit ISO-8859-1 kodiert wurde und ihr ihn als UTF-8 ladet, können Umlaute und Sonderzeichen kaputt gehen.
+
+### Dezimaltrennzeichen {#sec-loading-data-dezimal}
+
+In Deutschland wird anstelle eines Punktes häufig ein Komma als Dezimaltrennzeichen verwendet. Die Funktion `read_csv2()` berücksichtigt das automatisch. Ihr könnt das Dezimaltrennzeichen aber auch explizit über den Parameter `locale` angeben.
+
+Ob das Dezimaltrennzeichen falsch eingestellt ist, erkennt ihr wieder am Ergebnis: Alle Zahlen, die ein Dezimaltrennzeichen enthalten, werden als Text (Strings) interpretiert, anstatt als numerische Werte.
+
+Hier ein Beispiel, bei dem wir absichtlich ein falsches Dezimaltrennzeichen angeben:
+
+```{r}
+orders_wrong_decimal <- read_csv(
+    "data/orders.csv", 
+    locale = locale(decimal_mark = ",")
+)
+```
+
+Schauen wir uns jetzt die Spalte `total_price` an, die eigentlich eine Dezimalzahl sein müsste:
+
+```{r}
+orders_wrong_decimal |> 
+    select(total_price) |> 
+    head(5)
+```
+
+Achtet auf die Angabe des Datentyps `chr`, was für "character" steht, also Text. Wir sollten also schleunigst das richtige Dezimaltrennzeichen verwenden.
+
+Manchmal hat nur eine einzelne Spalte ein anderes Dezimaltrennzeichen als die übrigen Spalten. Dann könnt ihr euch damit behelfen, die Spalte nachträglich in den korrekten Datentyp umzuwandeln:
+
+```{r}
+orders_fixed_decimal <- orders_wrong_decimal |> 
+    mutate(total_price = as.double(total_price))
+```
+
+Prüfen wir, ob es geklappt hat:
+
+```{r}
+orders_fixed_decimal |> 
+    select(total_price) |> 
+    head(5)
+```
+
+Die Funktion `as.double()` sucht standardmäßig nach einem Punkt als Dezimaltrennzeichen. Sollte es in der Spalte tatsächlich ein Komma als Dezimaltrennzeichen geben, müsst ihr `parse_number()` verwenden und das Dezimaltrennzeichen explizit angeben:
+
+```{r}
+orders_fixed_decimal <- orders_wrong_decimal |> 
+    mutate(total_price = parse_number(total_price, locale = locale(decimal_mark = ",")))
+```
+
+### Kopfzeilen {#sec-loading-data-header}
+
+CSV-Dateien enthalten in der Regel eine Kopfzeile, die die Namen der Spalten angibt. Die Funktionen aus `readr` gehen davon aus, dass diese Zeile vorhanden ist. Wenn die CSV-Datei keine Kopfzeile enthält, müsst ihr dies beim Laden angeben:
+
+```{r}
+orders_no_header <- read_csv(
+    "data/orders.csv", 
+    col_names = FALSE
+)
+```
+
+Schaut euch das Ergebnis an:
+
+```{r}
+orders_no_header |> 
+    head(5)
+```
+
+Was ist passiert? Die Spalten wurden automatisch mit generischen Namen wie `X1`, `X2`, `X3` benannt, weil keine Kopfzeile vorhanden war. Oder zumindest haben wir das behauptet. Zusätzlich wurde die erste Zeile der CSV-Datei als Datenzeile interpretiert, anstatt als Kopfzeile.
+
+## JSON und JSONL {#sec-loading-data-json}
+
+Neben CSV gibt es ein weiteres textbasiertes Format, das euch in der Datenanalyse immer häufiger begegnet: JSON. JSON steht für "JavaScript Object Notation" und wurde ursprünglich für den Datenaustausch im Web entwickelt. Heute ist JSON weit über das Web hinaus verbreitet und wird oft für APIs, Konfigurationsdateien und hierarchisch strukturierte Daten verwendet.
+
+Was unterscheidet JSON von CSV? In einer CSV-Datei sind die Daten flach und tabellarisch. JSON erlaubt dagegen verschachtelte Strukturen. Ein einzelner JSON-Eintrag kann so aussehen:
+
+```json
+{
+  "name": "Anna",
+  "age": 23,
+  "courses": ["Statistics", "Programming", "Data Analytics"]
+}
+```
+
+Hier hat die Person ein Feld `courses`, das selbst eine Liste enthält. In CSV wäre das nur umständlich abzubilden.
+
+### JSON-Dateien laden {#sec-loading-data-json-laden}
+
+Zum Laden von JSON-Dateien nutzt ihr das Paket `jsonlite`. Es wandelt die JSON-Struktur automatisch in ein tibble-ähnliches Objekt um, wenn die Daten tabellarisch interpretierbar sind:
+
+```{r}
+#| eval: false
+library(jsonlite)
+data <- fromJSON("data/example.json")
+```
+
+Die Funktion `fromJSON()` erkennt, ob die JSON-Datei ein einzelnes Objekt oder eine Liste von Objekten enthält, und versucht, die Daten intelligent in einen Data Frame umzuwandeln. Bei einfachen, flachen JSON-Strukturen funktioniert das problemlos.
+
+### JSONL {#sec-loading-data-jsonl}
+
+In der Praxis begegnet euch häufig auch das Format JSONL (JSON Lines). Dabei enthält jede Zeile der Datei genau ein JSON-Objekt. Das ist besonders bei großen Datensätzen praktisch, weil die Datei zeilenweise gelesen und verarbeitet werden kann.
+
+Eine JSONL-Datei sieht zum Beispiel so aus:
+
+```
+{"name": "Anna", "age": 23, "passed": true}
+{"name": "Ben", "age": 21, "passed": false}
+{"name": "Cleo", "age": 25, "passed": true}
+```
+
+Zum Laden von JSONL-Dateien könnt ihr `stream_in()` aus dem Paket `jsonlite` verwenden:
+
+```{r}
+#| eval: false
+data <- stream_in(file("data/example.jsonl"))
+```
+
+Die Funktion `stream_in()` liest die Datei zeilenweise und liefert am Ende einen Data Frame. Das ist besonders bei sehr großen Dateien effizienter als `fromJSON()`, weil nicht die gesamte Datei auf einmal in den Arbeitsspeicher geladen werden muss.
+
+::: {.callout-tip icon="💡" title="JSON oder CSV?"}
+Für tabellarische Daten ist CSV oft die einfachere Wahl. JSON spielt seine Stärken bei verschachtelten oder hierarchischen Daten aus, zum Beispiel bei Antworten von Web-APIs. Wenn ihr Daten von einer API bekommt, liegen sie fast immer im JSON-Format vor.
+:::
+
+## Excel-Dateien {#sec-loading-data-excel}
+
+Excel-Dateien gehören zu den binären Formaten. Sie sind in der Praxis extrem verbreitet, weil viele Menschen mit Microsoft Excel oder Google Sheets arbeiten. Das Format `.xlsx` ist kein einfacher Text, sondern ein komprimiertes Archiv, das die Daten zusammen mit Formatierungen, Formeln und Metadaten speichert.
+
+Zum Laden von Excel-Dateien in R nutzt ihr das Paket `readxl`, das ebenfalls zum Tidyverse-Ökosystem gehört:
+
+```{r}
+#| eval: false
+library(readxl)
+data <- read_excel("data/example.xlsx")
+```
+
+Die Funktion `read_excel()` erkennt automatisch, ob es sich um eine `.xls`- oder `.xlsx`-Datei handelt. Das Ergebnis ist ein Tibble, genau wie bei `read_csv()`.
+
+### Arbeitsblätter auswählen {#sec-loading-data-excel-sheets}
+
+Eine Besonderheit von Excel-Dateien ist, dass sie mehrere Arbeitsblätter (Sheets) enthalten können. Standardmäßig liest `read_excel()` das erste Arbeitsblatt. Wenn ihr ein anderes Blatt laden wollt, gebt ihr es über den Parameter `sheet` an:
+
+```{r}
+#| eval: false
+# Über den Namen
+data <- read_excel("data/example.xlsx", sheet = "Sales")
+
+# Oder über die Position
+data <- read_excel("data/example.xlsx", sheet = 2)
+```
+
+Wenn ihr nicht wisst, welche Arbeitsblätter eine Excel-Datei enthält, hilft euch `excel_sheets()`:
+
+```{r}
+#| eval: false
+excel_sheets("data/example.xlsx")
+```
+
+### Bereiche und Kopfzeilen {#sec-loading-data-excel-ranges}
+
+Manchmal beginnen die eigentlichen Daten in einer Excel-Datei nicht in der ersten Zeile, weil darüber ein Titel oder Erläuterungen stehen. In diesem Fall könnt ihr Zeilen überspringen:
+
+```{r}
+#| eval: false
+data <- read_excel("data/example.xlsx", skip = 3)
+```
+
+Oder ihr gebt einen konkreten Zellbereich an, wie ihr es aus Excel kennt:
+
+```{r}
+#| eval: false
+data <- read_excel("data/example.xlsx", range = "B2:F100")
+```
+
+Genau wie bei CSV könnt ihr auch angeben, dass keine Kopfzeile vorhanden ist:
+
+```{r}
+#| eval: false
+data <- read_excel("data/example.xlsx", col_names = FALSE)
+```
+
+::: {.callout-tip icon="💡" title="readxl braucht kein Excel"}
+Das Paket `readxl` liest Excel-Dateien direkt, ohne dass Microsoft Excel installiert sein muss. Das ist besonders praktisch auf Servern oder in automatisierten Pipelines, wo kein Excel vorhanden ist.
+:::
+
+## Google Sheets {#sec-loading-data-google}
+
+Was ist, wenn eure Daten gar nicht als Datei auf eurem Rechner liegen, sondern in der Cloud? Google Sheets ist einer der verbreitetsten Orte, an denen Teams gemeinsam Daten sammeln und pflegen. Zum Beispiel, wenn ihr eine Umfrage über Google Forms durchführt: Die Antworten landen automatisch in einem Google Sheet.
+
+Das Paket `googlesheets4` erlaubt es euch, Daten direkt aus Google Sheets in R zu laden, ohne sie erst herunterladen zu müssen:
+
+```{r}
+#| eval: false
+library(googlesheets4)
+data <- read_sheet("https://docs.google.com/spreadsheets/d/...")
+```
+
+Ihr übergebt einfach die URL oder die ID eures Google Sheets an `read_sheet()`. Das Ergebnis ist ein Tibble.
+
+### Authentifizierung {#sec-loading-data-google-auth}
+
+Beim ersten Aufruf fragt euch `googlesheets4` nach einer Berechtigung, auf euer Google-Konto zuzugreifen. Es öffnet sich ein Browserfenster, in dem ihr euch anmeldet und die Berechtigung erteilt. R speichert diese Berechtigung dann lokal, sodass ihr euch nicht jedes Mal neu anmelden müsst.
+
+Wenn ihr auf öffentlich zugängliche Sheets zugreifen wollt, könnt ihr die Authentifizierung auch komplett abschalten:
+
+```{r}
+#| eval: false
+gs4_deauth()
+data <- read_sheet("https://docs.google.com/spreadsheets/d/...")
+```
+
+### Arbeitsblätter und Bereiche {#sec-loading-data-google-sheets}
+
+Genau wie bei Excel-Dateien könnt ihr bei Google Sheets das Arbeitsblatt und den Zellbereich angeben:
+
+```{r}
+#| eval: false
+# Bestimmtes Arbeitsblatt laden
+data <- read_sheet("https://docs.google.com/spreadsheets/d/...", sheet = "Responses")
+
+# Bestimmten Bereich laden
+data <- read_sheet("https://docs.google.com/spreadsheets/d/...", range = "A1:E100")
+```
+
+::: {.callout-tip icon="💡" title="Wann Google Sheets, wann CSV?"}
+Google Sheets ist praktisch, wenn Daten laufend aktualisiert werden und ihr immer den neuesten Stand laden wollt. Für statische Datensätze, die sich nicht mehr ändern, ist eine heruntergeladene CSV-Datei meistens die einfachere und reproduzierbarere Lösung.
+:::
+
+## RDS-Dateien {#sec-loading-data-rds}
+
+Zum Schluss schauen wir uns ein Format an, das speziell für R entwickelt wurde: RDS. RDS steht für "R Data Serialization" und ist ein binäres Format, mit dem ihr einzelne R-Objekte speichern und wieder laden könnt.
+
+Warum ist das nützlich? Stellt euch vor, ihr habt einen Datensatz aufwendig bereinigt und transformiert. Wenn ihr ihn als CSV speichert, gehen dabei Informationen verloren, zum Beispiel Datentypen, Faktor-Levels oder die Zeitzone von Datumswerten. RDS bewahrt all das, weil es das R-Objekt exakt so speichert, wie es im Arbeitsspeicher vorliegt.
+
+### RDS-Dateien laden {#sec-loading-data-rds-laden}
+
+Zum Laden nutzt ihr `read_rds()`:
+
+```{r}
+tweets <- read_rds("data/tweets_ampel.rds")
+tweets |>
+    head(5)
+```
+
+Das Ergebnis ist exakt das Objekt, das gespeichert wurde, einschließlich aller Datentypen und Attribute.
+
+### RDS-Dateien speichern {#sec-loading-data-rds-speichern}
+
+Umgekehrt könnt ihr jedes R-Objekt als RDS-Datei speichern:
+
+```{r}
+#| eval: false
+write_rds(tweets, "data/tweets_backup.rds")
+```
+
+Ein wichtiger Unterschied zu anderen Formaten: RDS speichert genau ein Objekt pro Datei. Wenn ihr mehrere Objekte speichern wollt, erstellt ihr entweder mehrere RDS-Dateien oder nutzt das verwandte Format `.RData` (auch `.rda`), das mehrere Objekte auf einmal speichern kann.
+
+### Wann RDS verwenden? {#sec-loading-data-rds-wann}
+
+RDS ist die beste Wahl, wenn ihr innerhalb von R arbeitet und sicherstellen wollt, dass keine Informationen verloren gehen. In diesem Buch laden wir den Tweets-Datensatz als RDS-Datei, weil so alle Spaltentypen und Metadaten erhalten bleiben. Wenn ihr Daten dagegen mit anderen Tools oder Personen teilen wollt, die kein R verwenden, ist CSV oder ein anderes offenes Format die bessere Wahl.
+
+## Kurz zusammengefasst {#sec-loading-data-zusammenfassung}
+
+::: {.reuse #load-data-summary}
+
+- **CSV** ist das verbreitetste textbasierte Format. Ihr ladet es mit `read_csv()` aus dem `readr`-Paket. Achtet auf Trennzeichen, Zeichenkodierung und Dezimaltrennzeichen.
+- **JSON** eignet sich für hierarchische oder verschachtelte Daten und kommt oft von Web-APIs. Ihr nutzt `fromJSON()` oder `stream_in()` aus dem Paket `jsonlite`.
+- **Excel-Dateien** ladet ihr mit `read_excel()` aus dem Paket `readxl`. Ihr könnt Arbeitsblätter, Bereiche und Kopfzeilen gezielt ansteuern.
+- **Google Sheets** lassen sich direkt mit `read_sheet()` aus dem Paket `googlesheets4` laden, ohne die Datei herunterladen zu müssen.
+- **RDS** ist das R-eigene Binärformat. Es bewahrt alle Datentypen und Attribute und eignet sich perfekt für die Arbeit innerhalb von R.
+
+:::
+
+Daten laden ist der Startpunkt jeder Analyse. Im nächsten Kapitel lernt ihr mit dem Pipe-Operator `|>` ein Werkzeug kennen, das euch dabei hilft, die geladenen Daten Schritt für Schritt weiterzuverarbeiten (siehe @sec-pipe).
+
+_Abbildung: Ein Flussdiagramm mit einem zentralen Kasten "Daten laden in R". Von dort gehen fünf Pfeile ab zu je einem Format-Kasten: CSV (mit Icon einer Textdatei), JSON (mit geschweiften Klammern), Excel (mit einem grünen Tabellen-Icon), Google Sheets (mit einem Cloud-Icon), RDS (mit dem R-Logo). Unter jedem Format-Kasten steht die zugehörige R-Funktion: `read_csv()`, `fromJSON()`, `read_excel()`, `read_sheet()`, `read_rds()`. Die Format-Kästen sind in zwei Gruppen aufgeteilt: links "Textbasiert" (CSV, JSON), rechts "Binär / Cloud" (Excel, Google Sheets, RDS)._

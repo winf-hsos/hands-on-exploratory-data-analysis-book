@@ -1,0 +1,343 @@
+# Variablen erstellen {#sec-mutate-add}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Im vorherigen Kapitel habt ihr gelernt, wie ihr bestehende Variablen verändert und repariert. Jetzt gehen wir den nächsten logischen Schritt: Neue Variablen anlegen. In diesem Kapitel lernt ihr, wie ihr mit `mutate()` aus zwei oder mehr Spalten eine völlig neue berechnet, Kategorien aus numerischen Werten ableitet und laufende Summen oder Ränge aufbaut. Der Unterschied zum vorherigen Kapitel ist konzeptionell einfach: Wenn ihr bei `mutate()` links vom Gleichheitszeichen einen Namen verwendet, der im Datensatz noch nicht existiert, wird die Spalte neu angehängt.
+
+In vielen quantitativen Projekten enthalten die rohen Daten nicht direkt die Kennzahlen, die ihr für eure Forschungsfrage benötigt. Ihr müsst sie erst berechnen – seien es Altersgruppen aus Geburtsjahren, prozentuale Anteile aus absoluten Zahlen oder textuelle Zusammenfassungen aus Einzelstrings. Die Fähigkeit, gezielt neue Metriken zu synthetisieren, erweitert eure Analysemöglichkeiten enorm und macht eure Visualisierungen später deutlich aussagekräftiger.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion | Beschreibung |
+|---|---|
+| `mutate()` | Neue Spalten berechnen und anhängen |
+| `str_c()` | Texte zusammenfügen |
+| `lag()` / `lead()` | Vorheriger bzw. nächster Wert (Fensterfunktionen) |
+| `cumsum()` / `cummean()` | Laufende Summe bzw. laufender Durchschnitt |
+| `min_rank()` / `dense_rank()` / `row_number()` | Rangfolgen berechnen |
+| `transmute()` | Nur neue Spalten behalten |
+| `.before` / `.after` / `.keep` | Position und Auswahl neuer Spalten steuern |
+
+Schauen wir uns als Erstes an, wie wir ganz klassisch mit bestehenden Werten rechnen.
+
+## Neue Variablen berechnen {#sec-mutate-add-berechnen}
+
+Die einfachste Form: Ihr rechnet mit bestehenden Spalten und gebt dem Ergebnis einen neuen Namen.
+
+```{r}
+tweets |>
+  mutate(total_engagement = retweet_count + favorite_count) |>
+  select(screen_name, retweet_count, favorite_count, total_engagement) |>
+  head(5)
+```
+
+Hier entsteht die neue Spalte `total_engagement` als Summe von Retweets und Likes. Die bestehenden Spalten bleiben vollständig erhalten.
+
+Ihr könnt in einem einzigen `mutate()`-Aufruf auch mehrere neue Variablen gleichzeitig anlegen. Dabei könnt ihr sogar auf Variablen zugreifen, die ihr gerade erst erstellt habt:
+
+```{r}
+tweets |>
+  mutate(
+    total_engagement = retweet_count + favorite_count,
+    engagement_ratio = retweet_count / total_engagement
+  ) |>
+  select(screen_name, total_engagement, engagement_ratio) |>
+  head(5)
+```
+
+`engagement_ratio` greift auf `total_engagement` zu, obwohl diese Spalte erst in der Zeile darüber definiert wurde. Das funktioniert, weil `mutate()` die neuen Variablen von oben nach unten abarbeitet.
+
+::: {.callout-tip icon="💡" title="Division durch Null"}
+Wenn `total_engagement` den Wert 0 hat, liefert die Division `Inf` (unendlich). In der Praxis wollt ihr solche Fälle abfangen, zum Beispiel mit `if_else(total_engagement == 0, 0, retweet_count / total_engagement)`.
+:::
+
+## Textuelle Variablen {#sec-mutate-add-text}
+
+Neben arithmetischen Berechnungen könnt ihr auch neue Textspalten zusammensetzen. Die Funktion `str_c()` aus `stringr` fügt mehrere Werte zu einem einzigen String zusammen:
+
+```{r}
+tweets |>
+  mutate(label = str_c(screen_name, ": ", text)) |>
+  select(label) |>
+  head(3)
+```
+
+Ein häufiger Anwendungsfall ist das Erstellen lesbarer Labels für Diagramme oder Berichte. Wenn ihr Werte mit einem Trennzeichen zusammenfügen wollt, nutzt den Parameter `sep`:
+
+```{r}
+tweets |>
+  mutate(
+    info = str_c(screen_name, retweet_count, sep = " | ")
+  ) |>
+  select(info) |>
+  head(3)
+```
+
+## Bedingte Variablen {#sec-mutate-add-bedingt}
+
+Oft hängt der Wert einer neuen Spalte von einer Bedingung ab. Das kennt ihr bereits aus dem vorherigen Kapitel. Hier erstellen wir aber eine neue Variable, statt eine bestehende zu verändern.
+
+### Zwei Fälle mit `if_else()`
+
+```{r}
+tweets |>
+  mutate(is_popular = if_else(retweet_count >= 100, "popular", "normal")) |>
+  select(screen_name, retweet_count, is_popular) |>
+  head(5)
+```
+
+### Mehrere Fälle mit `case_when()`
+
+```{r}
+tweets |>
+  mutate(
+    engagement_level = case_when(
+      retweet_count >= 1000 ~ "viral",
+      retweet_count >= 100  ~ "high",
+      retweet_count >= 10   ~ "medium",
+      .default = "low"
+    )
+  ) |>
+  select(screen_name, retweet_count, engagement_level) |>
+  head(10)
+```
+
+Die Reihenfolge der Bedingungen ist entscheidend: Die erste zutreffende Bedingung gewinnt. Wenn ihr die speziellsten Fälle nicht zuerst nennt, werden sie von allgemeineren Bedingungen überschattet.
+
+## Fensterfunktionen {#sec-mutate-add-fenster}
+
+Fensterfunktionen sind Funktionen, die für jede Zeile einen Wert berechnen, aber dabei die umliegenden Zeilen berücksichtigen. Im Gegensatz zu Aggregatfunktionen wie `sum()` oder `mean()`, die einen Datensatz auf einen einzigen Wert reduzieren, geben Fensterfunktionen für jede Zeile einen eigenen Wert zurück. Der Datensatz behält also seine Länge.
+
+### Vorherige und nächste Werte mit `lag()` und `lead()`
+
+Mit `lag()` greift ihr auf den Wert der vorherigen Zeile zu, mit `lead()` auf den der nächsten. Das ist besonders nützlich für Zeitreihendaten, wenn ihr Veränderungen zwischen aufeinanderfolgenden Einträgen berechnen wollt.
+
+```{r}
+orders |>
+  arrange(created_at) |>
+  mutate(
+    previous_price = lag(total_price),
+    price_change = total_price - lag(total_price)
+  ) |>
+  select(order_id, created_at, total_price, previous_price, price_change) |>
+  head(5)
+```
+
+Beachtet, dass die erste Zeile für `lag()` immer `NA` liefert, weil es keinen Vorgänger gibt. Genauso liefert `lead()` für die letzte Zeile `NA`.
+
+::: {.callout-tip icon="💡" title="Sortierung ist entscheidend"}
+`lag()` und `lead()` arbeiten auf der aktuellen Zeilenreihenfolge. Wenn eure Daten nicht sortiert sind, liefern sie unsinnige Ergebnisse. Sortiert deshalb vorher mit `arrange()`.
+:::
+
+### Laufende Summen und Durchschnitte
+
+Laufende (kumulative) Berechnungen bauen Schritt für Schritt auf: Jede Zeile enthält die Summe, den Mittelwert oder das Maximum aller bisherigen Werte.
+
+```{r}
+orders |>
+  arrange(created_at) |>
+  mutate(
+    cumulative_revenue = cumsum(total_price),
+    running_avg_price = cummean(total_price)
+  ) |>
+  select(order_id, total_price, cumulative_revenue, running_avg_price) |>
+  head(10)
+```
+
+Die wichtigsten kumulativen Funktionen:
+
+| Funktion | Beschreibung |
+|---|---|
+| `cumsum()` | Laufende Summe |
+| `cummean()` | Laufender Durchschnitt |
+| `cummax()` | Laufendes Maximum |
+| `cummin()` | Laufendes Minimum |
+
+### Rangfolgen
+
+Wenn ihr Zeilen nach einem Wert ranken wollt, gibt es mehrere Funktionen. Der Unterschied liegt im Umgang mit Gleichständen:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  mutate(rank = min_rank(desc(retweet_count))) |>
+  select(screen_name, retweet_count, rank) |>
+  arrange(rank) |>
+  head(10)
+```
+
+`min_rank()` vergibt bei Gleichstand denselben Rang und lässt danach Plätze aus (wie bei einem Sportwettbewerb: Platz 1, 1, 3). `dense_rank()` lässt dagegen keine Plätze aus (Platz 1, 1, 2). `row_number()` vergibt jeden Rang nur einmal, die Reihenfolge bei Gleichstand ist aber willkürlich.
+
+```{r}
+example <- tibble(score = c(100, 90, 90, 80))
+
+example |>
+  mutate(
+    min_rank = min_rank(desc(score)),
+    dense_rank = dense_rank(desc(score)),
+    row_number = row_number(desc(score))
+  )
+```
+
+_Abbildung: Drei Spalten nebeneinander mit denselben vier Werten (100, 90, 90, 80). In der ersten Spalte steht die Rangfolge mit `min_rank` (1, 2, 2, 4). In der zweiten Spalte steht `dense_rank` (1, 2, 2, 3). In der dritten Spalte steht `row_number` (1, 2, 3, 4). Die Gleichstände bei 90 sind farblich hervorgehoben, um den Unterschied im Umgang mit Gleichständen zu zeigen._
+
+### Zeilennummern
+
+Manchmal braucht ihr einfach eine fortlaufende Nummer für jede Zeile. Dafür gibt es `row_number()` ohne Argument:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  arrange(desc(retweet_count)) |>
+  mutate(position = row_number()) |>
+  select(position, screen_name, retweet_count) |>
+  head(5)
+```
+
+## Gruppiertes Mutieren {#sec-mutate-add-grouped}
+
+Hier wird es besonders spannend: Wenn ihr `mutate()` auf einen gruppierten Datensatz anwendet, werden die Berechnungen innerhalb jeder Gruppe durchgeführt. Das öffnet die Tür für Fragen wie "Wie verhält sich dieser Wert im Vergleich zu seiner Gruppe?"
+
+![In Kombination mit Gruppierung erzeugt `mutate` Berechnungen auf Gruppenebene, behält aber weiterhin jede Zeile.](https://winf-hsos.github.io/university-docs/images/group_by_mutate_schema.png){.lightbox}
+
+### Anteile innerhalb von Gruppen
+
+Stellt euch vor, ihr wollt wissen, wie viel Prozent der Gesamtinteraktion jeder Tweet innerhalb seines Accounts ausmacht:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  group_by(screen_name) |>
+  mutate(
+    account_total = sum(retweet_count),
+    share = retweet_count / account_total
+  ) |>
+  select(screen_name, retweet_count, account_total, share) |>
+  head(10)
+```
+
+Ohne `group_by()` würde `sum(retweet_count)` die Summe über den gesamten Datensatz berechnen. Mit `group_by()` berechnet R die Summe separat für jeden Account. Die Spalte `account_total` hat also für alle Tweets desselben Accounts denselben Wert.
+
+_Abbildung: Ein Datensatz als Tabelle mit drei Gruppen (farblich markiert, jeweils 3 Zeilen). Links: eine Spalte "value" mit Einzelwerten. Rechts: eine neue Spalte "group_sum" mit der Gruppensumme, die für alle Zeilen einer Gruppe identisch ist. Ein Pfeil zeigt, dass `group_by() |> mutate(group_sum = sum(value))` die Summe pro Gruppe berechnet und in jede Zeile schreibt, statt den Datensatz zu komprimieren._
+
+### Rang innerhalb von Gruppen
+
+Auch Rangfolgen funktionieren gruppiert:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  group_by(screen_name) |>
+  mutate(rank_within_account = min_rank(desc(retweet_count))) |>
+  filter(rank_within_account == 1) |>
+  select(screen_name, retweet_count, rank_within_account)
+```
+
+Hier bekommt jeder Tweet einen Rang innerhalb seines Accounts. Das Filtern auf Rang 1 ergibt den meistretweeteten Tweet pro Account.
+
+### Laufende Berechnungen pro Gruppe
+
+Kumulative Funktionen in gruppierten Daten starten für jede Gruppe neu von Null:
+
+```{r}
+orders |>
+  arrange(created_at) |>
+  group_by(financial_status) |>
+  mutate(
+    cumulative_revenue = cumsum(total_price),
+    order_number_in_group = row_number()
+  ) |>
+  select(financial_status, total_price, cumulative_revenue, order_number_in_group) |>
+  head(10)
+```
+
+::: {.callout-tip icon="💡" title="Gruppierung entfernen"}
+Vergesst nicht, die Gruppierung nach dem Mutieren mit `ungroup()` wieder aufzuheben, wenn ihr danach mit dem gesamten Datensatz weiterarbeiten wollt. Sonst wirken sich spätere Operationen weiterhin nur innerhalb der Gruppen aus.
+:::
+
+## Optionen für `mutate()` {#sec-mutate-add-optionen}
+
+Standardmäßig fügt `mutate()` neue Spalten ganz rechts an und behält alle bestehenden Spalten. Über drei Parameter könnt ihr dieses Verhalten anpassen: `.before`, `.after` und `.keep`.
+
+### Position neuer Spalten mit `.before` und `.after`
+
+Wenn ihr die neue Spalte an einer bestimmten Stelle im Datensatz haben wollt, statt ganz am Ende, nutzt `.before` oder `.after`:
+
+```{r}
+tweets |>
+  mutate(
+    total_engagement = retweet_count + favorite_count,
+    .after = screen_name
+  ) |>
+  select(screen_name, total_engagement, retweet_count, favorite_count) |>
+  head(3)
+```
+
+Mit `.before = retweet_count` würde die neue Spalte direkt vor `retweet_count` erscheinen. Das ist praktisch, wenn ihr euren Datensatz übersichtlich halten wollt, ohne danach extra `relocate()` aufrufen zu müssen.
+
+### Spalten behalten oder verwerfen mit `.keep`
+
+Der Parameter `.keep` steuert, welche der bestehenden Spalten im Ergebnis erhalten bleiben. Es gibt vier Optionen:
+
+| `.keep` | Verhalten |
+|---|---|
+| `"all"` | Alle Spalten behalten (Standard) |
+| `"used"` | Nur die Spalten behalten, die in der Berechnung verwendet wurden |
+| `"unused"` | Nur die Spalten behalten, die *nicht* in der Berechnung verwendet wurden |
+| `"none"` | Keine bestehenden Spalten behalten, nur die neuen |
+
+Schauen wir uns die Unterschiede an. Mit `"used"` behaltet ihr nur die Spalten, aus denen die neue Variable berechnet wurde:
+
+```{r}
+tweets |>
+  mutate(
+    total_engagement = retweet_count + favorite_count,
+    .keep = "used"
+  ) |>
+  head(3)
+```
+
+Das Ergebnis enthält `retweet_count`, `favorite_count` und `total_engagement`, aber keine der anderen Spalten. Das ist nützlich, wenn ihr schnell prüfen wollt, ob eure Berechnung stimmt.
+
+Mit `"none"` behaltet ihr ausschließlich die neuen Variablen:
+
+```{r}
+tweets |>
+  mutate(
+    user = screen_name,
+    total_engagement = retweet_count + favorite_count,
+    .keep = "none"
+  ) |>
+  head(3)
+```
+
+### `transmute()` als Alternative
+
+`mutate(..., .keep = "none")` macht genau das Gleiche wie `transmute()`. Die Funktion `transmute()` existierte bereits, bevor `.keep` eingeführt wurde, und ist eine kürzere Schreibweise:
+
+```{r}
+tweets |>
+  transmute(
+    user = screen_name,
+    total_engagement = retweet_count + favorite_count,
+    engagement_ratio = retweet_count / total_engagement
+  ) |>
+  head(5)
+```
+
+Welchen Weg ihr wählt, ist Geschmackssache. `transmute()` ist etwas kürzer, `mutate(..., .keep = "none")` macht die Absicht über den Parameter expliziter.
+
+## Kurz zusammengefasst {#sec-mutate-add-zusammenfassung}
+
+- Mit `mutate()` erstellt ihr neue Variablen, indem ihr links vom `=` einen neuen Namen vergebt.
+- Ihr könnt arithmetisch rechnen, Texte zusammensetzen und bedingte Werte mit `if_else()` oder `case_when()` erzeugen.
+- Fensterfunktionen wie `lag()`, `lead()`, `cumsum()` und `min_rank()` berechnen Werte im Kontext umliegender Zeilen.
+- Mit `group_by() |> mutate()` laufen Berechnungen innerhalb von Gruppen, ohne den Datensatz zu komprimieren.
+- Mit `.before` und `.after` steuert ihr die Position neuer Spalten.
+- Mit `.keep` bestimmt ihr, welche bestehenden Spalten erhalten bleiben (`"all"`, `"used"`, `"unused"`, `"none"`).
+- `transmute()` ist eine Kurzform für `mutate(..., .keep = "none")`.
+
+Mit `select()` und `mutate()` könnt ihr Spalten auswählen, verändern und neue berechnen. Im nächsten Kapitel dreht sich alles um die Frage, welche Zeilen für eure Analyse relevant sind (siehe @sec-filter).

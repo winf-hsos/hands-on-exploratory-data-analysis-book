@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.20">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>7&nbsp; Daten kennenlernen – Hands-On Exploratory Data Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-data-transformation/select.html" rel="next">
+<link href="../03-data-transformation/pipe.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/exploring-data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Hands-On Exploratory Data Analytics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Hintergründe</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/empirical-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Erste Schritte mit R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datentransformation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datenvisualisierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfragen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quellen</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#sec-exploring-data-dimensions" id="toc-sec-exploring-data-dimensions" class="nav-link active" data-scroll-target="#sec-exploring-data-dimensions"><span class="header-section-number">7.1</span> Dimensionen und Spalten</a></li>
+  <li><a href="#sec-exploring-data-first-rows" id="toc-sec-exploring-data-first-rows" class="nav-link" data-scroll-target="#sec-exploring-data-first-rows"><span class="header-section-number">7.2</span> Erste Zeilen anschauen</a></li>
+  <li><a href="#sec-exploring-data-glimpse" id="toc-sec-exploring-data-glimpse" class="nav-link" data-scroll-target="#sec-exploring-data-glimpse"><span class="header-section-number">7.3</span> Struktur mit <code>glimpse()</code></a></li>
+  <li><a href="#sec-exploring-data-summary" id="toc-sec-exploring-data-summary" class="nav-link" data-scroll-target="#sec-exploring-data-summary"><span class="header-section-number">7.4</span> Statistische Übersicht mit <code>summary()</code></a></li>
+  <li><a href="#sec-exploring-data-missing" id="toc-sec-exploring-data-missing" class="nav-link" data-scroll-target="#sec-exploring-data-missing"><span class="header-section-number">7.5</span> Fehlende Werte erkennen</a></li>
+  <li><a href="#sec-exploring-data-count" id="toc-sec-exploring-data-count" class="nav-link" data-scroll-target="#sec-exploring-data-count"><span class="header-section-number">7.6</span> Häufigkeiten mit <code>count()</code></a></li>
+  <li><a href="#sec-exploring-data-skimr" id="toc-sec-exploring-data-skimr" class="nav-link" data-scroll-target="#sec-exploring-data-skimr"><span class="header-section-number">7.7</span> Kompakte Übersicht mit <code>skimr</code></a></li>
+  <li><a href="#sec-exploring-data-checklist" id="toc-sec-exploring-data-checklist" class="nav-link" data-scroll-target="#sec-exploring-data-checklist"><span class="header-section-number">7.8</span> Eine Checkliste für neue Datensätze</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/exploring-data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-exploring-data" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Ihr habt gelernt, wie ihr Daten aus verschiedenen Quellen laden könnt, und ihr kennt die Pipe als Werkzeug, um Schritte sauber aneinanderzureihen. Dieses Kapitel widmet sich dem nächsten logischen Schritt: Euren Datensatz kennenzulernen, bevor ihr ihn verändert. Wir befassen uns damit, wie ihr die Größe des Datensatzes bestimmt, Spalten und Datentypen überblickt, fehlende Werte aufspürt und erste statistische Kennzahlen ermittelt.</p>
+<p>Dieser explorative Schritt ist enorm wichtig für den weiteren Verlauf eurer Arbeit, wird aber oft aus Ungeduld übersprungen. Wer sich die Zeit nimmt, seine Daten initial gründlich zu prüfen, versteht nicht nur die inhaltlichen Zusammenhänge besser, sondern erkennt auch Probleme wie verschmutzte Daten frühzeitig. Das spart später viel Zeit, weil ihr genau wisst, wo ihr ansetzen müsst, statt euch mitten in der Analyse über unerwartete Fehler zu wundern.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Funktion</th>
+<th>Paket</th>
+<th>Beschreibung</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>glimpse()</code></td>
+<td><code>dplyr</code></td>
+<td>Kompakte Spaltenübersicht mit Datentypen und ersten Werten</td>
+</tr>
+<tr class="even">
+<td>
+<code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> / <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code>
+</td>
+<td>Base R</td>
+<td>Erste bzw. letzte Zeilen anzeigen</td>
+</tr>
+<tr class="odd">
+<td>
+<code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> / <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code>
+</td>
+<td>Base R</td>
+<td>Anzahl Zeilen bzw. Spalten</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://rdrr.io/r/base/names.html">names()</a></code></td>
+<td>Base R</td>
+<td>Spaltennamen als Vektor</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code></td>
+<td>Base R</td>
+<td>Statistische Kennzahlen pro Spalte</td>
+</tr>
+<tr class="even">
+<td><code>count()</code></td>
+<td><code>dplyr</code></td>
+<td>Häufigkeiten von Werten zählen</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code></td>
+<td><code>skimr</code></td>
+<td>Ausführliche Übersicht nach Datentyp</td>
+</tr>
+</tbody>
+</table>
+<section id="sec-exploring-data-dimensions" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sec-exploring-data-dimensions">
+<span class="header-section-number">7.1</span> Dimensionen und Spalten</h2>
+<p>Die erste Frage bei einem neuen Datensatz ist: Wie groß ist er? Mit <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> und <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code> bekommt ihr die Anzahl der Zeilen und Spalten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58421</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22</code></pre>
+</div>
+</div>
+<p>Unser Tweets-Datensatz hat also 58.421 Zeilen und 22 Spalten. Jede Zeile steht für einen Tweet, jede Spalte für eine Eigenschaft dieses Tweets.</p>
+<p>Welche Spalten gibt es überhaupt? Mit <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> bekommt ihr die Spaltennamen als Vektor:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "id"                      "screen_name"            
+ [3] "text"                    "retweet_count"          
+ [5] "favorite_count"          "is_quote_status"        
+ [7] "is_retweet"              "retweeted_status_id"    
+ [9] "retweeted_user"          "lang"                   
+[11] "hashtags"                "urls"                   
+[13] "user_mentions"           "photos"                 
+[15] "source"                  "insert_timestamp"       
+[17] "created_at"              "quote_count"            
+[19] "reply_count"             "in_reply_to_screen_name"
+[21] "in_reply_to_status_id"   "quoted_status_id"       </code></pre>
+</div>
+</div>
+<p>Das ist nützlich, wenn ihr schnell nachschauen wollt, wie eine Spalte genau heißt. Denn Tippfehler in Spaltennamen führen sofort zu Fehlermeldungen.</p>
+</section><section id="sec-exploring-data-first-rows" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="sec-exploring-data-first-rows">
+<span class="header-section-number">7.2</span> Erste Zeilen anschauen</h2>
+<p>Ein Blick auf die ersten Zeilen gibt euch ein Gefühl dafür, wie die Daten aussehen. Dafür gibt es <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 22
+  id              screen_name text  retweet_count favorite_count is_quote_status
+  &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt; &lt;lgl&gt;          
+1 16422519457326… cem_oezdem… "RT …            23              0 FALSE          
+2 16424168190037… W_Schmidt_  "RT …         10659              0 FALSE          
+3 16420826297962… lisapaus    "@Ha…             1              3 FALSE          
+4 16420901117005… lisapaus    "@an…             1             11 FALSE          
+5 16425327413662… Wissing     "\U0…             6             25 FALSE          
+# ℹ 16 more variables: is_retweet &lt;lgl&gt;, retweeted_status_id &lt;chr&gt;,
+#   retweeted_user &lt;chr&gt;, lang &lt;chr&gt;, hashtags &lt;list&gt;, urls &lt;list&gt;,
+#   user_mentions &lt;list&gt;, photos &lt;list&gt;, source &lt;chr&gt;, insert_timestamp &lt;chr&gt;,
+#   created_at &lt;dttm&gt;, quote_count &lt;dbl&gt;, reply_count &lt;dbl&gt;,
+#   in_reply_to_screen_name &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+#   quoted_status_id &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Und wenn ihr lieber die letzten Zeilen sehen wollt, nutzt ihr <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 22
+  id              screen_name text  retweet_count favorite_count is_quote_status
+  &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt; &lt;lgl&gt;          
+1 15326104607968… lisapaus    RT @…            30              0 FALSE          
+2 15323909393014… cem_oezdem… RT @…             6              0 FALSE          
+3 15402350357097… SteffiLemke RT @…            63              0 FALSE          
+4 15449926952901… cem_oezdem… RT @…            54              0 FALSE          
+5 15449677044775… lisapaus    RT @…           138              0 FALSE          
+# ℹ 16 more variables: is_retweet &lt;lgl&gt;, retweeted_status_id &lt;chr&gt;,
+#   retweeted_user &lt;chr&gt;, lang &lt;chr&gt;, hashtags &lt;list&gt;, urls &lt;list&gt;,
+#   user_mentions &lt;list&gt;, photos &lt;list&gt;, source &lt;chr&gt;, insert_timestamp &lt;chr&gt;,
+#   created_at &lt;dttm&gt;, quote_count &lt;dbl&gt;, reply_count &lt;dbl&gt;,
+#   in_reply_to_screen_name &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+#   quoted_status_id &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>In der Praxis reichen oft die ersten fünf bis zehn Zeilen, um zu erkennen, ob die Daten plausibel aussehen. Sind die Spalten richtig benannt? Stehen dort Werte, die Sinn ergeben? Sehen Zahlen wie Zahlen aus und Texte wie Texte?</p>
+</section><section id="sec-exploring-data-glimpse" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="sec-exploring-data-glimpse">
+<span class="header-section-number">7.3</span> Struktur mit <code>glimpse()</code>
+</h2>
+<p><code>glimpse()</code> aus <code>dplyr</code> ist eine der nützlichsten Funktionen, um sich schnell einen Überblick zu verschaffen. Sie zeigt euch für jede Spalte den Namen, den Datentyp und die ersten Werte:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 58,421
+Columns: 22
+$ id                      &lt;chr&gt; "1642251945732653057", "1642416819003707397", …
+$ screen_name             &lt;chr&gt; "cem_oezdemir", "W_Schmidt_", "lisapaus", "lis…
+$ text                    &lt;chr&gt; "RT @BriHasselmann: Endlich! Wir sind drangebl…
+$ retweet_count           &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10…
+$ favorite_count          &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58,…
+$ is_quote_status         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALS…
+$ is_retweet              &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ retweeted_status_id     &lt;chr&gt; "1642158717113081856", "1641976869460275201", …
+$ retweeted_user          &lt;chr&gt; "BriHasselmann", "aakashg0", NA, NA, NA, NA, N…
+$ lang                    &lt;chr&gt; "de", "en", "de", "de", "qme", "de", "de", "de…
+$ hashtags                &lt;list&gt; &lt;"Tierhaltungskennzeichnung", "Wettbewerb"&gt;, …
+$ urls                    &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
+$ user_mentions           &lt;list&gt; "BriHasselmann", "aakashg0", &lt;"HassoSuliak", …
+$ photos                  &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
+$ source                  &lt;chr&gt; "&lt;a href=\"http://twitter.com/download/iphone\…
+$ insert_timestamp        &lt;chr&gt; "2023-04-02 03:00:04.749 UTC", "2023-04-02 07:…
+$ created_at              &lt;dttm&gt; 2023-04-01 19:45:50, 2023-04-02 06:40:58, 202…
+$ quote_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ reply_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ in_reply_to_screen_name &lt;chr&gt; NA, NA, "HassoSuliak", "andiewoerle", "Wissing…
+$ in_reply_to_status_id   &lt;chr&gt; NA, NA, "1642059841169502210", "16420886499603…
+$ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "16424095440462397…</code></pre>
+</div>
+</div>
+<p>Warum ist <code>glimpse()</code> so praktisch? Weil ihr auf einen Blick seht, ob die Datentypen stimmen. Wenn eine Spalte, die Zahlen enthalten sollte, als <code>chr</code> (Text) angezeigt wird, wisst ihr sofort, dass etwas beim Laden schiefgegangen ist. Und wenn eine Datumsspalte als <code>dttm</code> erscheint, könnt ihr sicher sein, dass R sie als Zeitstempel erkannt hat.</p>
+<p>Im Tweets-Datensatz seht ihr zum Beispiel:</p>
+<ul>
+<li>
+<code>screen_name</code> und <code>text</code> sind Text (<code>chr</code>)</li>
+<li>
+<code>retweet_count</code> und <code>favorite_count</code> sind ganze Zahlen (<code>int</code>)</li>
+<li>
+<code>created_at</code> ist ein Zeitstempel (<code>dttm</code>)</li>
+<li>
+<code>is_retweet</code> ist ein logischer Wert (<code>lgl</code>), also <code>TRUE</code> oder <code>FALSE</code>
+</li>
+</ul>
+<p>Diese Information braucht ihr immer wieder, wenn ihr später mit <code>mutate()</code> oder <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> arbeitet. Deshalb schaut euch <code>glimpse()</code> am besten direkt nach dem Laden eurer Daten an.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="glimpse() vs. str()">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>glimpse() vs.&nbsp;str()
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Die Base-R-Funktion <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> liefert ähnliche Informationen wie <code>glimpse()</code>, aber in einem weniger lesbaren Format. Im Tidyverse ist <code>glimpse()</code> die bevorzugte Wahl.</p>
+</div>
+</div>
+</section><section id="sec-exploring-data-summary" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="sec-exploring-data-summary">
+<span class="header-section-number">7.4</span> Statistische Übersicht mit <code>summary()</code>
+</h2>
+<p>Während <code>glimpse()</code> euch die Struktur zeigt, liefert <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> statistische Kennzahlen. Für numerische Spalten bekommt ihr Minimum, Maximum, Mittelwert, Median und Quartile. Für Text- und Faktorspalten bekommt ihr die Häufigkeiten der häufigsten Werte.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">is_retweet</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> retweet_count      favorite_count     is_retweet     
+ Min.   :     0.0   Min.   :     0.0   Mode :logical  
+ 1st Qu.:     2.0   1st Qu.:     0.0   FALSE:35757    
+ Median :     9.0   Median :     3.0   TRUE :22664    
+ Mean   :   139.7   Mean   :   374.4                  
+ 3rd Qu.:    35.0   3rd Qu.:    84.0                  
+ Max.   :434571.0   Max.   :105493.0                  </code></pre>
+</div>
+</div>
+<p>Was sagt euch diese Ausgabe? Schaut euch den Mittelwert und den Median an. Wenn die beiden weit auseinanderliegen, deutet das auf eine schiefe Verteilung hin. Bei <code>retweet_count</code> ist das typisch: Die meisten Tweets haben wenige Retweets, aber ein paar wenige haben sehr viele. Der Mittelwert wird von diesen Ausreißern nach oben gezogen, der Median bleibt davon unbeeindruckt.</p>
+<p>Auch das Maximum ist aufschlussreich. Wenn dort ein unplausibel hoher Wert steht, habt ihr vielleicht einen Datenfehler entdeckt.</p>
+</section><section id="sec-exploring-data-missing" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="sec-exploring-data-missing">
+<span class="header-section-number">7.5</span> Fehlende Werte erkennen</h2>
+<p>Fehlende Werte sind in echten Datensätzen völlig normal. Nicht jeder Tweet ist eine Antwort auf einen anderen, also ist <code>in_reply_to_screen_name</code> oft leer. Aber ihr solltet wissen, wie viele fehlende Werte es gibt und wo sie auftreten, bevor ihr mit der Analyse beginnt.</p>
+<p>Mit <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> und <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> könnt ihr die fehlenden Werte pro Spalte zählen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    na_reply_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">in_reply_to_screen_name</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    na_quoted <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">quoted_status_id</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    na_retweets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">retweet_count</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  na_reply_to na_quoted na_retweets
+        &lt;int&gt;     &lt;int&gt;       &lt;int&gt;
+1       44922     49507           0</code></pre>
+</div>
+</div>
+<p>Das funktioniert, ist aber mühsam, wenn ihr viele Spalten prüfen wollt. Eleganter geht es mit <code>across()</code>, das ihr später noch im Detail kennenlernt (siehe <a href="mutate-modify.html#sec-mutate-modify-across" class="quarto-xref"><span>Kapitel 9.9</span></a>). Hier ein Vorgeschmack:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1
+Columns: 22
+$ id                      &lt;int&gt; 0
+$ screen_name             &lt;int&gt; 0
+$ text                    &lt;int&gt; 0
+$ retweet_count           &lt;int&gt; 0
+$ favorite_count          &lt;int&gt; 0
+$ is_quote_status         &lt;int&gt; 0
+$ is_retweet              &lt;int&gt; 0
+$ retweeted_status_id     &lt;int&gt; 35757
+$ retweeted_user          &lt;int&gt; 35757
+$ lang                    &lt;int&gt; 0
+$ hashtags                &lt;int&gt; 0
+$ urls                    &lt;int&gt; 0
+$ user_mentions           &lt;int&gt; 0
+$ photos                  &lt;int&gt; 0
+$ source                  &lt;int&gt; 0
+$ insert_timestamp        &lt;int&gt; 0
+$ created_at              &lt;int&gt; 0
+$ quote_count             &lt;int&gt; 0
+$ reply_count             &lt;int&gt; 0
+$ in_reply_to_screen_name &lt;int&gt; 44922
+$ in_reply_to_status_id   &lt;int&gt; 45073
+$ quoted_status_id        &lt;int&gt; 49507</code></pre>
+</div>
+</div>
+<p>So seht ihr auf einen Blick, welche Spalten fehlende Werte haben und wie viele. Spalten mit null fehlenden Werten sind unkritisch. Bei Spalten mit vielen <code>NA</code>-Werten müsst ihr euch überlegen, wie ihr damit umgehen wollt: ignorieren, ersetzen oder die betroffenen Zeilen ausschließen.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Fehlende Werte sind Information">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Fehlende Werte sind Information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ein <code>NA</code> bedeutet nicht, dass etwas kaputt ist. Es bedeutet, dass die Information nicht vorhanden ist. Ein Tweet ohne <code>in_reply_to_screen_name</code> ist kein Fehler, sondern einfach kein Reply. Behandelt fehlende Werte also nicht reflexartig als Problem, sondern fragt euch immer, warum sie fehlen.</p>
+</div>
+</div>
+</section><section id="sec-exploring-data-count" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="sec-exploring-data-count">
+<span class="header-section-number">7.6</span> Häufigkeiten mit <code>count()</code>
+</h2>
+<p>Bei kategorialen Variablen, also Spalten mit einer begrenzten Anzahl möglicher Werte, wollt ihr wissen, wie die Werte verteilt sind. Welche Accounts twittern am meisten? In welcher Sprache wird getwittert? Wie viele Tweets sind Retweets?</p>
+<p>Dafür ist <code>count()</code> aus <code>dplyr</code> das perfekte Werkzeug:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">is_retweet</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  is_retweet     n
+  &lt;lgl&gt;      &lt;int&gt;
+1 FALSE      35757
+2 TRUE       22664</code></pre>
+</div>
+</div>
+<p>Ungefähr die Hälfte der Tweets sind Retweets. Das ist eine wichtige Information, denn bei vielen Analysen wollt ihr Retweets ausschließen, um nur Original-Inhalte zu betrachten.</p>
+<p>Welche Sprachen kommen vor?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">lang</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   lang      n
+   &lt;chr&gt; &lt;int&gt;
+ 1 de    53574
+ 2 en     2824
+ 3 und    1165
+ 4 tr      167
+ 5 in       99
+ 6 fr       81
+ 7 es       76
+ 8 nl       60
+ 9 pl       60
+10 pt       44</code></pre>
+</div>
+</div>
+<p>Und welche Accounts sind am aktivsten?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">screen_name</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   screen_name         n
+   &lt;chr&gt;           &lt;int&gt;
+ 1 c_lindner        5172
+ 2 MarcoBuschmann   5171
+ 3 cem_oezdemir     4704
+ 4 lisapaus         4260
+ 5 Karl_Lauterbach  4139
+ 6 W_Schmidt_       3936
+ 7 SvenjaSchulze68  3856
+ 8 starkwatzinger   3848
+ 9 hubertus_heil    3751
+10 SteffiLemke      3581</code></pre>
+</div>
+</div>
+<p>Mit <code>sort = TRUE</code> sortiert <code>count()</code> direkt absteigend nach Häufigkeit. Das spart euch ein zusätzliches <code>arrange()</code>.</p>
+<p>Ihr könnt auch nach mehreren Variablen gleichzeitig zählen. Zum Beispiel: Wie verteilen sich Original-Tweets und Retweets auf die Accounts?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">is_retweet</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   screen_name     is_retweet     n
+   &lt;chr&gt;           &lt;lgl&gt;      &lt;int&gt;
+ 1 MarcoBuschmann  FALSE       4436
+ 2 Karl_Lauterbach FALSE       4018
+ 3 starkwatzinger  FALSE       2942
+ 4 c_lindner       FALSE       2931
+ 5 cem_oezdemir    TRUE        2828
+ 6 Wissing         FALSE       2447
+ 7 hubertus_heil   TRUE        2390
+ 8 c_lindner       TRUE        2241
+ 9 lisapaus        TRUE        2162
+10 klara_geywitz   FALSE       2118</code></pre>
+</div>
+</div>
+<p><code>count()</code> wird euch im ganzen Buch immer wieder begegnen, weil es die schnellste Art ist, sich einen Überblick über kategoriale Variablen zu verschaffen. Mehr zu <code>count()</code> und verwandten Funktionen erfahrt ihr im Kapitel über <code>summarise()</code> (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 12</span></a>).</p>
+</section><section id="sec-exploring-data-skimr" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="sec-exploring-data-skimr">
+<span class="header-section-number">7.7</span> Kompakte Übersicht mit <code>skimr</code>
+</h2>
+<p>Wenn ihr alles auf einmal sehen wollt, ohne einzelne Funktionen nacheinander aufzurufen, ist das Paket <code>skimr</code> eine ausgezeichnete Wahl. Die Funktion <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> liefert eine umfassende Übersicht, die nach Datentypen gruppiert ist:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">text</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">is_retweet</span>, <span class="va">created_at</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">select(…)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">58421</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">logical</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">POSIXct</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">screen_name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">text</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">612</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">57844</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: left;">count</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: left;">is_retweet</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.39</td>
+<td style="text-align: left;">FAL: 35757, TRU: 22664</td>
+</tr></tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 7%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">retweet_count</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">139.66</td>
+<td style="text-align: right;">3087.42</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">434571</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">favorite_count</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">374.35</td>
+<td style="text-align: right;">1698.97</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">105493</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: POSIXct</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 8%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">min</th>
+<th style="text-align: left;">max</th>
+<th style="text-align: left;">median</th>
+<th style="text-align: right;">n_unique</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: left;">created_at</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2012-06-27 17:02:20</td>
+<td style="text-align: left;">2023-04-04 09:37:10</td>
+<td style="text-align: left;">2021-05-20 06:58:42</td>
+<td style="text-align: right;">56972</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<p><code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> zeigt euch für jede Spalte unterschiedliche Kennzahlen, je nach Datentyp:</p>
+<ul>
+<li>Für <strong>numerische Spalten</strong>: Mittelwert, Standardabweichung, Quartile und ein kleines Histogramm</li>
+<li>Für <strong>Text-Spalten</strong>: Anzahl fehlender Werte, kürzeste und längste Zeichenkette, Anzahl eindeutiger Werte</li>
+<li>Für <strong>logische Spalten</strong>: Anzahl <code>TRUE</code> und <code>FALSE</code>
+</li>
+<li>Für <strong>Datum/Zeit-Spalten</strong>: Frühestes und spätestes Datum</li>
+</ul>
+<p>Das kleine Histogramm in der Spalte <code>hist</code> ist besonders praktisch: Es zeigt euch auf einen Blick, ob die Verteilung symmetrisch, schief oder gleichmäßig ist, ganz ohne einen Plot erstellen zu müssen.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="skimr vs. summary()">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>skimr vs.&nbsp;summary()
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> liefert die klassischen R-Kennzahlen und funktioniert ohne zusätzliches Paket. <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> bietet mehr Informationen, eine klarere Struktur und die kleinen Histogramme. Für eine schnelle Prüfung reicht <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, für eine gründliche Erstuntersuchung ist <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> die bessere Wahl.</p>
+</div>
+</div>
+</section><section id="sec-exploring-data-checklist" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="sec-exploring-data-checklist">
+<span class="header-section-number">7.8</span> Eine Checkliste für neue Datensätze</h2>
+<p>Wenn ihr einen neuen Datensatz bekommt, könnt ihr euch an dieser Reihenfolge orientieren:</p>
+<ol type="1">
+<li>
+<strong>Dimensionen prüfen</strong>: <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> und <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code> – wie groß ist der Datensatz?</li>
+<li>
+<strong>Struktur ansehen</strong>: <code>glimpse()</code> – welche Spalten gibt es, welche Datentypen liegen vor?</li>
+<li>
+<strong>Erste Zeilen inspizieren</strong>: <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> – sehen die Werte plausibel aus?</li>
+<li>
+<strong>Fehlende Werte zählen</strong>: <code>summarise(across(everything(), \(x) sum(is.na(x))))</code> – wo fehlen Daten?</li>
+<li>
+<strong>Kategorien erkunden</strong>: <code>count()</code> – wie sind kategoriale Variablen verteilt?</li>
+<li>
+<strong>Statistische Kennzahlen</strong>: <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> oder <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> – wie verteilen sich numerische Werte?</li>
+</ol>
+<p>Diese Reihenfolge hilft euch, systematisch vorzugehen, statt planlos in den Daten herumzustochern. In den folgenden Kapiteln werden wir den Tweets-Datensatz Stück für Stück auseinandernehmen. Dafür braucht ihr die Werkzeuge, die jetzt kommen: Spalten auswählen mit <code>select()</code> (siehe <a href="select.html" class="quarto-xref"><span>Kapitel 8</span></a>), Variablen verändern mit <code>mutate()</code> (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 9</span></a>) und Zeilen filtern mit <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 11</span></a>).</p>
+<p>Jetzt, da ihr den Datensatz kennt und wisst, was euch erwartet, können wir mit der eigentlichen Arbeit beginnen. Im nächsten Kapitel lernt ihr, wie ihr mit <code>select()</code> gezielt die Spalten auswählt, die ihr für eine bestimmte Frage braucht.</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../03-data-transformation/pipe.html" class="pagination-link" aria-label="Pipe-Operator">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-data-transformation/select.html" class="pagination-link" aria-label="Variablen auswählen">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

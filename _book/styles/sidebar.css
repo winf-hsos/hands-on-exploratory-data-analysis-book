@@ -1,0 +1,36 @@
+:root {
+  --bs-link-color: #009ee3;
+  --bs-link-hover-color: #009ee3;
+}
+
+a:hover,
+a:focus {
+  color: #009ee3;
+}
+
+.sidebar-navigation .sidebar-item-container .active,
+.sidebar-navigation .sidebar-item-container .active .sidebar-item-text,
+.sidebar-navigation .sidebar-item-container .active code {
+  color: #009ee3 !important;
+}
+
+#TOC .nav-link.active,
+#TOC .nav-link.active:focus,
+#TOC .nav-link.active:hover {
+  color: #009ee3 !important;
+  border-left-color: #009ee3 !important;
+}
+
+#TOC .nav-link:hover,
+#TOC .nav-link:focus {
+  color: #009ee3 !important;
+}
+
+.page-navigation a:hover,
+.page-navigation a:hover .nav-page-text,
+.page-navigation a:hover .bi,
+.page-navigation a:focus,
+.page-navigation a:focus .nav-page-text,
+.page-navigation a:focus .bi {
+  color: #009ee3 !important;
+}

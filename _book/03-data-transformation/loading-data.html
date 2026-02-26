@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.20">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>5&nbsp; Daten laden – Hands-On Exploratory Data Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-data-transformation/pipe.html" rel="next">
+<link href="../02-r-basics/data-representation.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Hands-On Exploratory Data Analytics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Hintergründe</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/empirical-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Erste Schritte mit R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datentransformation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datenvisualisierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfragen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quellen</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#sec-loading-data-dateiformate" id="toc-sec-loading-data-dateiformate" class="nav-link active" data-scroll-target="#sec-loading-data-dateiformate"><span class="header-section-number">5.1</span> Dateiformate</a></li>
+  <li>
+<a href="#sec-loading-data-csv" id="toc-sec-loading-data-csv" class="nav-link" data-scroll-target="#sec-loading-data-csv"><span class="header-section-number">5.2</span> CSV-Dateien</a>
+  <ul class="collapse">
+<li><a href="#sec-loading-data-trennzeichen" id="toc-sec-loading-data-trennzeichen" class="nav-link" data-scroll-target="#sec-loading-data-trennzeichen">Trennzeichen</a></li>
+  <li><a href="#sec-loading-data-encoding" id="toc-sec-loading-data-encoding" class="nav-link" data-scroll-target="#sec-loading-data-encoding">Zeichenkodierung</a></li>
+  <li><a href="#sec-loading-data-dezimal" id="toc-sec-loading-data-dezimal" class="nav-link" data-scroll-target="#sec-loading-data-dezimal">Dezimaltrennzeichen</a></li>
+  <li><a href="#sec-loading-data-header" id="toc-sec-loading-data-header" class="nav-link" data-scroll-target="#sec-loading-data-header">Kopfzeilen</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-loading-data-json" id="toc-sec-loading-data-json" class="nav-link" data-scroll-target="#sec-loading-data-json"><span class="header-section-number">5.3</span> JSON und JSONL</a>
+  <ul class="collapse">
+<li><a href="#sec-loading-data-json-laden" id="toc-sec-loading-data-json-laden" class="nav-link" data-scroll-target="#sec-loading-data-json-laden">JSON-Dateien laden</a></li>
+  <li><a href="#sec-loading-data-jsonl" id="toc-sec-loading-data-jsonl" class="nav-link" data-scroll-target="#sec-loading-data-jsonl">JSONL</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-loading-data-excel" id="toc-sec-loading-data-excel" class="nav-link" data-scroll-target="#sec-loading-data-excel"><span class="header-section-number">5.4</span> Excel-Dateien</a>
+  <ul class="collapse">
+<li><a href="#sec-loading-data-excel-sheets" id="toc-sec-loading-data-excel-sheets" class="nav-link" data-scroll-target="#sec-loading-data-excel-sheets">Arbeitsblätter auswählen</a></li>
+  <li><a href="#sec-loading-data-excel-ranges" id="toc-sec-loading-data-excel-ranges" class="nav-link" data-scroll-target="#sec-loading-data-excel-ranges">Bereiche und Kopfzeilen</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-loading-data-google" id="toc-sec-loading-data-google" class="nav-link" data-scroll-target="#sec-loading-data-google"><span class="header-section-number">5.5</span> Google Sheets</a>
+  <ul class="collapse">
+<li><a href="#sec-loading-data-google-auth" id="toc-sec-loading-data-google-auth" class="nav-link" data-scroll-target="#sec-loading-data-google-auth">Authentifizierung</a></li>
+  <li><a href="#sec-loading-data-google-sheets" id="toc-sec-loading-data-google-sheets" class="nav-link" data-scroll-target="#sec-loading-data-google-sheets">Arbeitsblätter und Bereiche</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-loading-data-rds" id="toc-sec-loading-data-rds" class="nav-link" data-scroll-target="#sec-loading-data-rds"><span class="header-section-number">5.6</span> RDS-Dateien</a>
+  <ul class="collapse">
+<li><a href="#sec-loading-data-rds-laden" id="toc-sec-loading-data-rds-laden" class="nav-link" data-scroll-target="#sec-loading-data-rds-laden">RDS-Dateien laden</a></li>
+  <li><a href="#sec-loading-data-rds-speichern" id="toc-sec-loading-data-rds-speichern" class="nav-link" data-scroll-target="#sec-loading-data-rds-speichern">RDS-Dateien speichern</a></li>
+  <li><a href="#sec-loading-data-rds-wann" id="toc-sec-loading-data-rds-wann" class="nav-link" data-scroll-target="#sec-loading-data-rds-wann">Wann RDS verwenden?</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-loading-data-zusammenfassung" id="toc-sec-loading-data-zusammenfassung" class="nav-link" data-scroll-target="#sec-loading-data-zusammenfassung"><span class="header-section-number">5.7</span> Kurz zusammengefasst</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-loading-data" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Jeder Analyseprozess beginnt mit dem Laden der Daten (s. <a href="#fig-loading-data-eda-process" class="quarto-xref">Abbildung&nbsp;<span>5.1</span></a>). In diesem Kapitel schauen wir uns an, wie ihr die gängigsten Datenformate in R laden könnt. Wir starten mit textbasierten Formaten wie CSV und JSON, gehen dann über zu binären Formaten wie Excel und RDS und werfen zuletzt einen Blick auf das Laden von Daten direkt aus Google Sheets.</p>
+<div id="fig-loading-data-eda-process" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-loading-data-eda-process-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="https://winf-hsos.github.io/university-docs/images/eda_process.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten."><img src="https://winf-hsos.github.io/university-docs/images/eda_process.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loading-data-eda-process-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten.
+</figcaption></figure>
+</div>
+<p>Zu wissen, wie man Daten aus verschiedenen Quellen importiert, ist grundlegend für jede Analyseaufgabe. In der Realität liegen Daten selten im perfekten R-Format vor, sondern verteilen sich über verschiedene Systeme, Dateitypen und Cloud-Dienste. Wer diese Formate souverän in R überführen kann, spart sich von Anfang an viel Zeit und frustrierende manuelle Zwischenschritte.</p>
+<p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header">
+<th>Funktion</th>
+<th>Paket</th>
+<th>Beschreibung</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code>read_csv()</code> / <code>read_csv2()</code>
+</td>
+<td><code>readr</code></td>
+<td>CSV-Dateien laden</td>
+</tr>
+<tr class="even">
+<td><code>read_delim()</code></td>
+<td><code>readr</code></td>
+<td>Textdateien mit beliebigem Trennzeichen laden</td>
+</tr>
+<tr class="odd">
+<td>
+<code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> / <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code>
+</td>
+<td><code>jsonlite</code></td>
+<td>JSON- und JSONL-Dateien laden</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code></td>
+<td><code>readxl</code></td>
+<td>Excel-Dateien laden</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet()</a></code></td>
+<td><code>googlesheets4</code></td>
+<td>Google Sheets laden</td>
+</tr>
+<tr class="even">
+<td><code>read_rds()</code></td>
+<td><code>readr</code></td>
+<td>RDS-Dateien laden</td>
+</tr>
+</tbody>
+</table>
+<p>Zunächst beschäftigen wir uns mit den grundlegenden Dateiformaten, aus denen wir Daten laden können.</p>
+<section id="sec-loading-data-dateiformate" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="sec-loading-data-dateiformate">
+<span class="header-section-number">5.1</span> Dateiformate</h2>
+<p>Daten im Computer speichern wir üblicherweise in Dateien. Ein Datensatz kann dabei aus einer oder mehreren Dateien bestehen. Auf der untersten Ebene enthält eine Datei Daten in Form von Nullen und Einsen, denn der Computer arbeitet mit Bits und dem Binärsystem.</p>
+<p>In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern:</p>
+<ul>
+<li>Als Textdatei</li>
+<li>Als Binärdatei</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="..\images/data-file-formats.svg" class="img-fluid figure-img"></p>
+<figcaption>Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.</figcaption></figure>
+</div>
+<p>Was ist der Unterschied? Eine Textdatei speichert die Daten in einem Format, das für Menschen lesbar ist. Die Daten werden als Zeichenfolge gespeichert, die über ein gängiges Kodierungssystem wie UTF-8 in lesbare Zeichen übersetzt werden kann. Beispiele für textbasierte Formate sind CSV (Comma-Separated Values), TSV (Tab-Separated Values) und JSON (JavaScript Object Notation). Ihr könnt solche Dateien in jedem beliebigen Texteditor öffnen und lesen. Das ist der große Vorteil: Sie sind einfach zu verstehen und zu bearbeiten.</p>
+<p>Binäre Formate kodieren die Daten nicht als Text, sondern in einem Format, das für den Computer effizienter zu lesen und zu schreiben ist. Beispiele sind Excel-Dateien (.xlsx), RDS-Dateien (.rds) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und benötigen weniger Speicherplatz. Allerdings sind sie nicht direkt von Menschen lesbar und erfordern spezielle Software.</p>
+</section><section id="sec-loading-data-csv" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-loading-data-csv">
+<span class="header-section-number">5.2</span> CSV-Dateien</h2>
+<p>Eines der gängigsten Datenformate ist CSV. CSV steht für “Comma-Separated Values” und ist ein einfaches textbasiertes Format, das Daten in tabellarischer Form speichert. Jede Zeile in einer CSV-Datei entspricht einer Zeile in der Tabelle, und die Werte werden durch Kommas getrennt. CSV-Dateien können von vielen Anwendungen erstellt und gelesen werden, einschließlich Tabellenkalkulationsprogrammen wie Microsoft Excel und Google Sheets.</p>
+<p>In R könnt ihr CSV-Dateien mit der Funktion <code>read_csv()</code> aus dem <code>readr</code>-Paket laden. Hier ein Beispiel:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/orders.csv"</span><span class="op">)</span></span>
+<span><span class="va">orders</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 68
+      order_id name  order_number app_id created_at          updated_at         
+         &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+1      1.13e12 B1014         1014 580111 2019-05-24 12:59:16 2019-06-19 13:23:26
+2      1.13e12 B1015         1015 580111 2019-05-24 13:09:08 2019-06-21 14:40:07
+3      1.13e12 B1016         1016 580111 2019-05-24 13:22:41 2019-06-21 12:35:23
+4      1.13e12 B1017         1017 580111 2019-05-24 13:27:43 2019-06-21 14:27:18
+5      1.13e12 B1018         1018 580111 2019-05-24 13:36:46 2019-06-21 12:11:57
+# ℹ 62 more variables: test &lt;lgl&gt;, current_subtotal_price &lt;dbl&gt;,
+#   current_total_price &lt;dbl&gt;, current_total_discounts &lt;dbl&gt;,
+#   current_total_duties_set &lt;dbl&gt;, total_discounts &lt;dbl&gt;,
+#   total_line_items_price &lt;dbl&gt;, total_outstanding &lt;dbl&gt;, total_price &lt;dbl&gt;,
+#   total_tax &lt;dbl&gt;, total_tip_received &lt;dbl&gt;, taxes_included &lt;lgl&gt;,
+#   discount_codes &lt;chr&gt;, financial_status &lt;chr&gt;, fulfillment_status &lt;chr&gt;,
+#   source_name &lt;chr&gt;, landing_site &lt;chr&gt;, landing_site_ref &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>Das hat funktioniert. Aber bei CSV-Dateien gibt es einige Dinge, die sich unterscheiden können und die ihr beim Laden berücksichtigen müsst.</p>
+<section id="sec-loading-data-trennzeichen" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-trennzeichen">Trennzeichen</h3>
+<p>In einigen Ländern, zum Beispiel in Deutschland, wird anstelle eines Kommas häufig ein Semikolon als Trennzeichen verwendet. Für diesen Fall gibt es die Funktion <code>read_csv2()</code>. Ob das Trennzeichen falsch eingestellt ist, erkennt ihr sofort am Ergebnis: Alle Werte werden in einer einzigen Spalte zusammengefasst, anstatt in mehreren Spalten verteilt zu sein. Schauen wir uns das kurz an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_wrong</span> <span class="op">&lt;-</span> <span class="fu">read_csv2</span><span class="op">(</span><span class="st">"data/orders.csv"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Wie in der Ausgabe zu sehen, wurde nur eine Spalte erkannt. Wenn wir uns Beispielwerte ausgeben lassen, sehen wir, dass alle Werte in dieser einen Spalte zusammengefasst wurden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">orders_wrong</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 1
+  order_id,name,order_number,app_id,created_at,updated_at,test,current_subtota…¹
+  &lt;chr&gt;                                                                         
+1 "1130007101519,B1014,1014,580111,2019-05-24T14:59:16+02:00,2019-06-19T15:23:2…
+2 "1130014965839,B1015,1015,580111,2019-05-24T15:09:08+02:00,2019-06-21T16:40:0…
+3 "1130026958927,B1016,1016,580111,2019-05-24T15:22:41+02:00,2019-06-21T14:35:2…
+4 "1130030563407,B1017,1017,580111,2019-05-24T15:27:43+02:00,2019-06-21T16:27:1…
+5 "1130038853711,B1018,1018,580111,2019-05-24T15:36:46+02:00,2019-06-21T14:11:5…
+6 "1130045964367,B1019,1019,580111,2019-05-24T15:44:41+02:00,2019-06-21T16:37:2…
+# ℹ abbreviated name:
+#   ¹​`order_id,name,order_number,app_id,created_at,updated_at,test,current_subtotal_price,current_total_price,current_total_discounts,current_total_duties_set,total_discounts,total_line_items_price,total_outstanding,total_price,total_tax,total_tip_received,taxes_included,discount_codes,financial_status,fulfillment_status,source_name,landing_site,landing_site_ref,location_id,note,tags,processed_at,processing_method,payment_details_gateway,payment_details_credit_card_company,customer_id,customer_accepts_marketing,customer_accepts_marketing_updated_at,customer_marketing_opt_in_level,customer_sms_marketing_consent,customer_created_at,customer_updated_at,customer_gender,customer_is_hsos,customer_state,customer_orders_count,customer_total_spent,customer_last_order_id,customer_note,customer_verified_email,customer_tax_exempt,customer_tags,customer_last_order_name,campaign_tag,shipping_address_city,shipping_address_zip,shipping_address_country,shipping_address_latitude,shipping_address_longitude,billing_address_city,billing_address_zip,billing_address_country,billing_address_company,billing_address_latitude,billing_address_longitude,client_details_browser_ip,client_details_browser_height,client_details_browser_width,client_details_user_agent,cancel_reason,cancelled_at,closed_at`</code></pre>
+</div>
+</div>
+<p>Die Funktion <code>read_csv2()</code> verwenden wir nur, wenn wirklich ein Semikolon als Trennzeichen verwendet wird. Bei einem Komma als Trennzeichen müssen wir <code>read_csv()</code> verwenden, damit die Werte korrekt in Spalten aufgeteilt werden.</p>
+<p>Neben dem Tabulator-Zeichen als weiterem gängigem Trennzeichen gibt es die allgemeine Funktion <code>read_delim()</code>, bei der ihr das Trennzeichen explizit angeben könnt. Die Tabelle gibt einen Überblick:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Funktion</th>
+<th>Trennzeichen</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>read_csv()</code></td>
+<td>Komma (<code>,</code>)</td>
+</tr>
+<tr class="even">
+<td><code>read_csv2()</code></td>
+<td>Semikolon (<code>;</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>read_tsv()</code></td>
+<td>Tabulator (<code>\t</code>)</td>
+</tr>
+<tr class="even">
+<td><code>read_delim()</code></td>
+<td>Beliebiges Trennzeichen (muss angegeben werden)</td>
+</tr>
+</tbody>
+</table>
+<p>Hier ein Beispiel für <code>read_delim()</code>, wenn das Trennzeichen ein Pipe-Symbol wäre:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_delim</span> <span class="op">&lt;-</span> <span class="fu">read_delim</span><span class="op">(</span><span class="st">"data/orders.csv"</span>, delim <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-loading-data-encoding" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-encoding">Zeichenkodierung</h3>
+<p>Textdateien speichern die Daten in einem bestimmten Kodierungsformat. In Deutschland war es lange üblich, das Kodierungsformat “ISO-8859-1” (auch “Latin-1” genannt) zu verwenden, während international “UTF-8” der Standard ist. Wenn die CSV-Datei in einem anderen Kodierungsformat vorliegt als erwartet, müssen wir dies beim Laden angeben.</p>
+<p>Da die meisten Dateien heute im UTF-8-Format vorliegen, ist dies auch die Standardeinstellung in den Funktionen von <code>readr</code>. Mit UTF-8 könnt ihr auch das ältere, aber immer noch verwendete ASCII-Zeichenset abdecken, weil UTF-8 rückwärtskompatibel ist. Liegt die CSV-Datei jedoch in einem anderen Format vor, gebt ihr es explizit an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_iso</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>, </span>
+<span>    locale <span class="op">=</span> <span class="fu">locale</span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"ISO-8859-1"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Das ISO-8859-1-Format ist eine Erweiterung des ASCII-Zeichensatzes und unterstützt die meisten westeuropäischen Sprachen, einschließlich Deutsch mit seinen Umlauten. UTF-8 ist leider nicht vollständig rückwärtskompatibel mit ISO-8859-1: Wenn also ein Datensatz mit ISO-8859-1 kodiert wurde und ihr ihn als UTF-8 ladet, können Umlaute und Sonderzeichen kaputt gehen.</p>
+</section><section id="sec-loading-data-dezimal" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-dezimal">Dezimaltrennzeichen</h3>
+<p>In Deutschland wird anstelle eines Punktes häufig ein Komma als Dezimaltrennzeichen verwendet. Die Funktion <code>read_csv2()</code> berücksichtigt das automatisch. Ihr könnt das Dezimaltrennzeichen aber auch explizit über den Parameter <code>locale</code> angeben.</p>
+<p>Ob das Dezimaltrennzeichen falsch eingestellt ist, erkennt ihr wieder am Ergebnis: Alle Zahlen, die ein Dezimaltrennzeichen enthalten, werden als Text (Strings) interpretiert, anstatt als numerische Werte.</p>
+<p>Hier ein Beispiel, bei dem wir absichtlich ein falsches Dezimaltrennzeichen angeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_wrong_decimal</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>, </span>
+<span>    locale <span class="op">=</span> <span class="fu">locale</span><span class="op">(</span>decimal_mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Schauen wir uns jetzt die Spalte <code>total_price</code> an, die eigentlich eine Dezimalzahl sein müsste:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_wrong_decimal</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">total_price</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  total_price
+  &lt;chr&gt;      
+1 94.66      
+2 32.22      
+3 30.22      
+4 32.22      
+5 30.22      </code></pre>
+</div>
+</div>
+<p>Achtet auf die Angabe des Datentyps <code>chr</code>, was für “character” steht, also Text. Wir sollten also schleunigst das richtige Dezimaltrennzeichen verwenden.</p>
+<p>Manchmal hat nur eine einzelne Spalte ein anderes Dezimaltrennzeichen als die übrigen Spalten. Dann könnt ihr euch damit behelfen, die Spalte nachträglich in den korrekten Datentyp umzuwandeln:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_fixed_decimal</span> <span class="op">&lt;-</span> <span class="va">orders_wrong_decimal</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>total_price <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html">as.double</a></span><span class="op">(</span><span class="va">total_price</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Prüfen wir, ob es geklappt hat:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_fixed_decimal</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">total_price</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  total_price
+        &lt;dbl&gt;
+1        94.7
+2        32.2
+3        30.2
+4        32.2
+5        30.2</code></pre>
+</div>
+</div>
+<p>Die Funktion <code><a href="https://rdrr.io/r/base/double.html">as.double()</a></code> sucht standardmäßig nach einem Punkt als Dezimaltrennzeichen. Sollte es in der Spalte tatsächlich ein Komma als Dezimaltrennzeichen geben, müsst ihr <code>parse_number()</code> verwenden und das Dezimaltrennzeichen explizit angeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_fixed_decimal</span> <span class="op">&lt;-</span> <span class="va">orders_wrong_decimal</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>total_price <span class="op">=</span> <span class="fu">parse_number</span><span class="op">(</span><span class="va">total_price</span>, locale <span class="op">=</span> <span class="fu">locale</span><span class="op">(</span>decimal_mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-loading-data-header" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-header">Kopfzeilen</h3>
+<p>CSV-Dateien enthalten in der Regel eine Kopfzeile, die die Namen der Spalten angibt. Die Funktionen aus <code>readr</code> gehen davon aus, dass diese Zeile vorhanden ist. Wenn die CSV-Datei keine Kopfzeile enthält, müsst ihr dies beim Laden angeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_no_header</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>, </span>
+<span>    col_names <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Schaut euch das Ergebnis an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_no_header</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 68
+  X1     X2    X3    X4    X5    X6    X7    X8    X9    X10   X11   X12   X13  
+  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 order… name  orde… app_… crea… upda… test  curr… curr… curr… curr… tota… tota…
+2 11300… B1014 1014  5801… 2019… 2019… False 94.66 94.66 2.0   0.0   2.0   96.66
+3 11300… B1015 1015  5801… 2019… 2019… False 32.22 32.22 0.0   0.0   0.0   32.22
+4 11300… B1016 1016  5801… 2019… 2019… False 30.22 30.22 2.0   0.0   2.0   32.22
+5 11300… B1017 1017  5801… 2019… 2019… False 32.22 32.22 0.0   0.0   0.0   32.22
+# ℹ 55 more variables: X14 &lt;chr&gt;, X15 &lt;chr&gt;, X16 &lt;chr&gt;, X17 &lt;chr&gt;, X18 &lt;chr&gt;,
+#   X19 &lt;chr&gt;, X20 &lt;chr&gt;, X21 &lt;chr&gt;, X22 &lt;chr&gt;, X23 &lt;chr&gt;, X24 &lt;chr&gt;,
+#   X25 &lt;chr&gt;, X26 &lt;chr&gt;, X27 &lt;chr&gt;, X28 &lt;chr&gt;, X29 &lt;chr&gt;, X30 &lt;chr&gt;,
+#   X31 &lt;chr&gt;, X32 &lt;chr&gt;, X33 &lt;chr&gt;, X34 &lt;chr&gt;, X35 &lt;chr&gt;, X36 &lt;chr&gt;,
+#   X37 &lt;chr&gt;, X38 &lt;chr&gt;, X39 &lt;chr&gt;, X40 &lt;chr&gt;, X41 &lt;chr&gt;, X42 &lt;chr&gt;,
+#   X43 &lt;chr&gt;, X44 &lt;chr&gt;, X45 &lt;chr&gt;, X46 &lt;chr&gt;, X47 &lt;chr&gt;, X48 &lt;chr&gt;,
+#   X49 &lt;chr&gt;, X50 &lt;chr&gt;, X51 &lt;chr&gt;, X52 &lt;chr&gt;, X53 &lt;chr&gt;, X54 &lt;chr&gt;, …</code></pre>
+</div>
+</div>
+<p>Was ist passiert? Die Spalten wurden automatisch mit generischen Namen wie <code>X1</code>, <code>X2</code>, <code>X3</code> benannt, weil keine Kopfzeile vorhanden war. Oder zumindest haben wir das behauptet. Zusätzlich wurde die erste Zeile der CSV-Datei als Datenzeile interpretiert, anstatt als Kopfzeile.</p>
+</section></section><section id="sec-loading-data-json" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="sec-loading-data-json">
+<span class="header-section-number">5.3</span> JSON und JSONL</h2>
+<p>Neben CSV gibt es ein weiteres textbasiertes Format, das euch in der Datenanalyse immer häufiger begegnet: JSON. JSON steht für “JavaScript Object Notation” und wurde ursprünglich für den Datenaustausch im Web entwickelt. Heute ist JSON weit über das Web hinaus verbreitet und wird oft für APIs, Konfigurationsdateien und hierarchisch strukturierte Daten verwendet.</p>
+<p>Was unterscheidet JSON von CSV? In einer CSV-Datei sind die Daten flach und tabellarisch. JSON erlaubt dagegen verschachtelte Strukturen. Ein einzelner JSON-Eintrag kann so aussehen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Anna"</span><span class="fu">,</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">23</span><span class="fu">,</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Statistics"</span><span class="ot">,</span> <span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hier hat die Person ein Feld <code>courses</code>, das selbst eine Liste enthält. In CSV wäre das nur umständlich abzubilden.</p>
+<section id="sec-loading-data-json-laden" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-json-laden">JSON-Dateien laden</h3>
+<p>Zum Laden von JSON-Dateien nutzt ihr das Paket <code>jsonlite</code>. Es wandelt die JSON-Struktur automatisch in ein tibble-ähnliches Objekt um, wenn die Daten tabellarisch interpretierbar sind:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="st">"data/example.json"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> erkennt, ob die JSON-Datei ein einzelnes Objekt oder eine Liste von Objekten enthält, und versucht, die Daten intelligent in einen Data Frame umzuwandeln. Bei einfachen, flachen JSON-Strukturen funktioniert das problemlos.</p>
+</section><section id="sec-loading-data-jsonl" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-jsonl">JSONL</h3>
+<p>In der Praxis begegnet euch häufig auch das Format JSONL (JSON Lines). Dabei enthält jede Zeile der Datei genau ein JSON-Objekt. Das ist besonders bei großen Datensätzen praktisch, weil die Datei zeilenweise gelesen und verarbeitet werden kann.</p>
+<p>Eine JSONL-Datei sieht zum Beispiel so aus:</p>
+<pre><code>{"name": "Anna", "age": 23, "passed": true}
+{"name": "Ben", "age": 21, "passed": false}
+{"name": "Cleo", "age": 25, "passed": true}</code></pre>
+<p>Zum Laden von JSONL-Dateien könnt ihr <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> aus dem Paket <code>jsonlite</code> verwenden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">file</a></span><span class="op">(</span><span class="st">"data/example.jsonl"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> liest die Datei zeilenweise und liefert am Ende einen Data Frame. Das ist besonders bei sehr großen Dateien effizienter als <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code>, weil nicht die gesamte Datei auf einmal in den Arbeitsspeicher geladen werden muss.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="JSON oder CSV?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>JSON oder CSV?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Für tabellarische Daten ist CSV oft die einfachere Wahl. JSON spielt seine Stärken bei verschachtelten oder hierarchischen Daten aus, zum Beispiel bei Antworten von Web-APIs. Wenn ihr Daten von einer API bekommt, liegen sie fast immer im JSON-Format vor.</p>
+</div>
+</div>
+</section></section><section id="sec-loading-data-excel" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="sec-loading-data-excel">
+<span class="header-section-number">5.4</span> Excel-Dateien</h2>
+<p>Excel-Dateien gehören zu den binären Formaten. Sie sind in der Praxis extrem verbreitet, weil viele Menschen mit Microsoft Excel oder Google Sheets arbeiten. Das Format <code>.xlsx</code> ist kein einfacher Text, sondern ein komprimiertes Archiv, das die Daten zusammen mit Formatierungen, Formeln und Metadaten speichert.</p>
+<p>Zum Laden von Excel-Dateien in R nutzt ihr das Paket <code>readxl</code>, das ebenfalls zum Tidyverse-Ökosystem gehört:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Die Funktion <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> erkennt automatisch, ob es sich um eine <code>.xls</code>- oder <code>.xlsx</code>-Datei handelt. Das Ergebnis ist ein Tibble, genau wie bei <code>read_csv()</code>.</p>
+<section id="sec-loading-data-excel-sheets" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-excel-sheets">Arbeitsblätter auswählen</h3>
+<p>Eine Besonderheit von Excel-Dateien ist, dass sie mehrere Arbeitsblätter (Sheets) enthalten können. Standardmäßig liest <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> das erste Arbeitsblatt. Wenn ihr ein anderes Blatt laden wollt, gebt ihr es über den Parameter <code>sheet</code> an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Über den Namen</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"Sales"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Oder über die Position</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Wenn ihr nicht wisst, welche Arbeitsblätter eine Excel-Datei enthält, hilft euch <code><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets()</a></code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-loading-data-excel-ranges" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-excel-ranges">Bereiche und Kopfzeilen</h3>
+<p>Manchmal beginnen die eigentlichen Daten in einer Excel-Datei nicht in der ersten Zeile, weil darüber ein Titel oder Erläuterungen stehen. In diesem Fall könnt ihr Zeilen überspringen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, skip <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Oder ihr gebt einen konkreten Zellbereich an, wie ihr es aus Excel kennt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, range <span class="op">=</span> <span class="st">"B2:F100"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Genau wie bei CSV könnt ihr auch angeben, dass keine Kopfzeile vorhanden ist:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="readxl braucht kein Excel">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>readxl braucht kein Excel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Das Paket <code>readxl</code> liest Excel-Dateien direkt, ohne dass Microsoft Excel installiert sein muss. Das ist besonders praktisch auf Servern oder in automatisierten Pipelines, wo kein Excel vorhanden ist.</p>
+</div>
+</div>
+</section></section><section id="sec-loading-data-google" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="sec-loading-data-google">
+<span class="header-section-number">5.5</span> Google Sheets</h2>
+<p>Was ist, wenn eure Daten gar nicht als Datei auf eurem Rechner liegen, sondern in der Cloud? Google Sheets ist einer der verbreitetsten Orte, an denen Teams gemeinsam Daten sammeln und pflegen. Zum Beispiel, wenn ihr eine Umfrage über Google Forms durchführt: Die Antworten landen automatisch in einem Google Sheet.</p>
+<p>Das Paket <code>googlesheets4</code> erlaubt es euch, Daten direkt aus Google Sheets in R zu laden, ohne sie erst herunterladen zu müssen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Ihr übergebt einfach die URL oder die ID eures Google Sheets an <code><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet()</a></code>. Das Ergebnis ist ein Tibble.</p>
+<section id="sec-loading-data-google-auth" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-google-auth">Authentifizierung</h3>
+<p>Beim ersten Aufruf fragt euch <code>googlesheets4</code> nach einer Berechtigung, auf euer Google-Konto zuzugreifen. Es öffnet sich ein Browserfenster, in dem ihr euch anmeldet und die Berechtigung erteilt. R speichert diese Berechtigung dann lokal, sodass ihr euch nicht jedes Mal neu anmelden müsst.</p>
+<p>Wenn ihr auf öffentlich zugängliche Sheets zugreifen wollt, könnt ihr die Authentifizierung auch komplett abschalten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-loading-data-google-sheets" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-google-sheets">Arbeitsblätter und Bereiche</h3>
+<p>Genau wie bei Excel-Dateien könnt ihr bei Google Sheets das Arbeitsblatt und den Zellbereich angeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bestimmtes Arbeitsblatt laden</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span>, sheet <span class="op">=</span> <span class="st">"Responses"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Bestimmten Bereich laden</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span>, range <span class="op">=</span> <span class="st">"A1:E100"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Wann Google Sheets, wann CSV?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Wann Google Sheets, wann CSV?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Google Sheets ist praktisch, wenn Daten laufend aktualisiert werden und ihr immer den neuesten Stand laden wollt. Für statische Datensätze, die sich nicht mehr ändern, ist eine heruntergeladene CSV-Datei meistens die einfachere und reproduzierbarere Lösung.</p>
+</div>
+</div>
+</section></section><section id="sec-loading-data-rds" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="sec-loading-data-rds">
+<span class="header-section-number">5.6</span> RDS-Dateien</h2>
+<p>Zum Schluss schauen wir uns ein Format an, das speziell für R entwickelt wurde: RDS. RDS steht für “R Data Serialization” und ist ein binäres Format, mit dem ihr einzelne R-Objekte speichern und wieder laden könnt.</p>
+<p>Warum ist das nützlich? Stellt euch vor, ihr habt einen Datensatz aufwendig bereinigt und transformiert. Wenn ihr ihn als CSV speichert, gehen dabei Informationen verloren, zum Beispiel Datentypen, Faktor-Levels oder die Zeitzone von Datumswerten. RDS bewahrt all das, weil es das R-Objekt exakt so speichert, wie es im Arbeitsspeicher vorliegt.</p>
+<section id="sec-loading-data-rds-laden" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-rds-laden">RDS-Dateien laden</h3>
+<p>Zum Laden nutzt ihr <code>read_rds()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">&lt;-</span> <span class="fu">read_rds</span><span class="op">(</span><span class="st">"data/tweets_ampel.rds"</span><span class="op">)</span></span>
+<span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 22
+  id              screen_name text  retweet_count favorite_count is_quote_status
+  &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt; &lt;lgl&gt;          
+1 16422519457326… cem_oezdem… "RT …            23              0 FALSE          
+2 16424168190037… W_Schmidt_  "RT …         10659              0 FALSE          
+3 16420826297962… lisapaus    "@Ha…             1              3 FALSE          
+4 16420901117005… lisapaus    "@an…             1             11 FALSE          
+5 16425327413662… Wissing     "\U0…             6             25 FALSE          
+# ℹ 16 more variables: is_retweet &lt;lgl&gt;, retweeted_status_id &lt;chr&gt;,
+#   retweeted_user &lt;chr&gt;, lang &lt;chr&gt;, hashtags &lt;list&gt;, urls &lt;list&gt;,
+#   user_mentions &lt;list&gt;, photos &lt;list&gt;, source &lt;chr&gt;, insert_timestamp &lt;chr&gt;,
+#   created_at &lt;dttm&gt;, quote_count &lt;dbl&gt;, reply_count &lt;dbl&gt;,
+#   in_reply_to_screen_name &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+#   quoted_status_id &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Das Ergebnis ist exakt das Objekt, das gespeichert wurde, einschließlich aller Datentypen und Attribute.</p>
+</section><section id="sec-loading-data-rds-speichern" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-rds-speichern">RDS-Dateien speichern</h3>
+<p>Umgekehrt könnt ihr jedes R-Objekt als RDS-Datei speichern:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">write_rds</span><span class="op">(</span><span class="va">tweets</span>, <span class="st">"data/tweets_backup.rds"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Ein wichtiger Unterschied zu anderen Formaten: RDS speichert genau ein Objekt pro Datei. Wenn ihr mehrere Objekte speichern wollt, erstellt ihr entweder mehrere RDS-Dateien oder nutzt das verwandte Format <code>.RData</code> (auch <code>.rda</code>), das mehrere Objekte auf einmal speichern kann.</p>
+</section><section id="sec-loading-data-rds-wann" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-rds-wann">Wann RDS verwenden?</h3>
+<p>RDS ist die beste Wahl, wenn ihr innerhalb von R arbeitet und sicherstellen wollt, dass keine Informationen verloren gehen. In diesem Buch laden wir den Tweets-Datensatz als RDS-Datei, weil so alle Spaltentypen und Metadaten erhalten bleiben. Wenn ihr Daten dagegen mit anderen Tools oder Personen teilen wollt, die kein R verwenden, ist CSV oder ein anderes offenes Format die bessere Wahl.</p>
+</section></section><section id="sec-loading-data-zusammenfassung" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="sec-loading-data-zusammenfassung">
+<span class="header-section-number">5.7</span> Kurz zusammengefasst</h2>
+<div id="load-data-summary" class="reuse">
+<ul>
+<li>
+<strong>CSV</strong> ist das verbreitetste textbasierte Format. Ihr ladet es mit <code>read_csv()</code> aus dem <code>readr</code>-Paket. Achtet auf Trennzeichen, Zeichenkodierung und Dezimaltrennzeichen.</li>
+<li>
+<strong>JSON</strong> eignet sich für hierarchische oder verschachtelte Daten und kommt oft von Web-APIs. Ihr nutzt <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> oder <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> aus dem Paket <code>jsonlite</code>.</li>
+<li>
+<strong>Excel-Dateien</strong> ladet ihr mit <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> aus dem Paket <code>readxl</code>. Ihr könnt Arbeitsblätter, Bereiche und Kopfzeilen gezielt ansteuern.</li>
+<li>
+<strong>Google Sheets</strong> lassen sich direkt mit <code><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet()</a></code> aus dem Paket <code>googlesheets4</code> laden, ohne die Datei herunterladen zu müssen.</li>
+<li>
+<strong>RDS</strong> ist das R-eigene Binärformat. Es bewahrt alle Datentypen und Attribute und eignet sich perfekt für die Arbeit innerhalb von R.</li>
+</ul>
+</div>
+<p>Daten laden ist der Startpunkt jeder Analyse. Im nächsten Kapitel lernt ihr mit dem Pipe-Operator <code>|&gt;</code> ein Werkzeug kennen, das euch dabei hilft, die geladenen Daten Schritt für Schritt weiterzuverarbeiten (siehe <a href="pipe.html" class="quarto-xref"><span>Kapitel 6</span></a>).</p>
+<p><em>Abbildung: Ein Flussdiagramm mit einem zentralen Kasten “Daten laden in R”. Von dort gehen fünf Pfeile ab zu je einem Format-Kasten: CSV (mit Icon einer Textdatei), JSON (mit geschweiften Klammern), Excel (mit einem grünen Tabellen-Icon), Google Sheets (mit einem Cloud-Icon), RDS (mit dem R-Logo). Unter jedem Format-Kasten steht die zugehörige R-Funktion: <code>read_csv()</code>, <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code>, <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code>, <code><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet()</a></code>, <code>read_rds()</code>. Die Format-Kästen sind in zwei Gruppen aufgeteilt: links “Textbasiert” (CSV, JSON), rechts “Binär / Cloud” (Excel, Google Sheets, RDS).</em></p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../02-r-basics/data-representation.html" class="pagination-link" aria-label="Datenrepräsentation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-data-transformation/pipe.html" class="pagination-link" aria-label="Pipe-Operator">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>

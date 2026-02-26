@@ -1,0 +1,296 @@
+# Pipe-Operator {#sec-pipe}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Nachdem ihr im vorherigen Kapitel gelernt habt, wie Daten in R geladen werden, schauen wir uns nun das wichtigste Werkzeug an, um diese Daten effizient weiterzuverarbeiten: den Pipe-Operator `|>`. In diesem Kapitel lernt ihr, wie die Pipe funktioniert, wie sie Ergebnisse von einer Funktion an die nächste weiterreicht und wie ihr Code schreibt, der sich wie ein flüssiger Text liest.
+
+Wenn ihr Daten analysiert, arbeitet ihr fast nie mit einem einzigen Befehl, sondern baut eine kleine Kette aus vielen Einzelschritten. Ohne die Pipe müsstet ihr entweder sehr viele Zwischenergebnisse speichern oder Funktionen unübersichtlich ineinander verschachteln. Mit der Pipe schreibt ihr eure Analyse stattdessen so, dass ihr sie von oben nach unten lesen könnt, was euren Code deutlich verständlicher und leichter anpassbar macht.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion / Operator | Beschreibung |
+|---|---|
+| `|>` | Pipe-Operator: leitet das Ergebnis links als erstes Argument an die Funktion rechts weiter |
+| `\(x) ...` | Anonyme Funktion: hilft, wenn der Wert nicht als erstes Argument erwartet wird |
+
+Schauen wir uns als Erstes an, wie die Pipe im Detail funktioniert.
+
+## Funktionsweise {#sec-pipe-funktionsweise}
+
+Die wichtigste Regel ist kurz: Die Pipe nimmt das Ergebnis links und setzt es rechts als **erstes Argument** ein.
+
+Das sieht zum Beispiel so aus:
+
+```
+x |> f(a, b)
+```
+
+und bedeutet:
+
+```
+f(x, a, b)
+```
+
+Schauen wir uns das in einem kleinen Beispiel an. Die Funktion `nrow()` gibt euch die Anzahl Zeilen eines Datensatzes zurück. Ohne Pipe schreibt ihr:
+
+```{r}
+nrow(tweets)
+```
+
+Mit Pipe rückt der Datensatz nach links und wird rechts automatisch in `nrow()` eingesetzt:
+
+```{r}
+tweets |>
+  nrow()
+```
+
+Das Ergebnis einer Pipe muss übrigens nicht immer ein Tibble bleiben. Nach `nrow()` ist das Ergebnis eine Zahl, in diesem Datensatz also `r tweets |> nrow() |> format(big.mark = ".", decimal.mark = ",")`. Diese Zahl könnt ihr direkt in den nächsten Schritt weiterreichen:
+
+```{r}
+tweets |>
+  nrow() |>
+  sqrt()
+```
+
+Inhaltlich ist das Beispiel etwas künstlich. Es zeigt aber gut, dass die Pipe einfach Ergebnisse weiterreicht, egal ob es ein Tibble, eine Zahl oder ein Text ist.
+
+![Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.](/images/select_pipe_glimpse.png){#fig-r-basics-pipe .lightbox}
+
+In @fig-r-basics-pipe seht ihr das typische Muster, das euch im ganzen Buch immer wieder begegnet: Am Anfang steht ein Datensatz als Tibble, danach folgen mehrere Schritte, am Ende kommt oft eine kurze Ausgabe zur Kontrolle.
+
+```{r}
+#| lst-label: lst-r-basics-glimpse
+#| lst-cap: Am Anfang steht immer ein Tibble, der durch die Pipe weitergereicht wird.
+tweets |>
+  select(screen_name, favorite_count, retweet_count) |>
+  glimpse()
+```
+
+In @lst-r-basics-glimpse ist `tweets` der Startpunkt. `select()` nimmt den Tibble und reduziert ihn auf die gewünschten Spalten. `glimpse()` bekommt dann das Ergebnis und zeigt euch schnell Struktur und erste Werte.
+
+Wenn ihr es formeller mögt, könnt ihr euch eine Pipe-Kette wie eine verschachtelte Funktionsanwendung vorstellen:
+
+
+| Ohne Pipe    | Mit Pipe                 |
+|--------------|--------------------------|
+| `f(g(h(x)))` | `x |> h() |> g() |> f()` |
+
+
+## Vorteile der Pipe {#sec-pipe-vorteile}
+
+Die Pipe hilft euch vor allem bei drei Dingen:
+
+- **Lesbarkeit:** Ihr könnt den Code von oben nach unten lesen.
+- **Wartbarkeit:** Ihr könnt einzelne Schritte leicht austauschen.
+- **Struktur:** Jeder Schritt steht in einer eigenen Zeile.
+
+Das merkt ihr spätestens dann, wenn eine Transformation etwas länger wird. Ohne Pipe wird daraus schnell ein Klammermonster:
+
+```{r}
+#| lst-label: lst-r-basics-no-pipe
+#| lst-cap: Ohne die Pipe werden komplexe Transformationen schnell unübersichtlich.
+#| code-line-numbers: true
+head(
+  arrange(
+    select(
+      filter(
+        mutate(
+          filter(tweets, !is_retweet),
+          is_top_tweet = retweet_count >= quantile(retweet_count, 0.99)
+        ),
+        is_top_tweet
+      ),
+      retweet_count, screen_name, text
+    ),
+    -retweet_count
+  ),
+  5
+)
+```
+
+Beim ersten Blick wirkt das wie ein Rätsel. Der Code funktioniert, aber um zu verstehen, was passiert, müsst ihr von innen nach außen lesen. Die eigentliche Schrittfolge ist:
+
+```
+filter (6) → mutate (5) → filter (4) → select (3) → arrange (2) → head (1)
+```
+
+Mit Pipe schreibt ihr genau diese Reihenfolge direkt so auf, wie ihr sie gedanklich sowieso abarbeitet:
+
+```{r}
+#| lst-label: lst-r-basics-with-pipe
+#| lst-cap: Die Pipe gibt eine klare Struktur, macht den Code lesbar und erlaubt schnelle Änderungen.
+#| code-line-numbers: true
+tweets |>
+  filter(!is_retweet) |>
+  mutate(is_top_tweet = retweet_count >= quantile(retweet_count, 0.99)) |>
+  filter(is_top_tweet) |>
+  select(retweet_count, screen_name, text) |>
+  arrange(-retweet_count) |>
+  head(5)
+```
+
+Das Ergebnis ist identisch, aber ihr könnt jetzt jeden Schritt einzeln lesen. Außerdem könnt ihr sehr schnell ausprobieren, welchen Effekt ein Schritt hat. Kommentiert ihn dafür einfach temporär aus:
+
+```{r}
+tweets |>
+  # filter(!is_retweet) |>
+  mutate(is_top_tweet = retweet_count >= quantile(retweet_count, 0.99)) |>
+  filter(is_top_tweet) |>
+  select(retweet_count, screen_name, text) |>
+  arrange(-retweet_count) |>
+  head(5)
+```
+
+Wenn ihr Retweets nicht herausfiltert, landet ein geteilter Tweet von Cem Özdemir auf Platz 1. Genau solche schnellen Checks sind in der explorativen Datenanalyse Gold wert.
+
+## Ergebnis speichern {#sec-pipe-speichern}
+
+In den bisherigen Beispielen haben wir das Ergebnis der Pipe-Kette einfach ausgeben lassen. In der Praxis wollt ihr es aber oft in einer Variablen speichern, um damit weiterzuarbeiten. Das funktioniert genauso wie bei jeder anderen Zuweisung:
+
+```{r}
+top_tweets <- tweets |>
+  filter(!is_retweet) |>
+  arrange(-retweet_count) |>
+  head(10)
+```
+
+Danach ist `top_tweets` ein neues Tibble mit den zehn am häufigsten retweeteten Original-Tweets. Beachtet, dass der Zuweisungspfeil `<-` ganz am Anfang steht, vor der Pipe-Kette. Das Ergebnis des letzten Schritts wird in der Variable gespeichert.
+
+Ein häufiger Anfängerfehler ist, die Zuweisung zu vergessen. Dann seht ihr das Ergebnis zwar in der Konsole, aber es ist nirgendwo gespeichert. Das ist beim Erkunden kein Problem, aber sobald ihr mit dem Ergebnis weiterarbeiten wollt, braucht ihr die Zuweisung.
+
+::: {.callout-tip icon="💡" title="Überschreiben oder neues Objekt?"}
+Ihr könnt das Ergebnis auch in die gleiche Variable zurückschreiben: `tweets <- tweets |> filter(...)`. Das spart Variablen, aber ihr verliert den Originalzustand. Beim Experimentieren ist es oft sicherer, ein neues Objekt anzulegen.
+:::
+
+## Spezialfälle {#sec-pipe-spezialfaelle}
+
+Im Tidyverse klappt die Pipe fast immer reibungslos, weil die Funktionen so gestaltet sind, dass der Datensatz als erstes Argument kommt. Manchmal ist das aber anders, vor allem bei Base-R-Funktionen.
+
+Nehmen wir an, ihr wollt einen Text aus einem Online-Fragebogen bereinigen. Da entstehen schnell doppelte Leerzeichen, die euch später beim Auswerten nerven können.
+
+```{r}
+text <- "Jemand  hat unsaubere Werte   eingegeben. "
+
+text |>
+  trimws() |>
+  tolower() |>
+  (\(x) gsub("[[:punct:]]+", "", x))() |>
+  (\(x) gsub("[[:space:]]+", " ", x))()
+```
+
+`gsub()` (*global substitute*) ersetzt alle Vorkommnisse eines gesuchten Teilstrings durch einen anderen String. Im Beispiel entfernt die erste Ersetzung Satzzeichen. Die zweite fasst mehrere Leerzeichen zu einem einzelnen zusammen.
+
+Der Haken ist: Bei `gsub()` ist der Text, in dem ersetzt werden soll, das **dritte** Argument. Die Pipe kann ihn also nicht automatisch als erstes Argument einsetzen. Die Lösung ist eine anonyme Funktion `\(x) ...`, in der ihr selbst festlegt, wo `x` eingesetzt wird.
+
+### Benannte Funktionen statt anonymer Funktionen {#sec-pipe-benannt}
+
+Wenn eure anonymen Funktionen länger oder schwerer lesbar werden, könnt ihr sie auch vorab als benannte Funktion definieren. Das macht den Code übersichtlicher, vor allem wenn ihr denselben Schritt an mehreren Stellen braucht:
+
+```{r}
+remove_punctuation <- function(x) {
+  gsub("[[:punct:]]+", "", x)
+}
+
+collapse_spaces <- function(x) {
+  gsub("[[:space:]]+", " ", x)
+}
+
+text |>
+  trimws() |>
+  tolower() |>
+  remove_punctuation() |>
+  collapse_spaces()
+```
+
+Das Ergebnis ist identisch, aber jeder Schritt hat jetzt einen sprechenden Namen. Wenn ihr den Code Wochen später noch einmal lest, versteht ihr sofort, was passiert. Außerdem könnt ihr `remove_punctuation()` und `collapse_spaces()` in anderen Pipe-Ketten wiederverwenden.
+
+### Tidyverse-Alternativen {#sec-pipe-tidyverse}
+
+Wenn ihr solche Textbereinigungen häufiger macht, lohnt sich der Griff zu einer Tidyverse-Variante. Das Paket `stringr` bietet Funktionen, bei denen der zu bearbeitende Text als erstes Argument kommt:
+
+```{r}
+text |>
+  str_trim() |>
+  str_to_lower() |>
+  str_remove_all("[[:punct:]]+") |>
+  str_replace_all("[[:space:]]+", " ")
+```
+
+Merkt euch: Wenn es eine passende Tidyverse-Funktion gibt, ist das Piping meistens am angenehmsten. Wenn nicht, helfen euch anonyme oder benannte Funktionen.
+
+## Debugging {#sec-pipe-debugging}
+
+Was tut ihr, wenn eine Pipe-Kette nicht das liefert, was ihr erwartet? Der einfachste Trick: Baut die Kette schrittweise auf. Startet mit dem Datensatz und fügt einen Schritt nach dem anderen hinzu. Nach jedem Schritt schaut ihr euch das Zwischenergebnis an.
+
+In der Praxis sieht das so aus:
+
+```{r}
+# Schritt 1: Nur Original-Tweets
+tweets |>
+  filter(!is_retweet) |>
+  nrow()
+```
+
+```{r}
+# Schritt 2: Davon die mit vielen Retweets
+tweets |>
+  filter(!is_retweet) |>
+  filter(retweet_count >= 100) |>
+  nrow()
+```
+
+So seht ihr nach jedem Schritt, wie viele Zeilen übrig bleiben und ob das Ergebnis plausibel ist. Wenn die Zahl plötzlich auf null fällt oder unerwartet groß wird, wisst ihr genau, welcher Schritt das Problem verursacht.
+
+Ein weiterer hilfreicher Trick ist `glimpse()` als Zwischenschritt. Es zeigt euch die Struktur und die ersten Werte, ohne den Fluss der Pipe zu unterbrechen:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  select(screen_name, retweet_count) |>
+  glimpse()
+```
+
+### Automatisches Logging mit `tidylog` {#sec-pipe-tidylog}
+
+Wenn ihr es leid seid, nach jedem Schritt manuell `nrow()` oder `glimpse()` einzufügen, gibt es eine elegante Abkürzung: das Paket `tidylog`. 
+
+```{r}
+library(tidylog)
+```
+
+Sobald ihr es geladen habt, gibt euch jeder `dplyr`-Befehl automatisch eine kurze Rückmeldung, was er getan hat.
+
+```{r}
+#| warning: true
+tweets |>
+  filter(!is_retweet) |>
+  select(screen_name, retweet_count, text) |>
+  filter(retweet_count >= 100) |>
+  head(5)
+```
+
+Ohne dass ihr etwas an eurem Code ändern müsst, berichtet `tidylog` nach jedem Schritt, wie viele Zeilen entfernt oder behalten wurden und welche Spalten ausgewählt wurden. Das ist besonders bei längeren Pipe-Ketten Gold wert, weil ihr sofort seht, wo sich etwas unerwartet verändert.
+
+Wenn ihr das Logging wieder abschalten wollt, entfernt ihr einfach die Zeile `library(tidylog)` oder ladet `dplyr` erneut, um die Originalfunktionen wiederherzustellen:
+
+```{r}
+library(dplyr)
+```
+
+::: {.callout-tip icon="💡" title="tidylog nur beim Entwickeln"}
+`tidylog` ist ein reines Entwicklungswerkzeug. In fertigen Skripten oder Berichten entfernt ihr es wieder, damit die Ausgabe sauber bleibt. Beim Erkunden und Debuggen ist es aber ein echter Zeitsparer.
+:::
+
+## Kurz zusammengefasst {#sec-pipe-zusammenfassung}
+
+- Die Pipe `|>` reicht das Ergebnis links an den nächsten Schritt rechts weiter.
+- Standardmäßig wird der linke Wert als erstes Argument eingesetzt.
+- In längeren Transformationen bringt die Pipe Lesbarkeit und macht Experimente leicht.
+- Mit `<-` speichert ihr das Ergebnis einer Pipe-Kette in einer Variable.
+- Wenn eine Funktion den Wert nicht als erstes Argument erwartet, helfen anonyme Funktionen, benannte Funktionen oder Tidyverse-Alternativen.
+- Beim Debugging baut ihr die Kette schrittweise auf und prüft nach jedem Schritt das Zwischenergebnis.
+
+Ihr kennt jetzt das wichtigste Werkzeug, um Analyseschritte aneinanderzureihen. Bevor ihr damit aber gleich Spalten auswählt und Zeilen filtert, solltet ihr euren Datensatz erst einmal kennenlernen. Genau darum geht es im nächsten Kapitel (siehe @sec-exploring-data).

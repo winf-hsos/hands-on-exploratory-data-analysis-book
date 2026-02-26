@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.20">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>4&nbsp; Datenrepräsentation – Hands-On Exploratory Data Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-data-transformation/loading-data.html" rel="next">
+<link href="../02-r-basics/programming-with-r.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script><link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-r-basics/ide.html">Erste Schritte mit R</a></li><li class="breadcrumb-item"><a href="../02-r-basics/data-representation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Hands-On Exploratory Data Analytics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Hintergründe</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/empirical-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Erste Schritte mit R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datentransformation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datenvisualisierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfragen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-a-scraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Scraping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendix/appendix-b-supplemental.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anhang A: Material</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quellen</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li><a href="#skalare-werte" id="toc-skalare-werte" class="nav-link active" data-scroll-target="#skalare-werte"><span class="header-section-number">4.1</span> Skalare Werte</a></li>
+  <li>
+<a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen"><span class="header-section-number">4.2</span> Datentypen</a>
+  <ul class="collapse">
+<li><a href="#grundlegende-datentypen" id="toc-grundlegende-datentypen" class="nav-link" data-scroll-target="#grundlegende-datentypen">Grundlegende Datentypen</a></li>
+  <li><a href="#typumwandlung" id="toc-typumwandlung" class="nav-link" data-scroll-target="#typumwandlung">Typumwandlung</a></li>
+  <li><a href="#datum-und-uhrzeit" id="toc-datum-und-uhrzeit" class="nav-link" data-scroll-target="#datum-und-uhrzeit">Datum und Uhrzeit</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#vektoren" id="toc-vektoren" class="nav-link" data-scroll-target="#vektoren"><span class="header-section-number">4.3</span> Vektoren</a>
+  <ul class="collapse">
+<li><a href="#zugriff-auf-elemente" id="toc-zugriff-auf-elemente" class="nav-link" data-scroll-target="#zugriff-auf-elemente">Zugriff auf Elemente</a></li>
+  <li><a href="#rechnen-mit-vektoren" id="toc-rechnen-mit-vektoren" class="nav-link" data-scroll-target="#rechnen-mit-vektoren">Rechnen mit Vektoren</a></li>
+  <li><a href="#n%C3%BCtzliche-funktionen-f%C3%BCr-vektoren" id="toc-nützliche-funktionen-für-vektoren" class="nav-link" data-scroll-target="#n%C3%BCtzliche-funktionen-f%C3%BCr-vektoren">Nützliche Funktionen für Vektoren</a></li>
+  <li><a href="#gleicher-datentyp-f%C3%BCr-alle" id="toc-gleicher-datentyp-für-alle" class="nav-link" data-scroll-target="#gleicher-datentyp-f%C3%BCr-alle">Gleicher Datentyp für alle</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#faktoren" id="toc-faktoren" class="nav-link" data-scroll-target="#faktoren"><span class="header-section-number">4.4</span> Faktoren</a>
+  <ul class="collapse">
+<li><a href="#einen-faktor-erstellen" id="toc-einen-faktor-erstellen" class="nav-link" data-scroll-target="#einen-faktor-erstellen">Einen Faktor erstellen</a></li>
+  <li><a href="#warum-nicht-einfach-text" id="toc-warum-nicht-einfach-text" class="nav-link" data-scroll-target="#warum-nicht-einfach-text">Warum nicht einfach Text?</a></li>
+  <li><a href="#geordnete-faktoren" id="toc-geordnete-faktoren" class="nav-link" data-scroll-target="#geordnete-faktoren">Geordnete Faktoren</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#matrizen" id="toc-matrizen" class="nav-link" data-scroll-target="#matrizen"><span class="header-section-number">4.5</span> Matrizen</a>
+  <ul class="collapse">
+<li><a href="#zeilen-und-spalten-benennen" id="toc-zeilen-und-spalten-benennen" class="nav-link" data-scroll-target="#zeilen-und-spalten-benennen">Zeilen und Spalten benennen</a></li>
+  <li><a href="#zugriff-auf-elemente-1" id="toc-zugriff-auf-elemente-1" class="nav-link" data-scroll-target="#zugriff-auf-elemente-1">Zugriff auf Elemente</a></li>
+  <li><a href="#rechnen-mit-matrizen" id="toc-rechnen-mit-matrizen" class="nav-link" data-scroll-target="#rechnen-mit-matrizen">Rechnen mit Matrizen</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="header-section-number">4.6</span> Data Frames</a>
+  <ul class="collapse">
+<li><a href="#zugriff-auf-spalten" id="toc-zugriff-auf-spalten" class="nav-link" data-scroll-target="#zugriff-auf-spalten">Zugriff auf Spalten</a></li>
+  <li><a href="#das-problem-mit-data-frames" id="toc-das-problem-mit-data-frames" class="nav-link" data-scroll-target="#das-problem-mit-data-frames">Das Problem mit Data Frames</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">4.7</span> Tibbles</a>
+  <ul class="collapse">
+<li><a href="#was-ist-anders" id="toc-was-ist-anders" class="nav-link" data-scroll-target="#was-ist-anders">Was ist anders?</a></li>
+  <li><a href="#einen-tibble-erstellen" id="toc-einen-tibble-erstellen" class="nav-link" data-scroll-target="#einen-tibble-erstellen">Einen Tibble erstellen</a></li>
+  <li><a href="#die-vorteile-im-%C3%BCberblick" id="toc-die-vorteile-im-überblick" class="nav-link" data-scroll-target="#die-vorteile-im-%C3%BCberblick">Die Vorteile im Überblick</a></li>
+  <li><a href="#den-tweets-datensatz-erkunden" id="toc-den-tweets-datensatz-erkunden" class="nav-link" data-scroll-target="#den-tweets-datensatz-erkunden">Den Tweets-Datensatz erkunden</a></li>
+  <li><a href="#umwandlung-zwischen-data-frame-und-tibble" id="toc-umwandlung-zwischen-data-frame-und-tibble" class="nav-link" data-scroll-target="#umwandlung-zwischen-data-frame-und-tibble">Umwandlung zwischen Data Frame und Tibble</a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-r-basics/ide.html">Erste Schritte mit R</a></li><li class="breadcrumb-item"><a href="../02-r-basics/data-representation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-basics-data-representation" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Bevor ihr Daten analysieren könnt, müsst ihr verstehen, wie R Daten überhaupt speichert und organisiert. Denn R bietet euch eine ganze Reihe von Datenstrukturen, und jede hat ihren eigenen Zweck. Stellt euch vor, ihr zieht in eine neue Wohnung und habt einen Haufen Sachen. Manche kommen in Schubladen, manche in Regale, manche in Ordner. Genauso ist es in R: Je nachdem, was ihr mit euren Daten vorhabt, braucht ihr die passende Struktur.</p>
+<p>In diesem Kapitel starten wir ganz unten, bei einzelnen Werten, und arbeiten uns Schritt für Schritt nach oben. Am Ende steht der <strong>Tibble</strong>, die Datenstruktur, die euch im Rest des Buches überall begegnen wird.</p>
+<div id="data-repr-learning-objectives" class="reuse">
+<ul>
+<li>Was sind skalare Werte, und wie unterscheidet R verschiedene Datentypen?</li>
+<li>Wie fassen Vektoren, Faktoren und Matrizen mehrere Werte zusammen?</li>
+<li>Was ist der Unterschied zwischen einem Data Frame und einem Tibble, und warum verwenden wir Tibbles?</li>
+</ul>
+</div>
+<section id="skalare-werte" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="skalare-werte">
+<span class="header-section-number">4.1</span> Skalare Werte</h2>
+<p>Was passiert, wenn ihr R einfach eine Zahl gebt?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">42</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42</code></pre>
+</div>
+</div>
+<p>R gibt die Zahl zurück. Aber was <em>ist</em> das eigentlich? In vielen Programmiersprachen nennt man einen einzelnen Wert einen <em>Skalar</em>. Das ist der einfachste Baustein, mit dem ihr arbeiten könnt. In R ist ein Skalar intern ein Vektor der Länge 1, aber dazu kommen wir gleich. Erst einmal reicht es zu wissen: Ein einzelner Wert ist das Fundament.</p>
+<p>Ihr könnt skalare Werte in Variablen speichern, um sie später wiederzuverwenden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fl">23</span></span>
+<span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Anna"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Der Pfeil <code>&lt;-</code> ist der Zuweisungsoperator in R. Er legt den Wert rechts unter dem Namen links ab. Wenn ihr danach den Variablennamen eingebt, bekommt ihr den Wert zurück:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">age</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">name</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Anna"</code></pre>
+</div>
+</div>
+<p>Aber nicht jeder Wert ist gleich. Eine Zahl ist etwas anderes als ein Text, und das bringt uns zum nächsten Thema.</p>
+</section><section id="datentypen" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="datentypen">
+<span class="header-section-number">4.2</span> Datentypen</h2>
+<p>Warum ist es wichtig, ob ein Wert eine Zahl oder ein Text ist? Weil R mit verschiedenen Typen unterschiedlich umgeht. Ihr könnt zwei Zahlen addieren, aber ihr könnt nicht einen Text und eine Zahl addieren. Wenn R die Typen durcheinanderbringt, bekommt ihr entweder einen Fehler oder ein unerwartetes Ergebnis.</p>
+<section id="grundlegende-datentypen" class="level3"><h3 class="anchored" data-anchor-id="grundlegende-datentypen">Grundlegende Datentypen</h3>
+<p>R kennt vier grundlegende Datentypen, die euch im Alltag ständig begegnen:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Datentyp</th>
+<th>Beschreibung</th>
+<th>Beispiel</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<code>numeric</code> / <code>double</code>
+</td>
+<td>Dezimalzahlen</td>
+<td>
+<code>3.14</code>, <code>42.0</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>integer</code></td>
+<td>Ganzzahlen</td>
+<td>
+<code>1L</code>, <code>100L</code>
+</td>
+</tr>
+<tr class="odd">
+<td><code>character</code></td>
+<td>Text (Zeichenketten)</td>
+<td>
+<code>"Hallo"</code>, <code>"2024"</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>logical</code></td>
+<td>Wahrheitswerte</td>
+<td>
+<code>TRUE</code>, <code>FALSE</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Mit der Funktion <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> könnt ihr den Typ eines Werts herausfinden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="fl">3.14</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="fl">1L</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="st">"Hallo"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p>Beachtet das <code>L</code> hinter der <code>1</code>. Ohne dieses <code>L</code> behandelt R jede Zahl als <code>numeric</code>, also als Dezimalzahl. Erst das <code>L</code> sagt R: Das ist eine Ganzzahl. In der Praxis spielt der Unterschied zwischen <code>numeric</code> und <code>integer</code> selten eine große Rolle, aber es ist gut zu wissen, dass es ihn gibt.</p>
+</section><section id="typumwandlung" class="level3"><h3 class="anchored" data-anchor-id="typumwandlung">Typumwandlung</h3>
+<p>Was passiert, wenn ihr versucht, einen Text wie <code>"42"</code> als Zahl zu verwenden?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="st">"42"</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `"42" + 1`:
+! non-numeric argument to binary operator</code></pre>
+</div>
+</div>
+<p>R beschwert sich, weil es einen Text und eine Zahl nicht addieren kann. Ihr müsst den Typ erst umwandeln:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"42"</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 43</code></pre>
+</div>
+</div>
+<p>R bietet für jeden Datentyp eine passende Umwandlungsfunktion:</p>
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Funktion</th>
+<th>Wandelt um in</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code></td>
+<td>Dezimalzahl</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code></td>
+<td>Ganzzahl</td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code></td>
+<td>Text</td>
+</tr>
+<tr class="even">
+<td><code><a href="https://rdrr.io/r/base/logical.html">as.logical()</a></code></td>
+<td>Wahrheitswert</td>
+</tr>
+</tbody>
+</table>
+<p>Umwandlungen funktionieren nicht immer. Wenn ihr versucht, den Text <code>"Hallo"</code> in eine Zahl umzuwandeln, gibt R eine Warnung aus und liefert <code>NA</code>, also einen fehlenden Wert:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="st">"Hallo"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Fehlende Werte: NA">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Fehlende Werte: NA
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>NA</code> steht für <em>Not Available</em> und bedeutet, dass ein Wert fehlt. Fehlende Werte begegnen euch in der Datenanalyse ständig. R markiert damit Stellen, an denen keine Information vorhanden ist. Merkt euch <code>NA</code> gut, denn ihr werdet es noch oft sehen.</p>
+</div>
+</div>
+</section><section id="datum-und-uhrzeit" class="level3"><h3 class="anchored" data-anchor-id="datum-und-uhrzeit">Datum und Uhrzeit</h3>
+<p>Neben den vier Grundtypen gibt es noch einen Typ, der euch in der Datenanalyse besonders häufig begegnet: Datums- und Zeitwerte. R speichert Datumswerte intern als Zahl, die die Anzahl der Tage seit dem 1. Januar 1970 angibt, zeigt sie euch aber in einem lesbaren Format an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">today</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-02-26"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+</div>
+<p>Für die Arbeit mit Datumswerten gibt es im Tidyverse das Paket <code>lubridate</code>, das euch viele hilfreiche Funktionen bereitstellt. Darauf gehen wir in späteren Kapiteln genauer ein.</p>
+</section></section><section id="vektoren" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="vektoren">
+<span class="header-section-number">4.3</span> Vektoren</h2>
+<p>Was aber, wenn ihr nicht nur eine einzelne Zahl speichern wollt, sondern gleich fünf Prüfungsnoten? Oder die Namen aller Teilnehmenden eines Kurses?</p>
+<p>Dafür gibt es den <strong>Vektor</strong>. Ein Vektor ist eine geordnete Sammlung von Werten desselben Typs. Ihr erstellt ihn mit der Funktion <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, was für <em>combine</em> steht:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">grades</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.3</span>, <span class="fl">2.0</span>, <span class="fl">1.7</span>, <span class="fl">3.0</span>, <span class="fl">2.3</span><span class="op">)</span></span>
+<span><span class="va">grades</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.3 2.0 1.7 3.0 2.3</code></pre>
+</div>
+</div>
+<p>Vektoren sind so grundlegend für R, dass sogar ein einzelner Wert wie <code>42</code> im Hintergrund ein Vektor der Länge 1 ist. Das <code>[1]</code>, das R euch bei der Ausgabe immer anzeigt, ist der Index des ersten Elements in diesem Vektor.</p>
+<section id="zugriff-auf-elemente" class="level3"><h3 class="anchored" data-anchor-id="zugriff-auf-elemente">Zugriff auf Elemente</h3>
+<p>Wie greift ihr auf ein bestimmtes Element eines Vektors zu? Über eckige Klammern und die Position:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">grades</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">grades</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.7</code></pre>
+</div>
+</div>
+<p>Ihr könnt auch mehrere Positionen auf einmal angeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">grades</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.3 1.7 2.3</code></pre>
+</div>
+</div>
+<p>Oder einen Bereich:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">grades</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.0 1.7 3.0</code></pre>
+</div>
+</div>
+</section><section id="rechnen-mit-vektoren" class="level3"><h3 class="anchored" data-anchor-id="rechnen-mit-vektoren">Rechnen mit Vektoren</h3>
+<p>Das Besondere an R ist, dass Berechnungen automatisch auf alle Elemente eines Vektors angewendet werden. Dieses Prinzip nennt man <em>Vektorisierung</em>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">grades</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 130 200 170 300 230</code></pre>
+</div>
+</div>
+<p>Das funktioniert auch mit zwei Vektoren derselben Länge:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">90</span>, <span class="fl">75</span>, <span class="fl">85</span>, <span class="fl">60</span>, <span class="fl">70</span><span class="op">)</span></span>
+<span><span class="va">weights</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span><span class="op">)</span></span>
+<span><span class="va">scores</span> <span class="op">*</span> <span class="va">weights</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27.0 15.0 17.0  9.0 10.5</code></pre>
+</div>
+</div>
+<p>Jedes Element des ersten Vektors wird mit dem entsprechenden Element des zweiten Vektors multipliziert. Das ist ein mächtiges Prinzip, das euch viele Schleifen erspart.</p>
+<p><em>Abbildung: Zwei Vektoren liegen nebeneinander, jeweils mit fünf Elementen. Zwischen den Vektoren steht ein Multiplikationszeichen. Pfeile verbinden jeweils das erste Element des linken Vektors mit dem ersten des rechten, das zweite mit dem zweiten, und so weiter. Rechts daneben steht der Ergebnisvektor mit den fünf Produkten. Die Beschriftung lautet: „Vektorisierung: Elementweise Verknüpfung”.</em></p>
+</section><section id="nützliche-funktionen-für-vektoren" class="level3"><h3 class="anchored" data-anchor-id="nützliche-funktionen-für-vektoren">Nützliche Funktionen für Vektoren</h3>
+<p>R bringt viele eingebaute Funktionen mit, die mit Vektoren arbeiten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">grades</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">grades</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">grades</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.06</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">grades</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">grades</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">grades</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.3 1.7 2.0 2.3 3.0</code></pre>
+</div>
+</div>
+</section><section id="gleicher-datentyp-für-alle" class="level3"><h3 class="anchored" data-anchor-id="gleicher-datentyp-für-alle">Gleicher Datentyp für alle</h3>
+<p>Eine wichtige Regel bei Vektoren ist: <strong>Alle Elemente müssen denselben Typ</strong> haben. Was passiert, wenn ihr einen Text und eine Zahl in denselben Vektor packt?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"two"</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">mix</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1"   "two" "3"  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">mix</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>R wandelt stillschweigend alles in Text um, weil Text der allgemeinste Typ ist. Aus den Zahlen <code>1</code> und <code>3</code> werden die Texte <code>"1"</code> und <code>"3"</code>. Das kann zu überraschenden Fehlern führen, wenn ihr später mit diesen Werten rechnen wollt.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Automatische Typumwandlung">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tipp</span>Automatische Typumwandlung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wenn R verschiedene Typen in einem Vektor findet, wandelt es alle Werte in den allgemeinsten Typ um. Die Reihenfolge ist: <code>logical</code> → <code>integer</code> → <code>numeric</code> → <code>character</code>. Das nennt man <em>Coercion</em>. Achtet darauf, nur gleichartige Werte in einen Vektor zu packen.</p>
+</div>
+</div>
+</section></section><section id="faktoren" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="faktoren">
+<span class="header-section-number">4.4</span> Faktoren</h2>
+<p>Manche Werte sehen zwar aus wie Text, sind aber eigentlich Kategorien. Denkt an Antworten in einer Umfrage: „stimme zu”, „neutral”, „stimme nicht zu”. Oder an Schulnoten. Es gibt nur bestimmte erlaubte Werte, und manchmal haben sie eine Reihenfolge. Wir sprechen auch von <em>kategorialen Daten</em>.</p>
+<p>Genau dafür gibt es <strong>Faktoren</strong>. Ein Faktor ist ein Vektor, bei dem R weiß, welche Werte überhaupt möglich sind (die sogenannten <em>Levels</em> oder Kategorien) und in welcher Reihenfolge sie stehen.</p>
+<section id="einen-faktor-erstellen" class="level3"><h3 class="anchored" data-anchor-id="einen-faktor-erstellen">Einen Faktor erstellen</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">satisfaction</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"satisfied"</span>, <span class="st">"neutral"</span>, <span class="st">"dissatisfied"</span>, <span class="st">"satisfied"</span>, <span class="st">"neutral"</span><span class="op">)</span>,</span>
+<span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dissatisfied"</span>, <span class="st">"neutral"</span>, <span class="st">"satisfied"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">satisfaction</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] satisfied    neutral      dissatisfied satisfied    neutral     
+Levels: dissatisfied neutral satisfied</code></pre>
+</div>
+</div>
+<p>Beachtet die Zeile <code>Levels:</code> in der Ausgabe. Sie zeigt die möglichen Werte und ihre Reihenfolge. Das ist wichtig, weil R diese Reihenfolge zum Beispiel bei Diagrammen verwendet, die wir später mit <code>ggplot2</code> erstellen.</p>
+</section><section id="warum-nicht-einfach-text" class="level3"><h3 class="anchored" data-anchor-id="warum-nicht-einfach-text">Warum nicht einfach Text?</h3>
+<p>Wenn ihr Kategorien als einfachen Text speichert, hat R keine Ahnung, dass es nur bestimmte erlaubte Werte gibt. Faktoren geben euch drei Vorteile:</p>
+<ol type="1">
+<li>
+<strong>Validierung:</strong> R warnt euch, wenn ein Wert auftaucht, der kein definiertes Level ist.</li>
+<li>
+<strong>Reihenfolge:</strong> Ihr kontrolliert, in welcher Reihenfolge Kategorien in Grafiken und Tabellen erscheinen.</li>
+<li>
+<strong>Effizienz:</strong> Intern speichert R Faktoren als Ganzzahlen, was bei großen Datensätzen Speicher spart.</li>
+</ol>
+<p>Prüfen wir Punkt 1: Was passiert, wenn ein Wert kein definiertes Level ist?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rating</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"good"</span>, <span class="st">"medium"</span>, <span class="st">"super"</span><span class="op">)</span>,</span>
+<span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bad"</span>, <span class="st">"medium"</span>, <span class="st">"good"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">rating</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] good   medium &lt;NA&gt;  
+Levels: bad medium good</code></pre>
+</div>
+</div>
+<p>Der Wert <code>"super"</code> ist kein definiertes Level. R ersetzt ihn daher durch <code>NA</code>. Das ist eine nützliche Schutzfunktion, denn in der Analyse merkt ihr sofort, wenn unerwartete Werte auftauchen.</p>
+</section><section id="geordnete-faktoren" class="level3"><h3 class="anchored" data-anchor-id="geordnete-faktoren">Geordnete Faktoren</h3>
+<p>Manchmal ist die Reihenfolge der Kategorien inhaltlich wichtig. Dann könnt ihr einen geordneten Faktor erstellen. Wir sprechen auch von einer <em>ordinalen Variable</em>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rating_ordered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"good"</span>, <span class="st">"medium"</span>, <span class="st">"bad"</span>, <span class="st">"good"</span><span class="op">)</span>,</span>
+<span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bad"</span>, <span class="st">"medium"</span>, <span class="st">"good"</span><span class="op">)</span>,</span>
+<span>  ordered <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">rating_ordered</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] good   medium bad    good  
+Levels: bad &lt; medium &lt; good</code></pre>
+</div>
+</div>
+<p>Bei einem geordneten Faktor könnt ihr Vergleiche mit <code>&lt;</code> und <code>&gt;</code> anstellen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rating_ordered</span> <span class="op">&gt;</span> <span class="st">"medium"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE  TRUE</code></pre>
+</div>
+</div>
+<p>In der Praxis begegnen euch Faktoren vor allem bei der Datenvisualisierung und bei statistischen Modellen. Das Tidyverse bietet mit dem Paket <code>forcats</code> viele hilfreiche Funktionen für die Arbeit mit Faktoren.</p>
+</section></section><section id="matrizen" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="matrizen">
+<span class="header-section-number">4.5</span> Matrizen</h2>
+<p>Vektoren sind eindimensional. Aber was, wenn eure Daten zwei Dimensionen haben, also Zeilen und Spalten? Dann kommt die <strong>Matrix</strong> ins Spiel.</p>
+<p>Eine Matrix ist im Grunde ein Vektor, der in Zeilen und Spalten angeordnet ist. Wie beim Vektor gilt: <strong>Alle Elemente müssen denselben Typ haben</strong>, typischerweise Zahlen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">72</span>, <span class="fl">91</span>, <span class="fl">68</span>, <span class="fl">79</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">m</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]   85   91   79
+[2,]   72   68   95</code></pre>
+</div>
+</div>
+<p>Ihr seht, dass R die Werte spaltenweise auffüllt. Das ist die Voreinstellung. Wenn ihr die Werte zeilenweise einfüllen wollt, setzt ihr <code>byrow = TRUE</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">72</span>, <span class="fl">91</span>, <span class="fl">68</span>, <span class="fl">79</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  byrow <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">m2</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]   85   72   91
+[2,]   68   79   95</code></pre>
+</div>
+</div>
+<section id="zeilen-und-spalten-benennen" class="level3"><h3 class="anchored" data-anchor-id="zeilen-und-spalten-benennen">Zeilen und Spalten benennen</h3>
+<p>Um eine Matrix lesbarer zu machen, könnt ihr Zeilen und Spalten benennen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Exam 1"</span>, <span class="st">"Exam 2"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Math"</span>, <span class="st">"Statistics"</span>, <span class="st">"Programming"</span><span class="op">)</span></span>
+<span><span class="va">m2</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Math Statistics Programming
+Exam 1   85         72          91
+Exam 2   68         79          95</code></pre>
+</div>
+</div>
+</section><section id="zugriff-auf-elemente-1" class="level3"><h3 class="anchored" data-anchor-id="zugriff-auf-elemente-1">Zugriff auf Elemente</h3>
+<p>Der Zugriff funktioniert über <code>[Zeile, Spalte]</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 72</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span><span class="op">[</span><span class="st">"Exam 1"</span>, <span class="st">"Statistics"</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 72</code></pre>
+</div>
+</div>
+<p>Eine ganze Zeile oder Spalte bekommt ihr, indem ihr die andere Dimension leer lasst:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Math  Statistics Programming 
+         85          72          91 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span><span class="op">[</span>, <span class="st">"Math"</span><span class="op">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Exam 1 Exam 2 
+    85     68 </code></pre>
+</div>
+</div>
+</section><section id="rechnen-mit-matrizen" class="level3"><h3 class="anchored" data-anchor-id="rechnen-mit-matrizen">Rechnen mit Matrizen</h3>
+<p>Genau wie bei Vektoren könnt ihr mit Matrizen rechnen. Eine einfache Multiplikation mit einem Skalar funktioniert elementweise:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m2</span> <span class="op">/</span> <span class="fl">100</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Math Statistics Programming
+Exam 1 0.85       0.72        0.91
+Exam 2 0.68       0.79        0.95</code></pre>
+</div>
+</div>
+<p>Matrizen spielen in der Statistik und im maschinellen Lernen eine zentrale Rolle, zum Beispiel bei der linearen Algebra. Für die explorative Datenanalyse braucht ihr sie eher selten direkt, weil Data Frames und Tibbles flexibler sind. Aber es ist gut zu wissen, dass es sie gibt.</p>
+<p><em>Abbildung: Eine Matrix als Gitter dargestellt, mit beschrifteten Zeilen (Exam 1, Exam 2) und Spalten (Math, Statistics, Programming). Daneben ein Vektor als einzelne Spalte. Ein Pfeil zeigt, dass die Matrix aus mehreren gleichartigen Vektoren zusammengesetzt ist. Untertitel: „Eine Matrix ist ein zweidimensionaler Vektor.”</em></p>
+</section></section><section id="data-frames" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="data-frames">
+<span class="header-section-number">4.6</span> Data Frames</h2>
+<p>Vektoren können nur einen Typ enthalten, Matrizen genauso. In der Praxis sehen eure Daten aber anders aus: Eine Spalte enthält Namen (Text), eine andere Alter (Zahlen), eine dritte, ob eine Zustimmung vorliegt (Wahrheitswert). Ihr braucht also eine Struktur, die verschiedene Typen in verschiedenen Spalten erlaubt.</p>
+<p>Genau das ist ein <strong>Data Frame</strong>. Ein Data Frame ist die klassische tabellarische Datenstruktur in R. Jede Spalte ist ein Vektor, und die Spalten dürfen unterschiedliche Typen haben.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Anna"</span>, <span class="st">"Ben"</span>, <span class="st">"Cleo"</span><span class="op">)</span>,</span>
+<span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">21</span>, <span class="fl">25</span><span class="op">)</span>,</span>
+<span>  passed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  name age passed
+1 Anna  23   TRUE
+2  Ben  21  FALSE
+3 Cleo  25   TRUE</code></pre>
+</div>
+</div>
+<p>Das sieht schon sehr nach einer Tabelle aus. Jede Spalte hat einen Namen, und die Zeilen repräsentieren einzelne Beobachtungen. Dieses Prinzip heißt <strong>Tidy Data</strong>: Jede Zeile ist eine Beobachtung, jede Spalte ist eine Variable.</p>
+<section id="zugriff-auf-spalten" class="level3"><h3 class="anchored" data-anchor-id="zugriff-auf-spalten">Zugriff auf Spalten</h3>
+<p>Auf eine einzelne Spalte greift ihr mit dem Dollar-Zeichen zu:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">name</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Anna" "Ben"  "Cleo"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">age</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23 21 25</code></pre>
+</div>
+</div>
+<p>Das Ergebnis ist jeweils ein Vektor. Ihr könnt damit genauso arbeiten wie mit jedem anderen Vektor:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23</code></pre>
+</div>
+</div>
+</section><section id="das-problem-mit-data-frames" class="level3"><h3 class="anchored" data-anchor-id="das-problem-mit-data-frames">Das Problem mit Data Frames</h3>
+<p>Data Frames funktionieren zuverlässig, haben aber ein paar Eigenheiten, die im Alltag nerven können:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  name age passed
+1 Anna  23   TRUE
+2  Ben  21  FALSE
+3 Cleo  25   TRUE</code></pre>
+</div>
+</div>
+<p>Schaut euch die Ausgabe genau an. Wenn ein Data Frame viele Zeilen hat, zeigt R <em>alle</em> an. Bei einem Datensatz mit zehntausenden Beobachtungen überflutet das eure Konsole. Außerdem wandelt <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> Textspalten manchmal automatisch in Faktoren um, was zu unerwarteten Ergebnissen führen kann.</p>
+<p>Es gibt also Raum für Verbesserungen. Und genau hier kommen Tibbles ins Spiel.</p>
+</section></section><section id="tibbles" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="tibbles">
+<span class="header-section-number">4.7</span> Tibbles</h2>
+<p>Tibbles sind die moderne Version des Data Frames. Sie kommen aus dem Tidyverse und sind so gebaut, dass sie im Arbeitsalltag angenehmer und sicherer sind. Alles, was ein Data Frame kann, kann auch ein Tibble. Aber ein Tibble macht ein paar Dinge cleverer.</p>
+<section id="was-ist-anders" class="level3"><h3 class="anchored" data-anchor-id="was-ist-anders">Was ist anders?</h3>
+<p>Schauen wir uns den Unterschied direkt an. Wir laden den Tweets-Datensatz als Tibble:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 58,421 × 22
+   id             screen_name text  retweet_count favorite_count is_quote_status
+   &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;          &lt;dbl&gt; &lt;lgl&gt;          
+ 1 1642251945732… cem_oezdem… "RT …            23              0 FALSE          
+ 2 1642416819003… W_Schmidt_  "RT …         10659              0 FALSE          
+ 3 1642082629796… lisapaus    "@Ha…             1              3 FALSE          
+ 4 1642090111700… lisapaus    "@an…             1             11 FALSE          
+ 5 1642532741366… Wissing     "\U0…             6             25 FALSE          
+ 6 1642532736740… Wissing     "Wir…             9             93 FALSE          
+ 7 1642463874896… Wissing     "Wes…            15            154 FALSE          
+ 8 1642411368216… c_lindner   "202…            56            448 TRUE           
+ 9 1643126817555… lisapaus    "RT …            29              0 FALSE          
+10 1643018993815… lisapaus    "@SB…             1              1 FALSE          
+# ℹ 58,411 more rows
+# ℹ 16 more variables: is_retweet &lt;lgl&gt;, retweeted_status_id &lt;chr&gt;,
+#   retweeted_user &lt;chr&gt;, lang &lt;chr&gt;, hashtags &lt;list&gt;, urls &lt;list&gt;,
+#   user_mentions &lt;list&gt;, photos &lt;list&gt;, source &lt;chr&gt;, insert_timestamp &lt;chr&gt;,
+#   created_at &lt;dttm&gt;, quote_count &lt;dbl&gt;, reply_count &lt;dbl&gt;,
+#   in_reply_to_screen_name &lt;chr&gt;, in_reply_to_status_id &lt;chr&gt;,
+#   quoted_status_id &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Was fällt euch auf? Der Tibble zeigt euch automatisch nur die ersten zehn Zeilen und passt die Spalten an die Breite eurer Konsole an. Außerdem seht ihr unter jedem Spaltennamen den Datentyp: <code>&lt;chr&gt;</code> für Text, <code>&lt;dbl&gt;</code> für Dezimalzahlen, <code>&lt;lgl&gt;</code> für Wahrheitswerte, <code>&lt;dttm&gt;</code> für Zeitstempel.</p>
+<p>Vergleichen wir das mit einem Data Frame. Wenn wir den Tibble in einen klassischen Data Frame umwandeln und ausgeben, sehen wir den Unterschied sofort:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb93"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Würden wir <code>tweets_df</code> jetzt ausgeben, würde R versuchen, alle Zeilen und Spalten in der Konsole darzustellen. Bei einem Datensatz mit 58.421 Zeilen wäre das eine ziemliche Flut.</p>
+</section><section id="einen-tibble-erstellen" class="level3"><h3 class="anchored" data-anchor-id="einen-tibble-erstellen">Einen Tibble erstellen</h3>
+<p>Ihr könnt einen Tibble genau wie einen Data Frame von Hand erstellen. Statt <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> verwendet ihr <code>tibble()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb94"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">students</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Anna"</span>, <span class="st">"Ben"</span>, <span class="st">"Cleo"</span>, <span class="st">"David"</span><span class="op">)</span>,</span>
+<span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">21</span>, <span class="fl">25</span>, <span class="fl">22</span><span class="op">)</span>,</span>
+<span>  major <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Business"</span>, <span class="st">"CS"</span>, <span class="st">"Business"</span>, <span class="st">"Media"</span><span class="op">)</span>,</span>
+<span>  passed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">students</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  name    age major    passed
+  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;lgl&gt; 
+1 Anna     23 Business TRUE  
+2 Ben      21 CS       FALSE 
+3 Cleo     25 Business TRUE  
+4 David    22 Media    TRUE  </code></pre>
+</div>
+</div>
+<p>Beachtet, dass der Tibble im Gegensatz zum Data Frame den Datentyp unter jedem Spaltennamen anzeigt. Das ist eine kleine, aber wertvolle Hilfe, weil ihr sofort seht, womit ihr arbeitet.</p>
+</section><section id="die-vorteile-im-überblick" class="level3"><h3 class="anchored" data-anchor-id="die-vorteile-im-überblick">Die Vorteile im Überblick</h3>
+<p>Fassen wir die Unterschiede zusammen:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 39%">
+<col style="width: 29%">
+</colgroup>
+<thead><tr class="header">
+<th>Eigenschaft</th>
+<th><code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code></th>
+<th><code>tibble()</code></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Ausgabe</td>
+<td>Zeigt <em>alle</em> Zeilen</td>
+<td>Zeigt nur die ersten 10 Zeilen</td>
+</tr>
+<tr class="even">
+<td>Datentypen anzeigen</td>
+<td>Nein</td>
+<td>Ja, unter jedem Spaltennamen</td>
+</tr>
+<tr class="odd">
+<td>Text zu Faktor</td>
+<td>Manchmal automatisch</td>
+<td>Nie automatisch</td>
+</tr>
+<tr class="even">
+<td>Partielle Spaltennamen</td>
+<td>Erlaubt (<code>df$n</code> findet <code>name</code>)</td>
+<td>Nicht erlaubt, verhindert Fehler</td>
+</tr>
+<tr class="odd">
+<td>Subsetting</td>
+<td>Gibt manchmal Vektor zurück</td>
+<td>Gibt immer Tibble zurück</td>
+</tr>
+</tbody>
+</table>
+<p>Der letzte Punkt ist subtil, aber wichtig. Wenn ihr bei einem klassischen Data Frame eine einzelne Spalte mit eckigen Klammern auswählt, gibt R manchmal einen Vektor statt eines Data Frames zurück. Das kann zu schwer auffindbaren Fehlern führen. Tibbles geben in diesem Fall immer einen Tibble zurück, was das Verhalten berechenbarer macht.</p>
+</section><section id="den-tweets-datensatz-erkunden" class="level3"><h3 class="anchored" data-anchor-id="den-tweets-datensatz-erkunden">Den Tweets-Datensatz erkunden</h3>
+<p>Lasst uns den Tweets-Datensatz etwas genauer anschauen. Mit <code>glimpse()</code> bekommt ihr einen kompakten Überblick über alle Spalten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 58,421
+Columns: 22
+$ id                      &lt;chr&gt; "1642251945732653057", "1642416819003707397", …
+$ screen_name             &lt;chr&gt; "cem_oezdemir", "W_Schmidt_", "lisapaus", "lis…
+$ text                    &lt;chr&gt; "RT @BriHasselmann: Endlich! Wir sind drangebl…
+$ retweet_count           &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10…
+$ favorite_count          &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58,…
+$ is_quote_status         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALS…
+$ is_retweet              &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ retweeted_status_id     &lt;chr&gt; "1642158717113081856", "1641976869460275201", …
+$ retweeted_user          &lt;chr&gt; "BriHasselmann", "aakashg0", NA, NA, NA, NA, N…
+$ lang                    &lt;chr&gt; "de", "en", "de", "de", "qme", "de", "de", "de…
+$ hashtags                &lt;list&gt; &lt;"Tierhaltungskennzeichnung", "Wettbewerb"&gt;, …
+$ urls                    &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
+$ user_mentions           &lt;list&gt; "BriHasselmann", "aakashg0", &lt;"HassoSuliak", …
+$ photos                  &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
+$ source                  &lt;chr&gt; "&lt;a href=\"http://twitter.com/download/iphone\…
+$ insert_timestamp        &lt;chr&gt; "2023-04-02 03:00:04.749 UTC", "2023-04-02 07:…
+$ created_at              &lt;dttm&gt; 2023-04-01 19:45:50, 2023-04-02 06:40:58, 202…
+$ quote_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ reply_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ in_reply_to_screen_name &lt;chr&gt; NA, NA, "HassoSuliak", "andiewoerle", "Wissing…
+$ in_reply_to_status_id   &lt;chr&gt; NA, NA, "1642059841169502210", "16420886499603…
+$ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "16424095440462397…</code></pre>
+</div>
+</div>
+<p>Ihr seht hier alle Variablen mit ihrem Typ und den ersten Werten. Das ist meistens der erste Befehl, den ihr nach dem Laden eines Datensatzes ausführt, um euch zu orientieren.</p>
+<p>Wie viele Zeilen und Spalten hat der Datensatz?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58421</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22</code></pre>
+</div>
+</div>
+<p>Und welche Spaltennamen gibt es?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "id"                      "screen_name"            
+ [3] "text"                    "retweet_count"          
+ [5] "favorite_count"          "is_quote_status"        
+ [7] "is_retweet"              "retweeted_status_id"    
+ [9] "retweeted_user"          "lang"                   
+[11] "hashtags"                "urls"                   
+[13] "user_mentions"           "photos"                 
+[15] "source"                  "insert_timestamp"       
+[17] "created_at"              "quote_count"            
+[19] "reply_count"             "in_reply_to_screen_name"
+[21] "in_reply_to_status_id"   "quoted_status_id"       </code></pre>
+</div>
+</div>
+<p>All diese Informationen bekommt ihr auch, indem ihr einfach den Tibble ausgebt. Aber <code>glimpse()</code>, <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> und <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> sind nützlich, wenn ihr gezielt eine bestimmte Information braucht, zum Beispiel in einem Skript.</p>
+</section><section id="umwandlung-zwischen-data-frame-und-tibble" class="level3"><h3 class="anchored" data-anchor-id="umwandlung-zwischen-data-frame-und-tibble">Umwandlung zwischen Data Frame und Tibble</h3>
+<p>Manchmal bekommt ihr von einer Funktion einen klassischen Data Frame zurück und wollt ihn in einen Tibble umwandeln. Das geht mit <code>as_tibble()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb104"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_tibble</span> <span class="op">&lt;-</span> <span class="fu">as_tibble</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="va">df_tibble</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+      x y    
+  &lt;int&gt; &lt;chr&gt;
+1     1 a    
+2     2 b    
+3     3 c    </code></pre>
+</div>
+</div>
+<p>Und umgekehrt, wenn eine Funktion einen Data Frame erwartet, nutzt ihr <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>. In der Praxis braucht ihr das aber selten, weil Tibbles überall dort funktionieren, wo Data Frames erwartet werden.</p>
+<p>In der Praxis werden wir die gezeigten Datenstrukturen nicht per Hand erzeugen, sondern aus Dateien laden. Und für die Arbeit in diesem Buch werden wir zu 99% mit Tibbles arbeiten, die standardmäßige Darstellung von Daten im Tidyverse. An manchen Stellen verlassen wir jedoch da Tidyverse und brauchen dann auch das Verständnis der anderen Datenstrukturen, speziell Vektoren udn Skalarwerte.</p>
+<p>Wie wir Tibbles aus Dateien laden und was wir dabei beachten müssen, zeigen wir im nächsten <a href="../03-data-transformation/loading-data.html" class="quarto-xref"><span>Kapitel 5</span></a>.</p>
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../02-r-basics/programming-with-r.html" class="pagination-link" aria-label="Programmieren mit R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-data-transformation/loading-data.html" class="pagination-link" aria-label="Daten laden">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

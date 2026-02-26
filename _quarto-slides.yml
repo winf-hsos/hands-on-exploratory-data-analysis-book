@@ -1,15 +1,13 @@
 # _quarto-slides.yml
 project:
   type: default
-  execute-dir: project
-  pre-render:
-    - powershell -ExecutionPolicy Bypass -File scripts/generate-slide-snippets.ps1
+  execute-dir: file
   post-render:
     - powershell -ExecutionPolicy Bypass -File scripts/collect-rendered-slides.ps1
   render:
-    - r-basics/slides/_generated/loading-data-slides.qmd
-    #- project-1-survey/slides/_generated/survey-data-slides.qmd
-    #- r-basics/slides/_generated/pipe-slides.qmd
+    - r-basics/slides/loading-data-slides.qmd
+    - r-basics/slides/pipe-slides.qmd
+    #- project-1-survey/slides/survey-data-slides.qmd
     
 
 execute:
@@ -24,10 +22,9 @@ knitr:
 format:
   revealjs:
     slide-level: 2
-    #incremental: true
     theme: dark
     embed-resources: true
-    logo: ../../../images/slides/hs_logo.svg
+    logo: ../../images/slides/hs_logo.svg
     slide-number: c/t
     highlight-style: atom-one
     code-line-numbers: false

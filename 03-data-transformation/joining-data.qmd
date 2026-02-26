@@ -1,0 +1,302 @@
+# Datensätze verbinden {#sec-joining-data}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Nachdem ihr nun alle grundlegenden Operationen für einzelne Datensätze wie Filtern, Modifizieren und Aggregieren beherrscht, fehlt noch der Blick über den Tellerrand einer einzelnen Tabelle. In der Praxis liegen Daten fast nie in einer einzigen, sauberen Datei vor. Kundeninformationen stehen in einer Tabelle, Bestellungen in einer anderen und Produktdetails in einer dritten. In diesem Kapitel lernt ihr, wie ihr getrennte Datensätze über gemeinsame Schlüsselspalten – sogenannte Joins – zusammenführt.
+
+Die Fähigkeit, relationale Datenstrukturen aufzulösen, ist für reale Datenprojekte essenziell. Erst durch das Verknüpfen verschiedener Tabellen erhaltet ihr einen vollständigen Datensatz, in dem sich wirklich komplexe Fragen beantworten lassen. Stellt euch zwei Karteikästen vor: Einer enthält Kundennamen, der andere deren Bestellungen. Um zu wissen, welche Person was gekauft hat, braucht ihr einen Join. Das `dplyr`-Paket bietet hierfür verschiedene Varianten an, mit denen ihr exakt steuern könnt, welche Daten nach der Verknüpfung behalten oder verworfen werden.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion | Beschreibung |
+|---|---|
+| `inner_join()` | Nur Zeilen mit Treffern in beiden Tabellen behalten |
+| `left_join()` | Alle Zeilen der linken Tabelle behalten |
+| `right_join()` | Alle Zeilen der rechten Tabelle behalten |
+| `full_join()` | Alle Zeilen aus beiden Tabellen behalten |
+| `semi_join()` | Linke Tabelle filtern (Treffer behalten) |
+| `anti_join()` | Linke Tabelle filtern (Nicht-Treffer behalten) |
+| `join_by()` | Schlüssel bei unterschiedlichen Spaltennamen angeben |
+
+Um die Mechanismen der einzelnen Joins bestmöglich zu verstehen, nutzen wir zunächst stark vereinfachte Beispieldaten.
+
+## Beispieldaten {#sec-joining-data-beispiel}
+
+Um die verschiedenen Join-Typen zu verstehen, arbeiten wir mit zwei kleinen Tabellen, die wir selbst erstellen. So seht ihr genau, was passiert.
+
+```{r}
+customers <- tibble(
+  customer_id = c(1, 2, 3, 4),
+  name = c("Anna", "Ben", "Cleo", "David")
+)
+
+purchases <- tibble(
+  purchase_id = c(101, 102, 103, 104),
+  customer_id = c(1, 2, 2, 5),
+  product = c("Laptop", "Mouse", "Keyboard", "Monitor")
+)
+```
+
+Beachtet: Anna (ID 1) hat eine Bestellung, Ben (ID 2) hat zwei, Cleo (ID 3) und David (ID 4) haben keine, und es gibt eine Bestellung von Kunde 5, der gar nicht in der Kundentabelle steht. Diese Ungleichheiten sind absichtlich, denn sie zeigen, wie sich die verschiedenen Join-Typen verhalten.
+
+```{r}
+customers
+```
+
+```{r}
+purchases
+```
+
+## Das Grundprinzip {#sec-joining-data-grundprinzip}
+
+Ein Join verbindet zwei Tabellen über eine oder mehrere gemeinsame Spalten, die sogenannten **Schlüssel** (keys). Für jede Zeile in der linken Tabelle sucht R passende Zeilen in der rechten Tabelle, und umgekehrt. Was mit Zeilen passiert, die keinen Partner finden, hängt vom Join-Typ ab.
+
+_Abbildung: Zwei Tabellen nebeneinander. Links "customers" mit den Spalten customer_id und name, rechts "purchases" mit den Spalten purchase_id, customer_id und product. Gestrichelte Linien verbinden die customer_id-Werte, die in beiden Tabellen vorkommen (1, 2). Die customer_id 3 und 4 in der linken Tabelle und die customer_id 5 in der rechten Tabelle haben keine Verbindung. Unter den Tabellen steht "Schlüssel: customer_id"._
+
+## Join-Typen {#sec-joining-data-typen}
+
+### `inner_join()`
+
+`inner_join()` behält nur die Zeilen, die in beiden Tabellen einen passenden Partner haben. Alles ohne Treffer fällt raus.
+
+```{r}
+customers |>
+  inner_join(purchases, by = "customer_id")
+```
+
+Anna und Ben tauchen auf, weil ihre IDs in beiden Tabellen vorkommen. Cleo und David (keine Bestellung) und Kunde 5 (nicht in der Kundentabelle) fehlen. Ben hat zwei Zeilen, weil er zwei Bestellungen hat.
+
+### `left_join()`
+
+`left_join()` behält alle Zeilen der **linken** Tabelle. Wenn es in der rechten Tabelle keinen Treffer gibt, werden die Spalten der rechten Tabelle mit `NA` aufgefüllt.
+
+```{r}
+customers |>
+  left_join(purchases, by = "customer_id")
+```
+
+Jetzt erscheinen auch Cleo und David, allerdings mit `NA` in den Bestellspalten. Die Bestellung von Kunde 5 fehlt weiterhin, weil er nicht in der linken Tabelle (customers) steht.
+
+`left_join()` ist der mit Abstand häufigste Join-Typ. Er garantiert, dass keine Zeilen aus eurer Haupttabelle verloren gehen.
+
+### `right_join()`
+
+`right_join()` ist das Spiegelbild von `left_join()`: Es behält alle Zeilen der **rechten** Tabelle.
+
+```{r}
+customers |>
+  right_join(purchases, by = "customer_id")
+```
+
+Jetzt taucht Kunde 5 auf (mit `NA` beim Namen), aber Cleo und David fehlen, weil sie keine Bestellungen haben. In der Praxis kommt `right_join()` selten vor, weil ihr den gleichen Effekt erzielen könnt, indem ihr die Reihenfolge der Tabellen tauscht und `left_join()` verwendet.
+
+### `full_join()`
+
+`full_join()` behält alle Zeilen aus beiden Tabellen, egal ob es einen Treffer gibt oder nicht. Fehlende Werte werden mit `NA` aufgefüllt.
+
+```{r}
+customers |>
+  full_join(purchases, by = "customer_id")
+```
+
+Hier ist wirklich alles dabei: Anna und Ben mit ihren Bestellungen, Cleo und David ohne Bestellungen, und Kunde 5 ohne Namen.
+
+### Übersicht
+
+| Join-Typ | Behält Zeilen aus |
+|---|---|
+| `inner_join()` | Nur Zeilen mit Treffer in beiden Tabellen |
+| `left_join()` | Alle Zeilen der linken Tabelle |
+| `right_join()` | Alle Zeilen der rechten Tabelle |
+| `full_join()` | Alle Zeilen aus beiden Tabellen |
+
+_Abbildung: Vier kleine Diagramme nebeneinander, eines pro Join-Typ. Jedes Diagramm zeigt zwei Mengen (Kreise oder Rechtecke) als Venn-Diagramm. Die farblich hervorgehobene Fläche zeigt, welche Zeilen im Ergebnis enthalten sind. Bei inner_join ist nur die Schnittmenge farbig. Bei left_join ist der gesamte linke Kreis farbig. Bei right_join ist der gesamte rechte Kreis farbig. Bei full_join sind beide Kreise vollständig farbig. Unter jedem Diagramm steht der Funktionsname._
+
+## Schlüssel festlegen {#sec-joining-data-keys}
+
+### Automatische Erkennung
+
+Wenn ihr `by` nicht angebt, sucht `dplyr` automatisch nach Spalten mit dem gleichen Namen in beiden Tabellen und nutzt diese als Schlüssel:
+
+```{r}
+#| message: true
+customers |>
+  inner_join(purchases)
+```
+
+Die Meldung zeigt euch, welche Spalte als Schlüssel verwendet wurde. Das funktioniert gut, wenn die Spaltennamen eindeutig sind. Allerdings ist es besser, den Schlüssel immer explizit anzugeben, damit der Code auch dann korrekt bleibt, wenn sich die Daten ändern.
+
+### Unterschiedliche Spaltennamen
+
+Wenn die Schlüsselspalten in den beiden Tabellen unterschiedlich heißen, nutzt ihr `join_by()`:
+
+```{r}
+orders_renamed <- purchases |>
+  rename(buyer_id = customer_id)
+
+customers |>
+  inner_join(orders_renamed, by = join_by(customer_id == buyer_id))
+```
+
+`join_by()` ist die moderne Syntax in `dplyr`. Die ältere Schreibweise `by = c("customer_id" = "buyer_id")` funktioniert ebenfalls, ist aber weniger lesbar.
+
+### Mehrere Schlüsselspalten
+
+Manchmal braucht ihr mehr als eine Spalte, um die Zuordnung eindeutig zu machen. Das passiert zum Beispiel, wenn ihr Daten nach Jahr und Monat verknüpfen wollt:
+
+```{r}
+revenue <- tibble(
+  year = c(2024, 2024, 2025),
+  month = c(1, 2, 1),
+  total = c(5000, 6200, 5800)
+)
+
+targets <- tibble(
+  year = c(2024, 2024, 2025),
+  month = c(1, 2, 1),
+  target = c(5500, 6000, 6000)
+)
+
+revenue |>
+  left_join(targets, by = c("year", "month"))
+```
+
+## Duplikate und Kardinalität {#sec-joining-data-kardinalitaet}
+
+Bei Joins können sich Zeilen vervielfachen. Das habt ihr schon bei Ben gesehen: Weil er zwei Bestellungen hat, erscheint sein Name im Ergebnis zweimal. Das nennt man eine **Eins-zu-Viele-Beziehung** (one-to-many).
+
+Was passiert bei einer **Viele-zu-Viele-Beziehung** (many-to-many)? Dann bildet R das kartesische Produkt, also jede mögliche Kombination:
+
+```{r}
+#| warning: true
+left <- tibble(key = c(1, 1), value_left = c("a", "b"))
+right <- tibble(key = c(1, 1), value_right = c("x", "y"))
+
+left |>
+  inner_join(right, by = "key")
+```
+
+Aus zwei Zeilen links und zwei Zeilen rechts werden vier Zeilen. In der Praxis ist das fast immer ein Zeichen dafür, dass euer Schlüssel nicht eindeutig genug ist. `dplyr` gibt euch deshalb eine Warnung aus.
+
+::: {.callout-tip icon="💡" title="Zeilenzahl prüfen"}
+Prüft nach jedem Join kurz mit `nrow()`, ob die Zeilenzahl plausibel ist. Wenn sie unerwartet steigt, habt ihr wahrscheinlich Duplikate im Schlüssel. Mit `count(key, sort = TRUE)` findet ihr die Übeltäter.
+:::
+
+## Filtering-Joins {#sec-joining-data-filtering}
+
+Neben den verbindenden Joins gibt es auch **Filtering-Joins**. Sie verändern die Spalten nicht, sondern filtern nur die Zeilen der linken Tabelle.
+
+### `semi_join()`
+
+`semi_join()` behält die Zeilen der linken Tabelle, für die es einen Treffer in der rechten Tabelle gibt. Es fügt aber keine Spalten der rechten Tabelle hinzu:
+
+```{r}
+customers |>
+  semi_join(purchases, by = "customer_id")
+```
+
+Nur Anna und Ben erscheinen, weil sie Bestellungen haben. Aber die Bestellspalten fehlen. Das Ergebnis sieht aus wie ein `filter()`, und genau das ist der Zweck: Ihr filtert die Kundentabelle danach, welche Kunden überhaupt Bestellungen haben.
+
+### `anti_join()`
+
+`anti_join()` ist das Gegenstück: Es behält die Zeilen der linken Tabelle, für die es **keinen** Treffer in der rechten Tabelle gibt.
+
+```{r}
+customers |>
+  anti_join(purchases, by = "customer_id")
+```
+
+Cleo und David erscheinen, weil sie keine Bestellungen haben. `anti_join()` ist perfekt, um fehlende Zuordnungen zu finden, also Daten, die in einer Tabelle vorhanden sind, aber in der anderen fehlen.
+
+```{r}
+purchases |>
+  anti_join(customers, by = "customer_id")
+```
+
+Hier findet ihr die Bestellung von Kunde 5, die keinem Kunden zugeordnet werden kann. Das ist ein typischer Einsatz bei der Datenqualitätsprüfung.
+
+_Abbildung: Zwei Diagramme nebeneinander. Links: semi_join. Zwei Tabellen "customers" und "purchases". Der Pfeil zeigt von purchases auf customers. In der customers-Tabelle sind die Zeilen mit Treffern (Anna, Ben) hervorgehoben. Die purchases-Spalten werden NICHT hinzugefügt. Rechts: anti_join. Gleicher Aufbau, aber in der customers-Tabelle sind die Zeilen OHNE Treffer (Cleo, David) hervorgehoben._
+
+## Joins mit echten Daten {#sec-joining-data-real}
+
+Schauen wir uns einen Join mit dem `tweets`-Datensatz an. Im Ordner `data/` liegt eine CSV-Datei, die den Twitter-Accounts der Ampel-Politiker ihre Parteizugehörigkeit zuordnet. So eine Lookup-Tabelle ist ein typischer Anwendungsfall für Joins: Die Information steckt in einer separaten Datei, und ihr bringt sie per Join in euren Hauptdatensatz.
+
+```{r}
+party_info <- read_csv("data/party_info.csv")
+party_info
+```
+
+Jetzt verbinden wir die Parteizugehörigkeit mit den Tweets und berechnen die durchschnittliche Interaktion pro Partei:
+tweets |>
+  inner_join(party_info, by = "screen_name") |>
+  filter(!is_retweet) |>
+  group_by(party) |>
+  summarise(
+    tweets = n(),
+    avg_retweets = mean(retweet_count, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+Hier seht ihr, wie sich ein Join nahtlos in eine Pipe-Kette einreiht: Erst verbinden, dann filtern und zusammenfassen. Das ist ein typisches Muster in der Praxis.
+
+## Typische Probleme {#sec-joining-data-probleme}
+
+### Unerwartete Duplikate
+
+Wenn euer Ergebnis plötzlich viel mehr Zeilen hat als erwartet, prüft die Eindeutigkeit eurer Schlüssel:
+
+```{r}
+purchases |>
+  count(customer_id, sort = TRUE)
+```
+
+Wenn dieselbe ID mehrfach vorkommt, bekommt ihr für jede Kombination eine Zeile.
+
+### Fehlende Treffer finden
+
+Um herauszufinden, welche Zeilen beim Join verloren gehen, nutzt `anti_join()` in beide Richtungen:
+
+```{r}
+# Kunden ohne Bestellungen
+customers |>
+  anti_join(purchases, by = "customer_id")
+
+# Bestellungen ohne Kunden
+purchases |>
+  anti_join(customers, by = "customer_id")
+```
+
+### Spaltenkonflikte
+
+Wenn beide Tabellen Spalten mit dem gleichen Namen haben, die keine Schlüssel sind, hängt `dplyr` automatisch Suffixe an:
+
+```{r}
+ratings_a <- tibble(customer_id = c(1, 2), rating = c(4, 5))
+ratings_b <- tibble(customer_id = c(1, 2), rating = c(3, 4))
+
+ratings_a |>
+  inner_join(ratings_b, by = "customer_id")
+```
+
+Ihr könnt die Suffixe über den Parameter `suffix` anpassen:
+
+```{r}
+ratings_a |>
+  inner_join(ratings_b, by = "customer_id", suffix = c("_store", "_online"))
+```
+
+## Kurz zusammengefasst {#sec-joining-data-zusammenfassung}
+
+- Joins verbinden zwei Tabellen über gemeinsame Schlüsselspalten.
+- `inner_join()` behält nur Zeilen mit Treffern in beiden Tabellen.
+- `left_join()` behält alle Zeilen der linken Tabelle, ist der häufigste Join-Typ.
+- `right_join()` und `full_join()` behalten Zeilen der rechten beziehungsweise beider Tabellen.
+- Gebt den Schlüssel immer explizit mit `by` an. Bei unterschiedlichen Spaltennamen nutzt `join_by()`.
+- `semi_join()` und `anti_join()` filtern die linke Tabelle, ohne Spalten hinzuzufügen.
+- Prüft nach jedem Join die Zeilenzahl mit `nrow()`, um unerwartete Duplikate zu erkennen.
+
+Damit habt ihr alle wichtigen Werkzeuge für die Datentransformation kennengelernt. Ihr wisst, wie ihr Daten ladet (siehe @sec-loading-data), Spalten auswählt (siehe @sec-select), Variablen verändert und neue berechnet (siehe @sec-mutate-modify und @sec-mutate-add), Zeilen filtert (siehe @sec-filter), Daten zusammenfasst (siehe @sec-summarize) und Tabellen verbindet. Im nächsten Teil des Buches geht es darum, eure Ergebnisse sichtbar zu machen: mit Datenvisualisierungen.

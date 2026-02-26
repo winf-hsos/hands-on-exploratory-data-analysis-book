@@ -1,0 +1,167 @@
+# Boxplots {#sec-boxplots}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Boxplots fassen die Verteilung einer numerischen Variable in fünf Kennzahlen zusammen: Minimum, erstes Quartil, Median, drittes Quartil und Maximum. Im Gegensatz zu Histogrammen zeigen sie die Verteilung extrem kompakt, was sie ideal für Vergleiche zwischen Gruppen macht [@wilke_fundamentals_2019].
+
+## Aufbau eines Boxplots
+
+Bevor wir loslegen, kurz zur Anatomie:
+
+- Die **Box** reicht vom ersten Quartil (Q1, 25%) bis zum dritten Quartil (Q3, 75%). Sie enthält die mittleren 50% der Daten.
+- Die Linie in der Box ist der **Median** (50%).
+- Die **Whiskers** (Antennen) reichen bis zum weitesten Datenpunkt innerhalb von 1,5 × IQR (Interquartilsabstand) ab der Box.
+- **Ausreißer** sind Punkte jenseits der Whiskers und werden einzeln dargestellt.
+
+_Abbildung: Ein einzelner Boxplot mit Beschriftungen aller fünf Bestandteile: Whisker unten ("Minimum ohne Ausreißer"), untere Boxgrenze ("Q1 = 25%"), Linie in der Mitte ("Median = 50%"), obere Boxgrenze ("Q3 = 75%"), Whisker oben ("Maximum ohne Ausreißer"). Einzelne Punkte jenseits der Whiskers sind mit "Ausreißer" beschriftet. Eine geschweifte Klammer an der Box zeigt "IQR" (Interquartilsabstand)._
+
+## Einfacher Boxplot
+
+Wie verteilen sich die Retweet-Zahlen?
+
+```{r}
+#| label: fig-box-basic
+#| fig-cap: "Boxplot der Retweet-Zahlen."
+tweets |>
+  filter(!is_retweet) |>
+  ggplot() +
+  aes(y = retweet_count) +
+  geom_boxplot()
+```
+
+Der Boxplot zeigt sofort: Die meisten Tweets haben wenige Retweets (die Box ist sehr komprimiert), aber es gibt einige extreme Ausreißer.
+
+## Gruppen vergleichen
+
+Die eigentliche Stärke von Boxplots entfaltet sich, wenn ihr mehrere Gruppen nebeneinander zeigt:
+
+```{r}
+#| label: fig-box-groups
+#| fig-cap: "Retweet-Verteilung nach Account."
+top_accounts <- tweets |>
+  filter(!is_retweet) |>
+  count(screen_name, sort = TRUE) |>
+  head(8) |>
+  pull(screen_name)
+
+tweets |>
+  filter(!is_retweet, screen_name %in% top_accounts) |>
+  ggplot() +
+  aes(x = reorder(screen_name, retweet_count, FUN = median), y = retweet_count) +
+  geom_boxplot() +
+  coord_flip() +
+  labs(x = NULL, y = "Retweets")
+```
+
+`reorder(screen_name, retweet_count, FUN = median)` sortiert die Accounts nach dem Median ihrer Retweet-Zahlen. So seht ihr sofort, welcher Account typischerweise die meisten Retweets bekommt.
+
+## Boxplot verfeinern
+
+### Farbe nach Gruppe
+
+Mit `fill` färbt ihr die Boxen nach einer Gruppierungsvariable ein:
+
+```{r}
+#| label: fig-box-fill
+#| fig-cap: "Eingefärbte Boxplots."
+tweets |>
+  filter(!is_retweet, screen_name %in% top_accounts) |>
+  ggplot() +
+  aes(x = reorder(screen_name, retweet_count, FUN = median), y = retweet_count, fill = screen_name) +
+  geom_boxplot(show.legend = FALSE) +
+  coord_flip() +
+  labs(x = NULL, y = "Retweets")
+```
+
+### Breite nach Gruppengröße
+
+Mit `varwidth = TRUE` werden die Boxen proportional zur Gruppengröße breiter. So seht ihr auf einen Blick, welche Gruppen mehr Daten haben:
+
+```{r}
+#| label: fig-box-varwidth
+#| fig-cap: "Die Breite zeigt die Gruppengröße."
+tweets |>
+  filter(!is_retweet, screen_name %in% top_accounts) |>
+  ggplot() +
+  aes(x = reorder(screen_name, retweet_count, FUN = median), y = retweet_count) +
+  geom_boxplot(varwidth = TRUE) +
+  coord_flip() +
+  labs(x = NULL, y = "Retweets")
+```
+
+### Ausreißer unterdrücken
+
+Bei sehr vielen Ausreißern wird der Plot unübersichtlich. Ihr könnt die Ausreißer-Punkte ausblenden und stattdessen die Whiskers verlängern lassen:
+
+```{r}
+#| label: fig-box-no-outliers
+#| fig-cap: "Boxplot ohne einzelne Ausreißer-Punkte."
+tweets |>
+  filter(!is_retweet, screen_name %in% top_accounts) |>
+  ggplot() +
+  aes(x = reorder(screen_name, retweet_count, FUN = median), y = retweet_count) +
+  geom_boxplot(outlier.shape = NA) +
+  coord_flip() +
+  coord_flip(ylim = c(0, 2000)) +
+  labs(x = NULL, y = "Retweets")
+```
+
+## Alternativen und Ergänzungen
+
+### Violin-Plot
+
+`geom_violin()` zeigt die Verteilung als geglättete Dichtekurve statt als Box. Das gibt mehr Einblick in die Form der Verteilung:
+
+```{r}
+#| label: fig-box-violin
+#| fig-cap: "Violin-Plots zeigen die Form der Verteilung."
+tweets |>
+  filter(!is_retweet, screen_name %in% top_accounts) |>
+  ggplot() +
+  aes(x = reorder(screen_name, retweet_count, FUN = median), y = retweet_count) +
+  geom_violin() +
+  coord_flip() +
+  labs(x = NULL, y = "Retweets")
+```
+
+### Boxplot + Punkte
+
+Bei kleineren Datensätzen kann es sinnvoll sein, die einzelnen Datenpunkte über den Boxplot zu legen:
+
+```{r}
+#| label: fig-box-points
+#| fig-cap: "Boxplot mit einzelnen Datenpunkten."
+tweets |>
+  filter(!is_retweet, screen_name %in% top_accounts, retweet_count <= 2000) |>
+  ggplot() +
+  aes(x = reorder(screen_name, retweet_count, FUN = median), y = retweet_count) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  coord_flip() +
+  labs(x = NULL, y = "Retweets")
+```
+
+## Typische Fehler
+
+### Zu wenige Datenpunkte pro Gruppe
+
+Boxplots brauchen ausreichend Daten, um sinnvoll zu sein. Bei weniger als etwa 10 Beobachtungen pro Gruppe zeigt der Boxplot ein irreführendes Bild. Nutzt in dem Fall lieber `geom_point()` oder `geom_jitter()`.
+
+### Median vs. Mittelwert verwechseln
+
+Die Linie in der Box ist der Median, nicht der Mittelwert. Bei schiefen Verteilungen können die beiden stark auseinander liegen.
+
+### Verteilungsform ignorieren
+
+Zwei Gruppen können den gleichen Boxplot haben, aber völlig unterschiedliche Verteilungen. Wenn euch die Form wichtig ist, nutzt Violin-Plots oder Histogramme als Ergänzung [@wilke_fundamentals_2019].
+
+## Kurz zusammengefasst
+
+- `geom_boxplot()` fasst die Verteilung in fünf Kennzahlen zusammen.
+- Sortiert Gruppen mit `reorder()` nach dem Median für leichteren Vergleich.
+- `varwidth = TRUE` zeigt die Gruppengröße über die Boxbreite.
+- `geom_violin()` zeigt zusätzlich die Form der Verteilung.
+- Boxplots brauchen mindestens ~10 Beobachtungen pro Gruppe, um aussagekräftig zu sein.

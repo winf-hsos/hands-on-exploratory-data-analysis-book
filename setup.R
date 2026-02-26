@@ -1,7 +1,18 @@
 library(tidyverse)
 
-ts <- read_csv("data/tagesschau.zip", show_col_types = FALSE) |>
-	mutate(
-		date_time = ymd_hms(date_time, tz = "UTC"),
-		date_modified = ymd_hms(date_modified, tz = "UTC")
-	)
+find_project_dir <- function(start_dir = getwd()) {
+  dir <- normalizePath(start_dir)
+  repeat {
+    if (file.exists(file.path(dir, "_quarto.yml")) || file.exists(file.path(dir, "_quarto-slides.yml"))) {
+      return(dir)
+    }
+    parent <- dirname(dir)
+    if (parent == dir) stop("Project root not found")
+    dir <- parent
+  }
+}
+
+project_dir <- find_project_dir()
+
+tweets <- readRDS(file.path(project_dir, "data", "tweets_ampel.rds"))
+orders <- read_csv(file.path(project_dir, "data", "orders.csv"))

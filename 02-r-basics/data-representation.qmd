@@ -1,0 +1,467 @@
+# Datenrepräsentation {#sec-basics-data-representation}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Bevor ihr Daten analysieren könnt, müsst ihr verstehen, wie R Daten überhaupt speichert und organisiert. Denn R bietet euch eine ganze Reihe von Datenstrukturen, und jede hat ihren eigenen Zweck. Stellt euch vor, ihr zieht in eine neue Wohnung und habt einen Haufen Sachen. Manche kommen in Schubladen, manche in Regale, manche in Ordner. Genauso ist es in R: Je nachdem, was ihr mit euren Daten vorhabt, braucht ihr die passende Struktur.
+
+In diesem Kapitel starten wir ganz unten, bei einzelnen Werten, und arbeiten uns Schritt für Schritt nach oben. Am Ende steht der **Tibble**, die Datenstruktur, die euch im Rest des Buches überall begegnen wird.
+
+::: {.reuse #data-repr-learning-objectives}
+
+- Was sind skalare Werte, und wie unterscheidet R verschiedene Datentypen?
+- Wie fassen Vektoren, Faktoren und Matrizen mehrere Werte zusammen?
+- Was ist der Unterschied zwischen einem Data Frame und einem Tibble, und warum verwenden wir Tibbles?
+
+:::
+
+## Skalare Werte
+
+Was passiert, wenn ihr R einfach eine Zahl gebt?
+
+```{r}
+42
+```
+
+R gibt die Zahl zurück. Aber was *ist* das eigentlich? In vielen Programmiersprachen nennt man einen einzelnen Wert einen *Skalar*. Das ist der einfachste Baustein, mit dem ihr arbeiten könnt. In R ist ein Skalar intern ein Vektor der Länge 1, aber dazu kommen wir gleich. Erst einmal reicht es zu wissen: Ein einzelner Wert ist das Fundament.
+
+Ihr könnt skalare Werte in Variablen speichern, um sie später wiederzuverwenden:
+
+```{r}
+age <- 23
+name <- "Anna"
+```
+
+Der Pfeil `<-` ist der Zuweisungsoperator in R. Er legt den Wert rechts unter dem Namen links ab. Wenn ihr danach den Variablennamen eingebt, bekommt ihr den Wert zurück:
+
+```{r}
+age
+name
+```
+
+Aber nicht jeder Wert ist gleich. Eine Zahl ist etwas anderes als ein Text, und das bringt uns zum nächsten Thema.
+
+## Datentypen
+
+Warum ist es wichtig, ob ein Wert eine Zahl oder ein Text ist? Weil R mit verschiedenen Typen unterschiedlich umgeht. Ihr könnt zwei Zahlen addieren, aber ihr könnt nicht einen Text und eine Zahl addieren. Wenn R die Typen durcheinanderbringt, bekommt ihr entweder einen Fehler oder ein unerwartetes Ergebnis.
+
+### Grundlegende Datentypen
+
+R kennt vier grundlegende Datentypen, die euch im Alltag ständig begegnen:
+
+| Datentyp | Beschreibung | Beispiel |
+|----------|-------------|---------|
+| `numeric` / `double` | Dezimalzahlen | `3.14`, `42.0` |
+| `integer` | Ganzzahlen | `1L`, `100L` |
+| `character` | Text (Zeichenketten) | `"Hallo"`, `"2024"` |
+| `logical` | Wahrheitswerte | `TRUE`, `FALSE` |
+
+Mit der Funktion `class()` könnt ihr den Typ eines Werts herausfinden:
+
+```{r}
+class(3.14)
+class(1L)
+class("Hallo")
+class(TRUE)
+```
+
+Beachtet das `L` hinter der `1`. Ohne dieses `L` behandelt R jede Zahl als `numeric`, also als Dezimalzahl. Erst das `L` sagt R: Das ist eine Ganzzahl. In der Praxis spielt der Unterschied zwischen `numeric` und `integer` selten eine große Rolle, aber es ist gut zu wissen, dass es ihn gibt.
+
+### Typumwandlung
+
+Was passiert, wenn ihr versucht, einen Text wie `"42"` als Zahl zu verwenden?
+
+```{r}
+#| error: true
+"42" + 1
+```
+
+R beschwert sich, weil es einen Text und eine Zahl nicht addieren kann. Ihr müsst den Typ erst umwandeln:
+
+```{r}
+as.numeric("42") + 1
+```
+
+R bietet für jeden Datentyp eine passende Umwandlungsfunktion:
+
+| Funktion | Wandelt um in |
+|----------|-------------|
+| `as.numeric()` | Dezimalzahl |
+| `as.integer()` | Ganzzahl |
+| `as.character()` | Text |
+| `as.logical()` | Wahrheitswert |
+
+Umwandlungen funktionieren nicht immer. Wenn ihr versucht, den Text `"Hallo"` in eine Zahl umzuwandeln, gibt R eine Warnung aus und liefert `NA`, also einen fehlenden Wert:
+
+```{r}
+#| warning: true
+as.numeric("Hallo")
+```
+
+::: {.callout-tip icon="💡" title="Fehlende Werte: NA"}
+`NA` steht für *Not Available* und bedeutet, dass ein Wert fehlt. Fehlende Werte begegnen euch in der Datenanalyse ständig. R markiert damit Stellen, an denen keine Information vorhanden ist. Merkt euch `NA` gut, denn ihr werdet es noch oft sehen.
+:::
+
+### Datum und Uhrzeit
+
+Neben den vier Grundtypen gibt es noch einen Typ, der euch in der Datenanalyse besonders häufig begegnet: Datums- und Zeitwerte. R speichert Datumswerte intern als Zahl, die die Anzahl der Tage seit dem 1. Januar 1970 angibt, zeigt sie euch aber in einem lesbaren Format an:
+
+```{r}
+today <- Sys.Date()
+today
+class(today)
+```
+
+Für die Arbeit mit Datumswerten gibt es im Tidyverse das Paket `lubridate`, das euch viele hilfreiche Funktionen bereitstellt. Darauf gehen wir in späteren Kapiteln genauer ein.
+
+## Vektoren
+
+Was aber, wenn ihr nicht nur eine einzelne Zahl speichern wollt, sondern gleich fünf Prüfungsnoten? Oder die Namen aller Teilnehmenden eines Kurses?
+
+Dafür gibt es den **Vektor**. Ein Vektor ist eine geordnete Sammlung von Werten desselben Typs. Ihr erstellt ihn mit der Funktion `c()`, was für *combine* steht:
+
+```{r}
+grades <- c(1.3, 2.0, 1.7, 3.0, 2.3)
+grades
+```
+
+Vektoren sind so grundlegend für R, dass sogar ein einzelner Wert wie `42` im Hintergrund ein Vektor der Länge 1 ist. Das `[1]`, das R euch bei der Ausgabe immer anzeigt, ist der Index des ersten Elements in diesem Vektor.
+
+### Zugriff auf Elemente
+
+Wie greift ihr auf ein bestimmtes Element eines Vektors zu? Über eckige Klammern und die Position:
+
+```{r}
+grades[1]
+grades[3]
+```
+
+Ihr könnt auch mehrere Positionen auf einmal angeben:
+
+```{r}
+grades[c(1, 3, 5)]
+```
+
+Oder einen Bereich:
+
+```{r}
+grades[2:4]
+```
+
+### Rechnen mit Vektoren
+
+Das Besondere an R ist, dass Berechnungen automatisch auf alle Elemente eines Vektors angewendet werden. Dieses Prinzip nennt man *Vektorisierung*:
+
+```{r}
+grades * 100
+```
+
+Das funktioniert auch mit zwei Vektoren derselben Länge:
+
+```{r}
+scores <- c(90, 75, 85, 60, 70)
+weights <- c(0.3, 0.2, 0.2, 0.15, 0.15)
+scores * weights
+```
+
+Jedes Element des ersten Vektors wird mit dem entsprechenden Element des zweiten Vektors multipliziert. Das ist ein mächtiges Prinzip, das euch viele Schleifen erspart.
+
+_Abbildung: Zwei Vektoren liegen nebeneinander, jeweils mit fünf Elementen. Zwischen den Vektoren steht ein Multiplikationszeichen. Pfeile verbinden jeweils das erste Element des linken Vektors mit dem ersten des rechten, das zweite mit dem zweiten, und so weiter. Rechts daneben steht der Ergebnisvektor mit den fünf Produkten. Die Beschriftung lautet: „Vektorisierung: Elementweise Verknüpfung"._
+
+### Nützliche Funktionen für Vektoren
+
+R bringt viele eingebaute Funktionen mit, die mit Vektoren arbeiten:
+
+```{r}
+length(grades)
+sum(grades)
+mean(grades)
+min(grades)
+max(grades)
+sort(grades)
+```
+
+### Gleicher Datentyp für alle
+
+Eine wichtige Regel bei Vektoren ist: **Alle Elemente müssen denselben Typ** haben. Was passiert, wenn ihr einen Text und eine Zahl in denselben Vektor packt?
+
+```{r}
+mix <- c(1, "two", 3)
+mix
+class(mix)
+```
+
+R wandelt stillschweigend alles in Text um, weil Text der allgemeinste Typ ist. Aus den Zahlen `1` und `3` werden die Texte `"1"` und `"3"`. Das kann zu überraschenden Fehlern führen, wenn ihr später mit diesen Werten rechnen wollt.
+
+::: {.callout-tip icon="💡" title="Automatische Typumwandlung"}
+Wenn R verschiedene Typen in einem Vektor findet, wandelt es alle Werte in den allgemeinsten Typ um. Die Reihenfolge ist: `logical` → `integer` → `numeric` → `character`. Das nennt man *Coercion*. Achtet darauf, nur gleichartige Werte in einen Vektor zu packen.
+:::
+
+## Faktoren
+
+Manche Werte sehen zwar aus wie Text, sind aber eigentlich Kategorien. Denkt an Antworten in einer Umfrage: „stimme zu", „neutral", „stimme nicht zu". Oder an Schulnoten. Es gibt nur bestimmte erlaubte Werte, und manchmal haben sie eine Reihenfolge. Wir sprechen auch von *kategorialen Daten*.
+
+Genau dafür gibt es **Faktoren**. Ein Faktor ist ein Vektor, bei dem R weiß, welche Werte überhaupt möglich sind (die sogenannten *Levels* oder Kategorien) und in welcher Reihenfolge sie stehen.
+
+### Einen Faktor erstellen
+
+```{r}
+satisfaction <- factor(
+  c("satisfied", "neutral", "dissatisfied", "satisfied", "neutral"),
+  levels = c("dissatisfied", "neutral", "satisfied")
+)
+satisfaction
+```
+
+Beachtet die Zeile `Levels:` in der Ausgabe. Sie zeigt die möglichen Werte und ihre Reihenfolge. Das ist wichtig, weil R diese Reihenfolge zum Beispiel bei Diagrammen verwendet, die wir später mit `ggplot2` erstellen.
+
+### Warum nicht einfach Text?
+
+Wenn ihr Kategorien als einfachen Text speichert, hat R keine Ahnung, dass es nur bestimmte erlaubte Werte gibt. Faktoren geben euch drei Vorteile:
+
+1. **Validierung:** R warnt euch, wenn ein Wert auftaucht, der kein definiertes Level ist.
+2. **Reihenfolge:** Ihr kontrolliert, in welcher Reihenfolge Kategorien in Grafiken und Tabellen erscheinen.
+3. **Effizienz:** Intern speichert R Faktoren als Ganzzahlen, was bei großen Datensätzen Speicher spart.
+
+Prüfen wir Punkt 1: Was passiert, wenn ein Wert kein definiertes Level ist?
+
+```{r}
+#| warning: true
+rating <- factor(
+  c("good", "medium", "super"),
+  levels = c("bad", "medium", "good")
+)
+rating
+```
+
+Der Wert `"super"` ist kein definiertes Level. R ersetzt ihn daher durch `NA`. Das ist eine nützliche Schutzfunktion, denn in der Analyse merkt ihr sofort, wenn unerwartete Werte auftauchen.
+
+### Geordnete Faktoren
+
+Manchmal ist die Reihenfolge der Kategorien inhaltlich wichtig. Dann könnt ihr einen geordneten Faktor erstellen. Wir sprechen auch von einer *ordinalen Variable*:
+
+```{r}
+rating_ordered <- factor(
+  c("good", "medium", "bad", "good"),
+  levels = c("bad", "medium", "good"),
+  ordered = TRUE
+)
+rating_ordered
+```
+
+Bei einem geordneten Faktor könnt ihr Vergleiche mit `<` und `>` anstellen:
+
+```{r}
+rating_ordered > "medium"
+```
+
+In der Praxis begegnen euch Faktoren vor allem bei der Datenvisualisierung und bei statistischen Modellen. Das Tidyverse bietet mit dem Paket `forcats` viele hilfreiche Funktionen für die Arbeit mit Faktoren.
+
+## Matrizen
+
+Vektoren sind eindimensional. Aber was, wenn eure Daten zwei Dimensionen haben, also Zeilen und Spalten? Dann kommt die **Matrix** ins Spiel.
+
+Eine Matrix ist im Grunde ein Vektor, der in Zeilen und Spalten angeordnet ist. Wie beim Vektor gilt: **Alle Elemente müssen denselben Typ haben**, typischerweise Zahlen.
+
+```{r}
+m <- matrix(
+  c(85, 72, 91, 68, 79, 95),
+  nrow = 2,
+  ncol = 3
+)
+m
+```
+
+Ihr seht, dass R die Werte spaltenweise auffüllt. Das ist die Voreinstellung. Wenn ihr die Werte zeilenweise einfüllen wollt, setzt ihr `byrow = TRUE`:
+
+```{r}
+m2 <- matrix(
+  c(85, 72, 91, 68, 79, 95),
+  nrow = 2,
+  ncol = 3,
+  byrow = TRUE
+)
+m2
+```
+
+### Zeilen und Spalten benennen
+
+Um eine Matrix lesbarer zu machen, könnt ihr Zeilen und Spalten benennen:
+
+```{r}
+rownames(m2) <- c("Exam 1", "Exam 2")
+colnames(m2) <- c("Math", "Statistics", "Programming")
+m2
+```
+
+### Zugriff auf Elemente
+
+Der Zugriff funktioniert über `[Zeile, Spalte]`:
+
+```{r}
+m2[1, 2]
+m2["Exam 1", "Statistics"]
+```
+
+Eine ganze Zeile oder Spalte bekommt ihr, indem ihr die andere Dimension leer lasst:
+
+```{r}
+m2[1, ]
+m2[, "Math"]
+```
+
+### Rechnen mit Matrizen
+
+Genau wie bei Vektoren könnt ihr mit Matrizen rechnen. Eine einfache Multiplikation mit einem Skalar funktioniert elementweise:
+
+```{r}
+m2 / 100
+```
+
+Matrizen spielen in der Statistik und im maschinellen Lernen eine zentrale Rolle, zum Beispiel bei der linearen Algebra. Für die explorative Datenanalyse braucht ihr sie eher selten direkt, weil Data Frames und Tibbles flexibler sind. Aber es ist gut zu wissen, dass es sie gibt.
+
+_Abbildung: Eine Matrix als Gitter dargestellt, mit beschrifteten Zeilen (Exam 1, Exam 2) und Spalten (Math, Statistics, Programming). Daneben ein Vektor als einzelne Spalte. Ein Pfeil zeigt, dass die Matrix aus mehreren gleichartigen Vektoren zusammengesetzt ist. Untertitel: „Eine Matrix ist ein zweidimensionaler Vektor."_
+
+## Data Frames
+
+Vektoren können nur einen Typ enthalten, Matrizen genauso. In der Praxis sehen eure Daten aber anders aus: Eine Spalte enthält Namen (Text), eine andere Alter (Zahlen), eine dritte, ob eine Zustimmung vorliegt (Wahrheitswert). Ihr braucht also eine Struktur, die verschiedene Typen in verschiedenen Spalten erlaubt.
+
+Genau das ist ein **Data Frame**. Ein Data Frame ist die klassische tabellarische Datenstruktur in R. Jede Spalte ist ein Vektor, und die Spalten dürfen unterschiedliche Typen haben.
+
+```{r}
+df <- data.frame(
+  name = c("Anna", "Ben", "Cleo"),
+  age = c(23, 21, 25),
+  passed = c(TRUE, FALSE, TRUE)
+)
+df
+```
+
+Das sieht schon sehr nach einer Tabelle aus. Jede Spalte hat einen Namen, und die Zeilen repräsentieren einzelne Beobachtungen. Dieses Prinzip heißt **Tidy Data**: Jede Zeile ist eine Beobachtung, jede Spalte ist eine Variable.
+
+### Zugriff auf Spalten
+
+Auf eine einzelne Spalte greift ihr mit dem Dollar-Zeichen zu:
+
+```{r}
+df$name
+df$age
+```
+
+Das Ergebnis ist jeweils ein Vektor. Ihr könnt damit genauso arbeiten wie mit jedem anderen Vektor:
+
+```{r}
+mean(df$age)
+```
+
+### Das Problem mit Data Frames
+
+Data Frames funktionieren zuverlässig, haben aber ein paar Eigenheiten, die im Alltag nerven können:
+
+```{r}
+df
+```
+
+Schaut euch die Ausgabe genau an. Wenn ein Data Frame viele Zeilen hat, zeigt R *alle* an. Bei einem Datensatz mit zehntausenden Beobachtungen überflutet das eure Konsole. Außerdem wandelt `data.frame()` Textspalten manchmal automatisch in Faktoren um, was zu unerwarteten Ergebnissen führen kann.
+
+Es gibt also Raum für Verbesserungen. Und genau hier kommen Tibbles ins Spiel.
+
+## Tibbles
+
+Tibbles sind die moderne Version des Data Frames. Sie kommen aus dem Tidyverse und sind so gebaut, dass sie im Arbeitsalltag angenehmer und sicherer sind. Alles, was ein Data Frame kann, kann auch ein Tibble. Aber ein Tibble macht ein paar Dinge cleverer.
+
+### Was ist anders?
+
+Schauen wir uns den Unterschied direkt an. Wir laden den Tweets-Datensatz als Tibble:
+
+```{r}
+tweets
+```
+
+Was fällt euch auf? Der Tibble zeigt euch automatisch nur die ersten zehn Zeilen und passt die Spalten an die Breite eurer Konsole an. Außerdem seht ihr unter jedem Spaltennamen den Datentyp: `<chr>` für Text, `<dbl>` für Dezimalzahlen, `<lgl>` für Wahrheitswerte, `<dttm>` für Zeitstempel.
+
+Vergleichen wir das mit einem Data Frame. Wenn wir den Tibble in einen klassischen Data Frame umwandeln und ausgeben, sehen wir den Unterschied sofort:
+
+```{r}
+tweets_df <- as.data.frame(tweets)
+```
+
+Würden wir `tweets_df` jetzt ausgeben, würde R versuchen, alle Zeilen und Spalten in der Konsole darzustellen. Bei einem Datensatz mit `r nrow(tweets) |> format(big.mark = ".", decimal.mark = ",")` Zeilen wäre das eine ziemliche Flut.
+
+### Einen Tibble erstellen
+
+Ihr könnt einen Tibble genau wie einen Data Frame von Hand erstellen. Statt `data.frame()` verwendet ihr `tibble()`:
+
+```{r}
+students <- tibble(
+  name = c("Anna", "Ben", "Cleo", "David"),
+  age = c(23, 21, 25, 22),
+  major = c("Business", "CS", "Business", "Media"),
+  passed = c(TRUE, FALSE, TRUE, TRUE)
+)
+students
+```
+
+Beachtet, dass der Tibble im Gegensatz zum Data Frame den Datentyp unter jedem Spaltennamen anzeigt. Das ist eine kleine, aber wertvolle Hilfe, weil ihr sofort seht, womit ihr arbeitet.
+
+### Die Vorteile im Überblick
+
+Fassen wir die Unterschiede zusammen:
+
+| Eigenschaft | `data.frame()` | `tibble()` |
+|-------------|----------------|------------|
+| Ausgabe | Zeigt *alle* Zeilen | Zeigt nur die ersten 10 Zeilen |
+| Datentypen anzeigen | Nein | Ja, unter jedem Spaltennamen |
+| Text zu Faktor | Manchmal automatisch | Nie automatisch |
+| Partielle Spaltennamen | Erlaubt (`df$n` findet `name`) | Nicht erlaubt, verhindert Fehler |
+| Subsetting | Gibt manchmal Vektor zurück | Gibt immer Tibble zurück |
+
+Der letzte Punkt ist subtil, aber wichtig. Wenn ihr bei einem klassischen Data Frame eine einzelne Spalte mit eckigen Klammern auswählt, gibt R manchmal einen Vektor statt eines Data Frames zurück. Das kann zu schwer auffindbaren Fehlern führen. Tibbles geben in diesem Fall immer einen Tibble zurück, was das Verhalten berechenbarer macht.
+
+### Den Tweets-Datensatz erkunden
+
+Lasst uns den Tweets-Datensatz etwas genauer anschauen. Mit `glimpse()` bekommt ihr einen kompakten Überblick über alle Spalten:
+
+```{r}
+tweets |>
+  glimpse()
+```
+
+Ihr seht hier alle Variablen mit ihrem Typ und den ersten Werten. Das ist meistens der erste Befehl, den ihr nach dem Laden eines Datensatzes ausführt, um euch zu orientieren.
+
+Wie viele Zeilen und Spalten hat der Datensatz?
+
+```{r}
+nrow(tweets)
+ncol(tweets)
+```
+
+Und welche Spaltennamen gibt es?
+
+```{r}
+names(tweets)
+```
+
+All diese Informationen bekommt ihr auch, indem ihr einfach den Tibble ausgebt. Aber `glimpse()`, `nrow()` und `names()` sind nützlich, wenn ihr gezielt eine bestimmte Information braucht, zum Beispiel in einem Skript.
+
+### Umwandlung zwischen Data Frame und Tibble
+
+Manchmal bekommt ihr von einer Funktion einen klassischen Data Frame zurück und wollt ihn in einen Tibble umwandeln. Das geht mit `as_tibble()`:
+
+```{r}
+df <- data.frame(
+  x = 1:3,
+  y = c("a", "b", "c")
+)
+
+df_tibble <- as_tibble(df)
+df_tibble
+```
+
+Und umgekehrt, wenn eine Funktion einen Data Frame erwartet, nutzt ihr `as.data.frame()`. In der Praxis braucht ihr das aber selten, weil Tibbles überall dort funktionieren, wo Data Frames erwartet werden.
+
+In der Praxis werden wir die gezeigten Datenstrukturen nicht per Hand erzeugen, sondern aus Dateien laden. Und für die Arbeit in diesem Buch werden wir zu 99% mit Tibbles arbeiten, die standardmäßige Darstellung von Daten im Tidyverse. An manchen Stellen verlassen wir jedoch da Tidyverse und brauchen dann auch das Verständnis der anderen Datenstrukturen, speziell Vektoren udn Skalarwerte.  
+
+Wie wir Tibbles aus Dateien laden und was wir dabei beachten müssen, zeigen wir im nächsten @sec-loading-data.

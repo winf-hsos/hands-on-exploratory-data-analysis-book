@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>4&nbsp; Faktoren – Hands-On Exploratory Data Analytics</title>
+<title>24&nbsp; Faktoren – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Abschicken",
     "search-label": "Suchen"
   }
-}</script>
+}</script><link rel="stylesheet" href="../styles/sidebar.css">
 </head>
 <body class="nav-sidebar floating quarto-light">
 
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-2-news/load.html">Projekt 2: News</a></li><li class="breadcrumb-item"><a href="../project-2-news/factors.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-2-news/load.html">Projekt 2: News</a></li><li class="breadcrumb-item"><a href="../project-2-news/factors.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt 1: Umfrage</span></a>
+ <span class="menu-text">Hintergründe</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -149,14 +149,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../01-background/empirical-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
       </ul>
@@ -164,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt 2: News</span></a>
+ <span class="menu-text">Erste Schritte mit R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -172,26 +166,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Grundlagen</span></a>
+ <span class="menu-text">Datentransformation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -207,56 +195,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+  <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+  <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span></a>
+  <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datenvisualisierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfragen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -287,18 +386,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#%C3%BCberblick-welche-variablen-sind-gute-faktoren" id="toc-überblick-welche-variablen-sind-gute-faktoren" class="nav-link active" data-scroll-target="#%C3%BCberblick-welche-variablen-sind-gute-faktoren"><span class="header-section-number">4.1</span> Überblick: Welche Variablen sind gute Faktoren?</a></li>
-  <li><a href="#h%C3%A4ufigkeiten-ressorts-z%C3%A4hlen-und-visualisieren" id="toc-häufigkeiten-ressorts-zählen-und-visualisieren" class="nav-link" data-scroll-target="#h%C3%A4ufigkeiten-ressorts-z%C3%A4hlen-und-visualisieren"><span class="header-section-number">4.2</span> Häufigkeiten: Ressorts zählen und visualisieren</a></li>
-  <li><a href="#zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" id="toc-zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="nav-link" data-scroll-target="#zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen"><span class="header-section-number">4.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</a></li>
-  <li><a href="#sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" id="toc-sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="nav-link" data-scroll-target="#sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen"><span class="header-section-number">4.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</a></li>
-  <li><a href="#kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" id="toc-kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="nav-link" data-scroll-target="#kategorien-bereinigen-recoding-und-missingness-sichtbar-machen"><span class="header-section-number">4.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</a></li>
-  <li><a href="#abgeleitete-faktoren-wochentag-und-tageszeit" id="toc-abgeleitete-faktoren-wochentag-und-tageszeit" class="nav-link" data-scroll-target="#abgeleitete-faktoren-wochentag-und-tageszeit"><span class="header-section-number">4.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</a></li>
+<li><a href="#%C3%BCberblick-welche-variablen-sind-gute-faktoren" id="toc-überblick-welche-variablen-sind-gute-faktoren" class="nav-link active" data-scroll-target="#%C3%BCberblick-welche-variablen-sind-gute-faktoren"><span class="header-section-number">24.1</span> Überblick: Welche Variablen sind gute Faktoren?</a></li>
+  <li><a href="#h%C3%A4ufigkeiten-ressorts-z%C3%A4hlen-und-visualisieren" id="toc-häufigkeiten-ressorts-zählen-und-visualisieren" class="nav-link" data-scroll-target="#h%C3%A4ufigkeiten-ressorts-z%C3%A4hlen-und-visualisieren"><span class="header-section-number">24.2</span> Häufigkeiten: Ressorts zählen und visualisieren</a></li>
+  <li><a href="#zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" id="toc-zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="nav-link" data-scroll-target="#zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen"><span class="header-section-number">24.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</a></li>
+  <li><a href="#sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" id="toc-sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="nav-link" data-scroll-target="#sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen"><span class="header-section-number">24.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</a></li>
+  <li><a href="#kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" id="toc-kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="nav-link" data-scroll-target="#kategorien-bereinigen-recoding-und-missingness-sichtbar-machen"><span class="header-section-number">24.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</a></li>
+  <li><a href="#abgeleitete-faktoren-wochentag-und-tageszeit" id="toc-abgeleitete-faktoren-wochentag-und-tageszeit" class="nav-link" data-scroll-target="#abgeleitete-faktoren-wochentag-und-tageszeit"><span class="header-section-number">24.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-2-news/load.html">Projekt 2: News</a></li><li class="breadcrumb-item"><a href="../project-2-news/factors.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-2-news/load.html">Projekt 2: News</a></li><li class="breadcrumb-item"><a href="../project-2-news/factors.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span>
+<span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span>
 </h1>
 </div>
 
@@ -320,8 +419,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Modelle kategoriale Merkmale korrekt behandeln können.</li>
 </ul>
 <p>Im Tidyverse ist <code>forcats</code> (Teil von <code>tidyverse</code>) das Werkzeug für Faktor-Operationen.</p>
-<section id="überblick-welche-variablen-sind-gute-faktoren" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="überblick-welche-variablen-sind-gute-faktoren">
-<span class="header-section-number">4.1</span> Überblick: Welche Variablen sind gute Faktoren?</h2>
+<section id="überblick-welche-variablen-sind-gute-faktoren" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="überblick-welche-variablen-sind-gute-faktoren">
+<span class="header-section-number">24.1</span> Überblick: Welche Variablen sind gute Faktoren?</h2>
 <p>Ein schneller Check ist: Welche Spalten sind Text (<code>&lt;chr&gt;</code>) und haben eher wenige unterschiedliche Werte?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Anzahl unterschiedlicher Werte je Zeichen-Spalte</span></span>
@@ -361,8 +460,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Kleine <code>n_distinct</code> (z.B. <code>language</code>) → sehr gute Kandidaten für Faktoren.</li>
 <li>Große <code>n_distinct</code> (z.B. <code>title</code>, <code>url</code>) → eher Identifikatoren/Free-Text, meistens <em>kein</em> Faktor.</li>
-</ul></section><section id="häufigkeiten-ressorts-zählen-und-visualisieren" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="häufigkeiten-ressorts-zählen-und-visualisieren">
-<span class="header-section-number">4.2</span> Häufigkeiten: Ressorts zählen und visualisieren</h2>
+</ul></section><section id="häufigkeiten-ressorts-zählen-und-visualisieren" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="häufigkeiten-ressorts-zählen-und-visualisieren">
+<span class="header-section-number">24.2</span> Häufigkeiten: Ressorts zählen und visualisieren</h2>
 <p>Bei News-Daten ist <code>ressort</code> meist eine der wichtigsten Kategorien.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Häufigkeitstabelle</span></span>
@@ -408,8 +507,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Du erkennst sofort, welche Ressorts dominieren (wichtig für Stichproben, Bias, Gewichtung).</li>
 <li>Viele weitere Analysen (Zeitreihen, Textfeatures) lassen sich sinnvoll nach Ressort splitten.</li>
-</ul></section><section id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen">
-<span class="header-section-number">4.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</h2>
+</ul></section><section id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="zu-viele-kategorien-lumpen-seltene-werte-zusammenfassen">
+<span class="header-section-number">24.3</span> Zu viele Kategorien: Lumpen (seltene Werte zusammenfassen)</h2>
 <p>Bei Kategorien wie <code>author</code> gibt es oft sehr viele Ausprägungen. Für Auswertungen und Plots ist es dann sinnvoll, seltene Werte in <code>Other</code> zusammenzufassen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Top-Autor:innen + Other</span></span>
@@ -448,8 +547,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>reduziert visuelle Unordnung,</li>
 <li>verhindert, dass „Einzelfälle“ die Story dominieren,</li>
 <li>stabilisiert Modelle (zu viele Kategorien führen sonst schnell zu Overfitting).</li>
-</ul></section><section id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen">
-<span class="header-section-number">4.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</h2>
+</ul></section><section id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="sinnvolle-reihenfolgen-faktoren-nach-kennzahlen-ordnen">
+<span class="header-section-number">24.4</span> Sinnvolle Reihenfolgen: Faktoren nach Kennzahlen ordnen</h2>
 <p>Ein Faktor muss nicht alphabetisch sortiert sein. Häufig willst du Kategorien nach einer analytischen Kennzahl ordnen.</p>
 <p>Beispiel: Welche Ressorts haben im Median die längsten Texte (über <code>word_count</code>)?</p>
 <div class="cell">
@@ -498,8 +597,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>So ein Plot ist ein guter Einstieg, um Hypothesen zu formulieren (z.B. „Politikartikel sind länger als Sportmeldungen“).</p>
-</section><section id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen">
-<span class="header-section-number">4.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</h2>
+</section><section id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen" class="level2" data-number="24.5"><h2 data-number="24.5" class="anchored" data-anchor-id="kategorien-bereinigen-recoding-und-missingness-sichtbar-machen">
+<span class="header-section-number">24.5</span> Kategorien bereinigen: Recoding und Missingness sichtbar machen</h2>
 <p>Oft sind Kategorien „nicht sauber“: unterschiedliche Schreibweisen, leere Strings, oder NAs. Für Analytics ist es wichtig, diese Fälle bewusst zu behandeln.</p>
 <p>Beispiel: <code>language</code> sollte im Datensatz meistens <code>de</code> sein.</p>
 <div class="cell">
@@ -549,8 +648,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 29 more rows</code></pre>
 </div>
 </div>
-</section><section id="abgeleitete-faktoren-wochentag-und-tageszeit" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="abgeleitete-faktoren-wochentag-und-tageszeit">
-<span class="header-section-number">4.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</h2>
+</section><section id="abgeleitete-faktoren-wochentag-und-tageszeit" class="level2" data-number="24.6"><h2 data-number="24.6" class="anchored" data-anchor-id="abgeleitete-faktoren-wochentag-und-tageszeit">
+<span class="header-section-number">24.6</span> Abgeleitete Faktoren: Wochentag und Tageszeit</h2>
 <p>Faktoren entstehen nicht nur aus Textspalten. Gerade Zeitstempel werden in Analytics oft in kategoriale Einheiten transformiert, um Muster sichtbar zu machen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Wochentag (deutsche Labels) und Stunde</span></span>
@@ -1024,12 +1123,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../project-2-news/load.html" class="pagination-link" aria-label="Laden der Daten">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../project-2-news/variables.html" class="pagination-link" aria-label="Übersicht der Variablen">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

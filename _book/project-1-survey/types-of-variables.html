@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Arten von Variablen – Hands-On Exploratory Data Analytics</title>
+<title>22&nbsp; Arten von Variablen – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9389e2d1caad5346c362f7b9453bae78.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -161,6 +161,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles/sidebar.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -172,7 +173,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfragen</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -206,7 +207,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt 1: Umfrage</span></a>
+ <span class="menu-text">Hintergründe</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -214,14 +215,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../01-background/empirical-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
       </ul>
@@ -229,7 +224,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Projekt 2: News</span></a>
+ <span class="menu-text">Erste Schritte mit R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -237,26 +232,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+  <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,7 +253,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Grundlagen</span></a>
+ <span class="menu-text">Datentransformation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -272,56 +261,167 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+  <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+  <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+  <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+  <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+  <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+  <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+  <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Daten zusammenfassen</span></span></a>
+  <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../r-basics/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Datenvisualisierung</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 1: Umfragen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projekt 2: News</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -354,28 +454,28 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#ein-schema-zur-orientierung" id="toc-ein-schema-zur-orientierung" class="nav-link active" data-scroll-target="#ein-schema-zur-orientierung"><span class="header-section-number">2.1</span> Ein Schema zur Orientierung</a></li>
-  <li><a href="#numerische-variablen" id="toc-numerische-variablen" class="nav-link" data-scroll-target="#numerische-variablen"><span class="header-section-number">2.2</span> Numerische Variablen</a>
+  <li><a href="#ein-schema-zur-orientierung" id="toc-ein-schema-zur-orientierung" class="nav-link active" data-scroll-target="#ein-schema-zur-orientierung"><span class="header-section-number">22.1</span> Ein Schema zur Orientierung</a></li>
+  <li><a href="#numerische-variablen" id="toc-numerische-variablen" class="nav-link" data-scroll-target="#numerische-variablen"><span class="header-section-number">22.2</span> Numerische Variablen</a>
   <ul class="collapse">
   <li><a href="#kontinuierliche-variablen" id="toc-kontinuierliche-variablen" class="nav-link" data-scroll-target="#kontinuierliche-variablen">Kontinuierliche Variablen</a></li>
   <li><a href="#zählvariablen" id="toc-zählvariablen" class="nav-link" data-scroll-target="#zählvariablen">Zählvariablen</a></li>
   </ul></li>
-  <li><a href="#kategoriale-variablen" id="toc-kategoriale-variablen" class="nav-link" data-scroll-target="#kategoriale-variablen"><span class="header-section-number">2.3</span> Kategoriale Variablen</a>
+  <li><a href="#kategoriale-variablen" id="toc-kategoriale-variablen" class="nav-link" data-scroll-target="#kategoriale-variablen"><span class="header-section-number">22.3</span> Kategoriale Variablen</a>
   <ul class="collapse">
   <li><a href="#nominale-variablen" id="toc-nominale-variablen" class="nav-link" data-scroll-target="#nominale-variablen">Nominale Variablen</a></li>
   <li><a href="#ordinale-variablen" id="toc-ordinale-variablen" class="nav-link" data-scroll-target="#ordinale-variablen">Ordinale Variablen</a></li>
   </ul></li>
-  <li><a href="#qualitative-variablen" id="toc-qualitative-variablen" class="nav-link" data-scroll-target="#qualitative-variablen"><span class="header-section-number">2.4</span> Qualitative Variablen</a></li>
-  <li><a href="#zusammenfassung-welcher-typ-welche-werkzeuge" id="toc-zusammenfassung-welcher-typ-welche-werkzeuge" class="nav-link" data-scroll-target="#zusammenfassung-welcher-typ-welche-werkzeuge"><span class="header-section-number">2.5</span> Zusammenfassung: Welcher Typ → welche Werkzeuge?</a></li>
+  <li><a href="#qualitative-variablen" id="toc-qualitative-variablen" class="nav-link" data-scroll-target="#qualitative-variablen"><span class="header-section-number">22.4</span> Qualitative Variablen</a></li>
+  <li><a href="#zusammenfassung-welcher-typ-welche-werkzeuge" id="toc-zusammenfassung-welcher-typ-welche-werkzeuge" class="nav-link" data-scroll-target="#zusammenfassung-welcher-typ-welche-werkzeuge"><span class="header-section-number">22.5</span> Zusammenfassung: Welcher Typ → welche Werkzeuge?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfrage</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfragen</a></li><li class="breadcrumb-item"><a href="../project-1-survey/types-of-variables.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-surveys-types-of-variables" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></h1>
+<h1 class="title"><span id="sec-surveys-types-of-variables" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></h1>
 </div>
 
 
@@ -392,7 +492,7 @@ window.Quarto = {
 </header>
 
 
-<p>In <a href="survey-data.html" class="quarto-xref"><span>Kapitel 1</span></a> haben wir gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“, der Variablentyp entscheidet ganz praktisch darüber,</p>
+<p>In <a href="survey-data.html" class="quarto-xref"><span>Kapitel 21</span></a> haben wir gesehen, dass Umfragedaten aus vielen unterschiedlichen Spalten bestehen: Manche Spalten sind Zahlen, andere sind Kategorien wie „männlich/weiblich/divers“, wieder andere enthalten Freitext. Das ist nicht nur „Kosmetik“, der Variablentyp entscheidet ganz praktisch darüber,</p>
 <ul>
 <li>welche Kennzahlen sinnvoll sind (Mittelwert? Median? Anteil?),</li>
 <li>welche Visualisierung passt (Histogramm? Balkendiagramm? Boxplot?),</li>
@@ -417,8 +517,8 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<section id="ein-schema-zur-orientierung" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="ein-schema-zur-orientierung"><span class="header-section-number">2.1</span> Ein Schema zur Orientierung</h2>
+<section id="ein-schema-zur-orientierung" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="ein-schema-zur-orientierung"><span class="header-section-number">22.1</span> Ein Schema zur Orientierung</h2>
 <p>Um Variablen sauber abzugrenzen, hilft ein einfaches Schema. Laut <span class="citation" data-cites="effect_2026">Huntington-Klein (<a href="../references.html#ref-effect_2026" role="doc-biblioref">2026</a>)</span> unterscheiden wir in der empirischen Forschung zwischen:</p>
 <ul>
 <li>Kontinuierlichen Variablen</li>
@@ -427,23 +527,23 @@ window.Quarto = {
 <li>Kategorialen Variablen</li>
 <li>Qualitativen Variablen</li>
 </ul>
-<p>Ich würde einen Schritt weiter gehen und kontinuierliche und Zählvariablen zur Klasse der <strong>numerischen Variablen</strong> zusammenfassen. Da ordinale Variablen ebenfalls Katgeorien darstellen, die zusätzlich geordnet sind, werden Sie ihnen untergeordnet. Daneben gibt es dann die kategorialien Variablen ohne Reihenfolge, die wir <strong>nominale Variablen</strong> nennen. Qualitative Variablen (sowas wie Texte) bilden ihre eigene Klasse. In <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>2.1</span></a> ist das Schema zusammengefasst dargestellt.</p>
+<p>Ich würde einen Schritt weiter gehen und kontinuierliche und Zählvariablen zur Klasse der <strong>numerischen Variablen</strong> zusammenfassen. Da ordinale Variablen ebenfalls Katgeorien darstellen, die zusätzlich geordnet sind, werden Sie ihnen untergeordnet. Daneben gibt es dann die kategorialien Variablen ohne Reihenfolge, die wir <strong>nominale Variablen</strong> nennen. Qualitative Variablen (sowas wie Texte) bilden ihre eigene Klasse. In <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>22.1</span></a> ist das Schema zusammengefasst dargestellt.</p>
 <div id="fig-surveys-types-of-variables" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\images/types-of-variables.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;2.1: Klassifizierungsschema für Arten von Variablen."><img src="..\images/types-of-variables.svg" class="img-fluid figure-img"></a>
+<a href="..\images/types-of-variables.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;22.1: Klassifizierungsschema für Arten von Variablen."><img src="..\images/types-of-variables.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surveys-types-of-variables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;2.1: Klassifizierungsschema für Arten von Variablen.
+Abbildung&nbsp;22.1: Klassifizierungsschema für Arten von Variablen.
 </figcaption>
 </figure>
 </div>
 <p>Wichtig: Diese Einteilung beschreibt das <em>Messniveau</em> (also: was wird gemessen?). Der Datentyp in R (<code>&lt;dbl&gt;</code>, <code>&lt;int&gt;</code>, <code>&lt;chr&gt;</code>, …) ist ein Hinweis, aber nicht die ganze Wahrheit. In Umfragen werden Kategorien z. B. oft als Zahlen kodiert (1, 2, 3 …) oder als viele 0/1‑Spalten (Mehrfachauswahl). Ohne Codebuch/Data Dictionary kann man das leicht falsch lesen.</p>
 <p>Schauen wir uns jetzt die Typen nacheinander an – jeweils mit Beispielen aus unserem Datensatz.</p>
 </section>
-<section id="numerische-variablen" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="numerische-variablen"><span class="header-section-number">2.2</span> Numerische Variablen</h2>
-<p>Numerische (quantitative) Variablen messen eine Menge oder Größe. Mit ihnen können wir rechnen, im Sinne von Mittelwerte bilden, den Median bestimmen oder eine Spannweite berechnen. Wir unterscheiden dabei zwei grundlende numerische Arten: kontinuierlich und diskret. Anders ausgedrückt: Zahlen mit Kommastelle und ganze Zahlen (ohne Kommastellen)</p>
+<section id="numerische-variablen" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="numerische-variablen"><span class="header-section-number">22.2</span> Numerische Variablen</h2>
+<p>Numerische (quantitative) Variablen messen eine Menge oder Größe. Mit ihnen können wir rechnen, im Sinne von Mittelwerte bilden, den Median bestimmen oder eine Spannweite berechnen. Wir unterscheiden dabei zwei grundlende numerische Arten: kontinuierlich und diskret. Anders ausgedrückt: Zahlen mit Kommastelle und ganze Zahlen (ohne Kommastellen).</p>
 <section id="kontinuierliche-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="kontinuierliche-variablen">Kontinuierliche Variablen</h3>
 <blockquote class="blockquote">
@@ -666,7 +766,7 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Die Funktion <code>filter()</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten filtert, findet ihr in <a href="../r-basics/filter.html" class="quarto-xref"><span>Kapitel 13</span></a>.</p>
+<p>Die Funktion <code>filter()</code> ist zentral für die Auswahl der richtigen Beobachtungen. Eine Einführung, wie man mit R und dem <code>dplyr</code>‑Paket Daten filtert, findet ihr in <a href="../03-data-transformation/filter.html" class="quarto-xref"><span>Kapitel 11</span></a>.</p>
 </div>
 </div>
 </section>
@@ -878,13 +978,13 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../r-basics/visualizations-polish.html" class="quarto-xref"><span>Kapitel 15</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
+<p>Während wir in der explorativen Datenanalyse Wert auf schnelle Ergebnisse legen, wollen wir für Publikationen ansprechende Visualisierungen im Hochglanzformat erstellen. In <a href="../04-data-visualization/visualizations-polish.html" class="quarto-xref"><span>Kapitel 20</span></a> schauen wir explizit auf die Möglichkeiten, Visualisierungen aufzupolieren.</p>
 </div>
 </div>
 </section>
 <section id="ganze-zahlen-int" class="level4">
 <h4 class="anchored" data-anchor-id="ganze-zahlen-int">Ganze Zahlen (<code>int</code>)</h4>
-<p>Zählvariablen bestehen aus ganzen Zahlen (mathematisch: natürlichen Zahlen). In R gibt es dafür den Datentyp <code>int</code>, der in <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>2.1</span></a> auch für Zählvariablen angegeben ist.</p>
+<p>Zählvariablen bestehen aus ganzen Zahlen (mathematisch: natürlichen Zahlen). In R gibt es dafür den Datentyp <code>int</code>, der in <a href="#fig-surveys-types-of-variables" class="quarto-xref">Abbildung&nbsp;<span>22.1</span></a> auch für Zählvariablen angegeben ist.</p>
 <p>In der Praxis macht es oft keinen großen Unterschied, ob ihr eine Zählvariable als <code>double</code> oder <code>int</code> speichert. Zwei Vorteile von <code>int</code> sind:</p>
 <ol type="1">
 <li><code>int</code> benötigt weniger Speicher (bei sehr großen Daten relevant).</li>
@@ -998,8 +1098,8 @@ x_{\left(\frac{n+1}{2}\right)}, &amp; \text{falls } n \text{ ungerade ist},\\[6p
 </section>
 </section>
 </section>
-<section id="kategoriale-variablen" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="kategoriale-variablen"><span class="header-section-number">2.3</span> Kategoriale Variablen</h2>
+<section id="kategoriale-variablen" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="kategoriale-variablen"><span class="header-section-number">22.3</span> Kategoriale Variablen</h2>
 <p>Kategoriale Variablen ordnen Beobachtungen in Kategorien ein. Oft sind sie in Umfragen sogar der häufigste Typ.</p>
 <section id="nominale-variablen" class="level3">
 <h3 class="anchored" data-anchor-id="nominale-variablen">Nominale Variablen</h3>
@@ -1073,8 +1173,8 @@ $ v008ort_other     &lt;chr&gt; "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
 </section>
 </section>
 </section>
-<section id="qualitative-variablen" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="qualitative-variablen"><span class="header-section-number">2.4</span> Qualitative Variablen</h2>
+<section id="qualitative-variablen" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="qualitative-variablen"><span class="header-section-number">22.4</span> Qualitative Variablen</h2>
 <blockquote class="blockquote">
 <p>Qualitative variables are a sort of catch-all category for everything else. They aren’t numeric in nature, but also they’re not categorical. The text of a Washington Post headline is an example of a qualitative variable. <span class="citation" data-cites="effect_2026">(<a href="../references.html#ref-effect_2026" role="doc-biblioref">Huntington-Klein 2026</a>)</span></p>
 </blockquote>
@@ -1106,8 +1206,8 @@ $ v008ort_other     &lt;chr&gt; "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"
 <li>und dann entscheiden, ob man Kategorien daraus macht oder Textanalyse einsetzt.</li>
 </ul>
 </section>
-<section id="zusammenfassung-welcher-typ-welche-werkzeuge" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="zusammenfassung-welcher-typ-welche-werkzeuge"><span class="header-section-number">2.5</span> Zusammenfassung: Welcher Typ → welche Werkzeuge?</h2>
+<section id="zusammenfassung-welcher-typ-welche-werkzeuge" class="level2" data-number="22.5">
+<h2 data-number="22.5" class="anchored" data-anchor-id="zusammenfassung-welcher-typ-welche-werkzeuge"><span class="header-section-number">22.5</span> Zusammenfassung: Welcher Typ → welche Werkzeuge?</h2>
 <ul>
 <li><strong>Kontinuierlich (<code>dbl</code>)</strong>: NA/Ausreißer prüfen, Histogramm/Boxplot, Median als robuste Ergänzung.</li>
 <li><strong>Zählvariable (diskret, oft <code>int</code>)</strong>: Häufig wie kontinuierlich auswerten, aber „ganzzahlig“ im Kopf behalten.</li>
@@ -1567,12 +1667,12 @@ Huntington-Klein, Nick. 2026. <em>The effect: an introduction to research design
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../project-1-survey/survey-data.html" class="pagination-link" aria-label="Umfragedaten">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../project-2-news/load.html" class="pagination-link" aria-label="Laden der Daten">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

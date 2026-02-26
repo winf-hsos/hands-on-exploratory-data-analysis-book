@@ -1,0 +1,164 @@
+# Histogramme {#sec-histograms}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Histogramme zeigen, wie sich die Werte einer numerischen Variable verteilen. Statt einzelne Datenpunkte darzustellen, werden die Werte in Intervalle (Bins) eingeteilt und die Häufigkeit pro Intervall als Balken dargestellt. Claus Wilke beschreibt Histogramme als die natürliche Wahl, wenn ihr die Form einer Verteilung untersuchen wollt — ob symmetrisch, schief oder mit mehreren Gipfeln [@wilke_fundamentals_2019].
+
+## Einfaches Histogramm
+
+Wie sieht die Verteilung der Retweet-Zahlen aus? Die meisten Tweets bekommen wenige Retweets, einige wenige bekommen sehr viele:
+
+```{r}
+#| label: fig-hist-basic
+#| fig-cap: "Verteilung der Retweet-Zahlen."
+tweets |>
+  filter(!is_retweet) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram()
+```
+
+`ggplot2` zeigt eine Meldung, dass es 30 Bins verwendet hat (`bins = 30`). Das ist der Standardwert, aber nicht immer ideal.
+
+## Bins einstellen
+
+Die Anzahl der Bins beeinflusst, wie viel Detail ihr seht. Zu wenige Bins verbergen Muster, zu viele erzeugen Rauschen:
+
+```{r}
+#| label: fig-hist-bins-10
+#| fig-cap: "Histogramm mit 10 Bins: grob, aber übersichtlich."
+tweets |>
+  filter(!is_retweet) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram(bins = 10)
+```
+
+```{r}
+#| label: fig-hist-bins-100
+#| fig-cap: "Histogramm mit 100 Bins: mehr Detail, aber auch mehr Rauschen."
+tweets |>
+  filter(!is_retweet) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram(bins = 100)
+```
+
+Alternativ könnt ihr statt der Anzahl die Breite der Bins festlegen:
+
+```{r}
+#| label: fig-hist-binwidth
+#| fig-cap: "Histogramm mit einer Binbreite von 50."
+tweets |>
+  filter(!is_retweet) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram(binwidth = 50)
+```
+
+::: {.callout-tip icon="💡" title="Bins ausprobieren"}
+Es gibt keine perfekte Bin-Anzahl. Probiert zwei, drei Werte aus und schaut, welcher die Verteilung am klarsten zeigt. Das ist ein normaler Teil der explorativen Analyse.
+:::
+
+## Schiefe Verteilungen
+
+Daten wie Retweet-Zahlen, Umsätze oder Follower-Zahlen sind oft stark rechtsschief: Die meisten Werte sind klein, einige wenige sind extrem groß. In solchen Fällen hilft es, den Blick auf einen Ausschnitt zu richten:
+
+```{r}
+#| label: fig-hist-zoom
+#| fig-cap: "Histogramm mit Fokus auf den Bereich 0–500 Retweets."
+tweets |>
+  filter(!is_retweet, retweet_count <= 500) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram(binwidth = 10)
+```
+
+Alternativ könnt ihr eine logarithmische Skala verwenden:
+
+```{r}
+#| label: fig-hist-log
+#| fig-cap: "Histogramm mit logarithmischer x-Achse."
+tweets |>
+  filter(!is_retweet, retweet_count > 0) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram(bins = 30) +
+  scale_x_log10()
+```
+
+## Gruppen vergleichen
+
+### Überlagerte Histogramme
+
+Um die Verteilung zweier Gruppen zu vergleichen, könnt ihr sie überlagern. `alpha` sorgt dafür, dass beide sichtbar bleiben:
+
+```{r}
+#| label: fig-hist-overlay
+#| fig-cap: "Überlagerte Histogramme vergleichen zwei Gruppen."
+tweets |>
+  ggplot() +
+  aes(x = retweet_count, fill = is_retweet) +
+  geom_histogram(bins = 30, alpha = 0.5, position = "identity") +
+  scale_x_log10()
+```
+
+`position = "identity"` ist hier wichtig, sonst stapelt `ggplot2` die Histogramme übereinander statt sie zu überlagern.
+
+### Facetten
+
+Bei mehr als zwei Gruppen werden überlagerte Histogramme schnell unlesbar. Facetten sind dann die bessere Wahl:
+
+```{r}
+#| label: fig-hist-facet
+#| fig-cap: "Facetten zeigen die Verteilung pro Sprache."
+tweets |>
+  filter(!is_retweet, lang %in% c("de", "en", "fr"), retweet_count > 0) |>
+  ggplot() +
+  aes(x = retweet_count) +
+  geom_histogram(bins = 30) +
+  facet_wrap(~ lang) +
+  scale_x_log10()
+```
+
+## Dichtekurven als Alternative
+
+`geom_density()` zeichnet eine geglättete Kurve statt diskreter Balken. Das kann hilfreich sein, wenn ihr die Form der Verteilung hervorheben wollt:
+
+```{r}
+#| label: fig-hist-density
+#| fig-cap: "Dichtekurven glätten die Verteilung."
+tweets |>
+  filter(!is_retweet, retweet_count > 0) |>
+  ggplot() +
+  aes(x = retweet_count, fill = is_quote_status) +
+  geom_density(alpha = 0.4) +
+  scale_x_log10()
+```
+
+Dichtekurven eignen sich besonders gut für Vergleiche, weil sich die Kurven leichter überlagern lassen als Balken [@wilke_fundamentals_2019].
+
+## Typische Fehler
+
+### Standardwerte nicht hinterfragen
+
+Die 30 Standard-Bins sind ein Startpunkt, nicht die richtige Wahl. Passt `bins` oder `binwidth` immer bewusst an.
+
+### Gruppen ohne `position = "identity"`
+
+Wenn ihr Histogramme zweier Gruppen überlagern wollt, vergesst nicht `position = "identity"`. Sonst werden sie gestapelt, und ihr seht nicht die echte Verteilung.
+
+### Nullwerte bei Log-Skalen
+
+`log10(0)` ist nicht definiert. Filtert Nullwerte heraus, wenn ihr logarithmische Skalen verwendet.
+
+## Kurz zusammengefasst
+
+- `geom_histogram()` zeigt die Verteilung einer numerischen Variable.
+- Steuert die Auflösung mit `bins` oder `binwidth`. Probiert verschiedene Werte aus.
+- Bei schiefen Verteilungen helfen Zoom (`filter`) oder logarithmische Skalen.
+- Vergleicht Gruppen mit `fill` + `position = "identity"` oder mit `facet_wrap()`.
+- `geom_density()` ist eine geglättete Alternative, besonders gut für Gruppenvergleiche.

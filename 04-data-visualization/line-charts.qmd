@@ -1,0 +1,159 @@
+# Liniendiagramme {#sec-line-charts}
+
+```{r}
+#| include: false
+source("setup.R")
+library(lubridate)
+```
+
+Liniendiagramme zeigen, wie sich ein numerischer Wert über eine geordnete Achse verändert, fast immer über die Zeit. Claus Wilke betont, dass Linien eine Verbindung und Kontinuität zwischen den Datenpunkten suggerieren. Deshalb sind sie nur sinnvoll, wenn die Datenpunkte tatsächlich in einer natürlichen Reihenfolge stehen [@wilke_fundamentals_2019].
+
+## Daten vorbereiten
+
+Für Liniendiagramme brauchen wir eine Zeitachse. Wir wandeln die `created_at`-Spalte in ein Datum um und zählen die Tweets pro Tag:
+
+```{r}
+tweets_per_day <- tweets |>
+  mutate(date = as.Date(created_at)) |>
+  count(date)
+
+tweets_per_day |>
+  head()
+```
+
+## Einfaches Liniendiagramm
+
+```{r}
+#| label: fig-line-basic
+#| fig-cap: "Tweets pro Tag im Zeitverlauf."
+tweets_per_day |>
+  ggplot() +
+  aes(x = date, y = n) +
+  geom_line()
+```
+
+`geom_line()` verbindet die Datenpunkte in der Reihenfolge der x-Achse. Ihr seht sofort, an welchen Tagen besonders viele oder wenige Tweets veröffentlicht wurden.
+
+## Linie und Punkte
+
+Manchmal ist es hilfreich, die einzelnen Datenpunkte zusätzlich zur Linie zu zeigen:
+
+```{r}
+#| label: fig-line-points
+#| fig-cap: "Linie mit Datenpunkten."
+tweets_per_day |>
+  ggplot() +
+  aes(x = date, y = n) +
+  geom_line() +
+  geom_point(size = 1)
+```
+
+Die Punkte zeigen, wo tatsächlich Daten vorhanden sind. Bei Lücken in der Zeitreihe werden die Punkte fehlen, die Linie wird aber trotzdem durchgezogen.
+
+## Mehrere Linien
+
+Um mehrere Gruppen im selben Diagramm zu vergleichen, nutzt ihr `color` oder `group`:
+
+```{r}
+#| label: fig-line-groups
+#| fig-cap: "Tweets pro Tag für ausgewählte Accounts."
+selected <- c("cem_oezdemir", "Karl_Lauterbach", "c_lindner")
+
+tweets |>
+  filter(screen_name %in% selected) |>
+  mutate(date = as.Date(created_at)) |>
+  count(screen_name, date) |>
+  ggplot() +
+  aes(x = date, y = n, color = screen_name) +
+  geom_line() +
+  labs(x = NULL, y = "Tweets pro Tag", color = "Account")
+```
+
+Jede Gruppe bekommt automatisch eine eigene Farbe und einen Eintrag in der Legende.
+
+## Glättung
+
+Wenn die Linie stark schwankt, hilft eine Glättung mit `geom_smooth()`, um den langfristigen Trend zu erkennen:
+
+```{r}
+#| label: fig-line-smooth
+#| fig-cap: "Geglätteter Trend der täglichen Tweets."
+tweets_per_day |>
+  ggplot() +
+  aes(x = date, y = n) +
+  geom_line(alpha = 0.3) +
+  geom_smooth(se = FALSE)
+```
+
+Die Originallinie wird transparent dargestellt (`alpha = 0.3`), und die geglättete Kurve zeigt den Trend. `se = FALSE` blendet das Konfidenzband aus.
+
+## Flächendiagramme
+
+`geom_area()` füllt die Fläche unter der Linie aus. Das funktioniert besonders gut, wenn die y-Achse bei Null beginnt:
+
+```{r}
+#| label: fig-line-area
+#| fig-cap: "Flächendiagramm der täglichen Tweets."
+tweets_per_day |>
+  ggplot() +
+  aes(x = date, y = n) +
+  geom_area(alpha = 0.3) +
+  geom_line()
+```
+
+### Gestapelte Flächen
+
+Mehrere Gruppen als gestapelte Flächen zeigen sowohl den Gesamttrend als auch die Zusammensetzung:
+
+```{r}
+#| label: fig-line-stacked-area
+#| fig-cap: "Gestapelte Flächen zeigen den Anteil jedes Accounts."
+tweets |>
+  filter(screen_name %in% selected) |>
+  mutate(date = as.Date(created_at)) |>
+  count(screen_name, date) |>
+  ggplot() +
+  aes(x = date, y = n, fill = screen_name) +
+  geom_area(alpha = 0.6) +
+  labs(x = NULL, y = "Tweets pro Tag", fill = "Account")
+```
+
+## Zeitachse formatieren
+
+`ggplot2` erkennt Datumswerte automatisch und beschriftet die x-Achse entsprechend. Wenn ihr die Beschriftung anpassen wollt, nutzt `scale_x_date()`:
+
+```{r}
+#| label: fig-line-date-format
+#| fig-cap: "Angepasste Datumsbeschriftung."
+tweets_per_day |>
+  ggplot() +
+  aes(x = date, y = n) +
+  geom_line() +
+  scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +
+  labs(x = NULL, y = "Tweets pro Tag")
+```
+
+`date_labels` steuert das Format (z.B. `"%b %Y"` für "Jan 2021"), `date_breaks` den Abstand der Achsenbeschriftungen.
+
+## Typische Fehler
+
+### Kategoriale Daten mit Linien verbinden
+
+Linien suggerieren Kontinuität zwischen den Datenpunkten. Wenn die x-Achse kategorial ist (z.B. Länder oder Accounts), ist ein Balkendiagramm die richtige Wahl, nicht ein Liniendiagramm.
+
+### Fehlende Werte ignorieren
+
+Wenn an manchen Tagen keine Beobachtungen vorliegen, fehlen diese Tage in eurem gezählten Datensatz. `geom_line()` verbindet dann die vorhandenen Punkte direkt, was einen falschen Eindruck erwecken kann. Füllt fehlende Tage vorher mit `complete()` und `replace_na()` auf.
+
+### Zu viele Linien
+
+Mehr als vier oder fünf Linien in einem Diagramm sind schwer voneinander zu unterscheiden. Nutzt stattdessen Facetten oder zeigt nur die wichtigsten Gruppen.
+
+## Kurz zusammengefasst
+
+- `geom_line()` verbindet Datenpunkte in der Reihenfolge der x-Achse.
+- Nutzt Liniendiagramme nur, wenn die x-Achse eine natürliche Reihenfolge hat (meistens Zeit).
+- Mit `color` zeigt ihr mehrere Gruppen, mit `geom_area()` Flächen unter der Linie.
+- `geom_smooth()` zeigt den Trend hinter den Schwankungen.
+- `scale_x_date()` formatiert die Zeitachse nach euren Wünschen.
+- Begrenzt die Anzahl der Linien auf vier bis fünf pro Diagramm.

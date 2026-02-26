@@ -1,0 +1,574 @@
+# Beobachtungen auswählen {#sec-filter}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+Ihr habt jetzt gelernt, wie ihr mit `select()` den Blick auf die richtigen Spalten richtet und mit `mutate()` neue Variablen anlegt. In diesem Kapitel widmen wir uns dem Gegenstück zur Spaltenauswahl: Der Auswahl der relevanten Zeilen. Wir zeigen euch, wie ihr mit der Funktion `filter()` aus `dplyr` gezielt Beobachtungen behaltet, die bestimmte logische Bedingungen erfüllen, und wie ihr leere oder doppelte Zeilen entfernt.
+
+Das Filtern von Daten ist einer der wichtigsten Schritte in jeder explorativen Analyse. Reale Datensätze sind fast immer größer und unschärfer als das, was ihr für eine spezifische Forschungsfrage untersuchen möchtet. Erst indem ihr Gruppen isoliert, Ausreißer entfernt oder den Fokus auf einen konkreten Zeitraum beschränkt, könnt ihr präzise Aussagen treffen und den Rausch aus euren Daten entfernen.
+
+Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
+
+| Funktion | Beschreibung |
+|---|---|
+| `filter()` | Zeilen nach Bedingungen auswählen |
+| `between()` | Werte in einem Bereich prüfen |
+| `%in%` | Werte gegen eine Liste prüfen |
+| `str_detect()` | Text auf ein Muster prüfen |
+| `is.na()` | Fehlende Werte erkennen |
+| `if_any()` / `if_all()` | Bedingungen über mehrere Spalten prüfen |
+| `slice_head()` / `slice_max()` / `slice_sample()` | Zeilen nach Position oder Rang auswählen |
+| `distinct()` | Doppelte Zeilen entfernen |
+
+Bevor wir anfangen zu filtern, werfen wir einen kurzen Blick auf unseren Datensatz, damit wir wissen, wonach wir suchen können.
+
+Wenn ihr euch erst einmal orientieren wollt, schaut euch kurz die Struktur des Datensatzes an:
+
+::: {.reuse #filter-first-glimpse}
+
+```{r}
+tweets |>
+  glimpse()
+```
+
+:::
+
+## Das Grundprinzip {#sec-filter-grundprinzip}
+
+`filter()` bekommt einen Tibble, prüft pro Zeile eine oder mehrere Bedingungen und gibt nur die Zeilen zurück, die passen.
+
+![Die `filter`-Funktion reduziert die Beobachtungen in einem Tibble.](https://winf-hsos.github.io/university-docs/images/filter_schema.png){.lightbox}
+
+Die einfachste Variante ist eine einzelne Bedingung. Zum Beispiel: Zeigt nur Tweets, die keine Retweets sind.
+
+::: {.reuse #filter-basics-not-retweet}
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  select(screen_name, retweet_count, favorite_count, text) |>
+  head(5)
+```
+
+:::
+
+Hier passiert gleich viel auf einmal:
+
+- `filter(!is_retweet)` wählt Zeilen aus, bei denen `is_retweet` nicht `TRUE` ist.
+- `select(...)` reduziert die Spalten auf das Wesentliche, das kennt ihr schon.
+- `head(5)` zeigt euch eine kleine Vorschau, damit ihr schnell prüfen könnt, ob der Filter macht, was ihr erwartet.
+
+_Abbildung: Ein Datensatz als Tabelle mit acht Zeilen. Ein Filtersymbol steht links, daneben die Bedingung `!is_retweet`. Vier Zeilen sind durchgestrichen oder ausgegraut (die Retweets), die übrigen vier bleiben übrig. Rechts sieht man die kleinere Ergebnistabelle mit nur den vier verbliebenen Zeilen._
+
+## Vergleichsoperatoren {#sec-filter-vergleich}
+
+Die meisten Filterbedingungen beruhen auf Vergleichen:
+
+| Operator | Bedeutung |
+|---|---|
+| `==` | gleich |
+| `!=` | ungleich |
+| `<` | kleiner als |
+| `<=` | kleiner oder gleich |
+| `>` | größer als |
+| `>=` | größer oder gleich |
+
+Zum Beispiel: Zeigt nur Tweets mit mindestens 1.000 Retweets.
+
+::: {.reuse #filter-basics-gt}
+
+```{r}
+tweets |>
+  filter(retweet_count >= 1000) |>
+  select(screen_name, retweet_count, text) |>
+  arrange(desc(retweet_count)) |>
+  head(5)
+```
+
+:::
+
+Wenn ihr bei einer Bedingung unsicher seid, lohnt sich ein kurzer Check. Zählt einmal, wie viele Zeilen überhaupt übrig bleiben:
+
+::: {.reuse #filter-basics-count}
+
+```{r}
+tweets |>
+  filter(retweet_count >= 1000) |>
+  nrow()
+```
+
+:::
+
+::: {.callout-tip icon="💡" title="== ist nicht ="}
+Ein häufiger Anfängerfehler: `=` ist eine Zuweisung, `==` ist ein Vergleich. Wenn ihr `filter(retweet_count = 1000)` schreibt, bekommt ihr eine Fehlermeldung. Ihr braucht `filter(retweet_count == 1000)`.
+:::
+
+## Bedingungen kombinieren {#sec-filter-kombinieren}
+
+In der Praxis filtert ihr fast immer mit mehr als einer Bedingung. Manchmal müssen alle Kriterien erfüllt sein, manchmal reicht eines.
+
+### UND
+
+Wenn ihr mehrere Bedingungen durch Kommas trennt, bedeutet das: Alle Bedingungen müssen wahr sein. Das entspricht einem logischen UND.
+
+::: {.reuse #filter-and-comma}
+
+```{r}
+tweets |>
+  filter(!is_retweet, retweet_count >= 500) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+Ihr könnt das auch explizit mit `&` schreiben. Inhaltlich ist es gleich, aber manchmal ist die `&`-Schreibweise besser, wenn ihr Klammern setzen wollt:
+
+::: {.reuse #filter-and-amp}
+
+```{r}
+tweets |>
+  filter(!is_retweet & retweet_count >= 500) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+### ODER
+
+Mit `|` verknüpft ihr Bedingungen als logisches ODER. Dann reicht es, wenn mindestens eine Bedingung zutrifft.
+
+::: {.reuse #filter-or}
+
+```{r}
+tweets |>
+  filter(retweet_count >= 2000 | favorite_count >= 5000) |>
+  select(screen_name, retweet_count, favorite_count, text) |>
+  head(5)
+```
+
+:::
+
+### Klammern setzen
+
+Wenn ihr UND und ODER kombiniert, sind Klammern entscheidend. Ohne Klammern kann es passieren, dass ihr einen ganz anderen Filter baut, als ihr im Kopf habt.
+
+::: {.reuse #filter-parentheses}
+
+```{r}
+tweets |>
+  filter(!is_retweet & (retweet_count >= 2000 | favorite_count >= 5000)) |>
+  select(screen_name, retweet_count, favorite_count, text) |>
+  head(5)
+```
+
+:::
+
+Ohne die Klammern um die ODER-Bedingung würde `!is_retweet` nur mit `retweet_count >= 2000` verknüpft, und `favorite_count >= 5000` würde unabhängig davon gelten. Das Ergebnis wäre ein komplett anderer Datensatz.
+
+_Abbildung: Zwei Venn-Diagramme nebeneinander. Links: Zwei Kreise "Retweets >= 2000" und "Likes >= 5000", die sich überlappen, innerhalb eines Rahmens "keine Retweets". Die Schnittmenge des Rahmens mit der Vereinigung der Kreise ist hervorgehoben. Rechts: Dieselben Kreise, aber der Rahmen "keine Retweets" umschließt nur den linken Kreis. Die hervorgehobene Fläche ist deutlich größer. Unter dem linken Diagramm steht die Formel mit Klammern, unter dem rechten die Formel ohne Klammern._
+
+## Bereiche und Wertelisten {#sec-filter-bereiche}
+
+### `between()`
+
+Wenn ihr Werte in einem Bereich behalten wollt, ist `between()` oft lesbarer als zwei Vergleiche:
+
+::: {.reuse #filter-between}
+
+```{r}
+tweets |>
+  filter(between(retweet_count, 100, 500)) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+Das ist gleichbedeutend mit `retweet_count >= 100 & retweet_count <= 500`, nur kürzer.
+
+### `%in%`
+
+Wenn ihr mehrere konkrete Werte zulassen wollt, ist `%in%` euer Werkzeug. Stellt es euch wie eine Gästeliste vor:
+
+::: {.reuse #filter-in}
+
+```{r}
+users <- c("cem_oezdemir", "Karl_Lauterbach")
+
+tweets |>
+  filter(screen_name %in% users) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+Wenn ihr nicht sicher seid, ob die Schreibweise der Namen exakt passt, prüft die häufigsten Werte vorher:
+
+::: {.reuse #filter-check-values}
+
+```{r}
+tweets |>
+  count(screen_name, sort = TRUE) |>
+  head(10)
+```
+
+:::
+
+### Negation mit `!`
+
+Manchmal wollt ihr das Gegenteil: alle Zeilen, die *nicht* in einer Liste stehen. Dafür setzt ihr ein `!` vor die Bedingung:
+
+```{r}
+tweets |>
+  filter(!screen_name %in% users) |>
+  select(screen_name, retweet_count) |>
+  head(5)
+```
+
+Das funktioniert genauso mit `str_detect()` (dazu gleich mehr) und anderen logischen Ausdrücken.
+
+## Textfilter {#sec-filter-text}
+
+Beim Filtern von Text nutzt ihr Funktionen aus `stringr`. Der Klassiker ist `str_detect()`, das prüft, ob ein Text ein bestimmtes Muster enthält.
+
+::: {.reuse #filter-str-detect}
+
+```{r}
+tweets |>
+  filter(str_detect(text, "klima")) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+### Groß- und Kleinschreibung ignorieren
+
+`str_detect()` unterscheidet standardmäßig zwischen Groß- und Kleinschreibung. Wenn ihr beides finden wollt, nutzt `regex()` mit `ignore_case = TRUE`:
+
+::: {.reuse #filter-str-detect-ignore-case}
+
+```{r}
+tweets |>
+  filter(str_detect(text, regex("klima", ignore_case = TRUE))) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+### Textmuster ausschließen
+
+Um Zeilen auszuschließen, die ein Muster enthalten, negiert ihr `str_detect()`:
+
+```{r}
+tweets |>
+  filter(!str_detect(text, regex("klima", ignore_case = TRUE))) |>
+  nrow()
+```
+
+### Text am Anfang oder Ende
+
+Wenn euch interessiert, ob ein Text mit einem bestimmten Muster beginnt oder endet, gibt es `str_starts()` und `str_ends()`:
+
+```{r}
+tweets |>
+  filter(str_starts(text, "RT")) |>
+  select(screen_name, text) |>
+  head(3)
+```
+
+## Fehlende Werte {#sec-filter-na}
+
+Ein häufiger Stolperstein: `NA` ist weder wahr noch falsch. Es bedeutet, dass der Wert fehlt. In `filter()` werden Zeilen mit `NA` in der Bedingung automatisch entfernt, weil die Bedingung nicht eindeutig wahr ist.
+
+Wenn euch fehlende Werte wichtig sind, müsst ihr das explizit ausdrücken. Mit `is.na()` findet ihr Zeilen, in denen ein Wert fehlt:
+
+::: {.reuse #filter-is-na}
+
+```{r}
+tweets |>
+  filter(is.na(in_reply_to_screen_name)) |>
+  select(screen_name, in_reply_to_screen_name, text) |>
+  head(5)
+```
+
+:::
+
+Und das Gegenstück: Behaltet nur Zeilen, in denen der Wert vorhanden ist.
+
+::: {.reuse #filter-not-na}
+
+```{r}
+tweets |>
+  filter(!is.na(in_reply_to_screen_name)) |>
+  select(screen_name, in_reply_to_screen_name, text) |>
+  head(5)
+```
+
+:::
+
+::: {.callout-tip icon="💡" title="Leere Strings sind nicht NA"}
+Ein fehlender Wert ist `NA`. Ein leerer Text wie `""` ist dagegen ein vorhandener Wert, der nur leer ist. Wenn ihr beides ausschließen wollt, kombiniert ihr Bedingungen: `filter(!is.na(text), text != "")`.
+:::
+
+## Mehrere Spalten filtern {#sec-filter-mehrere}
+
+Manchmal wollt ihr eine Bedingung nicht nur für eine Spalte prüfen, sondern für mehrere gleichzeitig. Dafür gibt es `if_any()` und `if_all()`.
+
+### `if_any()`
+
+Behaltet Zeilen, wenn die Bedingung für *mindestens eine* der Spalten wahr ist:
+
+::: {.reuse #filter-if-any}
+
+```{r}
+tweets |>
+  filter(if_any(c(retweet_count, favorite_count), \(x) x >= 2000)) |>
+  select(screen_name, retweet_count, favorite_count, text) |>
+  head(5)
+```
+
+:::
+
+### `if_all()`
+
+Behaltet Zeilen, wenn die Bedingung für *alle* Spalten wahr ist:
+
+::: {.reuse #filter-if-all}
+
+```{r}
+tweets |>
+  filter(if_all(c(retweet_count, favorite_count), \(x) x >= 2000)) |>
+  select(screen_name, retweet_count, favorite_count, text) |>
+  head(5)
+```
+
+:::
+
+## Zeilen gezielt auswählen mit `slice()` {#sec-filter-slice}
+
+`filter()` wählt Zeilen nach einer Bedingung aus. Manchmal wollt ihr aber einfach bestimmte Zeilen nach Position oder Rang. Dafür gibt es die `slice()`-Familie.
+
+### `slice_head()` und `slice_tail()`
+
+Die einfachste Variante: Die ersten oder letzten `n` Zeilen:
+
+```{r}
+tweets |>
+  slice_head(n = 3)
+```
+
+### `slice_max()` und `slice_min()`
+
+Wenn ihr die Zeilen mit den höchsten oder niedrigsten Werten einer Spalte wollt, ist `slice_max()` eine kompakte Alternative zu `arrange()` und `head()`:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  slice_max(retweet_count, n = 5) |>
+  select(screen_name, retweet_count, text)
+```
+
+Das Gleiche funktioniert mit `slice_min()` für die kleinsten Werte.
+
+### `slice_sample()`
+
+Für eine zufällige Stichprobe nutzt ihr `slice_sample()`:
+
+```{r}
+tweets |>
+  slice_sample(n = 5) |>
+  select(screen_name, retweet_count, text)
+```
+
+Das ist nützlich, wenn ihr euch schnell einen Eindruck von eurem Datensatz verschaffen wollt, ohne immer nur die ersten Zeilen zu sehen.
+
+## Doppelte Zeilen entfernen mit `distinct()` {#sec-filter-distinct}
+
+Wenn euer Datensatz doppelte Zeilen enthält und ihr nur die eindeutigen behalten wollt, nutzt `distinct()`:
+
+```{r}
+tweets |>
+  distinct(screen_name) |>
+  head(10)
+```
+
+Ohne Argumente entfernt `distinct()` vollständig identische Zeilen. Mit Spaltennamen behält es nur die erste Zeile pro einzigartige Kombination und entfernt die übrigen Spalten. Wenn ihr alle Spalten behalten wollt, nutzt `.keep_all = TRUE`:
+
+```{r}
+tweets |>
+  distinct(screen_name, .keep_all = TRUE) |>
+  select(screen_name, text) |>
+  head(5)
+```
+
+## Gruppierte Daten {#sec-filter-grouped}
+
+Wenn ihr mit `group_by()` arbeitet, ändert sich die Bedeutung mancher Ausdrücke. `filter()` bleibt genauso nützlich, aber ihr könnt zusätzlich gruppenbezogene Informationen verwenden.
+
+### Gruppen nach Größe filtern
+
+Ein typischer Fall ist: Behaltet nur Accounts, die oft im Datensatz vorkommen.
+
+::: {.reuse #filter-group-n}
+
+```{r}
+tweets |>
+  group_by(screen_name) |>
+  filter(n() >= 50) |>
+  ungroup() |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+:::
+
+`n()` zählt hier die Zeilen pro Gruppe. Ohne `group_by()` würde `n()` die Gesamtzahl aller Zeilen zählen, nicht die Anzahl pro Account.
+
+### Innerhalb einer Gruppe filtern
+
+Ihr könnt auch innerhalb jeder Gruppe den stärksten Tweet behalten:
+
+::: {.reuse #filter-group-max}
+
+```{r}
+tweets |>
+  group_by(screen_name) |>
+  filter(retweet_count == max(retweet_count, na.rm = TRUE)) |>
+  ungroup() |>
+  select(screen_name, retweet_count, text) |>
+  arrange(desc(retweet_count)) |>
+  head(10)
+```
+
+:::
+
+Wenn mehrere Tweets denselben Maximalwert haben, bekommt ihr mehrere Zeilen pro Gruppe. Wenn ihr genau eine Zeile pro Gruppe wollt, nutzt `slice_max()` mit gruppierten Daten:
+
+```{r}
+tweets |>
+  group_by(screen_name) |>
+  slice_max(retweet_count, n = 1) |>
+  ungroup() |>
+  select(screen_name, retweet_count, text) |>
+  arrange(desc(retweet_count)) |>
+  head(10)
+```
+
+## Typische Probleme {#sec-filter-probleme}
+
+### Ergebnis ist leer
+
+Wenn ihr nach einem Filter plötzlich null Zeilen habt, stimmt oft eine Annahme nicht. Dann helfen zwei schnelle Checks:
+
+::: {.reuse #filter-debug-checks}
+
+```{r}
+tweets |>
+  summarise(
+    min_retweets = min(retweet_count, na.rm = TRUE),
+    max_retweets = max(retweet_count, na.rm = TRUE),
+    min_likes = min(favorite_count, na.rm = TRUE),
+    max_likes = max(favorite_count, na.rm = TRUE)
+  )
+```
+
+:::
+
+Damit seht ihr den tatsächlichen Wertebereich. Vielleicht habt ihr einen Schwellenwert gewählt, den kein einziger Tweet erreicht.
+
+Und wenn ihr bei Kategorien unsicher seid:
+
+::: {.reuse #filter-debug-count}
+
+```{r}
+tweets |>
+  count(is_retweet)
+```
+
+:::
+
+### Zu viele Zeilen
+
+Wenn ein Filter immer noch zu viele Zeilen zurückgibt, ist das kein Fehler. Es bedeutet nur, dass eure Bedingung noch zu grob ist. Dann baut ihr Schritt für Schritt weitere Kriterien ein und prüft zwischendurch mit `nrow()`:
+
+```{r}
+tweets |>
+  filter(!is_retweet) |>
+  nrow()
+
+tweets |>
+  filter(!is_retweet, retweet_count >= 100) |>
+  nrow()
+
+tweets |>
+  filter(!is_retweet, retweet_count >= 100, str_detect(text, regex("klima", ignore_case = TRUE))) |>
+  nrow()
+```
+
+So seht ihr genau, wie jede zusätzliche Bedingung den Datensatz weiter einschränkt.
+
+### Unerwartete NA-Verluste
+
+Wenn euer Datensatz nach dem Filtern plötzlich weniger Zeilen hat als erwartet, kann es sein, dass `NA`-Werte stillschweigend entfernt wurden. Prüft vorher, wie viele `NA`-Werte in der gefilterten Spalte stecken:
+
+```{r}
+tweets |>
+  summarise(
+    na_count = sum(is.na(in_reply_to_screen_name)),
+    total = n()
+  )
+```
+
+### Automatisches Logging mit `tidylog`
+
+Wenn ihr eine längere Pipe mit mehreren Filterschritten baut, kann es mühsam sein, nach jedem Schritt manuell `nrow()` einzufügen. Hier hilft das Paket `tidylog`: Es gibt euch nach jedem `dplyr`-Befehl automatisch eine Rückmeldung, wie viele Zeilen betroffen waren.
+
+```{r}
+library(tidylog)
+```
+
+Nachdem ihr es aktiviert habt, loggt es fleißig mit:
+
+```{r}
+#| warning: true
+tweets |>
+  filter(!is_retweet) |>
+  filter(retweet_count >= 100) |>
+  select(screen_name, retweet_count, text) |>
+  head(5)
+```
+
+In der Konsole seht ihr jetzt nach jedem Schritt eine Zeile wie `filter: removed 42,000 rows (65%), 23,000 rows remaining`. So erkennt ihr sofort, wenn ein Filter unerwartet viele oder wenige Zeilen entfernt.
+
+```{r}
+#| include: false
+detach("package:tidylog", unload = TRUE)
+```
+
+::: {.callout-tip icon="💡" title="`tidylog` deaktivieren"}
+`tidylog` überschreibt die `dplyr`-Funktionen mit eigenen Versionen, die zusätzliche Ausgaben erzeugen. Wenn die Meldungen stören, entfernt das Paket wieder mit `detach("package:tidylog", unload = TRUE)` oder startet eine neue R-Sitzung.
+:::
+
+## Kurz zusammengefasst {#sec-filter-zusammenfassung}
+
+::: {.reuse #filter-summary}
+
+- `filter()` wählt Zeilen aus, die eine Bedingung erfüllen.
+- Mehrere Bedingungen mit Kommas bedeuten UND, mit `|` bedeutet ODER. Klammern bei Mischungen sind wichtig.
+- Mit `between()` und `%in%` drückt ihr Bereiche und Wertelisten gut lesbar aus.
+- Für Textsuche nutzt ihr `str_detect()`, für fehlende Werte `is.na()`.
+- Mit `if_any()` und `if_all()` filtert ihr über mehrere Spalten gleichzeitig.
+- Die `slice()`-Familie wählt Zeilen nach Position oder Rang statt nach Bedingung.
+- `distinct()` entfernt doppelte Zeilen.
+- Mit `group_by()` könnt ihr in Gruppen filtern, zum Beispiel mit `n()` oder `max()`.
+
+:::
+
+Ihr könnt jetzt Spalten auswählen, verändern, neue berechnen und Zeilen filtern. Im nächsten Kapitel lernt ihr, wie ihr aus vielen Zeilen kompakte Zusammenfassungen erstellt (siehe @sec-summarize).

@@ -1,1 +1,0 @@
-# Variablen auswählen {#sec-basics-select}

@@ -54,12 +54,19 @@ function Get-ConfiguredSlideTargets {
 function Get-DestinationRelativeHtml {
   param([string]$RenderedHtmlRelative)
   $r = $RenderedHtmlRelative -replace '\\', '/'
-  if ($r -notlike "*/slides/_generated/*.html") {
-    throw "Rendered file path does not match expected pattern */slides/_generated/*.html : $RenderedHtmlRelative"
+  if ($r -like "*/slides/_generated/*.html") {
+    # Legacy generated source path:
+    # project-1-survey/slides/_generated/foo.html -> project-1-survey/foo.html
+    return ($r -replace '/slides/_generated/', '/')
   }
 
-  # project-1-survey/slides/_generated/foo.html -> project-1-survey/foo.html
-  return ($r -replace '/slides/_generated/', '/')
+  if ($r -like "*/slides/*.html") {
+    # Direct slide source path:
+    # project-1-survey/slides/foo.html -> project-1-survey/foo.html
+    return ($r -replace '/slides/', '/')
+  }
+
+  throw "Rendered file path does not match expected slide pattern */slides/*.html : $RenderedHtmlRelative"
 }
 
 New-Item -ItemType Directory -Force -Path $slidesOutRoot | Out-Null

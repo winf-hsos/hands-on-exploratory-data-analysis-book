@@ -26,6 +26,8 @@ Thumbs.db
 # Common rendered artifacts in source folders
 *_files/
 **/slides/_generated/
+!/_book/**/*_files/
+!/_book/**/*_files/**
 
 # Project data folder
 /data/

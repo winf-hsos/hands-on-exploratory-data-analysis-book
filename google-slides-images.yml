@@ -3,10 +3,50 @@ presentations:
   - document_id: 1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ
     slides:
 
-      - pageid: g3cb03c61121_0_128
-        slide_pageid: g1f51f684b29_0_800
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cc2738a5a3_0_52#slide=id.g3cc2738a5a3_0_52
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g2ca88d44681_0_760#slide=id.g2ca88d44681_0_760
+        filename: what_is_the_question
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3ca4d5c80fc_0_0#slide=id.g3ca4d5c80fc_0_0
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g2ba7caf9fd6_0_189#slide=id.g2ba7caf9fd6_0_189
+        filename: process_exploratory_analysis
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_128#slide=id.g3cb03c61121_0_128
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_800#slide=id.g1f51f684b29_0_800
         filename: select_schema
 
-      - pageid: g3cb03c61121_0_0
-        slide_pageid: g1f51f684b29_0_695
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_0#slide=id.g3cb03c61121_0_0
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_695#slide=id.g1f51f684b29_0_695
         filename: filter_schema
+
+      - slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_671#slide=id.g1f51f684b29_0_671
+        edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g386c3476c4e_0_0#slide=id.g386c3476c4e_0_0
+        filename: transformation_overview
+
+      - slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_841#slide=id.g1f51f684b29_0_841
+        edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_151#slide=id.g3cb03c61121_0_151
+        filename: arrange_schema
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_884#slide=id.g1f51f684b29_0_884
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_176#slide=id.g3cb03c61121_0_176
+        filename: group_by_schema
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_219#slide=id.g3cb03c61121_0_219
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_945#slide=id.g1f51f684b29_0_945
+        filename: mutate_add_schema
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cc2738a5a3_0_26#slide=id.g3cc2738a5a3_0_26
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cc2738a5a3_0_0#slide=id.g3cc2738a5a3_0_0
+        filename: mutate_modify_schema
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_25#slide=id.g3cb03c61121_0_25
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_1202#slide=id.g1f51f684b29_0_1202
+        filename: summarize_schema
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g3cb03c61121_0_38#slide=id.g3cb03c61121_0_38
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_1029#slide=id.g1f51f684b29_0_1029
+        filename: summarize_group_by_schema
+
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g2ff68eec641_0_141#slide=id.g2ff68eec641_0_141
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g2ff68eec641_0_141#slide=id.g2ff68eec641_0_141
+        filename: data_representation_in_r

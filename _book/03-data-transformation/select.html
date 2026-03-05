@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>8&nbsp; Variablen auswählen – Hands-On Exploratory Data Analytics</title>
+<title>12&nbsp; Variablen auswählen – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,7 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -111,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/select.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/select.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -153,6 +156,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -167,19 +194,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,55 +223,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,43 +294,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,13 +347,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,25 +370,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,36 +419,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-select-grundprinzip" id="toc-sec-select-grundprinzip" class="nav-link active" data-scroll-target="#sec-select-grundprinzip"><span class="header-section-number">8.1</span> Das Grundprinzip</a></li>
-  <li><a href="#sec-select-entfernen" id="toc-sec-select-entfernen" class="nav-link" data-scroll-target="#sec-select-entfernen"><span class="header-section-number">8.2</span> Spalten entfernen</a></li>
-  <li><a href="#sec-select-umbenennen" id="toc-sec-select-umbenennen" class="nav-link" data-scroll-target="#sec-select-umbenennen"><span class="header-section-number">8.3</span> Umbenennen</a></li>
+<li><a href="#sec-select-per-name" id="toc-sec-select-per-name" class="nav-link active" data-scroll-target="#sec-select-per-name"><span class="header-section-number">12.1</span> Auswahl per Name</a></li>
+  <li><a href="#sec-select-entfernen" id="toc-sec-select-entfernen" class="nav-link" data-scroll-target="#sec-select-entfernen"><span class="header-section-number">12.2</span> Spalten entfernen</a></li>
+  <li><a href="#sec-select-umbenennen" id="toc-sec-select-umbenennen" class="nav-link" data-scroll-target="#sec-select-umbenennen"><span class="header-section-number">12.3</span> Umbenennen</a></li>
   <li>
-<a href="#sec-select-muster" id="toc-sec-select-muster" class="nav-link" data-scroll-target="#sec-select-muster"><span class="header-section-number">8.4</span> Spaltenmuster</a>
+<a href="#sec-select-muster" id="toc-sec-select-muster" class="nav-link" data-scroll-target="#sec-select-muster"><span class="header-section-number">12.4</span> Spaltenmuster</a>
   <ul class="collapse">
-<li><a href="#starts_with-ends_with-contains" id="toc-starts_with-ends_with-contains" class="nav-link" data-scroll-target="#starts_with-ends_with-contains"><code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code></a></li>
-  <li><a href="#matches-f%C3%BCr-regul%C3%A4re-ausdr%C3%BCcke" id="toc-matches-für-reguläre-ausdrücke" class="nav-link" data-scroll-target="#matches-f%C3%BCr-regul%C3%A4re-ausdr%C3%BCcke"><code>matches()</code> für reguläre Ausdrücke</a></li>
-  <li><a href="#everything-und-last_col" id="toc-everything-und-last_col" class="nav-link" data-scroll-target="#everything-und-last_col"><code>everything()</code> und <code>last_col()</code></a></li>
+<li><a href="#everything-und-last_col" id="toc-everything-und-last_col" class="nav-link" data-scroll-target="#everything-und-last_col"><code>everything()</code> und <code>last_col()</code></a></li>
   </ul>
 </li>
-  <li><a href="#sec-select-bereiche" id="toc-sec-select-bereiche" class="nav-link" data-scroll-target="#sec-select-bereiche"><span class="header-section-number">8.5</span> Bereiche</a></li>
-  <li><a href="#sec-select-dynamisch" id="toc-sec-select-dynamisch" class="nav-link" data-scroll-target="#sec-select-dynamisch"><span class="header-section-number">8.6</span> Dynamische Auswahl</a></li>
-  <li><a href="#sec-select-datentyp" id="toc-sec-select-datentyp" class="nav-link" data-scroll-target="#sec-select-datentyp"><span class="header-section-number">8.7</span> Auswahl nach Datentyp</a></li>
+  <li><a href="#sec-select-bereiche" id="toc-sec-select-bereiche" class="nav-link" data-scroll-target="#sec-select-bereiche"><span class="header-section-number">12.5</span> Bereiche</a></li>
+  <li><a href="#sec-select-dynamisch" id="toc-sec-select-dynamisch" class="nav-link" data-scroll-target="#sec-select-dynamisch"><span class="header-section-number">12.6</span> Dynamische Auswahl</a></li>
+  <li><a href="#sec-select-datentyp" id="toc-sec-select-datentyp" class="nav-link" data-scroll-target="#sec-select-datentyp"><span class="header-section-number">12.7</span> Auswahl nach Datentyp</a></li>
   <li>
-<a href="#sec-select-weitere" id="toc-sec-select-weitere" class="nav-link" data-scroll-target="#sec-select-weitere"><span class="header-section-number">8.8</span> Weitere Werkzeuge</a>
+<a href="#sec-select-weitere" id="toc-sec-select-weitere" class="nav-link" data-scroll-target="#sec-select-weitere"><span class="header-section-number">12.8</span> Weitere Werkzeuge</a>
   <ul class="collapse">
-<li><a href="#num_range-f%C3%BCr-durchnummerierte-spalten" id="toc-num_range-für-durchnummerierte-spalten" class="nav-link" data-scroll-target="#num_range-f%C3%BCr-durchnummerierte-spalten"><code>num_range()</code> für durchnummerierte Spalten</a></li>
+<li><a href="#durchnummerierte-spalten" id="toc-durchnummerierte-spalten" class="nav-link" data-scroll-target="#durchnummerierte-spalten">Durchnummerierte Spalten</a></li>
   <li><a href="#optionales-entfernen-mit--any_of" id="toc-optionales-entfernen-mit--any_of" class="nav-link" data-scroll-target="#optionales-entfernen-mit--any_of">Optionales Entfernen mit <code>-any_of()</code></a></li>
   <li><a href="#gruppierte-daten-gruppierungsvariablen-bleiben-erhalten" id="toc-gruppierte-daten-gruppierungsvariablen-bleiben-erhalten" class="nav-link" data-scroll-target="#gruppierte-daten-gruppierungsvariablen-bleiben-erhalten">Gruppierte Daten: Gruppierungsvariablen bleiben erhalten</a></li>
   </ul>
 </li>
-  <li><a href="#sec-select-relocate" id="toc-sec-select-relocate" class="nav-link" data-scroll-target="#sec-select-relocate"><span class="header-section-number">8.9</span> Spalten umordnen mit <code>relocate()</code></a></li>
-  <li><a href="#sec-select-pipe" id="toc-sec-select-pipe" class="nav-link" data-scroll-target="#sec-select-pipe"><span class="header-section-number">8.10</span> Einsatz in Pipe-Ketten</a></li>
-  <li><a href="#sec-select-zusammenfassung" id="toc-sec-select-zusammenfassung" class="nav-link" data-scroll-target="#sec-select-zusammenfassung"><span class="header-section-number">8.11</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-select-relocate" id="toc-sec-select-relocate" class="nav-link" data-scroll-target="#sec-select-relocate"><span class="header-section-number">12.9</span> Spalten verschieben</a></li>
+  <li><a href="#sec-select-zusammenfassung" id="toc-sec-select-zusammenfassung" class="nav-link" data-scroll-target="#sec-select-zusammenfassung"><span class="header-section-number">12.10</span> Zusammenfassung</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/select.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-select" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/select.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-select" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></h1>
 </div>
 
 
@@ -430,7 +460,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p>Nachdem ihr im vorherigen Kapitel einen ersten Überblick über euren Datensatz gewonnen habt, geht es nun an das gezielte Aufräumen. In diesem Kapitel lernt ihr die Funktion <code>select()</code> aus dem <code>dplyr</code>-Paket kennen. Wir zeigen euch, wie ihr bestimmte Spalten auswählt, überflüssige Spalten entfernt, die Reihenfolge der Variablen verändert und Spalten bei der Auswahl direkt umbenennt.</p>
-<p>Das gezielte Auswählen von Variablen ist ein zentraler Bestandteil der Datenvorbereitung, da reale Datensätze oft hunderte von Spalten enthalten, von denen für eine spezifische Analyse nur eine Handvoll relevant ist. Durch das Reduzieren des Datensatzes auf das Wesentliche behaltet ihr den Überblick, vermeidet Ablenkungen und macht eure Analysen deutlich strukturierter. Ihr könnt euch das wie das Packen eines Rucksacks vorstellen: Ihr nehmt nur das mit, was ihr für die nächste Etappe braucht, der Rest bleibt zu Hause.</p>
+<p>Wie jede Transformation im <code>dplyr</code>-Paket nimmt <code>select()</code> einen Tibble, verändert ihn und gibt anschließend einen neuen Tibble zurück (<a href="#fig-select-schema" class="quarto-xref">Abbildung&nbsp;<span>12.1</span></a>).</p>
+<div id="fig-select-schema" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-select-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\images/google_slides/select_schema.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;12.1: Eine Transformation wie select bekommt einen Tibble als Eingabe und erzeugt als Ergebnis einen neuen Tibble."><img src="..\images/google_slides/select_schema.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-select-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;12.1: Eine Transformation wie <code>select</code> bekommt einen Tibble als Eingabe und erzeugt als Ergebnis einen neuen Tibble.
+</figcaption></figure>
+</div>
+<p>Die veränderte Version hat im Ergebnis nur die Variablen, die wir mit <code>select</code> angegeben haben. Das gezielte Auswählen von Variablen ist ein zentraler Bestandteil der Datenvorbereitung, da reale Datensätze oft hunderte von Spalten enthalten, von denen für eine spezifische Analyse nur eine Handvoll relevant ist. Durch das Reduzieren des Datensatzes auf das Wesentliche behaltet ihr den Überblick, vermeidet Ablenkungen und macht eure Analysen deutlich strukturierter. Ihr könnt euch das wie das Packen eines Rucksacks vorstellen: Ihr nehmt nur das mit, was ihr für die nächste Etappe braucht, der Rest bleibt zu Hause.</p>
+<p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -475,54 +515,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Wir nutzen in diesem Kapitel wieder den Tweets Datensatz. Wenn ihr euch erst einmal orientieren wollt, schaut euch kurz die Spalten an:</p>
-<div id="select-first-glimpse" class="reuse">
+<p>Schauen wir uns an, wie das Auswählen von Variablen mit <code>select</code> funktioniert und welche Möglichkeiten ihr damit habt.</p>
+<section id="sec-select-per-name" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="sec-select-per-name">
+<span class="header-section-number">12.1</span> Auswahl per Name</h2>
+<p>Die einfachste Form ist die Auswahl einzelner Spalten:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 58,421
-Columns: 22
-$ id                      &lt;chr&gt; "1642251945732653057", "1642416819003707397", …
-$ screen_name             &lt;chr&gt; "cem_oezdemir", "W_Schmidt_", "lisapaus", "lis…
-$ text                    &lt;chr&gt; "RT @BriHasselmann: Endlich! Wir sind drangebl…
-$ retweet_count           &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10…
-$ favorite_count          &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58,…
-$ is_quote_status         &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALS…
-$ is_retweet              &lt;lgl&gt; TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE,…
-$ retweeted_status_id     &lt;chr&gt; "1642158717113081856", "1641976869460275201", …
-$ retweeted_user          &lt;chr&gt; "BriHasselmann", "aakashg0", NA, NA, NA, NA, N…
-$ lang                    &lt;chr&gt; "de", "en", "de", "de", "qme", "de", "de", "de…
-$ hashtags                &lt;list&gt; &lt;"Tierhaltungskennzeichnung", "Wettbewerb"&gt;, …
-$ urls                    &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
-$ user_mentions           &lt;list&gt; "BriHasselmann", "aakashg0", &lt;"HassoSuliak", …
-$ photos                  &lt;list&gt; [&lt;data.frame[0 x 0]&gt;], [&lt;data.frame[0 x 0]&gt;],…
-$ source                  &lt;chr&gt; "&lt;a href=\"http://twitter.com/download/iphone\…
-$ insert_timestamp        &lt;chr&gt; "2023-04-02 03:00:04.749 UTC", "2023-04-02 07:…
-$ created_at              &lt;dttm&gt; 2023-04-01 19:45:50, 2023-04-02 06:40:58, 202…
-$ quote_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-$ reply_count             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-$ in_reply_to_screen_name &lt;chr&gt; NA, NA, "HassoSuliak", "andiewoerle", "Wissing…
-$ in_reply_to_status_id   &lt;chr&gt; NA, NA, "1642059841169502210", "16420886499603…
-$ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "16424095440462397…</code></pre>
-</div>
-</div>
-</div>
-<p>In diesem Kapitel klären wir drei Dinge:</p>
-<div id="select-learning-objectives" class="reuse">
-<ul>
-<li>Wie wählt ihr einzelne und mehrere Spalten aus, und wie werft ihr Spalten gezielt weg?</li>
-<li>Wie nutzt ihr Auswahl Helfer wie <code>starts_with()</code> oder <code>contains()</code>, damit eure Auswahl flexibel bleibt?</li>
-<li>Wie wählt ihr Spalten dynamisch aus, zum Beispiel aus einem Vektor oder nach Datentyp?</li>
-</ul>
-</div>
-<section id="sec-select-grundprinzip" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="sec-select-grundprinzip">
-<span class="header-section-number">8.1</span> Das Grundprinzip</h2>
-<p><code>select()</code> nimmt einen Tibble und gibt einen Tibble zurück. Nur die Spalten ändern sich.</p>
-<p>Die einfachste Form ist die Auswahl einzelner Spalten:</p>
-<div id="select-basics-single" class="reuse">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 58,421 × 1
@@ -541,11 +539,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 # ℹ 58,411 more rows</code></pre>
 </div>
 </div>
-</div>
 <p>Mehrere Spalten schreibt ihr einfach hintereinander:</p>
-<div id="select-basics-multiple" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 58,421 × 3
@@ -564,11 +560,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 # ℹ 58,411 more rows</code></pre>
 </div>
 </div>
-</div>
 <p>Ein praktischer Nebeneffekt ist die Reihenfolge. <code>select()</code> ordnet die Spalten genau so an, wie ihr sie angebt. Das ist hilfreich, wenn ihr euch eine Ausgabe gezielt lesbar machen wollt:</p>
-<div id="select-basics-order" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">retweet_count</span>, <span class="va">favorite_count</span>, <span class="va">screen_name</span>, <span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -580,14 +574,11 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 3             1              3 lisapaus     @HassoSuliak @Storch_i @tagesschau …</code></pre>
 </div>
 </div>
-</div>
-<p><em>Abbildung: Eine Skizze, die einen Datensatz als Tabelle zeigt. Ein Marker hebt vier Spalten hervor, die in eine kleinere Tabelle übernommen werden. Ein Pfeil zeigt, dass <code>select()</code> die Spalten auswählt und dabei die Reihenfolge neu anordnet.</em></p>
-</section><section id="sec-select-entfernen" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="sec-select-entfernen">
-<span class="header-section-number">8.2</span> Spalten entfernen</h2>
+</section><section id="sec-select-entfernen" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="sec-select-entfernen">
+<span class="header-section-number">12.2</span> Spalten entfernen</h2>
 <p>Manchmal ist es einfacher zu sagen, was weg soll. In <code>select()</code> könnt ihr Spalten mit einem Minus entfernen.</p>
-<div id="select-drop-one" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -604,11 +595,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 #   in_reply_to_status_id &lt;chr&gt;, quoted_status_id &lt;chr&gt;</code></pre>
 </div>
 </div>
-</div>
 <p>Das funktioniert auch mit mehreren Spalten:</p>
-<div id="select-drop-multiple" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">text</span>, <span class="op">-</span><span class="va">is_retweet</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -625,11 +614,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 #   in_reply_to_status_id &lt;chr&gt;, quoted_status_id &lt;chr&gt;</code></pre>
 </div>
 </div>
-</div>
 <p>Wenn ihr euch die Spaltennamen anschauen wollt, hilft <code><a href="https://rdrr.io/r/base/names.html">names()</a></code>:</p>
-<div id="select-names" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "id"                      "screen_name"            
  [3] "text"                    "retweet_count"          
@@ -642,7 +629,6 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 [17] "created_at"              "quote_count"            
 [19] "reply_count"             "in_reply_to_screen_name"
 [21] "in_reply_to_status_id"   "quoted_status_id"       </code></pre>
-</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Wenn `select()` meckert">
@@ -658,13 +644,12 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <p>Wenn ihr euch bei einem Spaltennamen vertippt, bekommt ihr eine Fehlermeldung. Das ist gut, denn es verhindert stillschweigende Fehler. Schaut dann als Erstes in <code>names(tweets)</code>, ob der Name genau so geschrieben ist.</p>
 </div>
 </div>
-</section><section id="sec-select-umbenennen" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="sec-select-umbenennen">
-<span class="header-section-number">8.3</span> Umbenennen</h2>
+</section><section id="sec-select-umbenennen" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="sec-select-umbenennen">
+<span class="header-section-number">12.3</span> Umbenennen</h2>
 <p>Ihr könnt Spalten in <code>select()</code> auch direkt umbenennen. Das Muster ist:</p>
 <p><code>neuer_name = alter_name</code></p>
-<div id="select-rename-inline" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span></span>
 <span>    user <span class="op">=</span> <span class="va">screen_name</span>,</span>
 <span>    likes <span class="op">=</span> <span class="va">favorite_count</span>,</span>
@@ -681,10 +666,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 3 lisapaus         3        1 @HassoSuliak @Storch_i @tagesschau Die EU Richtli…</code></pre>
 </div>
 </div>
-</div>
 <p>Das ist praktisch, wenn ihr ohnehin gerade eine Auswahl baut. Wenn ihr dagegen nur umbenennen wollt, ohne die Spaltenauswahl zu ändern, ist <code>rename()</code> die bessere Wahl:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>user <span class="op">=</span> <span class="va">screen_name</span>, likes <span class="op">=</span> <span class="va">favorite_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -702,13 +686,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 </div>
 <p>Mit <code>rename()</code> bleiben alle Spalten erhalten, nur die genannten bekommen einen neuen Namen.</p>
-</section><section id="sec-select-muster" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="sec-select-muster">
-<span class="header-section-number">8.4</span> Spaltenmuster</h2>
-<p>In echten Projekten ändern sich Datensätze. Es kommen Spalten dazu, Namen ändern sich leicht, oder ihr bekommt eine zweite Version einer Datei. Dann ist es hilfreich, nicht alles hart auszuschreiben, sondern über Muster auszuwählen.</p>
-<section id="starts_with-ends_with-contains" class="level3"><h3 class="anchored" data-anchor-id="starts_with-ends_with-contains">
-<code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>
-</h3>
-<p>Diese drei Helfer sind schnell verstanden:</p>
+</section><section id="sec-select-muster" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="sec-select-muster">
+<span class="header-section-number">12.4</span> Spaltenmuster</h2>
+<p>In echten Projekten ändern sich Datensätze. Es kommen Spalten dazu, Namen ändern sich leicht, oder ihr bekommt eine zweite Version einer Datei. Dann ist es hilfreich, nicht alles hart auszuschreiben, sondern über Muster auszuwählen. Dafür gibt es kleine Helferfunktionen, die ihr innerhalb des <code>select()</code>-Aufrufs nutzen könnt:</p>
 <ul>
 <li>
 <code>starts_with("...")</code>: Name beginnt mit diesem Text</li>
@@ -717,10 +697,9 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <li>
 <code>contains("...")</code>: Name enthält diesen Text</li>
 </ul>
-<p>Damit das reproduzierbar ist, schauen wir uns die Idee kurz an einem Mini Datensatz an:</p>
-<div id="select-helpers-mini-data" class="reuse">
+<p>Schauen wir uns die Idee kurz an einem Mini Datensatz an:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mini</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mini</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
 <span>  user_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>,</span>
 <span>  user_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  tweet_text <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hi"</span>, <span class="st">"bye"</span><span class="op">)</span>,</span>
@@ -737,14 +716,10 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 2 b               2</code></pre>
 </div>
 </div>
-</div>
 <p>Und genauso funktionieren die Helfer auch in größeren Datensätzen. Wenn eure Spalten sinnvolle Präfixe oder Suffixe haben, spart ihr euch viel Tipparbeit.</p>
-</section><section id="matches-für-reguläre-ausdrücke" class="level3"><h3 class="anchored" data-anchor-id="matches-für-reguläre-ausdrücke">
-<code>matches()</code> für reguläre Ausdrücke</h3>
-<p><code>matches()</code> ist die fortgeschrittene Variante, wenn ihr ein Muster sehr genau beschreiben wollt. Dahinter stecken reguläre Ausdrücke.</p>
-<div id="select-matches-mini" class="reuse">
+<p>Als fortgeschrittene Variante gibt es die Funktion <code>matches()</code>, wenn ihr ein Muster sehr genau beschreiben wollt. Dahinter stecken reguläre Ausdrücke.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mini</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mini</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">matches</span><span class="op">(</span><span class="st">"_(id|text)$"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
@@ -754,15 +729,13 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 2       2 bye              20</code></pre>
 </div>
 </div>
-</div>
 <p>Wenn euch reguläre Ausdrücke neu sind, merkt euch erst einmal diese Idee: Ihr könnt damit sehr präzise sagen, wie Spaltennamen aussehen sollen.</p>
-</section><section id="everything-und-last_col" class="level3"><h3 class="anchored" data-anchor-id="everything-und-last_col">
+<section id="everything-und-last_col" class="level3"><h3 class="anchored" data-anchor-id="everything-und-last_col">
 <code>everything()</code> und <code>last_col()</code>
 </h3>
 <p>Manchmal wollt ihr nur einzelne Spalten an eine bestimmte Stelle schieben. Dafür könnt ihr <code>everything()</code> nutzen, das für alle übrigen Spalten steht.</p>
-<div id="select-everything" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -780,15 +753,14 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 #   quoted_status_id &lt;chr&gt;</code></pre>
 </div>
 </div>
-</div>
 <p><code>last_col()</code> ist ähnlich praktisch, wenn ihr Bereiche über das Ende eines Datensatzes ausdrücken wollt. Das ist vor allem bei vielen Spalten hilfreich.</p>
-</section></section><section id="sec-select-bereiche" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="sec-select-bereiche">
-<span class="header-section-number">8.5</span> Bereiche</h2>
+</section></section><section id="sec-select-bereiche" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="sec-select-bereiche">
+<span class="header-section-number">12.5</span> Bereiche</h2>
 <p>Ihr könnt Spalten auch als Bereich auswählen, zum Beispiel <code>a:c</code>. Das funktioniert allerdings nur, wenn die Spalten im Datensatz in dieser Reihenfolge vorkommen.</p>
 <p>Damit ihr den Mechanismus sicher seht, nutzen wir wieder einen kleinen Datensatz:</p>
 <div id="select-range-colon" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">toy</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span>, c <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">toy</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span>, c <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">toy</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">b</span><span class="op">:</span><span class="va">d</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -801,8 +773,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 </div>
 <p>In euren eigenen Daten ist <code>:</code> vor allem dann praktisch, wenn Spaltenblöcke zusammenhängen, zum Beispiel Messwerte von <code>m1</code> bis <code>m20</code>.</p>
-</section><section id="sec-select-dynamisch" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="sec-select-dynamisch">
-<span class="header-section-number">8.6</span> Dynamische Auswahl</h2>
+</section><section id="sec-select-dynamisch" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="sec-select-dynamisch">
+<span class="header-section-number">12.6</span> Dynamische Auswahl</h2>
 <p>Oft habt ihr eine Liste von Spaltennamen, die ihr auswählen wollt. Vielleicht kommt sie aus einem Skript, aus einer Konfiguration oder ihr baut sie dynamisch zusammen.</p>
 <p>Wenn ihr einfach einen Vektor in <code>select()</code> schreibt, funktioniert das nicht so, wie ihr es vermutlich erwartet. Stattdessen nutzt ihr <code>all_of()</code> oder <code>any_of()</code>:</p>
 <ul>
@@ -813,7 +785,7 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </ul>
 <div id="select-all-of-any-of" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"screen_name"</span>, <span class="st">"retweet_count"</span>, <span class="st">"does_not_exist"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"screen_name"</span>, <span class="st">"retweet_count"</span>, <span class="st">"does_not_exist"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># all_of() ist strikt und hilft, Fehler früh zu finden.</span></span>
 <span><span class="co"># Dieser Aufruf wirft hier absichtlich einen Fehler, weil eine Spalte nicht existiert.</span></span>
@@ -828,7 +800,7 @@ Caused by error in `all_of()` at rlang/R/eval-tidy.R:121:3:
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"screen_name"</span>, <span class="st">"retweet_count"</span>, <span class="st">"does_not_exist"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"screen_name"</span>, <span class="st">"retweet_count"</span>, <span class="st">"does_not_exist"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># any_of() ist tolerant, wenn sich Spalten je nach Version unterscheiden</span></span>
 <span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -845,13 +817,13 @@ Caused by error in `all_of()` at rlang/R/eval-tidy.R:121:3:
 </div>
 </div>
 <p><code>all_of()</code> ist oft die bessere Wahl, wenn ihr euch auf eine feste Struktur verlasst. <code>any_of()</code> ist hilfreich, wenn ihr bewusst mit mehreren Datensatz Varianten arbeiten wollt.</p>
-</section><section id="sec-select-datentyp" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="sec-select-datentyp">
-<span class="header-section-number">8.7</span> Auswahl nach Datentyp</h2>
+</section><section id="sec-select-datentyp" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="sec-select-datentyp">
+<span class="header-section-number">12.7</span> Auswahl nach Datentyp</h2>
 <p>Manchmal wollt ihr nicht nach Namen auswählen, sondern nach Eigenschaften. Zum Beispiel alle numerischen Spalten, weil ihr sie gleich zusammenfassen oder visualisieren wollt.</p>
 <p>Das geht mit <code>where()</code>:</p>
 <div id="select-where-numeric" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -867,7 +839,7 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 <p>Ihr könnt <code>where()</code> auch kombinieren, zum Beispiel alle Zeichen Spalten, aber ohne den Text:</p>
 <div id="select-where-combine" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">-</span><span class="va">text</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -883,14 +855,12 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 </div>
 </div>
 <p><em>Abbildung: Zwei Filterkarten. Karte eins heißt “Namensmuster” und zeigt <code>starts_with()</code>, <code>contains()</code>, <code>matches()</code>. Karte zwei heißt “Eigenschaften” und zeigt <code>where(is.numeric)</code>. Beide führen in denselben Ausgang “select()”. Der Fokus ist, dass es zwei Denkweisen gibt.</em></p>
-</section><section id="sec-select-weitere" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="sec-select-weitere">
-<span class="header-section-number">8.8</span> Weitere Werkzeuge</h2>
-<section id="num_range-für-durchnummerierte-spalten" class="level3"><h3 class="anchored" data-anchor-id="num_range-für-durchnummerierte-spalten">
-<code>num_range()</code> für durchnummerierte Spalten</h3>
+</section><section id="sec-select-weitere" class="level2" data-number="12.8"><h2 data-number="12.8" class="anchored" data-anchor-id="sec-select-weitere">
+<span class="header-section-number">12.8</span> Weitere Werkzeuge</h2>
+<section id="durchnummerierte-spalten" class="level3"><h3 class="anchored" data-anchor-id="durchnummerierte-spalten">Durchnummerierte Spalten</h3>
 <p>Wenn Spalten durchnummeriert sind, hilft <code>num_range()</code>. Das ist typisch bei Messreihen oder Umfrageitems wie <code>q1</code>, <code>q2</code>, <code>q3</code>.</p>
-<div id="select-num-range" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey_like</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>q1 <span class="op">=</span> <span class="fl">1</span>, q2 <span class="op">=</span> <span class="fl">2</span>, q3 <span class="op">=</span> <span class="fl">3</span>, meta <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey_like</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>q1 <span class="op">=</span> <span class="fl">1</span>, q2 <span class="op">=</span> <span class="fl">2</span>, q3 <span class="op">=</span> <span class="fl">3</span>, meta <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">survey_like</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="fu">num_range</span><span class="op">(</span><span class="st">"q"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -901,13 +871,11 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 1     1     2     3</code></pre>
 </div>
 </div>
-</div>
 </section><section id="optionales-entfernen-mit--any_of" class="level3"><h3 class="anchored" data-anchor-id="optionales-entfernen-mit--any_of">Optionales Entfernen mit <code>-any_of()</code>
 </h3>
 <p>Manchmal wollt ihr Spalten entfernen, die vielleicht gar nicht in jeder Version eures Datensatzes existieren. Dann ist <code>-any_of()</code> praktisch:</p>
-<div id="select-drop-any-of" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu">any_of</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"text"</span>, <span class="st">"does_not_exist"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -924,12 +892,10 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 #   in_reply_to_status_id &lt;chr&gt;, quoted_status_id &lt;chr&gt;</code></pre>
 </div>
 </div>
-</div>
 </section><section id="gruppierte-daten-gruppierungsvariablen-bleiben-erhalten" class="level3"><h3 class="anchored" data-anchor-id="gruppierte-daten-gruppierungsvariablen-bleiben-erhalten">Gruppierte Daten: Gruppierungsvariablen bleiben erhalten</h3>
 <p>Ein Detail, das euch später viel Zeit sparen kann: Wenn ein Tibble gruppiert ist, behält <code>select()</code> die Gruppierungsvariablen auch dann, wenn ihr sie nicht explizit auswählt.</p>
-<div id="select-grouped-keeps-groups" class="reuse">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">screen_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">retweet_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -943,13 +909,11 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 3 lisapaus                 1</code></pre>
 </div>
 </div>
-</div>
-</section></section><section id="sec-select-relocate" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="sec-select-relocate">
-<span class="header-section-number">8.9</span> Spalten umordnen mit <code>relocate()</code>
-</h2>
+</section></section><section id="sec-select-relocate" class="level2" data-number="12.9"><h2 data-number="12.9" class="anchored" data-anchor-id="sec-select-relocate">
+<span class="header-section-number">12.9</span> Spalten verschieben</h2>
 <p>Manchmal wollt ihr Spalten nicht auswählen oder entfernen, sondern nur an eine andere Stelle schieben. Dafür gibt es <code>relocate()</code>. Es verschiebt Spalten, ohne die übrigen zu verändern:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">text</span>, .before <span class="op">=</span> <span class="va">screen_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -969,7 +933,7 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 </div>
 <p>Mit <code>.before</code> und <code>.after</code> legt ihr fest, wohin die Spalte wandert. Wenn ihr mehrere Spalten auf einmal verschieben wollt, funktionieren auch die bekannten Helfer wie <code>starts_with()</code> oder <code>where()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">relocate</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, .after <span class="op">=</span> <span class="fu">last_col</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -987,28 +951,8 @@ $ reply_count    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 </div>
 </div>
 <p><code>relocate()</code> ist eine gute Alternative zu dem Trick mit <code>select(spalte, everything())</code>, weil die Absicht klarer ist.</p>
-</section><section id="sec-select-pipe" class="level2" data-number="8.10"><h2 data-number="8.10" class="anchored" data-anchor-id="sec-select-pipe">
-<span class="header-section-number">8.10</span> Einsatz in Pipe-Ketten</h2>
-<p>In der explorativen Analyse nutzt ihr <code>select()</code> selten allein. Meist ist es ein Schritt in einer Pipe-Kette, um die Sicht auf den Datensatz zu fokussieren.</p>
-<p>Hier ist ein typisches Muster: erst auswählen, dann kurz prüfen.</p>
-<div id="select-chain-glimpse" class="reuse">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">select</span><span class="op">(</span><span class="va">screen_name</span>, <span class="va">retweet_count</span>, <span class="va">favorite_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 58,421
-Columns: 3
-$ screen_name    &lt;chr&gt; "cem_oezdemir", "W_Schmidt_", "lisapaus", "lisapaus", "…
-$ retweet_count  &lt;dbl&gt; 23, 10659, 1, 1, 6, 9, 15, 56, 29, 1, 1, 1, 10, 13, 26,…
-$ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103, 266…</code></pre>
-</div>
-</div>
-</div>
-<p>Wenn ihr danach weiterarbeitet, habt ihr weniger Ballast in eurem Kopf und in euren Ausgaben.</p>
-</section><section id="sec-select-zusammenfassung" class="level2" data-number="8.11"><h2 data-number="8.11" class="anchored" data-anchor-id="sec-select-zusammenfassung">
-<span class="header-section-number">8.11</span> Kurz zusammengefasst</h2>
-<div id="select-summary" class="reuse">
+</section><section id="sec-select-zusammenfassung" class="level2" data-number="12.10"><h2 data-number="12.10" class="anchored" data-anchor-id="sec-select-zusammenfassung">
+<span class="header-section-number">12.10</span> Zusammenfassung</h2>
 <ul>
 <li>
 <code>select()</code> wählt Spalten aus, ordnet sie um und kann sie auch umbenennen.</li>
@@ -1017,8 +961,7 @@ $ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103,
 <li>Mit <code>all_of()</code> und <code>any_of()</code> wählt ihr Spalten über Vektoren aus, strikt oder tolerant.</li>
 <li>Mit <code>where()</code> wählt ihr Spalten nach Datentyp aus, zum Beispiel alle numerischen Spalten.</li>
 </ul>
-</div>
-<p>Ihr wisst jetzt, wie ihr euren Datensatz auf die relevanten Spalten zuschneidet. Im nächsten Kapitel lernt ihr, wie ihr bestehende Spalten mit <code>mutate()</code> verändern könnt, zum Beispiel um Datentypen zu korrigieren oder Texte zu normalisieren (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 9</span></a>).</p>
+<p>Ihr wisst jetzt, wie ihr euren Datensatz auf die relevanten Spalten zuschneidet. Im nächsten Kapitel lernt ihr, wie ihr bestehende Spalten mit <code>mutate()</code> verändern könnt, zum Beispiel um Datentypen zu korrigieren oder Texte zu normalisieren (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 13</span></a>).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1461,17 +1404,48 @@ $ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103,
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/exploring-data.html" class="pagination-link" aria-label="Daten kennenlernen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/mutate-modify.html" class="pagination-link" aria-label="Variablen verändern">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 </body></html>

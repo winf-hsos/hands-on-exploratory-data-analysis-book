@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>14&nbsp; Grammar of Graphics – Hands-On Exploratory Data Analytics</title>
+<title>19&nbsp; Grammar of Graphics – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../04-data-visualization/bar-charts.html" rel="next">
-<link href="../03-data-transformation/joining-data.html" rel="prev">
+<link href="../03-data-transformation/complex-data-structures.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -153,6 +153,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -167,19 +191,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,55 +220,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,43 +291,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,13 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,25 +367,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,9 +416,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#die-idee" id="toc-die-idee" class="nav-link active" data-scroll-target="#die-idee"><span class="header-section-number">14.1</span> Die Idee</a></li>
+<li><a href="#die-idee" id="toc-die-idee" class="nav-link active" data-scroll-target="#die-idee"><span class="header-section-number">19.1</span> Die Idee</a></li>
   <li>
-<a href="#die-drei-essenziellen-bausteine" id="toc-die-drei-essenziellen-bausteine" class="nav-link" data-scroll-target="#die-drei-essenziellen-bausteine"><span class="header-section-number">14.2</span> Die drei essenziellen Bausteine</a>
+<a href="#die-drei-essenziellen-bausteine" id="toc-die-drei-essenziellen-bausteine" class="nav-link" data-scroll-target="#die-drei-essenziellen-bausteine"><span class="header-section-number">19.2</span> Die drei essenziellen Bausteine</a>
   <ul class="collapse">
 <li><a href="#daten" id="toc-daten" class="nav-link" data-scroll-target="#daten">Daten</a></li>
   <li><a href="#aesthetic-mappings" id="toc-aesthetic-mappings" class="nav-link" data-scroll-target="#aesthetic-mappings">Aesthetic Mappings</a></li>
@@ -396,7 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#die-weiteren-ebenen" id="toc-die-weiteren-ebenen" class="nav-link" data-scroll-target="#die-weiteren-ebenen"><span class="header-section-number">14.3</span> Die weiteren Ebenen</a>
+<a href="#die-weiteren-ebenen" id="toc-die-weiteren-ebenen" class="nav-link" data-scroll-target="#die-weiteren-ebenen"><span class="header-section-number">19.3</span> Die weiteren Ebenen</a>
   <ul class="collapse">
 <li><a href="#statistische-transformationen" id="toc-statistische-transformationen" class="nav-link" data-scroll-target="#statistische-transformationen">Statistische Transformationen</a></li>
   <li><a href="#skalen" id="toc-skalen" class="nav-link" data-scroll-target="#skalen">Skalen</a></li>
@@ -405,14 +435,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
   </ul>
 </li>
-  <li><a href="#alles-zusammen" id="toc-alles-zusammen" class="nav-link" data-scroll-target="#alles-zusammen"><span class="header-section-number">14.4</span> Alles zusammen</a></li>
-  <li><a href="#der-typische-ablauf" id="toc-der-typische-ablauf" class="nav-link" data-scroll-target="#der-typische-ablauf"><span class="header-section-number">14.5</span> Der typische Ablauf</a></li>
-  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">14.6</span> Kurz zusammengefasst</a></li>
+  <li><a href="#alles-zusammen" id="toc-alles-zusammen" class="nav-link" data-scroll-target="#alles-zusammen"><span class="header-section-number">19.4</span> Alles zusammen</a></li>
+  <li><a href="#der-typische-ablauf" id="toc-der-typische-ablauf" class="nav-link" data-scroll-target="#der-typische-ablauf"><span class="header-section-number">19.5</span> Der typische Ablauf</a></li>
+  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">19.6</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-grammar-of-graphics" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-grammar-of-graphics" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></h1>
 </div>
 
 
@@ -435,13 +465,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Welche weiteren Ebenen gibt es, und wann spielen sie eine Rolle?</li>
 </ul>
 </div>
-<section id="die-idee" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="die-idee">
-<span class="header-section-number">14.1</span> Die Idee</h2>
+<section id="die-idee" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="die-idee">
+<span class="header-section-number">19.1</span> Die Idee</h2>
 <p>Die Grammar of Graphics stammt aus dem Buch <em>The Grammar of Graphics</em> von Leland Wilkinson (1999). Die Grundidee: Jedes statistische Diagramm lässt sich als Kombination unabhängiger Bausteine beschreiben, genau wie ein Satz in einer natürlichen Sprache aus Subjekt, Verb und Objekt besteht.</p>
 <p>Hadley Wickham hat diese Idee aufgegriffen und in <code>ggplot2</code> umgesetzt. In <code>ggplot2</code> baut ihr ein Diagramm Schicht für Schicht auf, indem ihr Bausteine mit dem <code>+</code>-Operator verbindet.</p>
 <p>Die wichtigste Erkenntnis dabei ist: Ein Balkendiagramm und ein Liniendiagramm unterscheiden sich nicht grundlegend. Beide haben Daten, eine Zuordnung von Variablen zu visuellen Eigenschaften und eine geometrische Form. Der einzige Unterschied ist die Form: Balken statt Linie. Wenn ihr das verinnerlicht habt, könnt ihr jedes Diagramm bauen, das ihr euch vorstellen könnt.</p>
-</section><section id="die-drei-essenziellen-bausteine" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="die-drei-essenziellen-bausteine">
-<span class="header-section-number">14.2</span> Die drei essenziellen Bausteine</h2>
+</section><section id="die-drei-essenziellen-bausteine" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="die-drei-essenziellen-bausteine">
+<span class="header-section-number">19.2</span> Die drei essenziellen Bausteine</h2>
 <p>Jedes Diagramm in <code>ggplot2</code> braucht exakt drei Dinge:</p>
 <ol type="1">
 <li>
@@ -468,7 +498,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="grammar-of-graphics_files/figure-html/fig-gog-first-bar-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-first-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.1: Ein einfaches Balkendiagramm: Daten, Mapping, Geometrie.
+Abbildung&nbsp;19.1: Ein einfaches Balkendiagramm: Daten, Mapping, Geometrie.
 </figcaption></figure>
 </div>
 </div>
@@ -512,7 +542,7 @@ Abbildung&nbsp;14.1: Ein einfaches Balkendiagramm: Daten, Mapping, Geometrie.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-pipe-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.2: Der Datensatz kommt direkt aus einer Pipe-Kette.
+Abbildung&nbsp;19.2: Der Datensatz kommt direkt aus einer Pipe-Kette.
 </figcaption></figure>
 </div>
 </div>
@@ -583,7 +613,7 @@ Abbildung&nbsp;14.2: Der Datensatz kommt direkt aus einer Pipe-Kette.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-fill-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-fill-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.3: Mit fill werden die Balken nach einer zweiten Variable eingefärbt.
+Abbildung&nbsp;19.3: Mit fill werden die Balken nach einer zweiten Variable eingefärbt.
 </figcaption></figure>
 </div>
 </div>
@@ -642,7 +672,7 @@ Abbildung&nbsp;14.3: Mit fill werden die Balken nach einer zweiten Variable eing
 <img src="grammar-of-graphics_files/figure-html/fig-gog-bar-vs-col-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-bar-vs-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.4: geom_bar() zählt selbst, geom_col() nimmt vorberechnete Werte.
+Abbildung&nbsp;19.4: geom_bar() zählt selbst, geom_col() nimmt vorberechnete Werte.
 </figcaption></figure>
 </div>
 </div>
@@ -659,14 +689,14 @@ Abbildung&nbsp;14.4: geom_bar() zählt selbst, geom_col() nimmt vorberechnete We
 <img src="grammar-of-graphics_files/figure-html/fig-gog-col-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-col-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.5: geom_col() braucht einen vorberechneten y-Wert.
+Abbildung&nbsp;19.5: geom_col() braucht einen vorberechneten y-Wert.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p><em>Abbildung: Drei Karten nebeneinander, die die drei essenziellen Bausteine zeigen. Karte 1: “Data” mit einem Tabellensymbol und dem Label “top_accounts”. Karte 2: “Mapping” mit dem Label “aes(x = screen_name, y = n)” und Pfeilen von den Variablen zu den Achsen. Karte 3: “Geom” mit dem Label “geom_col()” und einer kleinen Balkengrafik. Unter den drei Karten steht ein Pluszeichen zwischen jeder Karte, und darunter das fertige Diagramm.</em></p>
-</section></section><section id="die-weiteren-ebenen" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="die-weiteren-ebenen">
-<span class="header-section-number">14.3</span> Die weiteren Ebenen</h2>
+</section></section><section id="die-weiteren-ebenen" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="die-weiteren-ebenen">
+<span class="header-section-number">19.3</span> Die weiteren Ebenen</h2>
 <p>Neben den drei essenziellen Bausteinen kennt die Grammar of Graphics noch weitere Ebenen. Diese sind optional und dienen dazu, das Diagramm zu verfeinern. Ihr müsst sie nicht für jedes Diagramm kennen, aber es hilft zu wissen, dass sie existieren.</p>
 <section id="statistische-transformationen" class="level3"><h3 class="anchored" data-anchor-id="statistische-transformationen">Statistische Transformationen</h3>
 <p>Manchmal wollt ihr die Daten nicht direkt darstellen, sondern erst eine statistische Zusammenfassung berechnen. Tatsächlich tut <code>geom_bar()</code> genau das bereits: Es zählt die Häufigkeiten für euch. Hinter jeder Geometrie steckt eine statistische Transformation (<code>stat</code>).</p>
@@ -682,7 +712,7 @@ Abbildung&nbsp;14.5: geom_col() braucht einen vorberechneten y-Wert.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-stat-identity-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-stat-identity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.6: Mit stat = ‘identity’ nimmt geom_bar() die Werte direkt, statt zu zählen.
+Abbildung&nbsp;19.6: Mit stat = ‘identity’ nimmt geom_bar() die Werte direkt, statt zu zählen.
 </figcaption></figure>
 </div>
 </div>
@@ -703,7 +733,7 @@ Abbildung&nbsp;14.6: Mit stat = ‘identity’ nimmt geom_bar() die Werte direkt
 <img src="grammar-of-graphics_files/figure-html/fig-gog-scale-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.7: Skalen steuern Farben und Achsenbeschriftungen.
+Abbildung&nbsp;19.7: Skalen steuern Farben und Achsenbeschriftungen.
 </figcaption></figure>
 </div>
 </div>
@@ -724,7 +754,7 @@ Abbildung&nbsp;14.7: Skalen steuern Farben und Achsenbeschriftungen.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-coord-flip-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-coord-flip-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.8: coord_flip() dreht die Achsen um 90 Grad.
+Abbildung&nbsp;19.8: coord_flip() dreht die Achsen um 90 Grad.
 </figcaption></figure>
 </div>
 </div>
@@ -745,7 +775,7 @@ Abbildung&nbsp;14.8: coord_flip() dreht die Achsen um 90 Grad.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-facet-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.9: Facetten erzeugen ein Teildiagramm pro Sprache.
+Abbildung&nbsp;19.9: Facetten erzeugen ein Teildiagramm pro Sprache.
 </figcaption></figure>
 </div>
 </div>
@@ -766,14 +796,14 @@ Abbildung&nbsp;14.9: Facetten erzeugen ein Teildiagramm pro Sprache.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-theme-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.10: Verschiedene Themes ändern das Aussehen, nicht die Daten.
+Abbildung&nbsp;19.10: Verschiedene Themes ändern das Aussehen, nicht die Daten.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p><code>ggplot2</code> bringt mehrere Themes mit: <code>theme_minimal()</code>, <code>theme_classic()</code>, <code>theme_light()</code>, <code>theme_dark()</code> und andere. Im Kapitel über das Verfeinern von Diagrammen gehen wir ausführlicher darauf ein.</p>
-</section></section><section id="alles-zusammen" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="alles-zusammen">
-<span class="header-section-number">14.4</span> Alles zusammen</h2>
+</section></section><section id="alles-zusammen" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="alles-zusammen">
+<span class="header-section-number">19.4</span> Alles zusammen</h2>
 <p>Hier ist die vollständige Schichtung, die die Grammar of Graphics beschreibt:</p>
 <table class="caption-top table">
 <thead><tr class="header">
@@ -826,8 +856,8 @@ Abbildung&nbsp;14.10: Verschiedene Themes ändern das Aussehen, nicht die Daten.
 </table>
 <p>Die ersten drei Zeilen (fett) braucht ihr immer. Der Rest ist optional und dient dazu, das Diagramm zu verfeinern. Für die explorative Analyse reicht es oft völlig, nur die drei essenziellen Bausteine zu verwenden und den Rest den Standards zu überlassen.</p>
 <p><em>Abbildung: Ein Schichtenmodell wie ein Stapel Folien oder ein Sandwich von unten nach oben. Ganz unten liegt die Schicht “Data” (blau). Darüber “Mapping / Aesthetics” (grün). Darüber “Geom” (orange). Darüber, etwas abgesetzt und leicht transparent: “Stat” (grau), “Scale” (grau), “Coord” (grau), “Facet” (grau), “Theme” (grau). Die unteren drei Schichten sind groß und kräftig gefärbt, die oberen fünf kleiner und dezent. Eine Klammer links umfasst die unteren drei mit der Beschriftung “Essenziell”. Eine Klammer rechts umfasst die oberen fünf mit der Beschriftung “Verfeinern”.</em></p>
-</section><section id="der-typische-ablauf" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="der-typische-ablauf">
-<span class="header-section-number">14.5</span> Der typische Ablauf</h2>
+</section><section id="der-typische-ablauf" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="der-typische-ablauf">
+<span class="header-section-number">19.5</span> Der typische Ablauf</h2>
 <p>In der Praxis baut ihr ein Diagramm fast immer so auf:</p>
 <ol type="1">
 <li>Daten aufbereiten (filtern, gruppieren, zusammenfassen)</li>
@@ -852,14 +882,14 @@ Abbildung&nbsp;14.10: Verschiedene Themes ändern das Aussehen, nicht die Daten.
 <img src="grammar-of-graphics_files/figure-html/fig-gog-workflow-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gog-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;14.11: Ein typischer Ablauf: Daten aufbereiten, dann visualisieren.
+Abbildung&nbsp;19.11: Ein typischer Ablauf: Daten aufbereiten, dann visualisieren.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Hier sehen wir die Pipe-Kette und <code>ggplot2</code> zusammenarbeiten: Erst filtern wir, dann zählen wir die Tweets pro Account, nehmen die Top 10 und visualisieren sie als horizontales Balkendiagramm. <code>reorder(screen_name, n)</code> sortiert die Balken nach Häufigkeit statt alphabetisch.</p>
-</section><section id="kurz-zusammengefasst" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="kurz-zusammengefasst">
-<span class="header-section-number">14.6</span> Kurz zusammengefasst</h2>
+</section><section id="kurz-zusammengefasst" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="kurz-zusammengefasst">
+<span class="header-section-number">19.6</span> Kurz zusammengefasst</h2>
 <ul>
 <li>Die Grammar of Graphics beschreibt Diagramme als Kombination unabhängiger Bausteine.</li>
 <li>Jedes Diagramm in <code>ggplot2</code> braucht drei Dinge: Daten (<code>data</code>), Zuordnungen (<code>aes()</code>) und eine Geometrie (<code>geom_*()</code>).</li>
@@ -1310,13 +1340,13 @@ Abbildung&nbsp;14.11: Ein typischer Ablauf: Daten aufbereiten, dann visualisiere
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../03-data-transformation/joining-data.html" class="pagination-link" aria-label="Datensätze verbinden">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span>
+      <a href="../03-data-transformation/complex-data-structures.html" class="pagination-link" aria-label="Komplexe Datenstrukturen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../04-data-visualization/bar-charts.html" class="pagination-link" aria-label="Balkendiagramme">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

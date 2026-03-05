@@ -7,7 +7,11 @@ source("setup.R")
 
 Nachdem ihr im vorherigen Kapitel einen ersten Überblick über euren Datensatz gewonnen habt, geht es nun an das gezielte Aufräumen. In diesem Kapitel lernt ihr die Funktion `select()` aus dem `dplyr`-Paket kennen. Wir zeigen euch, wie ihr bestimmte Spalten auswählt, überflüssige Spalten entfernt, die Reihenfolge der Variablen verändert und Spalten bei der Auswahl direkt umbenennt.
 
-Das gezielte Auswählen von Variablen ist ein zentraler Bestandteil der Datenvorbereitung, da reale Datensätze oft hunderte von Spalten enthalten, von denen für eine spezifische Analyse nur eine Handvoll relevant ist. Durch das Reduzieren des Datensatzes auf das Wesentliche behaltet ihr den Überblick, vermeidet Ablenkungen und macht eure Analysen deutlich strukturierter. Ihr könnt euch das wie das Packen eines Rucksacks vorstellen: Ihr nehmt nur das mit, was ihr für die nächste Etappe braucht, der Rest bleibt zu Hause.
+Wie jede Transformation im `dplyr`-Paket nimmt `select()` einen Tibble, verändert ihn und gibt anschließend einen neuen Tibble zurück (@fig-select-schema).
+
+![Eine Transformation wie `select` bekommt einen Tibble als Eingabe und erzeugt als Ergebnis einen neuen Tibble.](/images/google_slides/select_schema.svg){#fig-select-schema .lightbox}
+
+Die veränderte Version hat im Ergebnis nur die Variablen, die wir mit `select` angegeben haben. Das gezielte Auswählen von Variablen ist ein zentraler Bestandteil der Datenvorbereitung, da reale Datensätze oft hunderte von Spalten enthalten, von denen für eine spezifische Analyse nur eine Handvoll relevant ist. Durch das Reduzieren des Datensatzes auf das Wesentliche behaltet ihr den Überblick, vermeidet Ablenkungen und macht eure Analysen deutlich strukturierter. Ihr könnt euch das wie das Packen eines Rucksacks vorstellen: Ihr nehmt nur das mit, was ihr für die nächste Etappe braucht, der Rest bleibt zu Hause.
 
 Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
 
@@ -21,58 +25,25 @@ Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenler
 | `where()` | Spalten nach Datentyp auswählen |
 | `relocate()` | Spalten an eine andere Position verschieben |
 
-Bevor wir Variablen gezielt auswählen, werfen wir einen gemeinsamen Blick auf die verfügbaren Spalten im Datensatz.
+Schauen wir uns an, wie das Auswählen von Variablen mit `select` funktioniert und welche Möglichkeiten ihr damit habt.
 
-Wir nutzen in diesem Kapitel wieder den Tweets Datensatz. Wenn ihr euch erst einmal orientieren wollt, schaut euch kurz die Spalten an:
-
-::: {.reuse #select-first-glimpse}
-
-```{r}
-tweets |>
-  glimpse()
-```
-
-:::
-
-In diesem Kapitel klären wir drei Dinge:
-
-::: {.reuse #select-learning-objectives}
-
-- Wie wählt ihr einzelne und mehrere Spalten aus, und wie werft ihr Spalten gezielt weg?
-- Wie nutzt ihr Auswahl Helfer wie `starts_with()` oder `contains()`, damit eure Auswahl flexibel bleibt?
-- Wie wählt ihr Spalten dynamisch aus, zum Beispiel aus einem Vektor oder nach Datentyp?
-
-:::
-
-## Das Grundprinzip {#sec-select-grundprinzip}
-
-`select()` nimmt einen Tibble und gibt einen Tibble zurück. Nur die Spalten ändern sich.
+## Auswahl per Name {#sec-select-per-name}
 
 Die einfachste Form ist die Auswahl einzelner Spalten:
-
-::: {.reuse #select-basics-single}
 
 ```{r}
 tweets |>
   select(screen_name)
 ```
 
-:::
-
 Mehrere Spalten schreibt ihr einfach hintereinander:
-
-::: {.reuse #select-basics-multiple}
 
 ```{r}
 tweets |>
   select(screen_name, retweet_count, favorite_count)
 ```
 
-:::
-
 Ein praktischer Nebeneffekt ist die Reihenfolge. `select()` ordnet die Spalten genau so an, wie ihr sie angebt. Das ist hilfreich, wenn ihr euch eine Ausgabe gezielt lesbar machen wollt:
-
-::: {.reuse #select-basics-order}
 
 ```{r}
 tweets |>
@@ -80,15 +51,9 @@ tweets |>
   head(3)
 ```
 
-:::
-
-_Abbildung: Eine Skizze, die einen Datensatz als Tabelle zeigt. Ein Marker hebt vier Spalten hervor, die in eine kleinere Tabelle übernommen werden. Ein Pfeil zeigt, dass `select()` die Spalten auswählt und dabei die Reihenfolge neu anordnet._
-
 ## Spalten entfernen {#sec-select-entfernen}
 
 Manchmal ist es einfacher zu sagen, was weg soll. In `select()` könnt ihr Spalten mit einem Minus entfernen.
-
-::: {.reuse #select-drop-one}
 
 ```{r}
 tweets |>
@@ -96,11 +61,7 @@ tweets |>
   head(3)
 ```
 
-:::
-
 Das funktioniert auch mit mehreren Spalten:
-
-::: {.reuse #select-drop-multiple}
 
 ```{r}
 tweets |>
@@ -108,17 +69,11 @@ tweets |>
   head(3)
 ```
 
-:::
-
 Wenn ihr euch die Spaltennamen anschauen wollt, hilft `names()`:
-
-::: {.reuse #select-names}
 
 ```{r}
 names(tweets)
 ```
-
-:::
 
 ::: {.callout-tip icon="💡" title="Wenn `select()` meckert"}
 Wenn ihr euch bei einem Spaltennamen vertippt, bekommt ihr eine Fehlermeldung. Das ist gut, denn es verhindert stillschweigende Fehler. Schaut dann als Erstes in `names(tweets)`, ob der Name genau so geschrieben ist.
@@ -130,8 +85,6 @@ Ihr könnt Spalten in `select()` auch direkt umbenennen. Das Muster ist:
 
 `neuer_name = alter_name`
 
-::: {.reuse #select-rename-inline}
-
 ```{r}
 tweets |>
   select(
@@ -142,8 +95,6 @@ tweets |>
   ) |>
   head(3)
 ```
-
-:::
 
 Das ist praktisch, wenn ihr ohnehin gerade eine Auswahl baut. Wenn ihr dagegen nur umbenennen wollt, ohne die Spaltenauswahl zu ändern, ist `rename()` die bessere Wahl:
 
@@ -157,19 +108,13 @@ Mit `rename()` bleiben alle Spalten erhalten, nur die genannten bekommen einen n
 
 ## Spaltenmuster {#sec-select-muster}
 
-In echten Projekten ändern sich Datensätze. Es kommen Spalten dazu, Namen ändern sich leicht, oder ihr bekommt eine zweite Version einer Datei. Dann ist es hilfreich, nicht alles hart auszuschreiben, sondern über Muster auszuwählen.
-
-### `starts_with()`, `ends_with()`, `contains()`
-
-Diese drei Helfer sind schnell verstanden:
+In echten Projekten ändern sich Datensätze. Es kommen Spalten dazu, Namen ändern sich leicht, oder ihr bekommt eine zweite Version einer Datei. Dann ist es hilfreich, nicht alles hart auszuschreiben, sondern über Muster auszuwählen. Dafür gibt es kleine Helferfunktionen, die ihr innerhalb des `select()`-Aufrufs nutzen könnt:
 
 - `starts_with("...")`: Name beginnt mit diesem Text
 - `ends_with("...")`: Name endet mit diesem Text
 - `contains("...")`: Name enthält diesen Text
 
-Damit das reproduzierbar ist, schauen wir uns die Idee kurz an einem Mini Datensatz an:
-
-::: {.reuse #select-helpers-mini-data}
+Schauen wir uns die Idee kurz an einem Mini Datensatz an:
 
 ```{r}
 mini <- tibble(
@@ -183,22 +128,15 @@ mini |>
   select(starts_with("user"))
 ```
 
-:::
-
 Und genauso funktionieren die Helfer auch in größeren Datensätzen. Wenn eure Spalten sinnvolle Präfixe oder Suffixe haben, spart ihr euch viel Tipparbeit.
 
-### `matches()` für reguläre Ausdrücke
 
-`matches()` ist die fortgeschrittene Variante, wenn ihr ein Muster sehr genau beschreiben wollt. Dahinter stecken reguläre Ausdrücke.
-
-::: {.reuse #select-matches-mini}
+Als fortgeschrittene Variante gibt es die Funktion `matches()`, wenn ihr ein Muster sehr genau beschreiben wollt. Dahinter stecken reguläre Ausdrücke.
 
 ```{r}
 mini |>
   select(matches("_(id|text)$"))
 ```
-
-:::
 
 Wenn euch reguläre Ausdrücke neu sind, merkt euch erst einmal diese Idee: Ihr könnt damit sehr präzise sagen, wie Spaltennamen aussehen sollen.
 
@@ -206,15 +144,11 @@ Wenn euch reguläre Ausdrücke neu sind, merkt euch erst einmal diese Idee: Ihr 
 
 Manchmal wollt ihr nur einzelne Spalten an eine bestimmte Stelle schieben. Dafür könnt ihr `everything()` nutzen, das für alle übrigen Spalten steht.
 
-::: {.reuse #select-everything}
-
 ```{r}
 tweets |>
   select(screen_name, everything()) |>
   head(3)
 ```
-
-:::
 
 `last_col()` ist ähnlich praktisch, wenn ihr Bereiche über das Ende eines Datensatzes ausdrücken wollt. Das ist vor allem bei vielen Spalten hilfreich.
 
@@ -303,11 +237,9 @@ _Abbildung: Zwei Filterkarten. Karte eins heißt "Namensmuster" und zeigt `start
 
 ## Weitere Werkzeuge {#sec-select-weitere}
 
-### `num_range()` für durchnummerierte Spalten
+### Durchnummerierte Spalten
 
 Wenn Spalten durchnummeriert sind, hilft `num_range()`. Das ist typisch bei Messreihen oder Umfrageitems wie `q1`, `q2`, `q3`.
-
-::: {.reuse #select-num-range}
 
 ```{r}
 survey_like <- tibble(q1 = 1, q2 = 2, q3 = 3, meta = "x")
@@ -316,13 +248,9 @@ survey_like |>
   select(num_range("q", 1:3))
 ```
 
-:::
-
 ### Optionales Entfernen mit `-any_of()`
 
 Manchmal wollt ihr Spalten entfernen, die vielleicht gar nicht in jeder Version eures Datensatzes existieren. Dann ist `-any_of()` praktisch:
-
-::: {.reuse #select-drop-any-of}
 
 ```{r}
 tweets |>
@@ -330,13 +258,9 @@ tweets |>
   head(3)
 ```
 
-:::
-
 ### Gruppierte Daten: Gruppierungsvariablen bleiben erhalten
 
 Ein Detail, das euch später viel Zeit sparen kann: Wenn ein Tibble gruppiert ist, behält `select()` die Gruppierungsvariablen auch dann, wenn ihr sie nicht explizit auswählt.
-
-::: {.reuse #select-grouped-keeps-groups}
 
 ```{r}
 tweets |>
@@ -345,9 +269,7 @@ tweets |>
   head(3)
 ```
 
-:::
-
-## Spalten umordnen mit `relocate()` {#sec-select-relocate}
+## Spalten verschieben {#sec-select-relocate}
 
 Manchmal wollt ihr Spalten nicht auswählen oder entfernen, sondern nur an eine andere Stelle schieben. Dafür gibt es `relocate()`. Es verschiebt Spalten, ohne die übrigen zu verändern:
 
@@ -367,34 +289,13 @@ tweets |>
 
 `relocate()` ist eine gute Alternative zu dem Trick mit `select(spalte, everything())`, weil die Absicht klarer ist.
 
-## Einsatz in Pipe-Ketten {#sec-select-pipe}
 
-In der explorativen Analyse nutzt ihr `select()` selten allein. Meist ist es ein Schritt in einer Pipe-Kette, um die Sicht auf den Datensatz zu fokussieren.
-
-Hier ist ein typisches Muster: erst auswählen, dann kurz prüfen.
-
-::: {.reuse #select-chain-glimpse}
-
-```{r}
-tweets |>
-  select(screen_name, retweet_count, favorite_count) |>
-  glimpse()
-```
-
-:::
-
-Wenn ihr danach weiterarbeitet, habt ihr weniger Ballast in eurem Kopf und in euren Ausgaben.
-
-## Kurz zusammengefasst {#sec-select-zusammenfassung}
-
-::: {.reuse #select-summary}
+## Zusammenfassung {#sec-select-zusammenfassung}
 
 - `select()` wählt Spalten aus, ordnet sie um und kann sie auch umbenennen.
 - Mit `-spalte` entfernt ihr Spalten, statt sie aufzuzählen.
 - Mit Helfern wie `starts_with()` oder `matches()` bleibt eure Auswahl flexibel.
 - Mit `all_of()` und `any_of()` wählt ihr Spalten über Vektoren aus, strikt oder tolerant.
 - Mit `where()` wählt ihr Spalten nach Datentyp aus, zum Beispiel alle numerischen Spalten.
-
-:::
 
 Ihr wisst jetzt, wie ihr euren Datensatz auf die relevanten Spalten zuschneidet. Im nächsten Kapitel lernt ihr, wie ihr bestehende Spalten mit `mutate()` verändern könnt, zum Beispiel um Datentypen zu korrigieren oder Texte zu normalisieren (siehe @sec-mutate-modify).

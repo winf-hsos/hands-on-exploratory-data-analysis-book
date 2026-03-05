@@ -5,9 +5,9 @@
 source("setup.R")
 ```
 
-Jeder Analyseprozess beginnt mit dem Laden der Daten (s. @fig-loading-data-eda-process). In diesem Kapitel schauen wir uns an, wie ihr die gängigsten Datenformate in R laden könnt. Wir starten mit textbasierten Formaten wie CSV und JSON, gehen dann über zu binären Formaten wie Excel und RDS und werfen zuletzt einen Blick auf das Laden von Daten direkt aus Google Sheets.
+Jeder Analyseprozess beginnt mit dem Laden der Daten (@fig-loading-data-eda-process). In diesem Kapitel schauen wir uns an, wie ihr die gängigsten Datenformate in R laden könnt. Wir starten mit textbasierten Formaten wie CSV und JSON, gehen dann über zu binären Formaten wie Excel und RDS und werfen zuletzt einen Blick auf das Laden von Daten direkt aus Google Sheets.
 
-![Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten.](https://winf-hsos.github.io/university-docs/images/eda_process.png){#fig-loading-data-eda-process .lightbox}
+![Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten [@wickham_r_2023].](/images/google_slides/process_exploratory_analysis.svg){#fig-loading-data-eda-process .lightbox}
 
 Zu wissen, wie man Daten aus verschiedenen Quellen importiert, ist grundlegend für jede Analyseaufgabe. In der Realität liegen Daten selten im perfekten R-Format vor, sondern verteilen sich über verschiedene Systeme, Dateitypen und Cloud-Dienste. Wer diese Formate souverän in R überführen kann, spart sich von Anfang an viel Zeit und frustrierende manuelle Zwischenschritte.
 
@@ -28,16 +28,15 @@ Zunächst beschäftigen wir uns mit den grundlegenden Dateiformaten, aus denen w
 
 Daten im Computer speichern wir üblicherweise in Dateien. Ein Datensatz kann dabei aus einer oder mehreren Dateien bestehen. Auf der untersten Ebene enthält eine Datei Daten in Form von Nullen und Einsen, denn der Computer arbeitet mit Bits und dem Binärsystem.
 
-In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern:
+In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern (@fig-loading-data-file-formats): (1) Als Textdatei oder (2) Als Binärdatei.
 
-- Als Textdatei
-- Als Binärdatei
-
-![Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.](/images/data-file-formats.svg)
+![Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.](/images/data-file-formats.svg){#fig-loading-data-file-formats .lightbox}
 
 Was ist der Unterschied? Eine Textdatei speichert die Daten in einem Format, das für Menschen lesbar ist. Die Daten werden als Zeichenfolge gespeichert, die über ein gängiges Kodierungssystem wie UTF-8 in lesbare Zeichen übersetzt werden kann. Beispiele für textbasierte Formate sind CSV (Comma-Separated Values), TSV (Tab-Separated Values) und JSON (JavaScript Object Notation). Ihr könnt solche Dateien in jedem beliebigen Texteditor öffnen und lesen. Das ist der große Vorteil: Sie sind einfach zu verstehen und zu bearbeiten.
 
-Binäre Formate kodieren die Daten nicht als Text, sondern in einem Format, das für den Computer effizienter zu lesen und zu schreiben ist. Beispiele sind Excel-Dateien (.xlsx), RDS-Dateien (.rds) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und benötigen weniger Speicherplatz. Allerdings sind sie nicht direkt von Menschen lesbar und erfordern spezielle Software.
+Binäre Formate kodieren die Daten nicht als Text, sondern in einem Format, das für den Computer effizienter zu lesen und zu schreiben ist. Beispiele sind Excel-Dateien (.xlsx), RDS-Dateien (.rds) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und benötigen weniger Speicherplatz. Allerdings sind sie nicht direkt von Menschen lesbar, zumindest nicht ohne spezielle Software.
+
+Eines der häufigsten und damit wichtigsten Formate ist CSV, das von so gut wie jedem Werkezug unterstützt wird. Natürlich auch in R.
 
 ## CSV-Dateien {#sec-loading-data-csv}
 
@@ -166,9 +165,99 @@ orders_no_header |>
 
 Was ist passiert? Die Spalten wurden automatisch mit generischen Namen wie `X1`, `X2`, `X3` benannt, weil keine Kopfzeile vorhanden war. Oder zumindest haben wir das behauptet. Zusätzlich wurde die erste Zeile der CSV-Datei als Datenzeile interpretiert, anstatt als Kopfzeile.
 
+### Datentypen festlegen {#sec-loading-data-col-types}
+
+Habt ihr euch schon mal gefragt, wie R eigentlich weiß, ob eine Spalte Text, Zahlen oder Datumsangaben enthält? Wenn ihr eine CSV-Datei mit `read_csv()` ladet, nutzt R eine clevere Heuristik: Es zieht 1.000 Zeilen heran, die gleichmäßig zwischen der ersten und letzten Zeile verteilt sind. Für jede Spalte prüft es dann, ob diese Werte etwa nur aus Zahlen, logischen Wahrheitswerten (`TRUE` oder `FALSE`) oder Datumsangaben nach dem ISO8601-Standard bestehen. Alles andere wird einfachheitshalber als Text (`character`) interpretiert. Das ist so, als würdet ihr die ersten paar Personen in einer Schlange vor einem Club betrachten und daraus schließen, welche Musik drinnen gespielt wird.
+
+Meistens funktioniert dieses Raten extrem gut. Manchmal aber zieht R die falschen Schlüsse. Ein typisches Beispiel sind fehlende Werte, die in manchen Datensätzen nicht durch ein leeres Feld (`NA`), sondern mit einem speziellen Zeichen (zum Beispiel einem Punkt `.`) markiert sind. Wenn R beim Raten für eine ansosnten rein numerische Spalte auf diesen Punkt stößt, stuft es die Spalte plötzlich als Text ein. Auch kann es passieren, dass erst in der 1001. Zeile plötzlich unerwartet Text in einer Spalte auftaucht, die R bis dahin für Zahlen hielt. Dann gibt es Parsing-Warnungen und die betroffenen Werte gehen als `NA` verloren.
+
+Damit euch das nicht passiert, könnt ihr die Datentypen direkt beim Laden explizit festlegen. Das macht euren Code robuster und zwingt R, eure Erwartungen strikt zu erfüllen. Dafür gibt es den Parameter `col_types`.
+
+Die einfachste Methode ist eine kurze Zeichenfolge, bei der jeder Buchstabe für einen Datentyp steht. Ihr verwendet zum Beispiel `"c"` für Text (character), `"d"` für Kommazahlen (double), `"i"` für ganze Zahlen (integer), `"l"` für logische Wahrheitswerte (logical) und `"D"` für Datumsangaben (date). Mit einem Fragezeichen `?` weist ihr R an, den Typ für diese Spalte weiterhin zu raten. Um eine Spalte komplett zu überspringen (skip), nutzt ihr einen Unterstrich `_` oder ein Minus `-`.
+
+Lasst uns das für unsere Bestellungen ausprobieren:
+
+```{r}
+orders_types <- read_csv(
+    "data/orders.csv",
+    col_types = "icd?D"
+)
+```
+
+Mit `"icd?D"` teilen wir R genau mit, was wir erwarten: Die erste Spalte ist eine ganze Zahl (`i`), die zweite Spalte ist Text (`c`), die dritte eine Kommazahl (`d`), bei der vierten Spalte soll R raten (`?`) und die fünfte Spalte enthält Datumsangaben (`D`).
+
+#### Mehr Kontrolle mit `cols()` und `cols_only()` {#sec-loading-data-cols}
+
+Wenn eure Datensätze viele Spalten haben, wird eine solche Zeichenfolge schnell unleserlich. In diesem Fall hilft euch die Funktion `cols()`. Damit übergebt ihr die Datentypen als übersichtliche benannte Liste:
+
+```{r}
+#| eval: false
+orders_cols <- read_csv(
+    "data/orders.csv",
+    col_types = cols(
+        order_id = col_integer(),
+        customer_name = col_character(),
+        total_price = col_double(),
+        order_date = col_date()
+    )
+)
+```
+
+Anstelle der kurzen Buchstaben verwenden wir hier die ausgeschriebenen Parser-Funktionen. Welche gibt es?
+
+- `col_logical()`, `col_double()`, `col_integer()` und `col_character()` für die klassischen logischen Werte, Zahlen und Texte.
+
+- `col_factor()`, `col_date()` und `col_datetime()` für Faktoren und Datumsangaben.
+
+- `col_number()` ist ein besonders nützlicher Parser. Er ignoriert vor und nach der Zahl alle nicht-numerischen Zeichen. Das ist perfekt, um Währungszeichen herauszufiltern.
+
+- `col_skip()` überspringt bestimmte Spalten komplett.
+
+Rät R für alle ungenannten Spalten beim Verwenden von `cols()` den Typ? Ja, genau! Alle Spalten, die ihr nicht explizit ansprecht, werden weiterhin automatisch geraten. Manchmal wollt ihr aber das genaue Gegenteil: Ihr möchtet für *alle* Spalten einen bestimmten Typ als Standard setzen und nur Ausnahmen definieren. Dafür nutzt ihr das Argument `.default`:
+
+```{r}
+#| eval: false
+orders_default <- read_csv(
+    "data/orders.csv",
+    col_types = cols(
+        .default = col_character(),
+        total_price = col_double()
+    )
+)
+```
+
+In diesem Fall werden alle Spalten als Text geladen, außer für `total_price`, für diese Spalten haben wir es anders spezifiziert. Gerade `col_character()` ist ein idealer Typ für IDs, Postleitzahlen oder Telefonnummern. Das sind zwar Werte, die aus Ziffern bestehen, aber mit denen wir niemals mathematische Rechnungen durchführen werden. Sie als Text zu laden ist deshalb immer eine sichere Bank.
+
+Zum Schluss noch ein sehr eleganter Trick: Nutzt die Funktion `cols_only()`, wenn euer Datensatz viele Spalten hat, ihr aber ohnehin nur drei davon in R benötigen werdet. Damit werden ausschließlich die explizit in der Liste genannten Spalten importiert:
+
+```{r}
+#| eval: false
+orders_subset <- read_csv(
+    "data/orders.csv",
+    col_types = cols_only(
+        order_id = col_integer(),
+        total_price = col_double(),
+        order_date = col_date()
+    )
+)
+```
+
+Das spart nicht nur Tipparbeit, sondern auch Arbeitsspeicher und lässt den Ladevorgang bei riesigen Dateien spürbar schneller abschließen.
+
+### Fehler finden {#sec-loading-data-problems}
+
+Selbst wenn ihr die Datentypen noch so sorgfältig festlegt, kann es beim Laden zu Parsing-Fehlern kommen. R warnt euch in so einem Fall meist mit einer roten Meldung in der Konsole. Wenn ihr wissen wollt, was genau schiefgelaufen ist, ruft ihr einfach die Funktion `problems()` mit eurem eingelesenen Data Frame auf:
+
+```{r}
+#| eval: false
+problems(orders_subset)
+```
+
+Mit `problems()` erhaltet ihr einen hübschen Tibble zurück. Dieser verrät euch für jeden Fehler die genaue Zeile (`row`), die betroffene Spalte (`col`), was R an dieser Stelle erwartet hat (`expected`) und was tatsächlich dort stand (`actual`). Mit diesem Wissen könnt ihr dann gezielt in den Rohdaten nachschauen und das Problem beheben. Meistens entdeckt man so schnell fiese Sonderzeichen oder verschobene Spalten.
+
 ## JSON und JSONL {#sec-loading-data-json}
 
-Neben CSV gibt es ein weiteres textbasiertes Format, das euch in der Datenanalyse immer häufiger begegnet: JSON. JSON steht für "JavaScript Object Notation" und wurde ursprünglich für den Datenaustausch im Web entwickelt. Heute ist JSON weit über das Web hinaus verbreitet und wird oft für APIs, Konfigurationsdateien und hierarchisch strukturierte Daten verwendet.
+Mit JSON gibt es Neben CSV ein weiteres textbasiertes Format, das euch in der Datenanalyse immer häufiger begegnet. JSON steht für "JavaScript Object Notation" und wurde für den Datenaustausch im Internet entwickelt. Heute ist JSON weit über das Web hinaus verbreitet und wird oft für APIs, Konfigurationsdateien und hierarchisch strukturierte Daten verwendet.
 
 Was unterscheidet JSON von CSV? In einer CSV-Datei sind die Daten flach und tabellarisch. JSON erlaubt dagegen verschachtelte Strukturen. Ein einzelner JSON-Eintrag kann so aussehen:
 
@@ -184,36 +273,88 @@ Hier hat die Person ein Feld `courses`, das selbst eine Liste enthält. In CSV w
 
 ### JSON-Dateien laden {#sec-loading-data-json-laden}
 
-Zum Laden von JSON-Dateien nutzt ihr das Paket `jsonlite`. Es wandelt die JSON-Struktur automatisch in ein tibble-ähnliches Objekt um, wenn die Daten tabellarisch interpretierbar sind:
+Wie bekommen wir diese geschweiften Klammern nun in eine saubere Tabelle in R? Zum Laden von JSON-Dateien nutzt ihr das Paket `jsonlite`. 
 
 ```{r}
-#| eval: false
 library(jsonlite)
-data <- fromJSON("data/example.json")
+json_data <- fromJSON("data/example.json")
+json_data
 ```
 
-Die Funktion `fromJSON()` erkennt, ob die JSON-Datei ein einzelnes Objekt oder eine Liste von Objekten enthält, und versucht, die Daten intelligent in einen Data Frame umzuwandeln. Bei einfachen, flachen JSON-Strukturen funktioniert das problemlos.
+Die Funktion `fromJSON()` erkennt automatisch, ob die JSON-Datei ein einzelnes Objekt oder eine Liste von Objekten enthält. Vorhin sagten wir, JSON erlaubt verschachtelte Strukturen. Unser Objekt namens "Anna" enthält bei den Kursen genau so eine Liste aus drei Elementen. Habt ihr bemerkt, wie die Ausgabe unseres Codes oben formatiert ist? R hat uns hier eine einfache Liste (`list`) zurückgegeben!
+
+Wir können das leicht überprüfen. Die Funktion `class()` verrät uns den genauen R-Datentyp eines Objekts. Lasst uns sehen, was wir hier vor uns haben:
+
+```{r}
+class(json_data)
+```
+
+Tatsächlich! Die Funktion `fromJSON()` liefert uns für ein einzelnes JSON-Objekt eine Liste zurück. Das ist zwar inhaltlich korrekt, bringt uns für eine tabellarische Analyse aber noch nicht weiter. Glücklicherweise können wir unsere Daten ganz einfach in die richtige Form gießen. Mit der Funktion `as_tibble()` verwandeln wir diese Liste in einen modernen Tibble:
+
+```{r}
+library(tibble) 
+json_tibble <- as_tibble(json_data)
+json_tibble
+```
+
+Schaut euch das Ergebnis einmal genau an! Fällt euch etwas auf? Obwohl wir in unserem JSON-Objekt nur einmal den Namen "Anna" und das Alter "23" angegeben haben, gibt uns R gleich drei separate Zeilen zurück. Warum? Weil die in der Person verschachtelte Liste `courses` drei Einträge enthielt. Die Funktion `as_tibble()` ist clever genug, um die Zeilen hier automatisch "auszumultiplizieren" – für jeden Kurs erstellt sie eine eigene Zeile und wiederholt bequemerweise die kurzen Einzelwerte wie Name und Alter.
+
+#### Mehrere Personen {#sec-loading-data-json-multiple}
+
+Das war nur eine einzelne Person. Was passiert, wenn wir eine Datei haben, in der anstelle eines Einzelobjekts direkt drei Personen als JSON-Liste stecken? Lasst uns die erweiterte Datei `example_multiple.json` ausprobieren. Darin befinden sich Anna, Ben und Cleo:
+
+```json
+[
+  { "name": "Anna", "age": 23, "courses": ["Statistics", "Programming", "Data Analytics"] },
+  { "name": "Ben", "age": 21, "courses": ["Math"] },
+  { "name": "Cleo", "age": 25, "courses": ["Programming", "Data Analytics"] }
+]
+```
+
+Laden wir sie doch einmal ein:
+
+```{r}
+json_multiple <- fromJSON("data/example_multiple.json")
+json_multiple
+```
+
+Beachtet den genauen Output! Weil das JSON dieses Mal eine Liste mit mehreren Objekten ist, gibt uns `fromJSON()` direkt einen klassischen Data Frame zurück (welchen wir wie gewohnt mit `as_tibble()` aufpolieren können). Aber wo sind unsere Kurse geblieben? Die Spalte `courses` sieht plötzlich anders aus. Das ist eine sogenannte Listen-Spalte (`list`-column) – eine flache Spalte, in der sich wiederum Listen verstecken. Anders als bei nur einer Person multipliziert R diese Listen hier beim Erzeugen des Tibbles *nicht* automatisch aus. 
+
+Wie knacken wir diese Listen in der Spalte auf, um auch hier an die einzelnen Kurse zu gelangen? Dafür nutzen wir die Funktion `unnest()` aus dem Paket `tidyr`:
+
+```{r}
+library(tidyr)
+json_tibble_multiple <- json_multiple |> 
+    as_tibble() |> 
+    unnest(cols = courses)
+
+json_tibble_multiple
+```
+
+Perfekt! Durch `unnest()` klappen wir die Listen-Spalte auf und erreichen exakt denselben Effekt: Die Kurse werden ausmultipliziert und wir erhalten für jede belegte Vorlesung eine eigene Zeile mit Namen und Alter der entsprechenden Person.
 
 ### JSONL {#sec-loading-data-jsonl}
 
-In der Praxis begegnet euch häufig auch das Format JSONL (JSON Lines). Dabei enthält jede Zeile der Datei genau ein JSON-Objekt. Das ist besonders bei großen Datensätzen praktisch, weil die Datei zeilenweise gelesen und verarbeitet werden kann.
+In der Praxis begegnet euch häufig auch das Format JSONL. Dabei steht das "L" für Lines. Jede Zeile der Datei enthält genau ein JSON-Objekt. Das ist besonders bei großen Datensätzen enorm praktisch, weil die Datei zeilenweise gelesen und verarbeitet werden kann.
 
-Eine JSONL-Datei sieht zum Beispiel so aus:
+Eine erweiterte JSONL-Datei mit unseren drei Personen und ihren belegten Kursen sieht zum Beispiel so aus:
 
+```json
+{"name": "Anna", "age": 23, "passed": true, "courses": ["Statistics", "Programming", "Data Analytics"]}
+{"name": "Ben", "age": 21, "passed": false, "courses": ["Math"]}
+{"name": "Cleo", "age": 25, "passed": true, "courses": ["Programming", "Data Analytics"]}
 ```
-{"name": "Anna", "age": 23, "passed": true}
-{"name": "Ben", "age": 21, "passed": false}
-{"name": "Cleo", "age": 25, "passed": true}
-```
 
-Zum Laden von JSONL-Dateien könnt ihr `stream_in()` aus dem Paket `jsonlite` verwenden:
+Zum Laden von JSONL-Dateien nutzt ihr die Funktion `stream_in()` aus dem Paket `jsonlite`. Gönnen wir dem Ergebnis sofort wieder unseren Tibble-Anstrich:
 
 ```{r}
-#| eval: false
-data <- stream_in(file("data/example.jsonl"))
+jsonl_tibble <- as_tibble(stream_in(file("data/example.jsonl"), verbose = FALSE))
+jsonl_tibble
 ```
 
-Die Funktion `stream_in()` liest die Datei zeilenweise und liefert am Ende einen Data Frame. Das ist besonders bei sehr großen Dateien effizienter als `fromJSON()`, weil nicht die gesamte Datei auf einmal in den Arbeitsspeicher geladen werden muss.
+Die Funktion `stream_in()` liest die Datei Zeile für Zeile ein. Das ist besonders bei riesigen Dateien viel effizienter als das Ausführen von `fromJSON()`, weil der Computer nicht sofort die gesamte Datei in den Arbeitsspeicher laden muss. 
+
+Und keine Sorge bezüglich der verschachtelten Kurs-Listen! Wie ihr seht, liefert uns auch `stream_in()` von Haus aus eine elegante Listen-Spalte für die Kurse. Wenn ihr die Daten für die Analyse nun zeilenweise ausklappen wollt, wisst ihr ja bereits, welches Werkzeug euch zur Seite steht: Ein kurzes `unnest(cols = courses)` und alle Kurse sind wunderbar zeilenweise ausmultipliziert.
 
 ::: {.callout-tip icon="💡" title="JSON oder CSV?"}
 Für tabellarische Daten ist CSV oft die einfachere Wahl. JSON spielt seine Stärken bei verschachtelten oder hierarchischen Daten aus, zum Beispiel bei Antworten von Web-APIs. Wenn ihr Daten von einer API bekommt, liegen sie fast immer im JSON-Format vor.
@@ -358,15 +499,11 @@ RDS ist die beste Wahl, wenn ihr innerhalb von R arbeitet und sicherstellen woll
 
 ## Kurz zusammengefasst {#sec-loading-data-zusammenfassung}
 
-::: {.reuse #load-data-summary}
-
 - **CSV** ist das verbreitetste textbasierte Format. Ihr ladet es mit `read_csv()` aus dem `readr`-Paket. Achtet auf Trennzeichen, Zeichenkodierung und Dezimaltrennzeichen.
 - **JSON** eignet sich für hierarchische oder verschachtelte Daten und kommt oft von Web-APIs. Ihr nutzt `fromJSON()` oder `stream_in()` aus dem Paket `jsonlite`.
 - **Excel-Dateien** ladet ihr mit `read_excel()` aus dem Paket `readxl`. Ihr könnt Arbeitsblätter, Bereiche und Kopfzeilen gezielt ansteuern.
 - **Google Sheets** lassen sich direkt mit `read_sheet()` aus dem Paket `googlesheets4` laden, ohne die Datei herunterladen zu müssen.
 - **RDS** ist das R-eigene Binärformat. Es bewahrt alle Datentypen und Attribute und eignet sich perfekt für die Arbeit innerhalb von R.
-
-:::
 
 Daten laden ist der Startpunkt jeder Analyse. Im nächsten Kapitel lernt ihr mit dem Pipe-Operator `|>` ein Werkzeug kennen, das euch dabei hilft, die geladenen Daten Schritt für Schritt weiterzuverarbeiten (siehe @sec-pipe).
 

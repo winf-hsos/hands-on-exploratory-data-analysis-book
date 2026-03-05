@@ -5,7 +5,9 @@
 source("setup.R")
 ```
 
-Nachdem ihr gelernt habt, wie ihr Datensätze auf die relevanten Spalten reduziert, widmen wir uns nun der Qualität dieser Spalten. In diesem Kapitel geht es darum, wie ihr bestehende Variablen mit der Funktion `mutate()` aus dem `dplyr`-Paket gezielt verändern könnt. Wir zeigen euch, wie ihr Datentypen korrigiert, Text vereinheitlicht und fehlende oder fehlerhafte Werte ersetzt.
+Nachdem ihr gelernt habt, wie ihr Datensätze auf die relevanten Spalten reduziert, widmen wir uns nun der Qualität dieser Spalten. In diesem Kapitel geht es darum, wie ihr bestehende Variablen mit der Funktion `mutate()` aus dem `dplyr`-Paket gezielt verändern könnt. Wir schauen uns an, wie wir Datentypen korrigieren, Texte vereinheitlichen und fehlende oder fehlerhafte Werte ersetzen können.
+
+![Mit `mutate` können wir existierende Variablen verändern.](/images/google_slides/mutate_modify_schema.svg){#fig-mutate-modify-schema}
 
 Bevor ihr mit euren Daten rechnen, filtern oder visualisieren könnt, müsst ihr sie oft erst in Form bringen, denn die Realität liefert selten perfekte Daten. Spalten haben den falschen Datentyp, Texte sind uneinheitlich geschrieben oder es fehlen Werte. Wer lernt, diese Unsauberkeiten effizient zu beheben, schafft die notwendige Grundlage für alle verlässlichen Analysen und Modelle, die auf diesen Daten aufbauen.
 

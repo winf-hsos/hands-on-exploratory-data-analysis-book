@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>10&nbsp; Variablen erstellen – Hands-On Exploratory Data Analytics</title>
+<title>14&nbsp; Variablen erstellen – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-add.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-add.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -156,6 +156,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -170,19 +194,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,55 +223,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,43 +294,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,13 +347,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,25 +370,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,17 +419,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-mutate-add-berechnen" id="toc-sec-mutate-add-berechnen" class="nav-link active" data-scroll-target="#sec-mutate-add-berechnen"><span class="header-section-number">10.1</span> Neue Variablen berechnen</a></li>
-  <li><a href="#sec-mutate-add-text" id="toc-sec-mutate-add-text" class="nav-link" data-scroll-target="#sec-mutate-add-text"><span class="header-section-number">10.2</span> Textuelle Variablen</a></li>
+<li><a href="#sec-mutate-add-berechnen" id="toc-sec-mutate-add-berechnen" class="nav-link active" data-scroll-target="#sec-mutate-add-berechnen"><span class="header-section-number">14.1</span> Neue Variablen berechnen</a></li>
+  <li><a href="#sec-mutate-add-text" id="toc-sec-mutate-add-text" class="nav-link" data-scroll-target="#sec-mutate-add-text"><span class="header-section-number">14.2</span> Textuelle Variablen</a></li>
   <li>
-<a href="#sec-mutate-add-bedingt" id="toc-sec-mutate-add-bedingt" class="nav-link" data-scroll-target="#sec-mutate-add-bedingt"><span class="header-section-number">10.3</span> Bedingte Variablen</a>
+<a href="#sec-mutate-add-bedingt" id="toc-sec-mutate-add-bedingt" class="nav-link" data-scroll-target="#sec-mutate-add-bedingt"><span class="header-section-number">14.3</span> Bedingte Variablen</a>
   <ul class="collapse">
 <li><a href="#zwei-f%C3%A4lle-mit-if_else" id="toc-zwei-fälle-mit-if_else" class="nav-link" data-scroll-target="#zwei-f%C3%A4lle-mit-if_else">Zwei Fälle mit <code>if_else()</code></a></li>
   <li><a href="#mehrere-f%C3%A4lle-mit-case_when" id="toc-mehrere-fälle-mit-case_when" class="nav-link" data-scroll-target="#mehrere-f%C3%A4lle-mit-case_when">Mehrere Fälle mit <code>case_when()</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-mutate-add-fenster" id="toc-sec-mutate-add-fenster" class="nav-link" data-scroll-target="#sec-mutate-add-fenster"><span class="header-section-number">10.4</span> Fensterfunktionen</a>
+<a href="#sec-mutate-add-fenster" id="toc-sec-mutate-add-fenster" class="nav-link" data-scroll-target="#sec-mutate-add-fenster"><span class="header-section-number">14.4</span> Fensterfunktionen</a>
   <ul class="collapse">
 <li><a href="#vorherige-und-n%C3%A4chste-werte-mit-lag-und-lead" id="toc-vorherige-und-nächste-werte-mit-lag-und-lead" class="nav-link" data-scroll-target="#vorherige-und-n%C3%A4chste-werte-mit-lag-und-lead">Vorherige und nächste Werte mit <code>lag()</code> und <code>lead()</code></a></li>
   <li><a href="#laufende-summen-und-durchschnitte" id="toc-laufende-summen-und-durchschnitte" class="nav-link" data-scroll-target="#laufende-summen-und-durchschnitte">Laufende Summen und Durchschnitte</a></li>
@@ -408,7 +438,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-mutate-add-grouped" id="toc-sec-mutate-add-grouped" class="nav-link" data-scroll-target="#sec-mutate-add-grouped"><span class="header-section-number">10.5</span> Gruppiertes Mutieren</a>
+<a href="#sec-mutate-add-grouped" id="toc-sec-mutate-add-grouped" class="nav-link" data-scroll-target="#sec-mutate-add-grouped"><span class="header-section-number">14.5</span> Gruppiertes Mutieren</a>
   <ul class="collapse">
 <li><a href="#anteile-innerhalb-von-gruppen" id="toc-anteile-innerhalb-von-gruppen" class="nav-link" data-scroll-target="#anteile-innerhalb-von-gruppen">Anteile innerhalb von Gruppen</a></li>
   <li><a href="#rang-innerhalb-von-gruppen" id="toc-rang-innerhalb-von-gruppen" class="nav-link" data-scroll-target="#rang-innerhalb-von-gruppen">Rang innerhalb von Gruppen</a></li>
@@ -416,19 +446,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-mutate-add-optionen" id="toc-sec-mutate-add-optionen" class="nav-link" data-scroll-target="#sec-mutate-add-optionen"><span class="header-section-number">10.6</span> Optionen für <code>mutate()</code></a>
+<a href="#sec-mutate-add-optionen" id="toc-sec-mutate-add-optionen" class="nav-link" data-scroll-target="#sec-mutate-add-optionen"><span class="header-section-number">14.6</span> Optionen für <code>mutate()</code></a>
   <ul class="collapse">
-<li><a href="#position-neuer-spalten-mit-.before-und-.after" id="toc-position-neuer-spalten-mit-.before-und-.after" class="nav-link" data-scroll-target="#position-neuer-spalten-mit-.before-und-.after">Position neuer Spalten mit <code>.before</code> und <code>.after</code></a></li>
-  <li><a href="#spalten-behalten-oder-verwerfen-mit-.keep" id="toc-spalten-behalten-oder-verwerfen-mit-.keep" class="nav-link" data-scroll-target="#spalten-behalten-oder-verwerfen-mit-.keep">Spalten behalten oder verwerfen mit <code>.keep</code></a></li>
+<li><a href="#position-neuer-spalten" id="toc-position-neuer-spalten" class="nav-link" data-scroll-target="#position-neuer-spalten">Position neuer Spalten</a></li>
+  <li><a href="#spalten-behalten-oder-verwerfen" id="toc-spalten-behalten-oder-verwerfen" class="nav-link" data-scroll-target="#spalten-behalten-oder-verwerfen">Spalten behalten oder verwerfen</a></li>
   <li><a href="#transmute-als-alternative" id="toc-transmute-als-alternative" class="nav-link" data-scroll-target="#transmute-als-alternative"><code>transmute()</code> als Alternative</a></li>
   </ul>
 </li>
-  <li><a href="#sec-mutate-add-zusammenfassung" id="toc-sec-mutate-add-zusammenfassung" class="nav-link" data-scroll-target="#sec-mutate-add-zusammenfassung"><span class="header-section-number">10.7</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-mutate-add-zusammenfassung" id="toc-sec-mutate-add-zusammenfassung" class="nav-link" data-scroll-target="#sec-mutate-add-zusammenfassung"><span class="header-section-number">14.7</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-add.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-mutate-add" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-add.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-mutate-add" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></h1>
 </div>
 
 
@@ -443,7 +473,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p>Im vorherigen Kapitel habt ihr gelernt, wie ihr bestehende Variablen verändert und repariert. Jetzt gehen wir den nächsten logischen Schritt: Neue Variablen anlegen. In diesem Kapitel lernt ihr, wie ihr mit <code>mutate()</code> aus zwei oder mehr Spalten eine völlig neue berechnet, Kategorien aus numerischen Werten ableitet und laufende Summen oder Ränge aufbaut. Der Unterschied zum vorherigen Kapitel ist konzeptionell einfach: Wenn ihr bei <code>mutate()</code> links vom Gleichheitszeichen einen Namen verwendet, der im Datensatz noch nicht existiert, wird die Spalte neu angehängt.</p>
+<div id="fig-mutate-add-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mutate-add-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\images/google_slides/mutate_add_schema.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mutate-add-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;14.1: Mit <code>mutate</code> können wir neue Variablen berechnen und dem Tibble anfügen.
+</figcaption></figure>
+</div>
 <p>In vielen quantitativen Projekten enthalten die rohen Daten nicht direkt die Kennzahlen, die ihr für eure Forschungsfrage benötigt. Ihr müsst sie erst berechnen – seien es Altersgruppen aus Geburtsjahren, prozentuale Anteile aus absoluten Zahlen oder textuelle Zusammenfassungen aus Einzelstrings. Die Fähigkeit, gezielt neue Metriken zu synthetisieren, erweitert eure Analysemöglichkeiten enorm und macht eure Visualisierungen später deutlich aussagekräftiger.</p>
+<p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -492,8 +531,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<section id="sec-mutate-add-berechnen" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="sec-mutate-add-berechnen">
-<span class="header-section-number">10.1</span> Neue Variablen berechnen</h2>
+<p>Schauen wir uns als Erstes an, wie wir ganz klassisch mit bestehenden Werten rechnen.</p>
+<section id="sec-mutate-add-berechnen" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="sec-mutate-add-berechnen">
+<span class="header-section-number">14.1</span> Neue Variablen berechnen</h2>
 <p>Die einfachste Form: Ihr rechnet mit bestehenden Spalten und gebt dem Ergebnis einen neuen Namen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -546,8 +586,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wenn <code>total_engagement</code> den Wert 0 hat, liefert die Division <code>Inf</code> (unendlich). In der Praxis wollt ihr solche Fälle abfangen, zum Beispiel mit <code>if_else(total_engagement == 0, 0, retweet_count / total_engagement)</code>.</p>
 </div>
 </div>
-</section><section id="sec-mutate-add-text" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="sec-mutate-add-text">
-<span class="header-section-number">10.2</span> Textuelle Variablen</h2>
+</section><section id="sec-mutate-add-text" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="sec-mutate-add-text">
+<span class="header-section-number">14.2</span> Textuelle Variablen</h2>
 <p>Neben arithmetischen Berechnungen könnt ihr auch neue Textspalten zusammensetzen. Die Funktion <code>str_c()</code> aus <code>stringr</code> fügt mehrere Werte zu einem einzigen String zusammen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -580,8 +620,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3 lisapaus | 1      </code></pre>
 </div>
 </div>
-</section><section id="sec-mutate-add-bedingt" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="sec-mutate-add-bedingt">
-<span class="header-section-number">10.3</span> Bedingte Variablen</h2>
+</section><section id="sec-mutate-add-bedingt" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="sec-mutate-add-bedingt">
+<span class="header-section-number">14.3</span> Bedingte Variablen</h2>
 <p>Oft hängt der Wert einer neuen Spalte von einer Bedingung ab. Das kennt ihr bereits aus dem vorherigen Kapitel. Hier erstellen wir aber eine neue Variable, statt eine bestehende zu verändern.</p>
 <section id="zwei-fälle-mit-if_else" class="level3"><h3 class="anchored" data-anchor-id="zwei-fälle-mit-if_else">Zwei Fälle mit <code>if_else()</code>
 </h3>
@@ -632,8 +672,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Die Reihenfolge der Bedingungen ist entscheidend: Die erste zutreffende Bedingung gewinnt. Wenn ihr die speziellsten Fälle nicht zuerst nennt, werden sie von allgemeineren Bedingungen überschattet.</p>
-</section></section><section id="sec-mutate-add-fenster" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="sec-mutate-add-fenster">
-<span class="header-section-number">10.4</span> Fensterfunktionen</h2>
+</section></section><section id="sec-mutate-add-fenster" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="sec-mutate-add-fenster">
+<span class="header-section-number">14.4</span> Fensterfunktionen</h2>
 <p>Fensterfunktionen sind Funktionen, die für jede Zeile einen Wert berechnen, aber dabei die umliegenden Zeilen berücksichtigen. Im Gegensatz zu Aggregatfunktionen wie <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> oder <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, die einen Datensatz auf einen einzigen Wert reduzieren, geben Fensterfunktionen für jede Zeile einen eigenen Wert zurück. Der Datensatz behält also seine Länge.</p>
 <section id="vorherige-und-nächste-werte-mit-lag-und-lead" class="level3"><h3 class="anchored" data-anchor-id="vorherige-und-nächste-werte-mit-lag-und-lead">Vorherige und nächste Werte mit <code>lag()</code> und <code>lead()</code>
 </h3>
@@ -789,8 +829,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 5        5 Karl_Lauterbach          5363</code></pre>
 </div>
 </div>
-</section></section><section id="sec-mutate-add-grouped" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="sec-mutate-add-grouped">
-<span class="header-section-number">10.5</span> Gruppiertes Mutieren</h2>
+</section></section><section id="sec-mutate-add-grouped" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="sec-mutate-add-grouped">
+<span class="header-section-number">14.5</span> Gruppiertes Mutieren</h2>
 <p>Hier wird es besonders spannend: Wenn ihr <code>mutate()</code> auf einen gruppierten Datensatz anwendet, werden die Berechnungen innerhalb jeder Gruppe durchgeführt. Das öffnet die Tür für Fragen wie “Wie verhält sich dieser Wert im Vergleich zu seiner Gruppe?”</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="https://winf-hsos.github.io/university-docs/images/group_by_mutate_schema.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="In Kombination mit Gruppierung erzeugt mutate Berechnungen auf Gruppenebene, behält aber weiterhin jede Zeile."><img src="https://winf-hsos.github.io/university-docs/images/group_by_mutate_schema.png" class="img-fluid figure-img" alt="In Kombination mit Gruppierung erzeugt mutate Berechnungen auf Gruppenebene, behält aber weiterhin jede Zeile."></a></p>
@@ -903,12 +943,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Vergesst nicht, die Gruppierung nach dem Mutieren mit <code>ungroup()</code> wieder aufzuheben, wenn ihr danach mit dem gesamten Datensatz weiterarbeiten wollt. Sonst wirken sich spätere Operationen weiterhin nur innerhalb der Gruppen aus.</p>
 </div>
 </div>
-</section></section><section id="sec-mutate-add-optionen" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="sec-mutate-add-optionen">
-<span class="header-section-number">10.6</span> Optionen für <code>mutate()</code>
+</section></section><section id="sec-mutate-add-optionen" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="sec-mutate-add-optionen">
+<span class="header-section-number">14.6</span> Optionen für <code>mutate()</code>
 </h2>
 <p>Standardmäßig fügt <code>mutate()</code> neue Spalten ganz rechts an und behält alle bestehenden Spalten. Über drei Parameter könnt ihr dieses Verhalten anpassen: <code>.before</code>, <code>.after</code> und <code>.keep</code>.</p>
-<section id="position-neuer-spalten-mit-.before-und-.after" class="level3"><h3 class="anchored" data-anchor-id="position-neuer-spalten-mit-.before-und-.after">Position neuer Spalten mit <code>.before</code> und <code>.after</code>
-</h3>
+<section id="position-neuer-spalten" class="level3"><h3 class="anchored" data-anchor-id="position-neuer-spalten">Position neuer Spalten</h3>
 <p>Wenn ihr die neue Spalte an einer bestimmten Stelle im Datensatz haben wollt, statt ganz am Ende, nutzt <code>.before</code> oder <code>.after</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -928,8 +967,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Mit <code>.before = retweet_count</code> würde die neue Spalte direkt vor <code>retweet_count</code> erscheinen. Das ist praktisch, wenn ihr euren Datensatz übersichtlich halten wollt, ohne danach extra <code>relocate()</code> aufrufen zu müssen.</p>
-</section><section id="spalten-behalten-oder-verwerfen-mit-.keep" class="level3"><h3 class="anchored" data-anchor-id="spalten-behalten-oder-verwerfen-mit-.keep">Spalten behalten oder verwerfen mit <code>.keep</code>
-</h3>
+</section><section id="spalten-behalten-oder-verwerfen" class="level3"><h3 class="anchored" data-anchor-id="spalten-behalten-oder-verwerfen">Spalten behalten oder verwerfen</h3>
 <p>Der Parameter <code>.keep</code> steuert, welche der bestehenden Spalten im Ergebnis erhalten bleiben. Es gibt vier Optionen:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1018,8 +1056,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Welchen Weg ihr wählt, ist Geschmackssache. <code>transmute()</code> ist etwas kürzer, <code>mutate(..., .keep = "none")</code> macht die Absicht über den Parameter expliziter.</p>
-</section></section><section id="sec-mutate-add-zusammenfassung" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="sec-mutate-add-zusammenfassung">
-<span class="header-section-number">10.7</span> Kurz zusammengefasst</h2>
+</section></section><section id="sec-mutate-add-zusammenfassung" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="sec-mutate-add-zusammenfassung">
+<span class="header-section-number">14.7</span> Kurz zusammengefasst</h2>
 <ul>
 <li>Mit <code>mutate()</code> erstellt ihr neue Variablen, indem ihr links vom <code>=</code> einen neuen Namen vergebt.</li>
 <li>Ihr könnt arithmetisch rechnen, Texte zusammensetzen und bedingte Werte mit <code>if_else()</code> oder <code>case_when()</code> erzeugen.</li>
@@ -1030,7 +1068,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <code>transmute()</code> ist eine Kurzform für <code>mutate(..., .keep = "none")</code>.</li>
 </ul>
-<p>Mit <code>select()</code> und <code>mutate()</code> könnt ihr Spalten auswählen, verändern und neue berechnen. Im nächsten Kapitel dreht sich alles um die Frage, welche Zeilen für eure Analyse relevant sind (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 11</span></a>).</p>
+<p>Mit <code>select()</code> und <code>mutate()</code> könnt ihr Spalten auswählen, verändern und neue berechnen. Im nächsten Kapitel dreht sich alles um die Frage, welche Zeilen für eure Analyse relevant sind (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 15</span></a>).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1473,12 +1511,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/mutate-modify.html" class="pagination-link" aria-label="Variablen verändern">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/filter.html" class="pagination-link" aria-label="Beobachtungen auswählen">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

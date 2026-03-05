@@ -8,7 +8,9 @@ project:
     - slides/loading-data.qmd
     - slides/pipe.qmd
     - slides/survey-data.qmd
+    - slides/select.qmd
     - slides/filter.qmd
+    - slides/exploring-variables.qmd
 
 execute:
   echo: true

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>16&nbsp; Punktediagramme – Hands-On Exploratory Data Analytics</title>
+<title>21&nbsp; Punktediagramme – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -130,7 +130,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/scatter-plots.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/scatter-plots.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -172,6 +172,30 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -186,19 +210,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -215,55 +239,61 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -280,43 +310,43 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -333,13 +363,13 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -356,25 +386,25 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -405,32 +435,32 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#einfaches-punktediagramm" id="toc-einfaches-punktediagramm" class="nav-link active" data-scroll-target="#einfaches-punktediagramm"><span class="header-section-number">16.1</span> Einfaches Punktediagramm</a></li>
+<li><a href="#einfaches-punktediagramm" id="toc-einfaches-punktediagramm" class="nav-link active" data-scroll-target="#einfaches-punktediagramm"><span class="header-section-number">21.1</span> Einfaches Punktediagramm</a></li>
   <li>
-<a href="#overplotting-vermeiden" id="toc-overplotting-vermeiden" class="nav-link" data-scroll-target="#overplotting-vermeiden"><span class="header-section-number">16.2</span> Overplotting vermeiden</a>
+<a href="#overplotting-vermeiden" id="toc-overplotting-vermeiden" class="nav-link" data-scroll-target="#overplotting-vermeiden"><span class="header-section-number">21.2</span> Overplotting vermeiden</a>
   <ul class="collapse">
 <li><a href="#transparenz" id="toc-transparenz" class="nav-link" data-scroll-target="#transparenz">Transparenz</a></li>
   <li><a href="#jitter" id="toc-jitter" class="nav-link" data-scroll-target="#jitter">Jitter</a></li>
   <li><a href="#logarithmische-skalen" id="toc-logarithmische-skalen" class="nav-link" data-scroll-target="#logarithmische-skalen">Logarithmische Skalen</a></li>
   </ul>
 </li>
-  <li><a href="#farbe-als-dritte-variable" id="toc-farbe-als-dritte-variable" class="nav-link" data-scroll-target="#farbe-als-dritte-variable"><span class="header-section-number">16.3</span> Farbe als dritte Variable</a></li>
-  <li><a href="#gr%C3%B6%C3%9Fe-als-vierte-variable" id="toc-größe-als-vierte-variable" class="nav-link" data-scroll-target="#gr%C3%B6%C3%9Fe-als-vierte-variable"><span class="header-section-number">16.4</span> Größe als vierte Variable</a></li>
-  <li><a href="#trendlinien" id="toc-trendlinien" class="nav-link" data-scroll-target="#trendlinien"><span class="header-section-number">16.5</span> Trendlinien</a></li>
+  <li><a href="#farbe-als-dritte-variable" id="toc-farbe-als-dritte-variable" class="nav-link" data-scroll-target="#farbe-als-dritte-variable"><span class="header-section-number">21.3</span> Farbe als dritte Variable</a></li>
+  <li><a href="#gr%C3%B6%C3%9Fe-als-vierte-variable" id="toc-größe-als-vierte-variable" class="nav-link" data-scroll-target="#gr%C3%B6%C3%9Fe-als-vierte-variable"><span class="header-section-number">21.4</span> Größe als vierte Variable</a></li>
+  <li><a href="#trendlinien" id="toc-trendlinien" class="nav-link" data-scroll-target="#trendlinien"><span class="header-section-number">21.5</span> Trendlinien</a></li>
   <li>
-<a href="#typische-fehler" id="toc-typische-fehler" class="nav-link" data-scroll-target="#typische-fehler"><span class="header-section-number">16.6</span> Typische Fehler</a>
+<a href="#typische-fehler" id="toc-typische-fehler" class="nav-link" data-scroll-target="#typische-fehler"><span class="header-section-number">21.6</span> Typische Fehler</a>
   <ul class="collapse">
 <li><a href="#kategoriale-variablen-auf-den-achsen" id="toc-kategoriale-variablen-auf-den-achsen" class="nav-link" data-scroll-target="#kategoriale-variablen-auf-den-achsen">Kategoriale Variablen auf den Achsen</a></li>
   <li><a href="#zu-viele-punkte-ohne-transparenz" id="toc-zu-viele-punkte-ohne-transparenz" class="nav-link" data-scroll-target="#zu-viele-punkte-ohne-transparenz">Zu viele Punkte ohne Transparenz</a></li>
   <li><a href="#fehlende-null-filter-bei-log-skalen" id="toc-fehlende-null-filter-bei-log-skalen" class="nav-link" data-scroll-target="#fehlende-null-filter-bei-log-skalen">Fehlende Null-Filter bei Log-Skalen</a></li>
   </ul>
 </li>
-  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">16.7</span> Kurz zusammengefasst</a></li>
+  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">21.7</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/scatter-plots.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-basics-scatter-plots" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/scatter-plots.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-basics-scatter-plots" class="quarto-section-identifier"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></h1>
 </div>
 
 
@@ -445,8 +475,8 @@ div.csl-indent {
 
 
 </header><p>Punktediagramme (Scatter Plots) zeigen die Beziehung zwischen zwei numerischen Variablen. Jede Beobachtung wird als Punkt dargestellt, wobei die Position durch die Werte der beiden Variablen bestimmt wird. Claus Wilke beschreibt sie als das wichtigste Werkzeug, um Zusammenhänge zwischen Variablen zu erkennen <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="../references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke 2019</a>)</span>.</p>
-<section id="einfaches-punktediagramm" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="einfaches-punktediagramm">
-<span class="header-section-number">16.1</span> Einfaches Punktediagramm</h2>
+<section id="einfaches-punktediagramm" class="level2" data-number="21.1"><h2 data-number="21.1" class="anchored" data-anchor-id="einfaches-punktediagramm">
+<span class="header-section-number">21.1</span> Einfaches Punktediagramm</h2>
 <p>Gibt es einen Zusammenhang zwischen Retweets und Likes? Das lässt sich am schnellsten mit <code>geom_point()</code> prüfen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -460,14 +490,14 @@ div.csl-indent {
 <img src="scatter-plots_files/figure-html/fig-scatter-basic-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.1: Zusammenhang zwischen Retweets und Likes.
+Abbildung&nbsp;21.1: Zusammenhang zwischen Retweets und Likes.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Jeder Punkt ist ein Tweet. Die meisten Punkte kleben in der unteren linken Ecke, weil die Mehrheit der Tweets nur wenige Retweets und Likes bekommt. Ein paar Ausreißer stechen heraus.</p>
-</section><section id="overplotting-vermeiden" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="overplotting-vermeiden">
-<span class="header-section-number">16.2</span> Overplotting vermeiden</h2>
+</section><section id="overplotting-vermeiden" class="level2" data-number="21.2"><h2 data-number="21.2" class="anchored" data-anchor-id="overplotting-vermeiden">
+<span class="header-section-number">21.2</span> Overplotting vermeiden</h2>
 <p>Wenn viele Punkte übereinander liegen, seht ihr nicht, wie viele es tatsächlich sind. Es gibt mehrere Strategien:</p>
 <section id="transparenz" class="level3"><h3 class="anchored" data-anchor-id="transparenz">Transparenz</h3>
 <p>Mit <code>alpha</code> macht ihr die Punkte halbtransparent. Dort, wo viele Punkte überlagern, wird es dunkler:</p>
@@ -483,7 +513,7 @@ Abbildung&nbsp;16.1: Zusammenhang zwischen Retweets und Likes.
 <img src="scatter-plots_files/figure-html/fig-scatter-alpha-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.2: Transparente Punkte zeigen die Dichte.
+Abbildung&nbsp;21.2: Transparente Punkte zeigen die Dichte.
 </figcaption></figure>
 </div>
 </div>
@@ -502,7 +532,7 @@ Abbildung&nbsp;16.2: Transparente Punkte zeigen die Dichte.
 <img src="scatter-plots_files/figure-html/fig-scatter-jitter-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-jitter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.3: Jitter verschiebt Punkte leicht, um Überlagerung zu reduzieren.
+Abbildung&nbsp;21.3: Jitter verschiebt Punkte leicht, um Überlagerung zu reduzieren.
 </figcaption></figure>
 </div>
 </div>
@@ -523,14 +553,14 @@ Abbildung&nbsp;16.3: Jitter verschiebt Punkte leicht, um Überlagerung zu reduzi
 <img src="scatter-plots_files/figure-html/fig-scatter-log-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.4: Logarithmische Achsen spreizen die niedrigen Werte.
+Abbildung&nbsp;21.4: Logarithmische Achsen spreizen die niedrigen Werte.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Jetzt ist der Zusammenhang viel besser zu erkennen. Die Punkte verteilen sich gleichmäßiger, und ihr seht ein klares Muster.</p>
-</section></section><section id="farbe-als-dritte-variable" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="farbe-als-dritte-variable">
-<span class="header-section-number">16.3</span> Farbe als dritte Variable</h2>
+</section></section><section id="farbe-als-dritte-variable" class="level2" data-number="21.3"><h2 data-number="21.3" class="anchored" data-anchor-id="farbe-als-dritte-variable">
+<span class="header-section-number">21.3</span> Farbe als dritte Variable</h2>
 <p>Mit <code>color</code> könnt ihr eine dritte Variable einbringen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -546,13 +576,13 @@ Abbildung&nbsp;16.4: Logarithmische Achsen spreizen die niedrigen Werte.
 <img src="scatter-plots_files/figure-html/fig-scatter-color-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-color-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.5: Farbe zeigt eine kategoriale Variable.
+Abbildung&nbsp;21.5: Farbe zeigt eine kategoriale Variable.
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="größe-als-vierte-variable" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="größe-als-vierte-variable">
-<span class="header-section-number">16.4</span> Größe als vierte Variable</h2>
+</section><section id="größe-als-vierte-variable" class="level2" data-number="21.4"><h2 data-number="21.4" class="anchored" data-anchor-id="größe-als-vierte-variable">
+<span class="header-section-number">21.4</span> Größe als vierte Variable</h2>
 <p>Neben Farbe könnt ihr auch die Größe der Punkte an eine Variable koppeln. Diesen Diagrammtyp nennt man <strong>Bubble Chart</strong>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -576,14 +606,14 @@ Abbildung&nbsp;16.5: Farbe zeigt eine kategoriale Variable.
 <img src="scatter-plots_files/figure-html/fig-scatter-size-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-size-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.6: Die Größe der Punkte kodiert eine zusätzliche Variable.
+Abbildung&nbsp;21.6: Die Größe der Punkte kodiert eine zusätzliche Variable.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p><code>scale_size_area()</code> sorgt dafür, dass die Fläche proportional zum Wert ist, nicht der Radius. Das ist wichtig für eine korrekte visuelle Wahrnehmung <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="../references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke 2019</a>)</span>.</p>
-</section><section id="trendlinien" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="trendlinien">
-<span class="header-section-number">16.5</span> Trendlinien</h2>
+</section><section id="trendlinien" class="level2" data-number="21.5"><h2 data-number="21.5" class="anchored" data-anchor-id="trendlinien">
+<span class="header-section-number">21.5</span> Trendlinien</h2>
 <p>Um einen Trend sichtbar zu machen, fügt ihr eine Glättungslinie mit <code>geom_smooth()</code> hinzu:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -600,7 +630,7 @@ Abbildung&nbsp;16.6: Die Größe der Punkte kodiert eine zusätzliche Variable.
 <img src="scatter-plots_files/figure-html/fig-scatter-smooth-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-smooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.7: Eine Glättungslinie zeigt den Trend.
+Abbildung&nbsp;21.7: Eine Glättungslinie zeigt den Trend.
 </figcaption></figure>
 </div>
 </div>
@@ -621,21 +651,21 @@ Abbildung&nbsp;16.7: Eine Glättungslinie zeigt den Trend.
 <img src="scatter-plots_files/figure-html/fig-scatter-lm-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-lm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;16.8: Eine lineare Regressionslinie.
+Abbildung&nbsp;21.8: Eine lineare Regressionslinie.
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="typische-fehler" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="typische-fehler">
-<span class="header-section-number">16.6</span> Typische Fehler</h2>
+</section><section id="typische-fehler" class="level2" data-number="21.6"><h2 data-number="21.6" class="anchored" data-anchor-id="typische-fehler">
+<span class="header-section-number">21.6</span> Typische Fehler</h2>
 <section id="kategoriale-variablen-auf-den-achsen" class="level3"><h3 class="anchored" data-anchor-id="kategoriale-variablen-auf-den-achsen">Kategoriale Variablen auf den Achsen</h3>
 <p>Punktediagramme sind für zwei numerische Variablen gedacht. Wenn eine Variable kategorial ist, nutzt Boxplots oder Violin-Plots statt Punkte.</p>
 </section><section id="zu-viele-punkte-ohne-transparenz" class="level3"><h3 class="anchored" data-anchor-id="zu-viele-punkte-ohne-transparenz">Zu viele Punkte ohne Transparenz</h3>
 <p>Tausende Punkte ohne <code>alpha</code> oder Jitter erzeugen einen schwarzen Klecks. Nutzt immer mindestens Transparenz.</p>
 </section><section id="fehlende-null-filter-bei-log-skalen" class="level3"><h3 class="anchored" data-anchor-id="fehlende-null-filter-bei-log-skalen">Fehlende Null-Filter bei Log-Skalen</h3>
 <p><code>log10(0)</code> ist <code>-Inf</code>. Filtert Nullwerte heraus, bevor ihr logarithmische Skalen verwendet.</p>
-</section></section><section id="kurz-zusammengefasst" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="kurz-zusammengefasst">
-<span class="header-section-number">16.7</span> Kurz zusammengefasst</h2>
+</section></section><section id="kurz-zusammengefasst" class="level2" data-number="21.7"><h2 data-number="21.7" class="anchored" data-anchor-id="kurz-zusammengefasst">
+<span class="header-section-number">21.7</span> Kurz zusammengefasst</h2>
 <ul>
 <li>
 <code>geom_point()</code> zeigt die Beziehung zwischen zwei numerischen Variablen.</li>
@@ -1092,12 +1122,12 @@ Wilke, C. 2019. <em>Fundamentals of data visualization: a primer on making infor
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../04-data-visualization/bar-charts.html" class="pagination-link" aria-label="Balkendiagramme">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../04-data-visualization/histograms.html" class="pagination-link" aria-label="Histogramme">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

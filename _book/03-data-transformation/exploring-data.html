@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>7&nbsp; Daten kennenlernen – Hands-On Exploratory Data Analytics</title>
+<title>11&nbsp; Daten kennenlernen – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/exploring-data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/exploring-data.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -153,6 +153,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -167,19 +191,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,55 +220,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,43 +291,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,13 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,25 +367,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,19 +416,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-exploring-data-dimensions" id="toc-sec-exploring-data-dimensions" class="nav-link active" data-scroll-target="#sec-exploring-data-dimensions"><span class="header-section-number">7.1</span> Dimensionen und Spalten</a></li>
-  <li><a href="#sec-exploring-data-first-rows" id="toc-sec-exploring-data-first-rows" class="nav-link" data-scroll-target="#sec-exploring-data-first-rows"><span class="header-section-number">7.2</span> Erste Zeilen anschauen</a></li>
-  <li><a href="#sec-exploring-data-glimpse" id="toc-sec-exploring-data-glimpse" class="nav-link" data-scroll-target="#sec-exploring-data-glimpse"><span class="header-section-number">7.3</span> Struktur mit <code>glimpse()</code></a></li>
-  <li><a href="#sec-exploring-data-summary" id="toc-sec-exploring-data-summary" class="nav-link" data-scroll-target="#sec-exploring-data-summary"><span class="header-section-number">7.4</span> Statistische Übersicht mit <code>summary()</code></a></li>
-  <li><a href="#sec-exploring-data-missing" id="toc-sec-exploring-data-missing" class="nav-link" data-scroll-target="#sec-exploring-data-missing"><span class="header-section-number">7.5</span> Fehlende Werte erkennen</a></li>
-  <li><a href="#sec-exploring-data-count" id="toc-sec-exploring-data-count" class="nav-link" data-scroll-target="#sec-exploring-data-count"><span class="header-section-number">7.6</span> Häufigkeiten mit <code>count()</code></a></li>
-  <li><a href="#sec-exploring-data-skimr" id="toc-sec-exploring-data-skimr" class="nav-link" data-scroll-target="#sec-exploring-data-skimr"><span class="header-section-number">7.7</span> Kompakte Übersicht mit <code>skimr</code></a></li>
-  <li><a href="#sec-exploring-data-checklist" id="toc-sec-exploring-data-checklist" class="nav-link" data-scroll-target="#sec-exploring-data-checklist"><span class="header-section-number">7.8</span> Eine Checkliste für neue Datensätze</a></li>
+<li><a href="#sec-exploring-data-dimensions" id="toc-sec-exploring-data-dimensions" class="nav-link active" data-scroll-target="#sec-exploring-data-dimensions"><span class="header-section-number">11.1</span> Dimensionen und Spalten</a></li>
+  <li><a href="#sec-exploring-data-first-rows" id="toc-sec-exploring-data-first-rows" class="nav-link" data-scroll-target="#sec-exploring-data-first-rows"><span class="header-section-number">11.2</span> Erste Zeilen anschauen</a></li>
+  <li><a href="#sec-exploring-data-glimpse" id="toc-sec-exploring-data-glimpse" class="nav-link" data-scroll-target="#sec-exploring-data-glimpse"><span class="header-section-number">11.3</span> Struktur mit <code>glimpse()</code></a></li>
+  <li><a href="#sec-exploring-data-summary" id="toc-sec-exploring-data-summary" class="nav-link" data-scroll-target="#sec-exploring-data-summary"><span class="header-section-number">11.4</span> Statistische Übersicht mit <code>summary()</code></a></li>
+  <li><a href="#sec-exploring-data-missing" id="toc-sec-exploring-data-missing" class="nav-link" data-scroll-target="#sec-exploring-data-missing"><span class="header-section-number">11.5</span> Fehlende Werte erkennen</a></li>
+  <li><a href="#sec-exploring-data-count" id="toc-sec-exploring-data-count" class="nav-link" data-scroll-target="#sec-exploring-data-count"><span class="header-section-number">11.6</span> Häufigkeiten mit <code>count()</code></a></li>
+  <li><a href="#sec-exploring-data-skimr" id="toc-sec-exploring-data-skimr" class="nav-link" data-scroll-target="#sec-exploring-data-skimr"><span class="header-section-number">11.7</span> Kompakte Übersicht mit <code>skimr</code></a></li>
+  <li><a href="#sec-exploring-data-checklist" id="toc-sec-exploring-data-checklist" class="nav-link" data-scroll-target="#sec-exploring-data-checklist"><span class="header-section-number">11.8</span> Eine Checkliste für neue Datensätze</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/exploring-data.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-exploring-data" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/exploring-data.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-exploring-data" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></h1>
 </div>
 
 
@@ -467,8 +497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<section id="sec-exploring-data-dimensions" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sec-exploring-data-dimensions">
-<span class="header-section-number">7.1</span> Dimensionen und Spalten</h2>
+<section id="sec-exploring-data-dimensions" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="sec-exploring-data-dimensions">
+<span class="header-section-number">11.1</span> Dimensionen und Spalten</h2>
 <p>Die erste Frage bei einem neuen Datensatz ist: Wie groß ist er? Mit <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> und <code><a href="https://rdrr.io/r/base/nrow.html">ncol()</a></code> bekommt ihr die Anzahl der Zeilen und Spalten:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -501,8 +531,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Das ist nützlich, wenn ihr schnell nachschauen wollt, wie eine Spalte genau heißt. Denn Tippfehler in Spaltennamen führen sofort zu Fehlermeldungen.</p>
-</section><section id="sec-exploring-data-first-rows" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="sec-exploring-data-first-rows">
-<span class="header-section-number">7.2</span> Erste Zeilen anschauen</h2>
+</section><section id="sec-exploring-data-first-rows" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="sec-exploring-data-first-rows">
+<span class="header-section-number">11.2</span> Erste Zeilen anschauen</h2>
 <p>Ein Blick auf die ersten Zeilen gibt euch ein Gefühl dafür, wie die Daten aussehen. Dafür gibt es <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -546,8 +576,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In der Praxis reichen oft die ersten fünf bis zehn Zeilen, um zu erkennen, ob die Daten plausibel aussehen. Sind die Spalten richtig benannt? Stehen dort Werte, die Sinn ergeben? Sehen Zahlen wie Zahlen aus und Texte wie Texte?</p>
-</section><section id="sec-exploring-data-glimpse" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="sec-exploring-data-glimpse">
-<span class="header-section-number">7.3</span> Struktur mit <code>glimpse()</code>
+</section><section id="sec-exploring-data-glimpse" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="sec-exploring-data-glimpse">
+<span class="header-section-number">11.3</span> Struktur mit <code>glimpse()</code>
 </h2>
 <p><code>glimpse()</code> aus <code>dplyr</code> ist eine der nützlichsten Funktionen, um sich schnell einen Überblick zu verschaffen. Sie zeigt euch für jede Spalte den Namen, den Datentyp und die ersten Werte:</p>
 <div class="cell">
@@ -607,8 +637,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <p>Die Base-R-Funktion <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> liefert ähnliche Informationen wie <code>glimpse()</code>, aber in einem weniger lesbaren Format. Im Tidyverse ist <code>glimpse()</code> die bevorzugte Wahl.</p>
 </div>
 </div>
-</section><section id="sec-exploring-data-summary" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="sec-exploring-data-summary">
-<span class="header-section-number">7.4</span> Statistische Übersicht mit <code>summary()</code>
+</section><section id="sec-exploring-data-summary" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="sec-exploring-data-summary">
+<span class="header-section-number">11.4</span> Statistische Übersicht mit <code>summary()</code>
 </h2>
 <p>Während <code>glimpse()</code> euch die Struktur zeigt, liefert <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> statistische Kennzahlen. Für numerische Spalten bekommt ihr Minimum, Maximum, Mittelwert, Median und Quartile. Für Text- und Faktorspalten bekommt ihr die Häufigkeiten der häufigsten Werte.</p>
 <div class="cell">
@@ -627,8 +657,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 <p>Was sagt euch diese Ausgabe? Schaut euch den Mittelwert und den Median an. Wenn die beiden weit auseinanderliegen, deutet das auf eine schiefe Verteilung hin. Bei <code>retweet_count</code> ist das typisch: Die meisten Tweets haben wenige Retweets, aber ein paar wenige haben sehr viele. Der Mittelwert wird von diesen Ausreißern nach oben gezogen, der Median bleibt davon unbeeindruckt.</p>
 <p>Auch das Maximum ist aufschlussreich. Wenn dort ein unplausibel hoher Wert steht, habt ihr vielleicht einen Datenfehler entdeckt.</p>
-</section><section id="sec-exploring-data-missing" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="sec-exploring-data-missing">
-<span class="header-section-number">7.5</span> Fehlende Werte erkennen</h2>
+</section><section id="sec-exploring-data-missing" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="sec-exploring-data-missing">
+<span class="header-section-number">11.5</span> Fehlende Werte erkennen</h2>
 <p>Fehlende Werte sind in echten Datensätzen völlig normal. Nicht jeder Tweet ist eine Antwort auf einen anderen, also ist <code>in_reply_to_screen_name</code> oft leer. Aber ihr solltet wissen, wie viele fehlende Werte es gibt und wo sie auftreten, bevor ihr mit der Analyse beginnt.</p>
 <p>Mit <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> und <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> könnt ihr die fehlenden Werte pro Spalte zählen:</p>
 <div class="cell">
@@ -645,7 +675,7 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 1       44922     49507           0</code></pre>
 </div>
 </div>
-<p>Das funktioniert, ist aber mühsam, wenn ihr viele Spalten prüfen wollt. Eleganter geht es mit <code>across()</code>, das ihr später noch im Detail kennenlernt (siehe <a href="mutate-modify.html#sec-mutate-modify-across" class="quarto-xref"><span>Kapitel 9.9</span></a>). Hier ein Vorgeschmack:</p>
+<p>Das funktioniert, ist aber mühsam, wenn ihr viele Spalten prüfen wollt. Eleganter geht es mit <code>across()</code>, das ihr später noch im Detail kennenlernt (siehe <a href="mutate-modify.html#sec-mutate-modify-across" class="quarto-xref"><span>Kapitel 13.9</span></a>). Hier ein Vorgeschmack:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -691,8 +721,8 @@ $ quoted_status_id        &lt;int&gt; 49507</code></pre>
 <p>Ein <code>NA</code> bedeutet nicht, dass etwas kaputt ist. Es bedeutet, dass die Information nicht vorhanden ist. Ein Tweet ohne <code>in_reply_to_screen_name</code> ist kein Fehler, sondern einfach kein Reply. Behandelt fehlende Werte also nicht reflexartig als Problem, sondern fragt euch immer, warum sie fehlen.</p>
 </div>
 </div>
-</section><section id="sec-exploring-data-count" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="sec-exploring-data-count">
-<span class="header-section-number">7.6</span> Häufigkeiten mit <code>count()</code>
+</section><section id="sec-exploring-data-count" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="sec-exploring-data-count">
+<span class="header-section-number">11.6</span> Häufigkeiten mit <code>count()</code>
 </h2>
 <p>Bei kategorialen Variablen, also Spalten mit einer begrenzten Anzahl möglicher Werte, wollt ihr wissen, wie die Werte verteilt sind. Welche Accounts twittern am meisten? In welcher Sprache wird getwittert? Wie viele Tweets sind Retweets?</p>
 <p>Dafür ist <code>count()</code> aus <code>dplyr</code> das perfekte Werkzeug:</p>
@@ -772,9 +802,9 @@ $ quoted_status_id        &lt;int&gt; 49507</code></pre>
 10 klara_geywitz   FALSE       2118</code></pre>
 </div>
 </div>
-<p><code>count()</code> wird euch im ganzen Buch immer wieder begegnen, weil es die schnellste Art ist, sich einen Überblick über kategoriale Variablen zu verschaffen. Mehr zu <code>count()</code> und verwandten Funktionen erfahrt ihr im Kapitel über <code>summarise()</code> (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 12</span></a>).</p>
-</section><section id="sec-exploring-data-skimr" class="level2" data-number="7.7"><h2 data-number="7.7" class="anchored" data-anchor-id="sec-exploring-data-skimr">
-<span class="header-section-number">7.7</span> Kompakte Übersicht mit <code>skimr</code>
+<p><code>count()</code> wird euch im ganzen Buch immer wieder begegnen, weil es die schnellste Art ist, sich einen Überblick über kategoriale Variablen zu verschaffen. Mehr zu <code>count()</code> und verwandten Funktionen erfahrt ihr im Kapitel über <code>summarise()</code> (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 16</span></a>).</p>
+</section><section id="sec-exploring-data-skimr" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="sec-exploring-data-skimr">
+<span class="header-section-number">11.7</span> Kompakte Übersicht mit <code>skimr</code>
 </h2>
 <p>Wenn ihr alles auf einmal sehen wollt, ohne einzelne Funktionen nacheinander aufzurufen, ist das Paket <code>skimr</code> eine ausgezeichnete Wahl. Die Funktion <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> liefert eine umfassende Übersicht, die nach Datentypen gruppiert ist:</p>
 <div class="cell">
@@ -1006,8 +1036,8 @@ $ quoted_status_id        &lt;int&gt; 49507</code></pre>
 <p><code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> liefert die klassischen R-Kennzahlen und funktioniert ohne zusätzliches Paket. <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> bietet mehr Informationen, eine klarere Struktur und die kleinen Histogramme. Für eine schnelle Prüfung reicht <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, für eine gründliche Erstuntersuchung ist <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> die bessere Wahl.</p>
 </div>
 </div>
-</section><section id="sec-exploring-data-checklist" class="level2" data-number="7.8"><h2 data-number="7.8" class="anchored" data-anchor-id="sec-exploring-data-checklist">
-<span class="header-section-number">7.8</span> Eine Checkliste für neue Datensätze</h2>
+</section><section id="sec-exploring-data-checklist" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="sec-exploring-data-checklist">
+<span class="header-section-number">11.8</span> Eine Checkliste für neue Datensätze</h2>
 <p>Wenn ihr einen neuen Datensatz bekommt, könnt ihr euch an dieser Reihenfolge orientieren:</p>
 <ol type="1">
 <li>
@@ -1023,7 +1053,7 @@ $ quoted_status_id        &lt;int&gt; 49507</code></pre>
 <li>
 <strong>Statistische Kennzahlen</strong>: <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> oder <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> – wie verteilen sich numerische Werte?</li>
 </ol>
-<p>Diese Reihenfolge hilft euch, systematisch vorzugehen, statt planlos in den Daten herumzustochern. In den folgenden Kapiteln werden wir den Tweets-Datensatz Stück für Stück auseinandernehmen. Dafür braucht ihr die Werkzeuge, die jetzt kommen: Spalten auswählen mit <code>select()</code> (siehe <a href="select.html" class="quarto-xref"><span>Kapitel 8</span></a>), Variablen verändern mit <code>mutate()</code> (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 9</span></a>) und Zeilen filtern mit <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 11</span></a>).</p>
+<p>Diese Reihenfolge hilft euch, systematisch vorzugehen, statt planlos in den Daten herumzustochern. In den folgenden Kapiteln werden wir den Tweets-Datensatz Stück für Stück auseinandernehmen. Dafür braucht ihr die Werkzeuge, die jetzt kommen: Spalten auswählen mit <code>select()</code> (siehe <a href="select.html" class="quarto-xref"><span>Kapitel 12</span></a>), Variablen verändern mit <code>mutate()</code> (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 13</span></a>) und Zeilen filtern mit <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 15</span></a>).</p>
 <p>Jetzt, da ihr den Datensatz kennt und wisst, was euch erwartet, können wir mit der eigentlichen Arbeit beginnen. Im nächsten Kapitel lernt ihr, wie ihr mit <code>select()</code> gezielt die Spalten auswählt, die ihr für eine bestimmte Frage braucht.</p>
 
 
@@ -1467,12 +1497,12 @@ $ quoted_status_id        &lt;int&gt; 49507</code></pre>
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/pipe.html" class="pagination-link" aria-label="Pipe-Operator">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/select.html" class="pagination-link" aria-label="Variablen auswählen">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

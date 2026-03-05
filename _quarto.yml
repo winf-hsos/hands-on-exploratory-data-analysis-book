@@ -27,6 +27,10 @@ book:
     - part: "Hintergründe"
       chapters:
       - 01-background/empirical-research.qmd
+      - 01-background/research-questions.qmd
+      - 01-background/types-of-variables.qmd
+      - 01-background/data-analysis.qmd
+      - 01-background/tools.qmd
 
     - part: "Erste Schritte mit R"
       chapters:
@@ -45,6 +49,7 @@ book:
       - 03-data-transformation/filter.qmd
       - 03-data-transformation/summarize.qmd
       - 03-data-transformation/joining-data.qmd
+      - 03-data-transformation/complex-data-structures.qmd
 
     - part: "Datenvisualisierung"
       chapters:
@@ -59,7 +64,7 @@ book:
     - part: "Projekt 1: Umfragen"
       chapters:
       - project-1-survey/survey-data.qmd
-      - project-1-survey/types-of-variables.qmd
+      - project-1-survey/exploring-single-variables.qmd
       
 
     - part: "Projekt 2: News"

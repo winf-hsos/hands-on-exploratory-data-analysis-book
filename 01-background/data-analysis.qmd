@@ -1,0 +1,5 @@
+# Datenauswertung
+
+## Quantitative Datenauswertung
+
+![Die Auswertung quantitativer Daten erfolgt typischerweise in fünf Schritten.](/images/five_steps_quantitative_data_analysis.svg){#fig-empirical-research-five-steps-quantitative-data-analysis .lightbox}

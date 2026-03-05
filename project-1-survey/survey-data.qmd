@@ -1,6 +1,11 @@
 # Umfragedaten {#sec-surveys-data}
 
-In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein praktisches Werkzeug, wenn wir etwas über Einstellungen, Präferenzen oder Verhalten von Menschen herausfinden wollen – und genau solche Datensätze begegnen euch später auch im Job ziemlich häufig.
+```{r}
+#| include: false
+source("setup.R")
+```
+
+In diesem Projekt geht es um die Analyse eines Umfragedatensatzes. Umfragen sind ein praktisches Werkzeug, wenn wir etwas über Einstellungen, Präferenzen oder Verhalten von Menschen herausfinden wollen. Und genau solche Datensätze begegnen euch später auch im Job ziemlich häufig.
 
 Bevor wir loslegen, eine Leitfrage: Wenn ihr eine Tabelle mit hunderten Spalten vor euch habt – woher wisst ihr eigentlich, *was* ihr da seht? Was ist eine Zeile? Was ist eine Spalte? Und wie könnt ihr schnell prüfen, ob die Daten überhaupt korrekt in R angekommen sind? Genau darum geht es in diesem Abschnitt.
 
@@ -22,7 +27,7 @@ Bevor wir loslegen, eine Leitfrage: Wenn ihr eine Tabelle mit hunderten Spalten 
 
 ## Daten laden mit R
 
-In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches – es geht primär um die Daten*analyse*.
+In jedem Projekt steht am Anfang das Laden der Daten. In diesem Buch gehen wir davon aus, dass ein Datensatz bereits erhoben wurde. Die Datenerhebung ist nicht direkt Bestandteil dieses Buches, es geht hier primär um die Daten*analyse*.
 
 Die Umfrageergebnisse wurden mit der Software [Limesurvey](https://www.limesurvey.org/) erhoben und als CSV-Datei exportiert. Wenn ihr das GitHub-Repository für dieses Buch auf euren Rechner heruntergeladen habt, dann liegen die Daten im Ordner `/data` und können so geladen werden:
 
@@ -51,8 +56,6 @@ An dieser Stelle gehen wir nicht tiefer auf das Laden von Daten und andere Forma
 
 ```{r}
 #| include: false
-source("project-1-survey/setup.R")
-
 n <- nrow(survey)
 n_fmt <- format(n, big.mark = ".", decimal.mark = ",")
 ```

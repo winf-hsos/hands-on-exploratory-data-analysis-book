@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>12&nbsp; Beobachtungen zusammenfassen – Hands-On Exploratory Data Analytics</title>
+<title>16&nbsp; Beobachtungen zusammenfassen – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/summarize.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/summarize.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -156,6 +156,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -170,19 +194,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,55 +223,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,43 +294,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,13 +347,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,25 +370,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -390,21 +420,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li>
-<a href="#sec-summarize-grundprinzip" id="toc-sec-summarize-grundprinzip" class="nav-link active" data-scroll-target="#sec-summarize-grundprinzip"><span class="header-section-number">12.1</span> Das Grundprinzip</a>
+<a href="#sec-summarize-grundprinzip" id="toc-sec-summarize-grundprinzip" class="nav-link active" data-scroll-target="#sec-summarize-grundprinzip"><span class="header-section-number">16.1</span> Das Grundprinzip</a>
   <ul class="collapse">
 <li><a href="#h%C3%A4ufige-zusammenfassungsfunktionen" id="toc-häufige-zusammenfassungsfunktionen" class="nav-link" data-scroll-target="#h%C3%A4ufige-zusammenfassungsfunktionen">Häufige Zusammenfassungsfunktionen</a></li>
   </ul>
 </li>
-  <li><a href="#sec-summarize-vs-mutate" id="toc-sec-summarize-vs-mutate" class="nav-link" data-scroll-target="#sec-summarize-vs-mutate"><span class="header-section-number">12.2</span> <code>summarise()</code> und <code>mutate()</code> im Vergleich</a></li>
+  <li><a href="#sec-summarize-vs-mutate" id="toc-sec-summarize-vs-mutate" class="nav-link" data-scroll-target="#sec-summarize-vs-mutate"><span class="header-section-number">16.2</span> <code>summarise()</code> und <code>mutate()</code> im Vergleich</a></li>
   <li>
-<a href="#sec-summarize-groupby" id="toc-sec-summarize-groupby" class="nav-link" data-scroll-target="#sec-summarize-groupby"><span class="header-section-number">12.3</span> Gruppieren mit <code>group_by()</code></a>
+<a href="#sec-summarize-groupby" id="toc-sec-summarize-groupby" class="nav-link" data-scroll-target="#sec-summarize-groupby"><span class="header-section-number">16.3</span> Gruppieren mit <code>group_by()</code></a>
   <ul class="collapse">
 <li><a href="#mehrere-gruppierungsvariablen" id="toc-mehrere-gruppierungsvariablen" class="nav-link" data-scroll-target="#mehrere-gruppierungsvariablen">Mehrere Gruppierungsvariablen</a></li>
   <li><a href="#gruppierung-und-der-unterschied-zu-mutate" id="toc-gruppierung-und-der-unterschied-zu-mutate" class="nav-link" data-scroll-target="#gruppierung-und-der-unterschied-zu-mutate">Gruppierung und der Unterschied zu <code>mutate()</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-summarize-shortcuts" id="toc-sec-summarize-shortcuts" class="nav-link" data-scroll-target="#sec-summarize-shortcuts"><span class="header-section-number">12.4</span> Abkürzungen</a>
+<a href="#sec-summarize-shortcuts" id="toc-sec-summarize-shortcuts" class="nav-link" data-scroll-target="#sec-summarize-shortcuts"><span class="header-section-number">16.4</span> Abkürzungen</a>
   <ul class="collapse">
 <li><a href="#count" id="toc-count" class="nav-link" data-scroll-target="#count"><code>count()</code></a></li>
   <li><a href="#tally" id="toc-tally" class="nav-link" data-scroll-target="#tally"><code>tally()</code></a></li>
@@ -412,19 +442,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-summarize-across" id="toc-sec-summarize-across" class="nav-link" data-scroll-target="#sec-summarize-across"><span class="header-section-number">12.5</span> Mehrere Spalten mit <code>across()</code></a>
+<a href="#sec-summarize-across" id="toc-sec-summarize-across" class="nav-link" data-scroll-target="#sec-summarize-across"><span class="header-section-number">16.5</span> Mehrere Spalten mit <code>across()</code></a>
   <ul class="collapse">
 <li><a href="#mehrere-funktionen-gleichzeitig" id="toc-mehrere-funktionen-gleichzeitig" class="nav-link" data-scroll-target="#mehrere-funktionen-gleichzeitig">Mehrere Funktionen gleichzeitig</a></li>
   <li><a href="#across-mit-gruppierung" id="toc-across-mit-gruppierung" class="nav-link" data-scroll-target="#across-mit-gruppierung"><code>across()</code> mit Gruppierung</a></li>
   </ul>
 </li>
-  <li><a href="#sec-summarize-pipe" id="toc-sec-summarize-pipe" class="nav-link" data-scroll-target="#sec-summarize-pipe"><span class="header-section-number">12.6</span> Zusammenfassungen in der Pipe</a></li>
-  <li><a href="#sec-summarize-zusammenfassung" id="toc-sec-summarize-zusammenfassung" class="nav-link" data-scroll-target="#sec-summarize-zusammenfassung"><span class="header-section-number">12.7</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-summarize-pipe" id="toc-sec-summarize-pipe" class="nav-link" data-scroll-target="#sec-summarize-pipe"><span class="header-section-number">16.6</span> Zusammenfassungen in der Pipe</a></li>
+  <li><a href="#sec-summarize-zusammenfassung" id="toc-sec-summarize-zusammenfassung" class="nav-link" data-scroll-target="#sec-summarize-zusammenfassung"><span class="header-section-number">16.7</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/summarize.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-summarize" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/summarize.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-summarize" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></h1>
 </div>
 
 
@@ -439,6 +469,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p>Bisher habt ihr gelernt, in welcher Form man Spalten und Zeilen bearbeitet, ohne jedoch die grundsätzliche Struktur des Datensatzes massiv zu verändern. In diesem Kapitel geht es nun um das Verdichten von Daten. Mit der Funktion <code>summarise()</code> aus dem <code>dplyr</code>-Paket könnt ihr aus hunderten Einzelwerten eine Handvoll aussagekräftiger Kennzahlen berechnen, wie Mittelwerte, Summen oder Anzahlen. Meistens geschieht dies nicht für den gesamten Datensatz, sondern für definierte Untergruppen, wofür wir die Funktion <code>group_by()</code> nutzen.</p>
+<div id="fig-summarize-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-summarize-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\images/google_slides/.png" id="fig-summarize-schema" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-summarize-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;16.1
+</figcaption></figure>
+</div>
 <p>Das Aggregieren von Daten ist ein Schlüsselelement der deskriptiven Statistik und Berichtserstellung. Selten interessiert sich jemand für jede einzelne Transaktion in einem Datensatz. Die wahren Erkenntnisse – und auch die Grundlage für aussagekräftige Visualisierungen – liegen stattdessen in den zusammengefassten Kennzahlen: Welches Produkt hat den höchsten Durchschnittsumsatz? Wie viele Nutzer waren pro Wochentag aktiv? <code>summarise()</code> liefert euch genau diese aggregierten Werte prägnant und effizient.</p>
 <p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
 <table class="caption-top table">
@@ -492,8 +530,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Sehen wir uns zunächst an, wie wir den kompletten Datensatz auf eine einzige Zeile zusammenfassen können.</p>
-<section id="sec-summarize-grundprinzip" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="sec-summarize-grundprinzip">
-<span class="header-section-number">12.1</span> Das Grundprinzip</h2>
+<section id="sec-summarize-grundprinzip" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="sec-summarize-grundprinzip">
+<span class="header-section-number">16.1</span> Das Grundprinzip</h2>
 <p><code>summarise()</code> nimmt einen Tibble und gibt einen neuen Tibble mit einer einzigen Zeile zurück. In dieser Zeile stehen die Ergebnisse eurer Zusammenfassungsfunktionen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -578,8 +616,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wenn <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> oder eine andere Aggregatfunktion plötzlich <code>NA</code> zurückgibt, obwohl ihr echte Daten habt, liegt es fast immer an fehlenden Werten. Fügt <code>na.rm = TRUE</code> hinzu, und das Problem ist gelöst.</p>
 </div>
 </div>
-</section></section><section id="sec-summarize-vs-mutate" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="sec-summarize-vs-mutate">
-<span class="header-section-number">12.2</span> <code>summarise()</code> und <code>mutate()</code> im Vergleich</h2>
+</section></section><section id="sec-summarize-vs-mutate" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="sec-summarize-vs-mutate">
+<span class="header-section-number">16.2</span> <code>summarise()</code> und <code>mutate()</code> im Vergleich</h2>
 <p>Was ist eigentlich der Unterschied zwischen <code>summarise()</code> und <code>mutate()</code>? Beide können mit Aggregatfunktionen wie <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> arbeiten, aber sie tun etwas grundlegend Verschiedenes:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -634,15 +672,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Daten auf Kennzahlen verdichten</td>
 </tr>
 </tbody>
-</table></section><section id="sec-summarize-groupby" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="sec-summarize-groupby">
-<span class="header-section-number">12.3</span> Gruppieren mit <code>group_by()</code>
+</table></section><section id="sec-summarize-groupby" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="sec-summarize-groupby">
+<span class="header-section-number">16.3</span> Gruppieren mit <code>group_by()</code>
 </h2>
 <div id="fig-r-basics-summarize-groupby-shema" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-r-basics-summarize-groupby-shema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="https://winf-hsos.github.io/university-docs/images/group_by_summarize_schema.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt summarize mehrere Zeilen statt nur eine."><img src="https://winf-hsos.github.io/university-docs/images/group_by_summarize_schema.png" class="img-fluid figure-img"></a>
+<a href="https://winf-hsos.github.io/university-docs/images/group_by_summarize_schema.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;16.2: In Kombination mit Gruppierung erzeugt summarize mehrere Zeilen statt nur eine."><img src="https://winf-hsos.github.io/university-docs/images/group_by_summarize_schema.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-basics-summarize-groupby-shema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</code> mehrere Zeilen statt nur eine.
+Abbildung&nbsp;16.2: In Kombination mit Gruppierung erzeugt <code>summarize</code> mehrere Zeilen statt nur eine.
 </figcaption></figure>
 </div>
 <p>Die eigentliche Stärke von <code>summarise()</code> zeigt sich erst in Kombination mit <code>group_by()</code>. Ohne Gruppierung bekommt ihr eine einzige Zeile. Mit Gruppierung bekommt ihr eine Zeile pro Gruppe.</p>
@@ -766,8 +804,8 @@ Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</cod
 </div>
 </div>
 <p>Welche Variante ihr braucht, hängt von eurer Frage ab: Wollt ihr die Kennzahl neben den Originaldaten sehen (→ <code>mutate()</code>), oder braucht ihr eine kompakte Übersicht (→ <code>summarise()</code>)?</p>
-</section></section><section id="sec-summarize-shortcuts" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="sec-summarize-shortcuts">
-<span class="header-section-number">12.4</span> Abkürzungen</h2>
+</section></section><section id="sec-summarize-shortcuts" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="sec-summarize-shortcuts">
+<span class="header-section-number">16.4</span> Abkürzungen</h2>
 <p>Für die häufigsten Zusammenfassungen gibt es in <code>dplyr</code> kürzere Schreibweisen, die euren Code kompakter und lesbarer machen.</p>
 <section id="count" class="level3"><h3 class="anchored" data-anchor-id="count"><code>count()</code></h3>
 <p>Die mit Abstand häufigste Zusammenfassung ist das Zählen. Wie oft kommt ein bestimmter Wert vor? <code>count()</code> ist die Abkürzung dafür:</p>
@@ -879,8 +917,8 @@ Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</cod
 </div>
 </div>
 <p><code>add_count()</code> verhält sich wie <code>count()</code>, aber der Datensatz behält seine ursprüngliche Länge. Es ist die Abkürzung für <code>group_by() |&gt; mutate(n = n()) |&gt; ungroup()</code>.</p>
-</section></section><section id="sec-summarize-across" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="sec-summarize-across">
-<span class="header-section-number">12.5</span> Mehrere Spalten mit <code>across()</code>
+</section></section><section id="sec-summarize-across" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="sec-summarize-across">
+<span class="header-section-number">16.5</span> Mehrere Spalten mit <code>across()</code>
 </h2>
 <p>Wenn ihr dieselbe Zusammenfassung auf mehrere Spalten gleichzeitig anwenden wollt, spart <code>across()</code> viel Tipparbeit:</p>
 <div class="cell">
@@ -954,8 +992,8 @@ Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</cod
 10 MarcoBuschmann           14.0           174.</code></pre>
 </div>
 </div>
-</section></section><section id="sec-summarize-pipe" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="sec-summarize-pipe">
-<span class="header-section-number">12.6</span> Zusammenfassungen in der Pipe</h2>
+</section></section><section id="sec-summarize-pipe" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="sec-summarize-pipe">
+<span class="header-section-number">16.6</span> Zusammenfassungen in der Pipe</h2>
 <p>In der Praxis steht <code>summarise()</code> selten allein. Es ist fast immer Teil einer Pipe-Kette, die den Datensatz vorher filtert, gruppiert und nachher sortiert oder weiterverarbeitet.</p>
 <p>Hier ist ein typisches Muster, das euch im Buch immer wieder begegnen wird:</p>
 <div class="cell">
@@ -1001,8 +1039,8 @@ Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</cod
 <strong>Sortieren</strong>: Die aktivsten Accounts zuerst.</li>
 </ol>
 <p>Dieser Ablauf ist ein Grundmuster der explorativen Datenanalyse: Daten einschränken, verdichten und sortieren.</p>
-</section><section id="sec-summarize-zusammenfassung" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="sec-summarize-zusammenfassung">
-<span class="header-section-number">12.7</span> Kurz zusammengefasst</h2>
+</section><section id="sec-summarize-zusammenfassung" class="level2" data-number="16.7"><h2 data-number="16.7" class="anchored" data-anchor-id="sec-summarize-zusammenfassung">
+<span class="header-section-number">16.7</span> Kurz zusammengefasst</h2>
 <ul>
 <li>
 <code>summarise()</code> verdichtet einen Datensatz auf eine einzige Zeile mit Kennzahlen.</li>
@@ -1017,7 +1055,7 @@ Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</cod
 <li>Mit <code>across()</code> wendet ihr Zusammenfassungen auf mehrere Spalten gleichzeitig an.</li>
 <li>Kontrolliert die Gruppierung nach <code>summarise()</code> mit <code>.groups = "drop"</code> oder <code>ungroup()</code>.</li>
 </ul>
-<p>Mit <code>summarise()</code> könnt ihr eure Daten auf die wesentlichen Kennzahlen verdichten. Im letzten Kapitel dieses Teils lernt ihr, wie ihr mehrere Datensätze über gemeinsame Schlüssel zusammenführt (siehe <a href="joining-data.html" class="quarto-xref"><span>Kapitel 13</span></a>).</p>
+<p>Mit <code>summarise()</code> könnt ihr eure Daten auf die wesentlichen Kennzahlen verdichten. Im letzten Kapitel dieses Teils lernt ihr, wie ihr mehrere Datensätze über gemeinsame Schlüssel zusammenführt (siehe <a href="joining-data.html" class="quarto-xref"><span>Kapitel 17</span></a>).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1460,12 +1498,12 @@ Abbildung&nbsp;12.1: In Kombination mit Gruppierung erzeugt <code>summarize</cod
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/filter.html" class="pagination-link" aria-label="Beobachtungen auswählen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/joining-data.html" class="pagination-link" aria-label="Datensätze verbinden">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

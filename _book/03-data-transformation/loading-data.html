@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>5&nbsp; Daten laden – Hands-On Exploratory Data Analytics</title>
+<title>9&nbsp; Daten laden – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
@@ -114,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -156,6 +175,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -170,19 +213,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,55 +242,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,43 +313,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,13 +366,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,25 +389,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,51 +438,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-loading-data-dateiformate" id="toc-sec-loading-data-dateiformate" class="nav-link active" data-scroll-target="#sec-loading-data-dateiformate"><span class="header-section-number">5.1</span> Dateiformate</a></li>
+<li><a href="#sec-loading-data-dateiformate" id="toc-sec-loading-data-dateiformate" class="nav-link active" data-scroll-target="#sec-loading-data-dateiformate"><span class="header-section-number">9.1</span> Dateiformate</a></li>
   <li>
-<a href="#sec-loading-data-csv" id="toc-sec-loading-data-csv" class="nav-link" data-scroll-target="#sec-loading-data-csv"><span class="header-section-number">5.2</span> CSV-Dateien</a>
+<a href="#sec-loading-data-csv" id="toc-sec-loading-data-csv" class="nav-link" data-scroll-target="#sec-loading-data-csv"><span class="header-section-number">9.2</span> CSV-Dateien</a>
   <ul class="collapse">
 <li><a href="#sec-loading-data-trennzeichen" id="toc-sec-loading-data-trennzeichen" class="nav-link" data-scroll-target="#sec-loading-data-trennzeichen">Trennzeichen</a></li>
   <li><a href="#sec-loading-data-encoding" id="toc-sec-loading-data-encoding" class="nav-link" data-scroll-target="#sec-loading-data-encoding">Zeichenkodierung</a></li>
   <li><a href="#sec-loading-data-dezimal" id="toc-sec-loading-data-dezimal" class="nav-link" data-scroll-target="#sec-loading-data-dezimal">Dezimaltrennzeichen</a></li>
   <li><a href="#sec-loading-data-header" id="toc-sec-loading-data-header" class="nav-link" data-scroll-target="#sec-loading-data-header">Kopfzeilen</a></li>
+  <li><a href="#sec-loading-data-col-types" id="toc-sec-loading-data-col-types" class="nav-link" data-scroll-target="#sec-loading-data-col-types">Datentypen festlegen</a></li>
+  <li><a href="#sec-loading-data-problems" id="toc-sec-loading-data-problems" class="nav-link" data-scroll-target="#sec-loading-data-problems">Fehler finden</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-loading-data-json" id="toc-sec-loading-data-json" class="nav-link" data-scroll-target="#sec-loading-data-json"><span class="header-section-number">5.3</span> JSON und JSONL</a>
+<a href="#sec-loading-data-json" id="toc-sec-loading-data-json" class="nav-link" data-scroll-target="#sec-loading-data-json"><span class="header-section-number">9.3</span> JSON und JSONL</a>
   <ul class="collapse">
 <li><a href="#sec-loading-data-json-laden" id="toc-sec-loading-data-json-laden" class="nav-link" data-scroll-target="#sec-loading-data-json-laden">JSON-Dateien laden</a></li>
   <li><a href="#sec-loading-data-jsonl" id="toc-sec-loading-data-jsonl" class="nav-link" data-scroll-target="#sec-loading-data-jsonl">JSONL</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-loading-data-excel" id="toc-sec-loading-data-excel" class="nav-link" data-scroll-target="#sec-loading-data-excel"><span class="header-section-number">5.4</span> Excel-Dateien</a>
+<a href="#sec-loading-data-excel" id="toc-sec-loading-data-excel" class="nav-link" data-scroll-target="#sec-loading-data-excel"><span class="header-section-number">9.4</span> Excel-Dateien</a>
   <ul class="collapse">
 <li><a href="#sec-loading-data-excel-sheets" id="toc-sec-loading-data-excel-sheets" class="nav-link" data-scroll-target="#sec-loading-data-excel-sheets">Arbeitsblätter auswählen</a></li>
   <li><a href="#sec-loading-data-excel-ranges" id="toc-sec-loading-data-excel-ranges" class="nav-link" data-scroll-target="#sec-loading-data-excel-ranges">Bereiche und Kopfzeilen</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-loading-data-google" id="toc-sec-loading-data-google" class="nav-link" data-scroll-target="#sec-loading-data-google"><span class="header-section-number">5.5</span> Google Sheets</a>
+<a href="#sec-loading-data-google" id="toc-sec-loading-data-google" class="nav-link" data-scroll-target="#sec-loading-data-google"><span class="header-section-number">9.5</span> Google Sheets</a>
   <ul class="collapse">
 <li><a href="#sec-loading-data-google-auth" id="toc-sec-loading-data-google-auth" class="nav-link" data-scroll-target="#sec-loading-data-google-auth">Authentifizierung</a></li>
   <li><a href="#sec-loading-data-google-sheets" id="toc-sec-loading-data-google-sheets" class="nav-link" data-scroll-target="#sec-loading-data-google-sheets">Arbeitsblätter und Bereiche</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-loading-data-rds" id="toc-sec-loading-data-rds" class="nav-link" data-scroll-target="#sec-loading-data-rds"><span class="header-section-number">5.6</span> RDS-Dateien</a>
+<a href="#sec-loading-data-rds" id="toc-sec-loading-data-rds" class="nav-link" data-scroll-target="#sec-loading-data-rds"><span class="header-section-number">9.6</span> RDS-Dateien</a>
   <ul class="collapse">
 <li><a href="#sec-loading-data-rds-laden" id="toc-sec-loading-data-rds-laden" class="nav-link" data-scroll-target="#sec-loading-data-rds-laden">RDS-Dateien laden</a></li>
   <li><a href="#sec-loading-data-rds-speichern" id="toc-sec-loading-data-rds-speichern" class="nav-link" data-scroll-target="#sec-loading-data-rds-speichern">RDS-Dateien speichern</a></li>
   <li><a href="#sec-loading-data-rds-wann" id="toc-sec-loading-data-rds-wann" class="nav-link" data-scroll-target="#sec-loading-data-rds-wann">Wann RDS verwenden?</a></li>
   </ul>
 </li>
-  <li><a href="#sec-loading-data-zusammenfassung" id="toc-sec-loading-data-zusammenfassung" class="nav-link" data-scroll-target="#sec-loading-data-zusammenfassung"><span class="header-section-number">5.7</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-loading-data-zusammenfassung" id="toc-sec-loading-data-zusammenfassung" class="nav-link" data-scroll-target="#sec-loading-data-zusammenfassung"><span class="header-section-number">9.7</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-loading-data" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-loading-data" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></h1>
 </div>
 
 
@@ -447,13 +498,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>Jeder Analyseprozess beginnt mit dem Laden der Daten (s. <a href="#fig-loading-data-eda-process" class="quarto-xref">Abbildung&nbsp;<span>5.1</span></a>). In diesem Kapitel schauen wir uns an, wie ihr die gängigsten Datenformate in R laden könnt. Wir starten mit textbasierten Formaten wie CSV und JSON, gehen dann über zu binären Formaten wie Excel und RDS und werfen zuletzt einen Blick auf das Laden von Daten direkt aus Google Sheets.</p>
+</header><p>Jeder Analyseprozess beginnt mit dem Laden der Daten (<a href="#fig-loading-data-eda-process" class="quarto-xref">Abbildung&nbsp;<span>9.1</span></a>). In diesem Kapitel schauen wir uns an, wie ihr die gängigsten Datenformate in R laden könnt. Wir starten mit textbasierten Formaten wie CSV und JSON, gehen dann über zu binären Formaten wie Excel und RDS und werfen zuletzt einen Blick auf das Laden von Daten direkt aus Google Sheets.</p>
 <div id="fig-loading-data-eda-process" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-loading-data-eda-process-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="https://winf-hsos.github.io/university-docs/images/eda_process.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten."><img src="https://winf-hsos.github.io/university-docs/images/eda_process.png" class="img-fluid figure-img"></a>
+<a href="..\images/google_slides/process_exploratory_analysis.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;9.1: Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten [@wickham_r_2023]."><img src="..\images/google_slides/process_exploratory_analysis.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loading-data-eda-process-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten.
+Abbildung&nbsp;9.1: Der Prozess der explorativen Datenanalyse beginnt mit dem Laden der Daten <span class="citation" data-cites="wickham_r_2023">(<a href="../references.html#ref-wickham_r_2023" role="doc-biblioref">Wickham u.&nbsp;a. 2023</a>)</span>.
 </figcaption></figure>
 </div>
 <p>Zu wissen, wie man Daten aus verschiedenen Quellen importiert, ist grundlegend für jede Analyseaufgabe. In der Realität liegen Daten selten im perfekten R-Format vor, sondern verteilen sich über verschiedene Systeme, Dateitypen und Cloud-Dienste. Wer diese Formate souverän in R überführen kann, spart sich von Anfang an viel Zeit und frustrierende manuelle Zwischenschritte.</p>
@@ -507,22 +558,23 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 </tbody>
 </table>
 <p>Zunächst beschäftigen wir uns mit den grundlegenden Dateiformaten, aus denen wir Daten laden können.</p>
-<section id="sec-loading-data-dateiformate" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="sec-loading-data-dateiformate">
-<span class="header-section-number">5.1</span> Dateiformate</h2>
+<section id="sec-loading-data-dateiformate" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-loading-data-dateiformate">
+<span class="header-section-number">9.1</span> Dateiformate</h2>
 <p>Daten im Computer speichern wir üblicherweise in Dateien. Ein Datensatz kann dabei aus einer oder mehreren Dateien bestehen. Auf der untersten Ebene enthält eine Datei Daten in Form von Nullen und Einsen, denn der Computer arbeitet mit Bits und dem Binärsystem.</p>
-<p>In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern:</p>
-<ul>
-<li>Als Textdatei</li>
-<li>Als Binärdatei</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="..\images/data-file-formats.svg" class="img-fluid figure-img"></p>
-<figcaption>Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.</figcaption></figure>
+<p>In der Arbeit mit Daten unterscheiden wir zwei grundlegende Ideen, wie wir einen Datensatz als Datei speichern (<a href="#fig-loading-data-file-formats" class="quarto-xref">Abbildung&nbsp;<span>9.2</span></a>): (1) Als Textdatei oder (2) Als Binärdatei.</p>
+<div id="fig-loading-data-file-formats" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-loading-data-file-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\images/data-file-formats.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Abbildung&nbsp;9.2: Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate."><img src="..\images/data-file-formats.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loading-data-file-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;9.2: Dateiformate für Daten sind entweder textbasierte Formate oder proprietäre binäre Formate.
+</figcaption></figure>
 </div>
 <p>Was ist der Unterschied? Eine Textdatei speichert die Daten in einem Format, das für Menschen lesbar ist. Die Daten werden als Zeichenfolge gespeichert, die über ein gängiges Kodierungssystem wie UTF-8 in lesbare Zeichen übersetzt werden kann. Beispiele für textbasierte Formate sind CSV (Comma-Separated Values), TSV (Tab-Separated Values) und JSON (JavaScript Object Notation). Ihr könnt solche Dateien in jedem beliebigen Texteditor öffnen und lesen. Das ist der große Vorteil: Sie sind einfach zu verstehen und zu bearbeiten.</p>
-<p>Binäre Formate kodieren die Daten nicht als Text, sondern in einem Format, das für den Computer effizienter zu lesen und zu schreiben ist. Beispiele sind Excel-Dateien (.xlsx), RDS-Dateien (.rds) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und benötigen weniger Speicherplatz. Allerdings sind sie nicht direkt von Menschen lesbar und erfordern spezielle Software.</p>
-</section><section id="sec-loading-data-csv" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="sec-loading-data-csv">
-<span class="header-section-number">5.2</span> CSV-Dateien</h2>
+<p>Binäre Formate kodieren die Daten nicht als Text, sondern in einem Format, das für den Computer effizienter zu lesen und zu schreiben ist. Beispiele sind Excel-Dateien (.xlsx), RDS-Dateien (.rds) und Parquet-Dateien (.parquet). Binäre Formate sind in der Regel schneller zu lesen und benötigen weniger Speicherplatz. Allerdings sind sie nicht direkt von Menschen lesbar, zumindest nicht ohne spezielle Software.</p>
+<p>Eines der häufigsten und damit wichtigsten Formate ist CSV, das von so gut wie jedem Werkezug unterstützt wird. Natürlich auch in R.</p>
+</section><section id="sec-loading-data-csv" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="sec-loading-data-csv">
+<span class="header-section-number">9.2</span> CSV-Dateien</h2>
 <p>Eines der gängigsten Datenformate ist CSV. CSV steht für “Comma-Separated Values” und ist ein einfaches textbasiertes Format, das Daten in tabellarischer Form speichert. Jede Zeile in einer CSV-Datei entspricht einer Zeile in der Tabelle, und die Werte werden durch Kommas getrennt. CSV-Dateien können von vielen Anwendungen erstellt und gelesen werden, einschließlich Tabellenkalkulationsprogrammen wie Microsoft Excel und Google Sheets.</p>
 <p>In R könnt ihr CSV-Dateien mit der Funktion <code>read_csv()</code> aus dem <code>readr</code>-Paket laden. Hier ein Beispiel:</p>
 <div class="cell">
@@ -694,34 +746,180 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 </div>
 </div>
 <p>Was ist passiert? Die Spalten wurden automatisch mit generischen Namen wie <code>X1</code>, <code>X2</code>, <code>X3</code> benannt, weil keine Kopfzeile vorhanden war. Oder zumindest haben wir das behauptet. Zusätzlich wurde die erste Zeile der CSV-Datei als Datenzeile interpretiert, anstatt als Kopfzeile.</p>
-</section></section><section id="sec-loading-data-json" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="sec-loading-data-json">
-<span class="header-section-number">5.3</span> JSON und JSONL</h2>
-<p>Neben CSV gibt es ein weiteres textbasiertes Format, das euch in der Datenanalyse immer häufiger begegnet: JSON. JSON steht für “JavaScript Object Notation” und wurde ursprünglich für den Datenaustausch im Web entwickelt. Heute ist JSON weit über das Web hinaus verbreitet und wird oft für APIs, Konfigurationsdateien und hierarchisch strukturierte Daten verwendet.</p>
+</section><section id="sec-loading-data-col-types" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-col-types">Datentypen festlegen</h3>
+<p>Habt ihr euch schon mal gefragt, wie R eigentlich weiß, ob eine Spalte Text, Zahlen oder Datumsangaben enthält? Wenn ihr eine CSV-Datei mit <code>read_csv()</code> ladet, nutzt R eine clevere Heuristik: Es zieht 1.000 Zeilen heran, die gleichmäßig zwischen der ersten und letzten Zeile verteilt sind. Für jede Spalte prüft es dann, ob diese Werte etwa nur aus Zahlen, logischen Wahrheitswerten (<code>TRUE</code> oder <code>FALSE</code>) oder Datumsangaben nach dem ISO8601-Standard bestehen. Alles andere wird einfachheitshalber als Text (<code>character</code>) interpretiert. Das ist so, als würdet ihr die ersten paar Personen in einer Schlange vor einem Club betrachten und daraus schließen, welche Musik drinnen gespielt wird.</p>
+<p>Meistens funktioniert dieses Raten extrem gut. Manchmal aber zieht R die falschen Schlüsse. Ein typisches Beispiel sind fehlende Werte, die in manchen Datensätzen nicht durch ein leeres Feld (<code>NA</code>), sondern mit einem speziellen Zeichen (zum Beispiel einem Punkt <code>.</code>) markiert sind. Wenn R beim Raten für eine ansosnten rein numerische Spalte auf diesen Punkt stößt, stuft es die Spalte plötzlich als Text ein. Auch kann es passieren, dass erst in der 1001. Zeile plötzlich unerwartet Text in einer Spalte auftaucht, die R bis dahin für Zahlen hielt. Dann gibt es Parsing-Warnungen und die betroffenen Werte gehen als <code>NA</code> verloren.</p>
+<p>Damit euch das nicht passiert, könnt ihr die Datentypen direkt beim Laden explizit festlegen. Das macht euren Code robuster und zwingt R, eure Erwartungen strikt zu erfüllen. Dafür gibt es den Parameter <code>col_types</code>.</p>
+<p>Die einfachste Methode ist eine kurze Zeichenfolge, bei der jeder Buchstabe für einen Datentyp steht. Ihr verwendet zum Beispiel <code>"c"</code> für Text (character), <code>"d"</code> für Kommazahlen (double), <code>"i"</code> für ganze Zahlen (integer), <code>"l"</code> für logische Wahrheitswerte (logical) und <code>"D"</code> für Datumsangaben (date). Mit einem Fragezeichen <code>?</code> weist ihr R an, den Typ für diese Spalte weiterhin zu raten. Um eine Spalte komplett zu überspringen (skip), nutzt ihr einen Unterstrich <code>_</code> oder ein Minus <code>-</code>.</p>
+<p>Lasst uns das für unsere Bestellungen ausprobieren:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_types</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>,</span>
+<span>    col_types <span class="op">=</span> <span class="st">"icd?D"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Mit <code>"icd?D"</code> teilen wir R genau mit, was wir erwarten: Die erste Spalte ist eine ganze Zahl (<code>i</code>), die zweite Spalte ist Text (<code>c</code>), die dritte eine Kommazahl (<code>d</code>), bei der vierten Spalte soll R raten (<code>?</code>) und die fünfte Spalte enthält Datumsangaben (<code>D</code>).</p>
+<section id="sec-loading-data-cols" class="level4"><h4 class="anchored" data-anchor-id="sec-loading-data-cols">Mehr Kontrolle mit <code>cols()</code> und <code>cols_only()</code>
+</h4>
+<p>Wenn eure Datensätze viele Spalten haben, wird eine solche Zeichenfolge schnell unleserlich. In diesem Fall hilft euch die Funktion <code>cols()</code>. Damit übergebt ihr die Datentypen als übersichtliche benannte Liste:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_cols</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>,</span>
+<span>    col_types <span class="op">=</span> <span class="fu">cols</span><span class="op">(</span></span>
+<span>        order_id <span class="op">=</span> <span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        customer_name <span class="op">=</span> <span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        total_price <span class="op">=</span> <span class="fu">col_double</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        order_date <span class="op">=</span> <span class="fu">col_date</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Anstelle der kurzen Buchstaben verwenden wir hier die ausgeschriebenen Parser-Funktionen. Welche gibt es?</p>
+<ul>
+<li><p><code>col_logical()</code>, <code>col_double()</code>, <code>col_integer()</code> und <code>col_character()</code> für die klassischen logischen Werte, Zahlen und Texte.</p></li>
+<li><p><code>col_factor()</code>, <code>col_date()</code> und <code>col_datetime()</code> für Faktoren und Datumsangaben.</p></li>
+<li><p><code>col_number()</code> ist ein besonders nützlicher Parser. Er ignoriert vor und nach der Zahl alle nicht-numerischen Zeichen. Das ist perfekt, um Währungszeichen herauszufiltern.</p></li>
+<li><p><code>col_skip()</code> überspringt bestimmte Spalten komplett.</p></li>
+</ul>
+<p>Rät R für alle ungenannten Spalten beim Verwenden von <code>cols()</code> den Typ? Ja, genau! Alle Spalten, die ihr nicht explizit ansprecht, werden weiterhin automatisch geraten. Manchmal wollt ihr aber das genaue Gegenteil: Ihr möchtet für <em>alle</em> Spalten einen bestimmten Typ als Standard setzen und nur Ausnahmen definieren. Dafür nutzt ihr das Argument <code>.default</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_default</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>,</span>
+<span>    col_types <span class="op">=</span> <span class="fu">cols</span><span class="op">(</span></span>
+<span>        .default <span class="op">=</span> <span class="fu">col_character</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        total_price <span class="op">=</span> <span class="fu">col_double</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In diesem Fall werden alle Spalten als Text geladen, außer für <code>total_price</code>, für diese Spalten haben wir es anders spezifiziert. Gerade <code>col_character()</code> ist ein idealer Typ für IDs, Postleitzahlen oder Telefonnummern. Das sind zwar Werte, die aus Ziffern bestehen, aber mit denen wir niemals mathematische Rechnungen durchführen werden. Sie als Text zu laden ist deshalb immer eine sichere Bank.</p>
+<p>Zum Schluss noch ein sehr eleganter Trick: Nutzt die Funktion <code>cols_only()</code>, wenn euer Datensatz viele Spalten hat, ihr aber ohnehin nur drei davon in R benötigen werdet. Damit werden ausschließlich die explizit in der Liste genannten Spalten importiert:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders_subset</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span></span>
+<span>    <span class="st">"data/orders.csv"</span>,</span>
+<span>    col_types <span class="op">=</span> <span class="fu">cols_only</span><span class="op">(</span></span>
+<span>        order_id <span class="op">=</span> <span class="fu">col_integer</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        total_price <span class="op">=</span> <span class="fu">col_double</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        order_date <span class="op">=</span> <span class="fu">col_date</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Das spart nicht nur Tipparbeit, sondern auch Arbeitsspeicher und lässt den Ladevorgang bei riesigen Dateien spürbar schneller abschließen.</p>
+</section></section><section id="sec-loading-data-problems" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-problems">Fehler finden</h3>
+<p>Selbst wenn ihr die Datentypen noch so sorgfältig festlegt, kann es beim Laden zu Parsing-Fehlern kommen. R warnt euch in so einem Fall meist mit einer roten Meldung in der Konsole. Wenn ihr wissen wollt, was genau schiefgelaufen ist, ruft ihr einfach die Funktion <code>problems()</code> mit eurem eingelesenen Data Frame auf:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">problems</span><span class="op">(</span><span class="va">orders_subset</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Mit <code>problems()</code> erhaltet ihr einen hübschen Tibble zurück. Dieser verrät euch für jeden Fehler die genaue Zeile (<code>row</code>), die betroffene Spalte (<code>col</code>), was R an dieser Stelle erwartet hat (<code>expected</code>) und was tatsächlich dort stand (<code>actual</code>). Mit diesem Wissen könnt ihr dann gezielt in den Rohdaten nachschauen und das Problem beheben. Meistens entdeckt man so schnell fiese Sonderzeichen oder verschobene Spalten.</p>
+</section></section><section id="sec-loading-data-json" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-loading-data-json">
+<span class="header-section-number">9.3</span> JSON und JSONL</h2>
+<p>Mit JSON gibt es Neben CSV ein weiteres textbasiertes Format, das euch in der Datenanalyse immer häufiger begegnet. JSON steht für “JavaScript Object Notation” und wurde für den Datenaustausch im Internet entwickelt. Heute ist JSON weit über das Web hinaus verbreitet und wird oft für APIs, Konfigurationsdateien und hierarchisch strukturierte Daten verwendet.</p>
 <p>Was unterscheidet JSON von CSV? In einer CSV-Datei sind die Daten flach und tabellarisch. JSON erlaubt dagegen verschachtelte Strukturen. Ein einzelner JSON-Eintrag kann so aussehen:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Anna"</span><span class="fu">,</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">23</span><span class="fu">,</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Statistics"</span><span class="ot">,</span> <span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Anna"</span><span class="fu">,</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">23</span><span class="fu">,</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Statistics"</span><span class="ot">,</span> <span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Hier hat die Person ein Feld <code>courses</code>, das selbst eine Liste enthält. In CSV wäre das nur umständlich abzubilden.</p>
 <section id="sec-loading-data-json-laden" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-json-laden">JSON-Dateien laden</h3>
-<p>Zum Laden von JSON-Dateien nutzt ihr das Paket <code>jsonlite</code>. Es wandelt die JSON-Struktur automatisch in ein tibble-ähnliches Objekt um, wenn die Daten tabellarisch interpretierbar sind:</p>
+<p>Wie bekommen wir diese geschweiften Klammern nun in eine saubere Tabelle in R? Zum Laden von JSON-Dateien nutzt ihr das Paket <code>jsonlite</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="st">"data/example.json"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jeroen.r-universe.dev/jsonlite">jsonlite</a></span><span class="op">)</span></span>
+<span><span class="va">json_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="st">"data/example.json"</span><span class="op">)</span></span>
+<span><span class="va">json_data</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$name
+[1] "Anna"
+
+$age
+[1] 23
+
+$courses
+[1] "Statistics"     "Programming"    "Data Analytics"</code></pre>
 </div>
-<p>Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> erkennt, ob die JSON-Datei ein einzelnes Objekt oder eine Liste von Objekten enthält, und versucht, die Daten intelligent in einen Data Frame umzuwandeln. Bei einfachen, flachen JSON-Strukturen funktioniert das problemlos.</p>
-</section><section id="sec-loading-data-jsonl" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-jsonl">JSONL</h3>
-<p>In der Praxis begegnet euch häufig auch das Format JSONL (JSON Lines). Dabei enthält jede Zeile der Datei genau ein JSON-Objekt. Das ist besonders bei großen Datensätzen praktisch, weil die Datei zeilenweise gelesen und verarbeitet werden kann.</p>
-<p>Eine JSONL-Datei sieht zum Beispiel so aus:</p>
-<pre><code>{"name": "Anna", "age": 23, "passed": true}
-{"name": "Ben", "age": 21, "passed": false}
-{"name": "Cleo", "age": 25, "passed": true}</code></pre>
-<p>Zum Laden von JSONL-Dateien könnt ihr <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> aus dem Paket <code>jsonlite</code> verwenden:</p>
+</div>
+<p>Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> erkennt automatisch, ob die JSON-Datei ein einzelnes Objekt oder eine Liste von Objekten enthält. Vorhin sagten wir, JSON erlaubt verschachtelte Strukturen. Unser Objekt namens “Anna” enthält bei den Kursen genau so eine Liste aus drei Elementen. Habt ihr bemerkt, wie die Ausgabe unseres Codes oben formatiert ist? R hat uns hier eine einfache Liste (<code>list</code>) zurückgegeben!</p>
+<p>Wir können das leicht überprüfen. Die Funktion <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> verrät uns den genauen R-Datentyp eines Objekts. Lasst uns sehen, was wir hier vor uns haben:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">file</a></span><span class="op">(</span><span class="st">"data/example.jsonl"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">json_data</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
 </div>
-<p>Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> liest die Datei zeilenweise und liefert am Ende einen Data Frame. Das ist besonders bei sehr großen Dateien effizienter als <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code>, weil nicht die gesamte Datei auf einmal in den Arbeitsspeicher geladen werden muss.</p>
+</div>
+<p>Tatsächlich! Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> liefert uns für ein einzelnes JSON-Objekt eine Liste zurück. Das ist zwar inhaltlich korrekt, bringt uns für eine tabellarische Analyse aber noch nicht weiter. Glücklicherweise können wir unsere Daten ganz einfach in die richtige Form gießen. Mit der Funktion <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble()</a></code> verwandeln wir diese Liste in einen modernen Tibble:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span> </span>
+<span><span class="va">json_tibble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">json_data</span><span class="op">)</span></span>
+<span><span class="va">json_tibble</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name    age courses       
+  &lt;chr&gt; &lt;int&gt; &lt;chr&gt;         
+1 Anna     23 Statistics    
+2 Anna     23 Programming   
+3 Anna     23 Data Analytics</code></pre>
+</div>
+</div>
+<p>Schaut euch das Ergebnis einmal genau an! Fällt euch etwas auf? Obwohl wir in unserem JSON-Objekt nur einmal den Namen “Anna” und das Alter “23” angegeben haben, gibt uns R gleich drei separate Zeilen zurück. Warum? Weil die in der Person verschachtelte Liste <code>courses</code> drei Einträge enthielt. Die Funktion <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble()</a></code> ist clever genug, um die Zeilen hier automatisch “auszumultiplizieren” – für jeden Kurs erstellt sie eine eigene Zeile und wiederholt bequemerweise die kurzen Einzelwerte wie Name und Alter.</p>
+<section id="sec-loading-data-json-multiple" class="level4"><h4 class="anchored" data-anchor-id="sec-loading-data-json-multiple">Mehrere Personen</h4>
+<p>Das war nur eine einzelne Person. Was passiert, wenn wir eine Datei haben, in der anstelle eines Einzelobjekts direkt drei Personen als JSON-Liste stecken? Lasst uns die erweiterte Datei <code>example_multiple.json</code> ausprobieren. Darin befinden sich Anna, Ben und Cleo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Anna"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">23</span><span class="fu">,</span> <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Statistics"</span><span class="ot">,</span> <span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Ben"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">21</span><span class="fu">,</span> <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Math"</span><span class="ot">]</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Cleo"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">25</span><span class="fu">,</span> <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span> <span class="fu">}</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Laden wir sie doch einmal ein:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">json_multiple</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON</a></span><span class="op">(</span><span class="st">"data/example_multiple.json"</span><span class="op">)</span></span>
+<span><span class="va">json_multiple</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  name age                                 courses
+1 Anna  23 Statistics, Programming, Data Analytics
+2  Ben  21                                    Math
+3 Cleo  25             Programming, Data Analytics</code></pre>
+</div>
+</div>
+<p>Beachtet den genauen Output! Weil das JSON dieses Mal eine Liste mit mehreren Objekten ist, gibt uns <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code> direkt einen klassischen Data Frame zurück (welchen wir wie gewohnt mit <code><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble()</a></code> aufpolieren können). Aber wo sind unsere Kurse geblieben? Die Spalte <code>courses</code> sieht plötzlich anders aus. Das ist eine sogenannte Listen-Spalte (<code>list</code>-column) – eine flache Spalte, in der sich wiederum Listen verstecken. Anders als bei nur einer Person multipliziert R diese Listen hier beim Erzeugen des Tibbles <em>nicht</em> automatisch aus.</p>
+<p>Wie knacken wir diese Listen in der Spalte auf, um auch hier an die einzelnen Kurse zu gelangen? Dafür nutzen wir die Funktion <code><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest()</a></code> aus dem Paket <code>tidyr</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
+<span><span class="va">json_tibble_multiple</span> <span class="op">&lt;-</span> <span class="va">json_multiple</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">courses</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">json_tibble_multiple</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  name    age courses       
+  &lt;chr&gt; &lt;int&gt; &lt;chr&gt;         
+1 Anna     23 Statistics    
+2 Anna     23 Programming   
+3 Anna     23 Data Analytics
+4 Ben      21 Math          
+5 Cleo     25 Programming   
+6 Cleo     25 Data Analytics</code></pre>
+</div>
+</div>
+<p>Perfekt! Durch <code><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest()</a></code> klappen wir die Listen-Spalte auf und erreichen exakt denselben Effekt: Die Kurse werden ausmultipliziert und wir erhalten für jede belegte Vorlesung eine eigene Zeile mit Namen und Alter der entsprechenden Person.</p>
+</section></section><section id="sec-loading-data-jsonl" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-jsonl">JSONL</h3>
+<p>In der Praxis begegnet euch häufig auch das Format JSONL. Dabei steht das “L” für Lines. Jede Zeile der Datei enthält genau ein JSON-Objekt. Das ist besonders bei großen Datensätzen enorm praktisch, weil die Datei zeilenweise gelesen und verarbeitet werden kann.</p>
+<p>Eine erweiterte JSONL-Datei mit unseren drei Personen und ihren belegten Kursen sieht zum Beispiel so aus:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Anna"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">23</span><span class="fu">,</span> <span class="dt">"passed"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Statistics"</span><span class="ot">,</span> <span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span><span class="fu">}</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Ben"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">21</span><span class="fu">,</span> <span class="dt">"passed"</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Math"</span><span class="ot">]</span><span class="fu">}</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Cleo"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">25</span><span class="fu">,</span> <span class="dt">"passed"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">"courses"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Programming"</span><span class="ot">,</span> <span class="st">"Data Analytics"</span><span class="ot">]</span><span class="fu">}</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Zum Laden von JSONL-Dateien nutzt ihr die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> aus dem Paket <code>jsonlite</code>. Gönnen wir dem Ergebnis sofort wieder unseren Tibble-Anstrich:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">jsonl_tibble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">file</a></span><span class="op">(</span><span class="st">"data/example.jsonl"</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">jsonl_tibble</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  name    age passed courses  
+  &lt;chr&gt; &lt;int&gt; &lt;lgl&gt;  &lt;list&gt;   
+1 Anna     23 TRUE   &lt;chr [3]&gt;
+2 Ben      21 FALSE  &lt;chr [1]&gt;
+3 Cleo     25 TRUE   &lt;chr [2]&gt;</code></pre>
+</div>
+</div>
+<p>Die Funktion <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> liest die Datei Zeile für Zeile ein. Das ist besonders bei riesigen Dateien viel effizienter als das Ausführen von <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code>, weil der Computer nicht sofort die gesamte Datei in den Arbeitsspeicher laden muss.</p>
+<p>Und keine Sorge bezüglich der verschachtelten Kurs-Listen! Wie ihr seht, liefert uns auch <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/stream_in.html">stream_in()</a></code> von Haus aus eine elegante Listen-Spalte für die Kurse. Wenn ihr die Daten für die Analyse nun zeilenweise ausklappen wollt, wisst ihr ja bereits, welches Werkzeug euch zur Seite steht: Ein kurzes <code>unnest(cols = courses)</code> und alle Kurse sind wunderbar zeilenweise ausmultipliziert.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="JSON oder CSV?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -735,19 +933,19 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 <p>Für tabellarische Daten ist CSV oft die einfachere Wahl. JSON spielt seine Stärken bei verschachtelten oder hierarchischen Daten aus, zum Beispiel bei Antworten von Web-APIs. Wenn ihr Daten von einer API bekommt, liegen sie fast immer im JSON-Format vor.</p>
 </div>
 </div>
-</section></section><section id="sec-loading-data-excel" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="sec-loading-data-excel">
-<span class="header-section-number">5.4</span> Excel-Dateien</h2>
+</section></section><section id="sec-loading-data-excel" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="sec-loading-data-excel">
+<span class="header-section-number">9.4</span> Excel-Dateien</h2>
 <p>Excel-Dateien gehören zu den binären Formaten. Sie sind in der Praxis extrem verbreitet, weil viele Menschen mit Microsoft Excel oder Google Sheets arbeiten. Das Format <code>.xlsx</code> ist kein einfacher Text, sondern ein komprimiertes Archiv, das die Daten zusammen mit Formatierungen, Formeln und Metadaten speichert.</p>
 <p>Zum Laden von Excel-Dateien in R nutzt ihr das Paket <code>readxl</code>, das ebenfalls zum Tidyverse-Ökosystem gehört:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Die Funktion <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> erkennt automatisch, ob es sich um eine <code>.xls</code>- oder <code>.xlsx</code>-Datei handelt. Das Ergebnis ist ein Tibble, genau wie bei <code>read_csv()</code>.</p>
 <section id="sec-loading-data-excel-sheets" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-excel-sheets">Arbeitsblätter auswählen</h3>
 <p>Eine Besonderheit von Excel-Dateien ist, dass sie mehrere Arbeitsblätter (Sheets) enthalten können. Standardmäßig liest <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code> das erste Arbeitsblatt. Wenn ihr ein anderes Blatt laden wollt, gebt ihr es über den Parameter <code>sheet</code> an:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Über den Namen</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Über den Namen</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, sheet <span class="op">=</span> <span class="st">"Sales"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Oder über die Position</span></span>
@@ -755,20 +953,20 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 </div>
 <p>Wenn ihr nicht wisst, welche Arbeitsblätter eine Excel-Datei enthält, hilft euch <code><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets()</a></code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://readxl.tidyverse.org/reference/excel_sheets.html">excel_sheets</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="sec-loading-data-excel-ranges" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-excel-ranges">Bereiche und Kopfzeilen</h3>
 <p>Manchmal beginnen die eigentlichen Daten in einer Excel-Datei nicht in der ersten Zeile, weil darüber ein Titel oder Erläuterungen stehen. In diesem Fall könnt ihr Zeilen überspringen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, skip <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, skip <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Oder ihr gebt einen konkreten Zellbereich an, wie ihr es aus Excel kennt:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, range <span class="op">=</span> <span class="st">"B2:F100"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, range <span class="op">=</span> <span class="st">"B2:F100"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Genau wie bei CSV könnt ihr auch angeben, dass keine Kopfzeile vorhanden ist:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"data/example.xlsx"</span>, col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="readxl braucht kein Excel">
 <div class="callout-header d-flex align-content-center">
@@ -783,12 +981,12 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 <p>Das Paket <code>readxl</code> liest Excel-Dateien direkt, ohne dass Microsoft Excel installiert sein muss. Das ist besonders praktisch auf Servern oder in automatisierten Pipelines, wo kein Excel vorhanden ist.</p>
 </div>
 </div>
-</section></section><section id="sec-loading-data-google" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="sec-loading-data-google">
-<span class="header-section-number">5.5</span> Google Sheets</h2>
+</section></section><section id="sec-loading-data-google" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="sec-loading-data-google">
+<span class="header-section-number">9.5</span> Google Sheets</h2>
 <p>Was ist, wenn eure Daten gar nicht als Datei auf eurem Rechner liegen, sondern in der Cloud? Google Sheets ist einer der verbreitetsten Orte, an denen Teams gemeinsam Daten sammeln und pflegen. Zum Beispiel, wenn ihr eine Umfrage über Google Forms durchführt: Die Antworten landen automatisch in einem Google Sheet.</p>
 <p>Das Paket <code>googlesheets4</code> erlaubt es euch, Daten direkt aus Google Sheets in R zu laden, ohne sie erst herunterladen zu müssen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Ihr übergebt einfach die URL oder die ID eures Google Sheets an <code><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet()</a></code>. Das Ergebnis ist ein Tibble.</p>
@@ -796,13 +994,13 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 <p>Beim ersten Aufruf fragt euch <code>googlesheets4</code> nach einer Berechtigung, auf euer Google-Konto zuzugreifen. Es öffnet sich ein Browserfenster, in dem ihr euch anmeldet und die Berechtigung erteilt. R speichert diese Berechtigung dann lokal, sodass ihr euch nicht jedes Mal neu anmelden müsst.</p>
 <p>Wenn ihr auf öffentlich zugängliche Sheets zugreifen wollt, könnt ihr die Authentifizierung auch komplett abschalten:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="sec-loading-data-google-sheets" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-google-sheets">Arbeitsblätter und Bereiche</h3>
 <p>Genau wie bei Excel-Dateien könnt ihr bei Google Sheets das Arbeitsblatt und den Zellbereich angeben:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bestimmtes Arbeitsblatt laden</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Bestimmtes Arbeitsblatt laden</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/..."</span>, sheet <span class="op">=</span> <span class="st">"Responses"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Bestimmten Bereich laden</span></span>
@@ -821,14 +1019,14 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 <p>Google Sheets ist praktisch, wenn Daten laufend aktualisiert werden und ihr immer den neuesten Stand laden wollt. Für statische Datensätze, die sich nicht mehr ändern, ist eine heruntergeladene CSV-Datei meistens die einfachere und reproduzierbarere Lösung.</p>
 </div>
 </div>
-</section></section><section id="sec-loading-data-rds" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="sec-loading-data-rds">
-<span class="header-section-number">5.6</span> RDS-Dateien</h2>
+</section></section><section id="sec-loading-data-rds" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="sec-loading-data-rds">
+<span class="header-section-number">9.6</span> RDS-Dateien</h2>
 <p>Zum Schluss schauen wir uns ein Format an, das speziell für R entwickelt wurde: RDS. RDS steht für “R Data Serialization” und ist ein binäres Format, mit dem ihr einzelne R-Objekte speichern und wieder laden könnt.</p>
 <p>Warum ist das nützlich? Stellt euch vor, ihr habt einen Datensatz aufwendig bereinigt und transformiert. Wenn ihr ihn als CSV speichert, gehen dabei Informationen verloren, zum Beispiel Datentypen, Faktor-Levels oder die Zeitzone von Datumswerten. RDS bewahrt all das, weil es das R-Objekt exakt so speichert, wie es im Arbeitsspeicher vorliegt.</p>
 <section id="sec-loading-data-rds-laden" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-rds-laden">RDS-Dateien laden</h3>
 <p>Zum Laden nutzt ihr <code>read_rds()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">&lt;-</span> <span class="fu">read_rds</span><span class="op">(</span><span class="st">"data/tweets_ampel.rds"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">&lt;-</span> <span class="fu">read_rds</span><span class="op">(</span><span class="st">"data/tweets_ampel.rds"</span><span class="op">)</span></span>
 <span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -852,14 +1050,13 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 </section><section id="sec-loading-data-rds-speichern" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-rds-speichern">RDS-Dateien speichern</h3>
 <p>Umgekehrt könnt ihr jedes R-Objekt als RDS-Datei speichern:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">write_rds</span><span class="op">(</span><span class="va">tweets</span>, <span class="st">"data/tweets_backup.rds"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">write_rds</span><span class="op">(</span><span class="va">tweets</span>, <span class="st">"data/tweets_backup.rds"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Ein wichtiger Unterschied zu anderen Formaten: RDS speichert genau ein Objekt pro Datei. Wenn ihr mehrere Objekte speichern wollt, erstellt ihr entweder mehrere RDS-Dateien oder nutzt das verwandte Format <code>.RData</code> (auch <code>.rda</code>), das mehrere Objekte auf einmal speichern kann.</p>
 </section><section id="sec-loading-data-rds-wann" class="level3"><h3 class="anchored" data-anchor-id="sec-loading-data-rds-wann">Wann RDS verwenden?</h3>
 <p>RDS ist die beste Wahl, wenn ihr innerhalb von R arbeitet und sicherstellen wollt, dass keine Informationen verloren gehen. In diesem Buch laden wir den Tweets-Datensatz als RDS-Datei, weil so alle Spaltentypen und Metadaten erhalten bleiben. Wenn ihr Daten dagegen mit anderen Tools oder Personen teilen wollt, die kein R verwenden, ist CSV oder ein anderes offenes Format die bessere Wahl.</p>
-</section></section><section id="sec-loading-data-zusammenfassung" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="sec-loading-data-zusammenfassung">
-<span class="header-section-number">5.7</span> Kurz zusammengefasst</h2>
-<div id="load-data-summary" class="reuse">
+</section></section><section id="sec-loading-data-zusammenfassung" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="sec-loading-data-zusammenfassung">
+<span class="header-section-number">9.7</span> Kurz zusammengefasst</h2>
 <ul>
 <li>
 <strong>CSV</strong> ist das verbreitetste textbasierte Format. Ihr ladet es mit <code>read_csv()</code> aus dem <code>readr</code>-Paket. Achtet auf Trennzeichen, Zeichenkodierung und Dezimaltrennzeichen.</li>
@@ -872,11 +1069,15 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
 <li>
 <strong>RDS</strong> ist das R-eigene Binärformat. Es bewahrt alle Datentypen und Attribute und eignet sich perfekt für die Arbeit innerhalb von R.</li>
 </ul>
-</div>
-<p>Daten laden ist der Startpunkt jeder Analyse. Im nächsten Kapitel lernt ihr mit dem Pipe-Operator <code>|&gt;</code> ein Werkzeug kennen, das euch dabei hilft, die geladenen Daten Schritt für Schritt weiterzuverarbeiten (siehe <a href="pipe.html" class="quarto-xref"><span>Kapitel 6</span></a>).</p>
+<p>Daten laden ist der Startpunkt jeder Analyse. Im nächsten Kapitel lernt ihr mit dem Pipe-Operator <code>|&gt;</code> ein Werkzeug kennen, das euch dabei hilft, die geladenen Daten Schritt für Schritt weiterzuverarbeiten (siehe <a href="pipe.html" class="quarto-xref"><span>Kapitel 10</span></a>).</p>
 <p><em>Abbildung: Ein Flussdiagramm mit einem zentralen Kasten “Daten laden in R”. Von dort gehen fünf Pfeile ab zu je einem Format-Kasten: CSV (mit Icon einer Textdatei), JSON (mit geschweiften Klammern), Excel (mit einem grünen Tabellen-Icon), Google Sheets (mit einem Cloud-Icon), RDS (mit dem R-Logo). Unter jedem Format-Kasten steht die zugehörige R-Funktion: <code>read_csv()</code>, <code><a href="https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html">fromJSON()</a></code>, <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel()</a></code>, <code><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet()</a></code>, <code>read_rds()</code>. Die Format-Kästen sind in zwei Gruppen aufgeteilt: links “Textbasiert” (CSV, JSON), rechts “Binär / Cloud” (Excel, Google Sheets, RDS).</em></p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-wickham_r_2023" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, und Garrett Grolemund. 2023. <em>R for data science: import, tidy, transform, visualize, and model data</em>. 2nd edition. O’Reilly Media, Inc.
+</div>
+</div>
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -1317,12 +1518,12 @@ Abbildung&nbsp;5.1: Der Prozess der explorativen Datenanalyse beginnt mit dem La
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../02-r-basics/data-representation.html" class="pagination-link" aria-label="Datenrepräsentation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/pipe.html" class="pagination-link" aria-label="Pipe-Operator">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

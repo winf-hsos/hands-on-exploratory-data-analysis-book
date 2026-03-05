@@ -16,6 +16,30 @@ The publish flow is:
 quarto render --to html
 ```
 
+## Render Slides
+
+Slides are rendered with the `slides` Quarto profile from `_quarto-slides.yml`.
+
+### Render all configured slides
+
+```bash
+quarto render --profile slides
+```
+
+This renders the configured files in `slides/*.qmd` and writes output to `_book/slides/`.
+
+### Render only changed slides
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/render-changed-slides.ps1
+```
+
+### Force-render all configured slides via script
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/render-changed-slides.ps1 -Force
+```
+
 ### Commit and push
 
 ```bash
@@ -41,6 +65,7 @@ A workflow at `.github/workflows/deploy-book.yml` deploys the `_book` directory.
 Manage slide exports in:
 
 - `google-slides-images.yml`
+- `scripts/google-slides-images.json` is deprecated and ignored by the script
 
 Structure:
 
@@ -50,6 +75,9 @@ Structure:
 - `pageid`: SVG for book image (`images/google_slides/<name>.svg`)
 - optional `slide_pageid`: SVG for slide variant (`images/slides/google_slides/<same-name>.svg`)
 - optional `filename`: base file name without extension
+- optional `edit_url`: Google Slides edit URL; script extracts `document_id` and `pageid`
+- optional `slide_edit_url`: Google Slides edit URL for slide variant; script extracts `slide_pageid`
+- each slide object can start with `pageid`, `edit_url`, or `slide_edit_url`
 
 Run:
 
@@ -67,9 +95,9 @@ Example slide entry:
 ```yaml
 output_dir: images
 presentations:
-  - document_id: your_google_presentation_id
+  - document_id: your_google_presentation_id  # optional if edit_url includes it
     slides:
-      - pageid: gBOOK_ID
-        slide_pageid: gSLIDE_ID
+      - edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_841#slide=id.g1f51f684b29_0_841
+        slide_edit_url: https://docs.google.com/presentation/d/1r8QPIf77zuOwwy0l41asBmtejohw70fovt_gqQbakWQ/edit?slide=id.g1f51f684b29_0_695#slide=id.g1f51f684b29_0_695
         filename: select_schema
 ```

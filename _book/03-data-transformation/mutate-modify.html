@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>9&nbsp; Variablen verändern – Hands-On Exploratory Data Analytics</title>
+<title>13&nbsp; Variablen verändern – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-modify.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-modify.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -153,6 +153,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -167,19 +191,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,55 +220,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,43 +291,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,13 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,25 +367,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,9 +416,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-mutate-modify-umbenennen" id="toc-sec-mutate-modify-umbenennen" class="nav-link active" data-scroll-target="#sec-mutate-modify-umbenennen"><span class="header-section-number">9.1</span> Variablen umbenennen</a></li>
+<li><a href="#sec-mutate-modify-umbenennen" id="toc-sec-mutate-modify-umbenennen" class="nav-link active" data-scroll-target="#sec-mutate-modify-umbenennen"><span class="header-section-number">13.1</span> Variablen umbenennen</a></li>
   <li>
-<a href="#sec-mutate-modify-datentypen" id="toc-sec-mutate-modify-datentypen" class="nav-link" data-scroll-target="#sec-mutate-modify-datentypen"><span class="header-section-number">9.2</span> Datentypen umwandeln</a>
+<a href="#sec-mutate-modify-datentypen" id="toc-sec-mutate-modify-datentypen" class="nav-link" data-scroll-target="#sec-mutate-modify-datentypen"><span class="header-section-number">13.2</span> Datentypen umwandeln</a>
   <ul class="collapse">
 <li><a href="#text-in-zahlen" id="toc-text-in-zahlen" class="nav-link" data-scroll-target="#text-in-zahlen">Text in Zahlen</a></li>
   <li><a href="#zahlen-in-text" id="toc-zahlen-in-text" class="nav-link" data-scroll-target="#zahlen-in-text">Zahlen in Text</a></li>
@@ -396,44 +426,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-mutate-modify-umkodieren" id="toc-sec-mutate-modify-umkodieren" class="nav-link" data-scroll-target="#sec-mutate-modify-umkodieren"><span class="header-section-number">9.3</span> Werte umkodieren</a>
+<a href="#sec-mutate-modify-umkodieren" id="toc-sec-mutate-modify-umkodieren" class="nav-link" data-scroll-target="#sec-mutate-modify-umkodieren"><span class="header-section-number">13.3</span> Werte umkodieren</a>
   <ul class="collapse">
 <li><a href="#einfache-bedingung-mit-if_else" id="toc-einfache-bedingung-mit-if_else" class="nav-link" data-scroll-target="#einfache-bedingung-mit-if_else">Einfache Bedingung mit <code>if_else()</code></a></li>
   <li><a href="#mehrere-bedingungen-mit-case_when" id="toc-mehrere-bedingungen-mit-case_when" class="nav-link" data-scroll-target="#mehrere-bedingungen-mit-case_when">Mehrere Bedingungen mit <code>case_when()</code></a></li>
   <li><a href="#werte-direkt-ersetzen-mit-case_match" id="toc-werte-direkt-ersetzen-mit-case_match" class="nav-link" data-scroll-target="#werte-direkt-ersetzen-mit-case_match">Werte direkt ersetzen mit <code>case_match()</code></a></li>
   </ul>
 </li>
-  <li><a href="#sec-mutate-modify-einheiten" id="toc-sec-mutate-modify-einheiten" class="nav-link" data-scroll-target="#sec-mutate-modify-einheiten"><span class="header-section-number">9.4</span> Einheiten umrechnen</a></li>
+  <li><a href="#sec-mutate-modify-einheiten" id="toc-sec-mutate-modify-einheiten" class="nav-link" data-scroll-target="#sec-mutate-modify-einheiten"><span class="header-section-number">13.4</span> Einheiten umrechnen</a></li>
   <li>
-<a href="#sec-mutate-modify-korrigieren" id="toc-sec-mutate-modify-korrigieren" class="nav-link" data-scroll-target="#sec-mutate-modify-korrigieren"><span class="header-section-number">9.5</span> Werte korrigieren</a>
+<a href="#sec-mutate-modify-korrigieren" id="toc-sec-mutate-modify-korrigieren" class="nav-link" data-scroll-target="#sec-mutate-modify-korrigieren"><span class="header-section-number">13.5</span> Werte korrigieren</a>
   <ul class="collapse">
 <li><a href="#einzelne-werte-ersetzen" id="toc-einzelne-werte-ersetzen" class="nav-link" data-scroll-target="#einzelne-werte-ersetzen">Einzelne Werte ersetzen</a></li>
   <li><a href="#muster-ersetzen-mit-str_replace" id="toc-muster-ersetzen-mit-str_replace" class="nav-link" data-scroll-target="#muster-ersetzen-mit-str_replace">Muster ersetzen mit <code>str_replace()</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-mutate-modify-na" id="toc-sec-mutate-modify-na" class="nav-link" data-scroll-target="#sec-mutate-modify-na"><span class="header-section-number">9.6</span> Fehlende Werte ersetzen</a>
+<a href="#sec-mutate-modify-na" id="toc-sec-mutate-modify-na" class="nav-link" data-scroll-target="#sec-mutate-modify-na"><span class="header-section-number">13.6</span> Fehlende Werte ersetzen</a>
   <ul class="collapse">
 <li><a href="#replace_na" id="toc-replace_na" class="nav-link" data-scroll-target="#replace_na"><code>replace_na()</code></a></li>
   <li><a href="#coalesce-f%C3%BCr-ersatzwerte-aus-mehreren-spalten" id="toc-coalesce-für-ersatzwerte-aus-mehreren-spalten" class="nav-link" data-scroll-target="#coalesce-f%C3%BCr-ersatzwerte-aus-mehreren-spalten"><code>coalesce()</code> für Ersatzwerte aus mehreren Spalten</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-mutate-modify-text" id="toc-sec-mutate-modify-text" class="nav-link" data-scroll-target="#sec-mutate-modify-text"><span class="header-section-number">9.7</span> Text normalisieren</a>
+<a href="#sec-mutate-modify-text" id="toc-sec-mutate-modify-text" class="nav-link" data-scroll-target="#sec-mutate-modify-text"><span class="header-section-number">13.7</span> Text normalisieren</a>
   <ul class="collapse">
 <li><a href="#gro%C3%9F--und-kleinschreibung" id="toc-groß--und-kleinschreibung" class="nav-link" data-scroll-target="#gro%C3%9F--und-kleinschreibung">Groß- und Kleinschreibung</a></li>
   <li><a href="#leerzeichen-bereinigen" id="toc-leerzeichen-bereinigen" class="nav-link" data-scroll-target="#leerzeichen-bereinigen">Leerzeichen bereinigen</a></li>
   <li><a href="#sonderzeichen-entfernen" id="toc-sonderzeichen-entfernen" class="nav-link" data-scroll-target="#sonderzeichen-entfernen">Sonderzeichen entfernen</a></li>
   </ul>
 </li>
-  <li><a href="#sec-mutate-modify-runden" id="toc-sec-mutate-modify-runden" class="nav-link" data-scroll-target="#sec-mutate-modify-runden"><span class="header-section-number">9.8</span> Zahlen runden</a></li>
-  <li><a href="#sec-mutate-modify-across" id="toc-sec-mutate-modify-across" class="nav-link" data-scroll-target="#sec-mutate-modify-across"><span class="header-section-number">9.9</span> Mehrere Variablen ändern</a></li>
-  <li><a href="#sec-mutate-modify-zusammenfassung" id="toc-sec-mutate-modify-zusammenfassung" class="nav-link" data-scroll-target="#sec-mutate-modify-zusammenfassung"><span class="header-section-number">9.10</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-mutate-modify-runden" id="toc-sec-mutate-modify-runden" class="nav-link" data-scroll-target="#sec-mutate-modify-runden"><span class="header-section-number">13.8</span> Zahlen runden</a></li>
+  <li><a href="#sec-mutate-modify-across" id="toc-sec-mutate-modify-across" class="nav-link" data-scroll-target="#sec-mutate-modify-across"><span class="header-section-number">13.9</span> Mehrere Variablen ändern</a></li>
+  <li><a href="#sec-mutate-modify-zusammenfassung" id="toc-sec-mutate-modify-zusammenfassung" class="nav-link" data-scroll-target="#sec-mutate-modify-zusammenfassung"><span class="header-section-number">13.10</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-modify.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-mutate-modify" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/mutate-modify.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-mutate-modify" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></h1>
 </div>
 
 
@@ -447,7 +477,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>Nachdem ihr gelernt habt, wie ihr Datensätze auf die relevanten Spalten reduziert, widmen wir uns nun der Qualität dieser Spalten. In diesem Kapitel geht es darum, wie ihr bestehende Variablen mit der Funktion <code>mutate()</code> aus dem <code>dplyr</code>-Paket gezielt verändern könnt. Wir zeigen euch, wie ihr Datentypen korrigiert, Text vereinheitlicht und fehlende oder fehlerhafte Werte ersetzt.</p>
+</header><p>Nachdem ihr gelernt habt, wie ihr Datensätze auf die relevanten Spalten reduziert, widmen wir uns nun der Qualität dieser Spalten. In diesem Kapitel geht es darum, wie ihr bestehende Variablen mit der Funktion <code>mutate()</code> aus dem <code>dplyr</code>-Paket gezielt verändern könnt. Wir schauen uns an, wie wir Datentypen korrigieren, Texte vereinheitlichen und fehlende oder fehlerhafte Werte ersetzen können.</p>
+<div id="fig-mutate-modify-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-mutate-modify-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\images/google_slides/mutate_modify_schema.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mutate-modify-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;13.1: Mit <code>mutate</code> können wir existierende Variablen verändern.
+</figcaption></figure>
+</div>
 <p>Bevor ihr mit euren Daten rechnen, filtern oder visualisieren könnt, müsst ihr sie oft erst in Form bringen, denn die Realität liefert selten perfekte Daten. Spalten haben den falschen Datentyp, Texte sind uneinheitlich geschrieben oder es fehlen Werte. Wer lernt, diese Unsauberkeiten effizient zu beheben, schafft die notwendige Grundlage für alle verlässlichen Analysen und Modelle, die auf diesen Daten aufbauen.</p>
 <p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
 <table class="caption-top table">
@@ -507,9 +545,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Beginnen wir mit der rudimentärsten Form der Anpassung: Dem Umbenennen von Spalten.</p>
-<section id="sec-mutate-modify-umbenennen" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-mutate-modify-umbenennen">
-<span class="header-section-number">9.1</span> Variablen umbenennen</h2>
-<p>Das Umbenennen von Spalten ist streng genommen keine <code>mutate()</code>-Aufgabe, aber es gehört zum Vorbereiten eines Datensatzes dazu. Wie ihr im Kapitel zu <code>select()</code> gesehen habt (siehe <a href="select.html#sec-select-umbenennen" class="quarto-xref"><span>Kapitel 8.3</span></a>), gibt es dafür die Funktion <code>rename()</code>:</p>
+<section id="sec-mutate-modify-umbenennen" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="sec-mutate-modify-umbenennen">
+<span class="header-section-number">13.1</span> Variablen umbenennen</h2>
+<p>Das Umbenennen von Spalten ist streng genommen keine <code>mutate()</code>-Aufgabe, aber es gehört zum Vorbereiten eines Datensatzes dazu. Wie ihr im Kapitel zu <code>select()</code> gesehen habt (siehe <a href="select.html#sec-select-umbenennen" class="quarto-xref"><span>Kapitel 12.3</span></a>), gibt es dafür die Funktion <code>rename()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rename</span><span class="op">(</span>user <span class="op">=</span> <span class="va">screen_name</span>, likes <span class="op">=</span> <span class="va">favorite_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -639,8 +677,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In R und im Tidyverse ist snake_case der Standard. <code><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names()</a></code> sorgt dafür, dass eure Spaltennamen automatisch diesem Standard folgen.</p>
 </div>
 </div>
-</section><section id="sec-mutate-modify-datentypen" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="sec-mutate-modify-datentypen">
-<span class="header-section-number">9.2</span> Datentypen umwandeln</h2>
+</section><section id="sec-mutate-modify-datentypen" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="sec-mutate-modify-datentypen">
+<span class="header-section-number">13.2</span> Datentypen umwandeln</h2>
 <p>Warum ändert man überhaupt den Datentyp einer Spalte? Weil R je nach Typ unterschiedliche Dinge damit machen kann. Eine Zahl, die als Text gespeichert ist, lässt sich nicht addieren. Ein Datum, das als Zeichenkette vorliegt, kann nicht nach Monaten gruppiert werden. Deshalb ist das Umwandeln von Datentypen einer der häufigsten Schritte bei der Datenvorbereitung.</p>
 <section id="text-in-zahlen" class="level3"><h3 class="anchored" data-anchor-id="text-in-zahlen">Text in Zahlen</h3>
 <p>Manchmal kommen Zahlenwerte als Text in euren Datensatz, zum Beispiel weil sie aus einer CSV-Datei falsch geladen wurden. Mit <code><a href="https://rdrr.io/r/base/double.html">as.double()</a></code> oder <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code> wandelt ihr sie um:</p>
@@ -715,7 +753,7 @@ $ lang &lt;fct&gt; de, en, de, de, qme, de, de, de, de, de, qme, de, de, de, de,
 <img src="mutate-modify_files/figure-html/fig-factor-alphabetical-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-factor-alphabetical-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;9.1: Ohne Faktor sortiert R die Kategorien alphabetisch.
+Abbildung&nbsp;13.2: Ohne Faktor sortiert R die Kategorien alphabetisch.
 </figcaption></figure>
 </div>
 </div>
@@ -744,14 +782,14 @@ Abbildung&nbsp;9.1: Ohne Faktor sortiert R die Kategorien alphabetisch.
 <img src="mutate-modify_files/figure-html/fig-factor-ordered-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-factor-ordered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der richtigen Reihenfolge.
+Abbildung&nbsp;13.3: Mit einem geordneten Faktor erscheinen die Kategorien in der richtigen Reihenfolge.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Jetzt stimmt die Reihenfolge: von “very dissatisfied” bis “very satisfied”, genau wie auf einer Likert-Skala. Das ist der Grund, warum Faktoren bei ordinalen Variablen so wichtig sind. Ohne sie verliert ihr die inhaltliche Ordnung.</p>
-</section></section><section id="sec-mutate-modify-umkodieren" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-mutate-modify-umkodieren">
-<span class="header-section-number">9.3</span> Werte umkodieren</h2>
+</section></section><section id="sec-mutate-modify-umkodieren" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="sec-mutate-modify-umkodieren">
+<span class="header-section-number">13.3</span> Werte umkodieren</h2>
 <p>Häufig müsst ihr die Werte einer Spalte in andere Werte übersetzen. Vielleicht liegen Kategorien als kryptische Codes vor, oder ihr wollt Wertebereiche zu Gruppen zusammenfassen. Dafür gibt es in R mehrere Werkzeuge.</p>
 <section id="einfache-bedingung-mit-if_else" class="level3"><h3 class="anchored" data-anchor-id="einfache-bedingung-mit-if_else">Einfache Bedingung mit <code>if_else()</code>
 </h3>
@@ -847,8 +885,8 @@ Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der
 </div>
 <p>Der Unterschied zu <code>case_when()</code> ist, dass <code>case_match()</code> direkt Werte vergleicht statt Bedingungen zu prüfen. Das macht den Code kürzer und lesbarer, wenn es um einfache Zuordnungen geht.</p>
 <p><em>Abbildung: Eine zweispaltige Tabelle mit dem Titel “case_match()”. Links steht “Originalwert” mit den Einträgen “de”, “en”, “fr”, “sonstige”. Rechts steht “Neuer Wert” mit den Einträgen “German”, “English”, “French”, “Other”. Pfeile verbinden jeweils linke und rechte Seite. Unter der Tabelle steht ein kurzer R-Code-Schnipsel, der das Muster zeigt.</em></p>
-</section></section><section id="sec-mutate-modify-einheiten" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="sec-mutate-modify-einheiten">
-<span class="header-section-number">9.4</span> Einheiten umrechnen</h2>
+</section></section><section id="sec-mutate-modify-einheiten" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="sec-mutate-modify-einheiten">
+<span class="header-section-number">13.4</span> Einheiten umrechnen</h2>
 <p>Manchmal liegen eure Daten in der falschen Einheit vor. Vielleicht sind Preise in Cent statt in Euro, Gewichte in Pfund statt in Kilogramm oder Temperaturen in Fahrenheit statt in Celsius. Solche Umrechnungen sind einfache arithmetische Operationen in <code>mutate()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weather_data</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
@@ -885,8 +923,8 @@ Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der
 5 1130038853711       0.302</code></pre>
 </div>
 </div>
-</section><section id="sec-mutate-modify-korrigieren" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="sec-mutate-modify-korrigieren">
-<span class="header-section-number">9.5</span> Werte korrigieren</h2>
+</section><section id="sec-mutate-modify-korrigieren" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="sec-mutate-modify-korrigieren">
+<span class="header-section-number">13.5</span> Werte korrigieren</h2>
 <p>In echten Datensätzen finden sich immer wieder Tippfehler, uneinheitliche Schreibweisen oder andere kleine Fehler. Stellt euch vor, ihr habt eine Spalte mit Städtenamen, in der “Osnabrück” manchmal als “Osnabrueck” oder “osnabrück” geschrieben wurde. Solche Inkonsistenzen müsst ihr bereinigen, bevor ihr die Daten gruppieren oder filtern könnt.</p>
 <section id="einzelne-werte-ersetzen" class="level3"><h3 class="anchored" data-anchor-id="einzelne-werte-ersetzen">Einzelne Werte ersetzen</h3>
 <p>Für gezielte Korrekturen eignet sich <code>case_match()</code>, das ihr schon kennt:</p>
@@ -937,8 +975,8 @@ Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der
 </div>
 </div>
 <p><code>str_replace()</code> ersetzt nur das erste Vorkommen. Wenn ihr alle Vorkommen ersetzen wollt, nutzt <code>str_replace_all()</code>.</p>
-</section></section><section id="sec-mutate-modify-na" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="sec-mutate-modify-na">
-<span class="header-section-number">9.6</span> Fehlende Werte ersetzen</h2>
+</section></section><section id="sec-mutate-modify-na" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="sec-mutate-modify-na">
+<span class="header-section-number">13.6</span> Fehlende Werte ersetzen</h2>
 <p>Fehlende Werte (<code>NA</code>) sind in der Datenanalyse unvermeidlich. Manchmal stören sie aber bei Berechnungen oder Visualisierungen. Dann wollt ihr sie durch einen Ersatzwert ersetzen.</p>
 <section id="replace_na" class="level3"><h3 class="anchored" data-anchor-id="replace_na"><code>replace_na()</code></h3>
 <p>Die direkteste Methode ist <code>replace_na()</code> aus dem Paket <code>tidyr</code>:</p>
@@ -979,8 +1017,8 @@ Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der
 </div>
 </div>
 <p><code>coalesce()</code> prüft von links nach rechts und nimmt den ersten Wert, der nicht <code>NA</code> ist. Das ist besonders nützlich, wenn ihr mehrere Quellen für denselben Wert habt.</p>
-</section></section><section id="sec-mutate-modify-text" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="sec-mutate-modify-text">
-<span class="header-section-number">9.7</span> Text normalisieren</h2>
+</section></section><section id="sec-mutate-modify-text" class="level2" data-number="13.7"><h2 data-number="13.7" class="anchored" data-anchor-id="sec-mutate-modify-text">
+<span class="header-section-number">13.7</span> Text normalisieren</h2>
 <p>Textdaten sind oft uneinheitlich: Groß- und Kleinschreibung variiert, es gibt überflüssige Leerzeichen oder unerwünschte Sonderzeichen. Bevor ihr Texte analysieren könnt, müsst ihr sie normalisieren. Dafür bietet das Paket <code>stringr</code> eine Reihe von Funktionen.</p>
 <section id="groß--und-kleinschreibung" class="level3"><h3 class="anchored" data-anchor-id="groß--und-kleinschreibung">Groß- und Kleinschreibung</h3>
 <p>Mit <code>str_to_lower()</code> wandelt ihr alles in Kleinbuchstaben um. Das ist besonders wichtig, wenn ihr später nach Wörtern suchen oder Texte gruppieren wollt:</p>
@@ -1034,8 +1072,8 @@ Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der
 </div>
 </div>
 <p>Das Muster <code>[[:punct:]]</code> steht für alle gängigen Satzzeichen. Wenn ihr nur bestimmte Zeichen entfernen wollt, gebt sie direkt an, zum Beispiel <code>str_remove_all(text, "#")</code> für Hashtag-Symbole.</p>
-</section></section><section id="sec-mutate-modify-runden" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="sec-mutate-modify-runden">
-<span class="header-section-number">9.8</span> Zahlen runden</h2>
+</section></section><section id="sec-mutate-modify-runden" class="level2" data-number="13.8"><h2 data-number="13.8" class="anchored" data-anchor-id="sec-mutate-modify-runden">
+<span class="header-section-number">13.8</span> Zahlen runden</h2>
 <p>Beim Arbeiten mit Dezimalzahlen wollt ihr die Werte manchmal runden, sei es für eine übersichtlichere Ausgabe oder weil Nachkommastellen in eurem Kontext keine Rolle spielen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">orders</span> <span class="op">|&gt;</span></span>
@@ -1054,8 +1092,8 @@ Abbildung&nbsp;9.2: Mit einem geordneten Faktor erscheinen die Kategorien in der
 </div>
 </div>
 <p>Neben <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> gibt es <code><a href="https://rdrr.io/r/base/Round.html">floor()</a></code> (abrunden auf die nächste ganze Zahl) und <code><a href="https://rdrr.io/r/base/Round.html">ceiling()</a></code> (aufrunden). Diese Funktionen sind nützlich, wenn ihr zum Beispiel Altersangaben aus Geburtsdaten berechnet und immer auf ganze Jahre abrunden wollt.</p>
-</section><section id="sec-mutate-modify-across" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="sec-mutate-modify-across">
-<span class="header-section-number">9.9</span> Mehrere Variablen ändern</h2>
+</section><section id="sec-mutate-modify-across" class="level2" data-number="13.9"><h2 data-number="13.9" class="anchored" data-anchor-id="sec-mutate-modify-across">
+<span class="header-section-number">13.9</span> Mehrere Variablen ändern</h2>
 <p>Bisher haben wir immer eine Spalte nach der anderen verändert. Was aber, wenn ihr dieselbe Transformation auf mehrere Spalten gleichzeitig anwenden wollt? Dafür gibt es <code>across()</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -1101,8 +1139,8 @@ $ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103,
 </div>
 </div>
 <p><em>Abbildung: Ein Datensatz als Tabelle mit fünf Spalten. Drei davon sind farblich hervorgehoben (zum Beispiel alle numerischen). Darunter steht der Code <code>mutate(across(where(is.numeric), round))</code>. Ein Pfeil zeigt von den hervorgehobenen Spalten auf die gleiche Tabelle, in der die Werte dieser drei Spalten gerundet sind. Der Fokus liegt darauf, dass <code>across()</code> die gleiche Funktion auf mehrere Spalten anwendet.</em></p>
-</section><section id="sec-mutate-modify-zusammenfassung" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="sec-mutate-modify-zusammenfassung">
-<span class="header-section-number">9.10</span> Kurz zusammengefasst</h2>
+</section><section id="sec-mutate-modify-zusammenfassung" class="level2" data-number="13.10"><h2 data-number="13.10" class="anchored" data-anchor-id="sec-mutate-modify-zusammenfassung">
+<span class="header-section-number">13.10</span> Kurz zusammengefasst</h2>
 <ul>
 <li>Mit <code>rename()</code> und <code>rename_with()</code> benennt ihr Spalten um.</li>
 <li>
@@ -1113,7 +1151,7 @@ $ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103,
 <li>Text normalisiert ihr mit <code>str_to_lower()</code>, <code>str_trim()</code>, <code>str_squish()</code> und <code>str_remove_all()</code>.</li>
 <li>Mit <code>across()</code> wendet ihr dieselbe Transformation auf mehrere Spalten gleichzeitig an.</li>
 </ul>
-<p>Jetzt wisst ihr, wie ihr bestehende Spalten in Form bringt. Im nächsten Kapitel geht es darum, aus vorhandenen Daten neue Variablen zu berechnen (siehe <a href="mutate-add.html" class="quarto-xref"><span>Kapitel 10</span></a>).</p>
+<p>Jetzt wisst ihr, wie ihr bestehende Spalten in Form bringt. Im nächsten Kapitel geht es darum, aus vorhandenen Daten neue Variablen zu berechnen (siehe <a href="mutate-add.html" class="quarto-xref"><span>Kapitel 14</span></a>).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1556,12 +1594,12 @@ $ favorite_count &lt;dbl&gt; 0, 0, 3, 11, 25, 93, 154, 448, 0, 1, 2, 2, 58, 103,
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/select.html" class="pagination-link" aria-label="Variablen auswählen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/mutate-add.html" class="pagination-link" aria-label="Variablen erstellen">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

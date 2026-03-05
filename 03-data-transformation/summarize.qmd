@@ -7,6 +7,8 @@ source("setup.R")
 
 Bisher habt ihr gelernt, in welcher Form man Spalten und Zeilen bearbeitet, ohne jedoch die grundsätzliche Struktur des Datensatzes massiv zu verändern. In diesem Kapitel geht es nun um das Verdichten von Daten. Mit der Funktion `summarise()` aus dem `dplyr`-Paket könnt ihr aus hunderten Einzelwerten eine Handvoll aussagekräftiger Kennzahlen berechnen, wie Mittelwerte, Summen oder Anzahlen. Meistens geschieht dies nicht für den gesamten Datensatz, sondern für definierte Untergruppen, wofür wir die Funktion `group_by()` nutzen.
 
+![](/images/google_slides/){#fig-summarize-schema}
+
 Das Aggregieren von Daten ist ein Schlüsselelement der deskriptiven Statistik und Berichtserstellung. Selten interessiert sich jemand für jede einzelne Transaktion in einem Datensatz. Die wahren Erkenntnisse – und auch die Grundlage für aussagekräftige Visualisierungen – liegen stattdessen in den zusammengefassten Kennzahlen: Welches Produkt hat den höchsten Durchschnittsumsatz? Wie viele Nutzer waren pro Wochentag aktiv? `summarise()` liefert euch genau diese aggregierten Werte prägnant und effizient.
 
 Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.

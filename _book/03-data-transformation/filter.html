@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>11&nbsp; Beobachtungen auswählen – Hands-On Exploratory Data Analytics</title>
+<title>15&nbsp; Beobachtungen auswählen – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/filter.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/filter.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -156,6 +156,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -170,19 +194,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,55 +223,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,43 +294,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,13 +347,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -340,25 +370,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -389,10 +419,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-filter-grundprinzip" id="toc-sec-filter-grundprinzip" class="nav-link active" data-scroll-target="#sec-filter-grundprinzip"><span class="header-section-number">11.1</span> Das Grundprinzip</a></li>
-  <li><a href="#sec-filter-vergleich" id="toc-sec-filter-vergleich" class="nav-link" data-scroll-target="#sec-filter-vergleich"><span class="header-section-number">11.2</span> Vergleichsoperatoren</a></li>
+<li><a href="#sec-filter-grundprinzip" id="toc-sec-filter-grundprinzip" class="nav-link active" data-scroll-target="#sec-filter-grundprinzip"><span class="header-section-number">15.1</span> Das Grundprinzip</a></li>
+  <li><a href="#sec-filter-vergleich" id="toc-sec-filter-vergleich" class="nav-link" data-scroll-target="#sec-filter-vergleich"><span class="header-section-number">15.2</span> Vergleichsoperatoren</a></li>
   <li>
-<a href="#sec-filter-kombinieren" id="toc-sec-filter-kombinieren" class="nav-link" data-scroll-target="#sec-filter-kombinieren"><span class="header-section-number">11.3</span> Bedingungen kombinieren</a>
+<a href="#sec-filter-kombinieren" id="toc-sec-filter-kombinieren" class="nav-link" data-scroll-target="#sec-filter-kombinieren"><span class="header-section-number">15.3</span> Bedingungen kombinieren</a>
   <ul class="collapse">
 <li><a href="#und" id="toc-und" class="nav-link" data-scroll-target="#und">UND</a></li>
   <li><a href="#oder" id="toc-oder" class="nav-link" data-scroll-target="#oder">ODER</a></li>
@@ -400,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-filter-bereiche" id="toc-sec-filter-bereiche" class="nav-link" data-scroll-target="#sec-filter-bereiche"><span class="header-section-number">11.4</span> Bereiche und Wertelisten</a>
+<a href="#sec-filter-bereiche" id="toc-sec-filter-bereiche" class="nav-link" data-scroll-target="#sec-filter-bereiche"><span class="header-section-number">15.4</span> Bereiche und Wertelisten</a>
   <ul class="collapse">
 <li><a href="#between" id="toc-between" class="nav-link" data-scroll-target="#between"><code>between()</code></a></li>
   <li><a href="#in" id="toc-in" class="nav-link" data-scroll-target="#in"><code>%in%</code></a></li>
@@ -408,39 +438,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-filter-text" id="toc-sec-filter-text" class="nav-link" data-scroll-target="#sec-filter-text"><span class="header-section-number">11.5</span> Textfilter</a>
+<a href="#sec-filter-text" id="toc-sec-filter-text" class="nav-link" data-scroll-target="#sec-filter-text"><span class="header-section-number">15.5</span> Textfilter</a>
   <ul class="collapse">
 <li><a href="#gro%C3%9F--und-kleinschreibung-ignorieren" id="toc-groß--und-kleinschreibung-ignorieren" class="nav-link" data-scroll-target="#gro%C3%9F--und-kleinschreibung-ignorieren">Groß- und Kleinschreibung ignorieren</a></li>
   <li><a href="#textmuster-ausschlie%C3%9Fen" id="toc-textmuster-ausschließen" class="nav-link" data-scroll-target="#textmuster-ausschlie%C3%9Fen">Textmuster ausschließen</a></li>
   <li><a href="#text-am-anfang-oder-ende" id="toc-text-am-anfang-oder-ende" class="nav-link" data-scroll-target="#text-am-anfang-oder-ende">Text am Anfang oder Ende</a></li>
   </ul>
 </li>
-  <li><a href="#sec-filter-na" id="toc-sec-filter-na" class="nav-link" data-scroll-target="#sec-filter-na"><span class="header-section-number">11.6</span> Fehlende Werte</a></li>
+  <li><a href="#sec-filter-na" id="toc-sec-filter-na" class="nav-link" data-scroll-target="#sec-filter-na"><span class="header-section-number">15.6</span> Fehlende Werte</a></li>
   <li>
-<a href="#sec-filter-mehrere" id="toc-sec-filter-mehrere" class="nav-link" data-scroll-target="#sec-filter-mehrere"><span class="header-section-number">11.7</span> Mehrere Spalten filtern</a>
+<a href="#sec-filter-mehrere" id="toc-sec-filter-mehrere" class="nav-link" data-scroll-target="#sec-filter-mehrere"><span class="header-section-number">15.7</span> Mehrere Spalten filtern</a>
   <ul class="collapse">
 <li><a href="#if_any" id="toc-if_any" class="nav-link" data-scroll-target="#if_any"><code>if_any()</code></a></li>
   <li><a href="#if_all" id="toc-if_all" class="nav-link" data-scroll-target="#if_all"><code>if_all()</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-filter-slice" id="toc-sec-filter-slice" class="nav-link" data-scroll-target="#sec-filter-slice"><span class="header-section-number">11.8</span> Zeilen gezielt auswählen mit <code>slice()</code></a>
+<a href="#sec-filter-slice" id="toc-sec-filter-slice" class="nav-link" data-scroll-target="#sec-filter-slice"><span class="header-section-number">15.8</span> Zeilen gezielt auswählen mit <code>slice()</code></a>
   <ul class="collapse">
 <li><a href="#slice_head-und-slice_tail" id="toc-slice_head-und-slice_tail" class="nav-link" data-scroll-target="#slice_head-und-slice_tail"><code>slice_head()</code> und <code>slice_tail()</code></a></li>
   <li><a href="#slice_max-und-slice_min" id="toc-slice_max-und-slice_min" class="nav-link" data-scroll-target="#slice_max-und-slice_min"><code>slice_max()</code> und <code>slice_min()</code></a></li>
   <li><a href="#slice_sample" id="toc-slice_sample" class="nav-link" data-scroll-target="#slice_sample"><code>slice_sample()</code></a></li>
   </ul>
 </li>
-  <li><a href="#sec-filter-distinct" id="toc-sec-filter-distinct" class="nav-link" data-scroll-target="#sec-filter-distinct"><span class="header-section-number">11.9</span> Doppelte Zeilen entfernen mit <code>distinct()</code></a></li>
+  <li><a href="#sec-filter-distinct" id="toc-sec-filter-distinct" class="nav-link" data-scroll-target="#sec-filter-distinct"><span class="header-section-number">15.9</span> Doppelte Zeilen entfernen mit <code>distinct()</code></a></li>
   <li>
-<a href="#sec-filter-grouped" id="toc-sec-filter-grouped" class="nav-link" data-scroll-target="#sec-filter-grouped"><span class="header-section-number">11.10</span> Gruppierte Daten</a>
+<a href="#sec-filter-grouped" id="toc-sec-filter-grouped" class="nav-link" data-scroll-target="#sec-filter-grouped"><span class="header-section-number">15.10</span> Gruppierte Daten</a>
   <ul class="collapse">
 <li><a href="#gruppen-nach-gr%C3%B6%C3%9Fe-filtern" id="toc-gruppen-nach-größe-filtern" class="nav-link" data-scroll-target="#gruppen-nach-gr%C3%B6%C3%9Fe-filtern">Gruppen nach Größe filtern</a></li>
   <li><a href="#innerhalb-einer-gruppe-filtern" id="toc-innerhalb-einer-gruppe-filtern" class="nav-link" data-scroll-target="#innerhalb-einer-gruppe-filtern">Innerhalb einer Gruppe filtern</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-filter-probleme" id="toc-sec-filter-probleme" class="nav-link" data-scroll-target="#sec-filter-probleme"><span class="header-section-number">11.11</span> Typische Probleme</a>
+<a href="#sec-filter-probleme" id="toc-sec-filter-probleme" class="nav-link" data-scroll-target="#sec-filter-probleme"><span class="header-section-number">15.11</span> Typische Probleme</a>
   <ul class="collapse">
 <li><a href="#ergebnis-ist-leer" id="toc-ergebnis-ist-leer" class="nav-link" data-scroll-target="#ergebnis-ist-leer">Ergebnis ist leer</a></li>
   <li><a href="#zu-viele-zeilen" id="toc-zu-viele-zeilen" class="nav-link" data-scroll-target="#zu-viele-zeilen">Zu viele Zeilen</a></li>
@@ -448,12 +478,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#automatisches-logging-mit-tidylog" id="toc-automatisches-logging-mit-tidylog" class="nav-link" data-scroll-target="#automatisches-logging-mit-tidylog">Automatisches Logging mit <code>tidylog</code></a></li>
   </ul>
 </li>
-  <li><a href="#sec-filter-zusammenfassung" id="toc-sec-filter-zusammenfassung" class="nav-link" data-scroll-target="#sec-filter-zusammenfassung"><span class="header-section-number">11.12</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-filter-zusammenfassung" id="toc-sec-filter-zusammenfassung" class="nav-link" data-scroll-target="#sec-filter-zusammenfassung"><span class="header-section-number">15.12</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/filter.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-filter" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/filter.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-filter" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></h1>
 </div>
 
 
@@ -468,6 +498,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p>Ihr habt jetzt gelernt, wie ihr mit <code>select()</code> den Blick auf die richtigen Spalten richtet und mit <code>mutate()</code> neue Variablen anlegt. In diesem Kapitel widmen wir uns dem Gegenstück zur Spaltenauswahl: Der Auswahl der relevanten Zeilen. Wir zeigen euch, wie ihr mit der Funktion <code>filter()</code> aus <code>dplyr</code> gezielt Beobachtungen behaltet, die bestimmte logische Bedingungen erfüllen, und wie ihr leere oder doppelte Zeilen entfernt.</p>
+<div id="fig-filter-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-filter-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="..\images/google_slides/filter_schema.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-filter-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;15.1: Die Funktion <code>filter</code> bietet flexible Möglichkeiten, die Beobachtungen (Zeilen) zu reduzieren.
+</figcaption></figure>
+</div>
 <p>Das Filtern von Daten ist einer der wichtigsten Schritte in jeder explorativen Analyse. Reale Datensätze sind fast immer größer und unschärfer als das, was ihr für eine spezifische Forschungsfrage untersuchen möchtet. Erst indem ihr Gruppen isoliert, Ausreißer entfernt oder den Fokus auf einen konkreten Zeitraum beschränkt, könnt ihr präzise Aussagen treffen und den Rausch aus euren Daten entfernen.</p>
 <p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
 <table class="caption-top table">
@@ -552,8 +590,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 </div>
 </div>
-<section id="sec-filter-grundprinzip" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="sec-filter-grundprinzip">
-<span class="header-section-number">11.1</span> Das Grundprinzip</h2>
+<section id="sec-filter-grundprinzip" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="sec-filter-grundprinzip">
+<span class="header-section-number">15.1</span> Das Grundprinzip</h2>
 <p><code>filter()</code> bekommt einen Tibble, prüft pro Zeile eine oder mehrere Bedingungen und gibt nur die Zeilen zurück, die passen.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="https://winf-hsos.github.io/university-docs/images/filter_schema.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Die filter-Funktion reduziert die Beobachtungen in einem Tibble."><img src="https://winf-hsos.github.io/university-docs/images/filter_schema.png" class="img-fluid figure-img" alt="Die filter-Funktion reduziert die Beobachtungen in einem Tibble."></a></p>
@@ -588,8 +626,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <code>head(5)</code> zeigt euch eine kleine Vorschau, damit ihr schnell prüfen könnt, ob der Filter macht, was ihr erwartet.</li>
 </ul>
 <p><em>Abbildung: Ein Datensatz als Tabelle mit acht Zeilen. Ein Filtersymbol steht links, daneben die Bedingung <code>!is_retweet</code>. Vier Zeilen sind durchgestrichen oder ausgegraut (die Retweets), die übrigen vier bleiben übrig. Rechts sieht man die kleinere Ergebnistabelle mit nur den vier verbliebenen Zeilen.</em></p>
-</section><section id="sec-filter-vergleich" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="sec-filter-vergleich">
-<span class="header-section-number">11.2</span> Vergleichsoperatoren</h2>
+</section><section id="sec-filter-vergleich" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="sec-filter-vergleich">
+<span class="header-section-number">15.2</span> Vergleichsoperatoren</h2>
 <p>Die meisten Filterbedingungen beruhen auf Vergleichen:</p>
 <table class="caption-top table">
 <thead><tr class="header">
@@ -667,8 +705,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <p>Ein häufiger Anfängerfehler: <code>=</code> ist eine Zuweisung, <code>==</code> ist ein Vergleich. Wenn ihr <code>filter(retweet_count = 1000)</code> schreibt, bekommt ihr eine Fehlermeldung. Ihr braucht <code>filter(retweet_count == 1000)</code>.</p>
 </div>
 </div>
-</section><section id="sec-filter-kombinieren" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="sec-filter-kombinieren">
-<span class="header-section-number">11.3</span> Bedingungen kombinieren</h2>
+</section><section id="sec-filter-kombinieren" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="sec-filter-kombinieren">
+<span class="header-section-number">15.3</span> Bedingungen kombinieren</h2>
 <p>In der Praxis filtert ihr fast immer mit mehr als einer Bedingung. Manchmal müssen alle Kriterien erfüllt sein, manchmal reicht eines.</p>
 <section id="und" class="level3"><h3 class="anchored" data-anchor-id="und">UND</h3>
 <p>Wenn ihr mehrere Bedingungen durch Kommas trennt, bedeutet das: Alle Bedingungen müssen wahr sein. Das entspricht einem logischen UND.</p>
@@ -751,8 +789,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 <p>Ohne die Klammern um die ODER-Bedingung würde <code>!is_retweet</code> nur mit <code>retweet_count &gt;= 2000</code> verknüpft, und <code>favorite_count &gt;= 5000</code> würde unabhängig davon gelten. Das Ergebnis wäre ein komplett anderer Datensatz.</p>
 <p><em>Abbildung: Zwei Venn-Diagramme nebeneinander. Links: Zwei Kreise “Retweets &gt;= 2000” und “Likes &gt;= 5000”, die sich überlappen, innerhalb eines Rahmens “keine Retweets”. Die Schnittmenge des Rahmens mit der Vereinigung der Kreise ist hervorgehoben. Rechts: Dieselben Kreise, aber der Rahmen “keine Retweets” umschließt nur den linken Kreis. Die hervorgehobene Fläche ist deutlich größer. Unter dem linken Diagramm steht die Formel mit Klammern, unter dem rechten die Formel ohne Klammern.</em></p>
-</section></section><section id="sec-filter-bereiche" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="sec-filter-bereiche">
-<span class="header-section-number">11.4</span> Bereiche und Wertelisten</h2>
+</section></section><section id="sec-filter-bereiche" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="sec-filter-bereiche">
+<span class="header-section-number">15.4</span> Bereiche und Wertelisten</h2>
 <section id="between" class="level3"><h3 class="anchored" data-anchor-id="between"><code>between()</code></h3>
 <p>Wenn ihr Werte in einem Bereich behalten wollt, ist <code>between()</code> oft lesbarer als zwei Vergleiche:</p>
 <div id="filter-between" class="reuse">
@@ -839,8 +877,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 </div>
 <p>Das funktioniert genauso mit <code>str_detect()</code> (dazu gleich mehr) und anderen logischen Ausdrücken.</p>
-</section></section><section id="sec-filter-text" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="sec-filter-text">
-<span class="header-section-number">11.5</span> Textfilter</h2>
+</section></section><section id="sec-filter-text" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="sec-filter-text">
+<span class="header-section-number">15.5</span> Textfilter</h2>
 <p>Beim Filtern von Text nutzt ihr Funktionen aus <code>stringr</code>. Der Klassiker ist <code>str_detect()</code>, das prüft, ob ein Text ein bestimmtes Muster enthält.</p>
 <div id="filter-str-detect" class="reuse">
 <div class="cell">
@@ -906,8 +944,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 3 lisapaus     RT @JSchmitzLeipzig: Die gesellschaftlichen Folgekosten von Kind…</code></pre>
 </div>
 </div>
-</section></section><section id="sec-filter-na" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="sec-filter-na">
-<span class="header-section-number">11.6</span> Fehlende Werte</h2>
+</section></section><section id="sec-filter-na" class="level2" data-number="15.6"><h2 data-number="15.6" class="anchored" data-anchor-id="sec-filter-na">
+<span class="header-section-number">15.6</span> Fehlende Werte</h2>
 <p>Ein häufiger Stolperstein: <code>NA</code> ist weder wahr noch falsch. Es bedeutet, dass der Wert fehlt. In <code>filter()</code> werden Zeilen mit <code>NA</code> in der Bedingung automatisch entfernt, weil die Bedingung nicht eindeutig wahr ist.</p>
 <p>Wenn euch fehlende Werte wichtig sind, müsst ihr das explizit ausdrücken. Mit <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> findet ihr Zeilen, in denen ein Wert fehlt:</p>
 <div id="filter-is-na" class="reuse">
@@ -960,8 +998,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <p>Ein fehlender Wert ist <code>NA</code>. Ein leerer Text wie <code>""</code> ist dagegen ein vorhandener Wert, der nur leer ist. Wenn ihr beides ausschließen wollt, kombiniert ihr Bedingungen: <code>filter(!is.na(text), text != "")</code>.</p>
 </div>
 </div>
-</section><section id="sec-filter-mehrere" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="sec-filter-mehrere">
-<span class="header-section-number">11.7</span> Mehrere Spalten filtern</h2>
+</section><section id="sec-filter-mehrere" class="level2" data-number="15.7"><h2 data-number="15.7" class="anchored" data-anchor-id="sec-filter-mehrere">
+<span class="header-section-number">15.7</span> Mehrere Spalten filtern</h2>
 <p>Manchmal wollt ihr eine Bedingung nicht nur für eine Spalte prüfen, sondern für mehrere gleichzeitig. Dafür gibt es <code>if_any()</code> und <code>if_all()</code>.</p>
 <section id="if_any" class="level3"><h3 class="anchored" data-anchor-id="if_any"><code>if_any()</code></h3>
 <p>Behaltet Zeilen, wenn die Bedingung für <em>mindestens eine</em> der Spalten wahr ist:</p>
@@ -1003,8 +1041,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 </div>
 </div>
-</section></section><section id="sec-filter-slice" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="sec-filter-slice">
-<span class="header-section-number">11.8</span> Zeilen gezielt auswählen mit <code>slice()</code>
+</section></section><section id="sec-filter-slice" class="level2" data-number="15.8"><h2 data-number="15.8" class="anchored" data-anchor-id="sec-filter-slice">
+<span class="header-section-number">15.8</span> Zeilen gezielt auswählen mit <code>slice()</code>
 </h2>
 <p><code>filter()</code> wählt Zeilen nach einer Bedingung aus. Manchmal wollt ihr aber einfach bestimmte Zeilen nach Position oder Rang. Dafür gibt es die <code>slice()</code>-Familie.</p>
 <section id="slice_head-und-slice_tail" class="level3"><h3 class="anchored" data-anchor-id="slice_head-und-slice_tail">
@@ -1060,16 +1098,16 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 <pre><code># A tibble: 5 × 3
   screen_name     retweet_count text                                            
   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;                                           
-1 SteffiLemke                 4 "Die AfD-Fraktion vertritt im Bundestag immer o…
-2 lisapaus                    0 "Die Alternative dazu, die #Kindergrundsicherun…
-3 c_lindner                   4 "RT @fdpbt: Jetzt debattiert der #Bundestag übe…
-4 Karl_Lauterbach           220 "Sehr wichtige Studie zur Wirkung des BionTech …
-5 Karl_Lauterbach            53 "Deutschland hat bisher überzeugend gespielt un…</code></pre>
+1 hubertus_heil              11 "Heil (SPD) zum Konjunkturpaket - \"Wir können …
+2 MarcoBuschmann              1 "@KreisMartina09 Wir halten Sie hier selbstvers…
+3 SteffiLemke                 0 "@kaigleissner @GruenChristian Der Kohleausstie…
+4 hubertus_heil              10 "⁦@klara_geywitz⁩ ⁦@FranziskaGiffey⁩ ⁦@AnkeRehl…     
+5 ABaerbockArchiv            32 "RT @ntvde: Die Lage in Flüchtlingscamps auf de…</code></pre>
 </div>
 </div>
 <p>Das ist nützlich, wenn ihr euch schnell einen Eindruck von eurem Datensatz verschaffen wollt, ohne immer nur die ersten Zeilen zu sehen.</p>
-</section></section><section id="sec-filter-distinct" class="level2" data-number="11.9"><h2 data-number="11.9" class="anchored" data-anchor-id="sec-filter-distinct">
-<span class="header-section-number">11.9</span> Doppelte Zeilen entfernen mit <code>distinct()</code>
+</section></section><section id="sec-filter-distinct" class="level2" data-number="15.9"><h2 data-number="15.9" class="anchored" data-anchor-id="sec-filter-distinct">
+<span class="header-section-number">15.9</span> Doppelte Zeilen entfernen mit <code>distinct()</code>
 </h2>
 <p>Wenn euer Datensatz doppelte Zeilen enthält und ihr nur die eindeutigen behalten wollt, nutzt <code>distinct()</code>:</p>
 <div class="cell">
@@ -1109,8 +1147,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 5 c_lindner    "2024 werden wir voraussichtlich erstmals über 1 Billion Euro ei…</code></pre>
 </div>
 </div>
-</section><section id="sec-filter-grouped" class="level2" data-number="11.10"><h2 data-number="11.10" class="anchored" data-anchor-id="sec-filter-grouped">
-<span class="header-section-number">11.10</span> Gruppierte Daten</h2>
+</section><section id="sec-filter-grouped" class="level2" data-number="15.10"><h2 data-number="15.10" class="anchored" data-anchor-id="sec-filter-grouped">
+<span class="header-section-number">15.10</span> Gruppierte Daten</h2>
 <p>Wenn ihr mit <code>group_by()</code> arbeitet, ändert sich die Bedeutung mancher Ausdrücke. <code>filter()</code> bleibt genauso nützlich, aber ihr könnt zusätzlich gruppenbezogene Informationen verwenden.</p>
 <section id="gruppen-nach-größe-filtern" class="level3"><h3 class="anchored" data-anchor-id="gruppen-nach-größe-filtern">Gruppen nach Größe filtern</h3>
 <p>Ein typischer Fall ist: Behaltet nur Accounts, die oft im Datensatz vorkommen.</p>
@@ -1188,8 +1226,8 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 10 lisapaus                12895 RT @rezomusik: Hier ist Teil 2. Dieses Video l…</code></pre>
 </div>
 </div>
-</section></section><section id="sec-filter-probleme" class="level2" data-number="11.11"><h2 data-number="11.11" class="anchored" data-anchor-id="sec-filter-probleme">
-<span class="header-section-number">11.11</span> Typische Probleme</h2>
+</section></section><section id="sec-filter-probleme" class="level2" data-number="15.11"><h2 data-number="15.11" class="anchored" data-anchor-id="sec-filter-probleme">
+<span class="header-section-number">15.11</span> Typische Probleme</h2>
 <section id="ergebnis-ist-leer" class="level3"><h3 class="anchored" data-anchor-id="ergebnis-ist-leer">Ergebnis ist leer</h3>
 <p>Wenn ihr nach einem Filter plötzlich null Zeilen habt, stimmt oft eine Annahme nicht. Dann helfen zwei schnelle Checks:</p>
 <div id="filter-debug-checks" class="reuse">
@@ -1305,8 +1343,8 @@ select: dropped 19 variables (id, favorite_count, is_quote_status, is_retweet, r
 <p><code>tidylog</code> überschreibt die <code>dplyr</code>-Funktionen mit eigenen Versionen, die zusätzliche Ausgaben erzeugen. Wenn die Meldungen stören, entfernt das Paket wieder mit <code>detach("package:tidylog", unload = TRUE)</code> oder startet eine neue R-Sitzung.</p>
 </div>
 </div>
-</section></section><section id="sec-filter-zusammenfassung" class="level2" data-number="11.12"><h2 data-number="11.12" class="anchored" data-anchor-id="sec-filter-zusammenfassung">
-<span class="header-section-number">11.12</span> Kurz zusammengefasst</h2>
+</section></section><section id="sec-filter-zusammenfassung" class="level2" data-number="15.12"><h2 data-number="15.12" class="anchored" data-anchor-id="sec-filter-zusammenfassung">
+<span class="header-section-number">15.12</span> Kurz zusammengefasst</h2>
 <div id="filter-summary" class="reuse">
 <ul>
 <li>
@@ -1321,7 +1359,7 @@ select: dropped 19 variables (id, favorite_count, is_quote_status, is_retweet, r
 <li>Mit <code>group_by()</code> könnt ihr in Gruppen filtern, zum Beispiel mit <code>n()</code> oder <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>.</li>
 </ul>
 </div>
-<p>Ihr könnt jetzt Spalten auswählen, verändern, neue berechnen und Zeilen filtern. Im nächsten Kapitel lernt ihr, wie ihr aus vielen Zeilen kompakte Zusammenfassungen erstellt (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 12</span></a>).</p>
+<p>Ihr könnt jetzt Spalten auswählen, verändern, neue berechnen und Zeilen filtern. Im nächsten Kapitel lernt ihr, wie ihr aus vielen Zeilen kompakte Zusammenfassungen erstellt (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 16</span></a>).</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1764,12 +1802,12 @@ select: dropped 19 variables (id, favorite_count, is_quote_status, is_retweet, r
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/mutate-add.html" class="pagination-link" aria-label="Variablen erstellen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/summarize.html" class="pagination-link" aria-label="Beobachtungen zusammenfassen">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

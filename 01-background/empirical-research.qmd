@@ -1,6 +1,8 @@
 
 # Empirische Forschung
 
+![Der empirische Forschungsprozess in Phasen [@doring_forschungsmethoden_2023]](/images/empirical_research_phases.svg){#fig-empirical-research-phases .lightbox}
+
 ## Datenerhebung
 
 > Empirical research is any research that uses structured observations from the real world to attempt to answer questions. [@effect_2026]
@@ -48,12 +50,9 @@ Die Tabelle unten zeigt eine Analogie aus der realen Welt, um den Unterschied zw
 
 Die Analyse von Daten ist die notwendige Zutat, die wir brauchen, um aus den erhobenen Daten neues Wissen oder Antworten auf Forschungsfragen zu erzeugen. Dabei gehen wir immer davon aus, dass uns die Daten bereits vorliegen und dass wir außerdem den Kontext der Daten kennen. Die erhobenen Daten sind somit genau genommen Informationen, vorausgesetzt wir kennne die Bedeutung der gemessenen Variablen und den Kontext der Erhebung. Aus diesem Grund ist die Datenerhebung immer relevant für die Datenanalyse, wie eingangs bereits erwähnt.
 
-## Werkzeuge
-
-Es gibt viele konkrete Werzeuge, mit dem wir unsere Analysen erstellen, ist R in Kombination mit dem Tidyverse. Für manche Aufgaben im Buch verwenden wir auch Python, insbesondere für die Anwendung von Werkzeugen aus dem Bereich des maschinellen Lernens.
-
 ## Forschung oder Praxis?
 
 Die Methoden der empirischen Forschung sind gleichermaßen für die akademische Forschung wie für die Praxis relevant. Schließlich streben auch Unternehmen nach besserem Wissen für ihre Entscheidungen. Ein systematischer, wissenschaftlicher Ansatz, ist der einzige Weg, um die Belastbarkeit des gewonnenen Wissens sicherzustellen. Häufig wird dieser aus pragmatischen Gründen vernachlässigt mit den Argumenten, wissenschaftliche Methoden seien zu aufwändig und damit zu teuer, oder sie seien für eine bestimmte Fragestellung nicht notwendig. Das ist zu kurz gedacht.
 
 In der Lehre an der Hochschule Osnabrück vertreten wir die Auffassung, das ein strukturiertes Vorgehen zur Gewinnung von Wissen auch in der Praxis wichtig ist. Um das in diesem Buch zum Ausdruck zu bringen, sind die Projekte bewusst sowohl aus akademischden als auch aus praktischen Kontexten gewählt. Für eine Hochschule angewandter Wissenschaften ist die Schnittstelle zwischen der Forschung und der Praxis besonders im Fokus.
+

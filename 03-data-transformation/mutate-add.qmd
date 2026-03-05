@@ -7,6 +7,8 @@ source("setup.R")
 
 Im vorherigen Kapitel habt ihr gelernt, wie ihr bestehende Variablen verändert und repariert. Jetzt gehen wir den nächsten logischen Schritt: Neue Variablen anlegen. In diesem Kapitel lernt ihr, wie ihr mit `mutate()` aus zwei oder mehr Spalten eine völlig neue berechnet, Kategorien aus numerischen Werten ableitet und laufende Summen oder Ränge aufbaut. Der Unterschied zum vorherigen Kapitel ist konzeptionell einfach: Wenn ihr bei `mutate()` links vom Gleichheitszeichen einen Namen verwendet, der im Datensatz noch nicht existiert, wird die Spalte neu angehängt.
 
+![Mit `mutate` können wir neue Variablen berechnen und dem Tibble anfügen.](/images/google_slides/mutate_add_schema.svg){#fig-mutate-add-schema}
+
 In vielen quantitativen Projekten enthalten die rohen Daten nicht direkt die Kennzahlen, die ihr für eure Forschungsfrage benötigt. Ihr müsst sie erst berechnen – seien es Altersgruppen aus Geburtsjahren, prozentuale Anteile aus absoluten Zahlen oder textuelle Zusammenfassungen aus Einzelstrings. Die Fähigkeit, gezielt neue Metriken zu synthetisieren, erweitert eure Analysemöglichkeiten enorm und macht eure Visualisierungen später deutlich aussagekräftiger.
 
 Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.
@@ -262,7 +264,7 @@ Vergesst nicht, die Gruppierung nach dem Mutieren mit `ungroup()` wieder aufzuhe
 
 Standardmäßig fügt `mutate()` neue Spalten ganz rechts an und behält alle bestehenden Spalten. Über drei Parameter könnt ihr dieses Verhalten anpassen: `.before`, `.after` und `.keep`.
 
-### Position neuer Spalten mit `.before` und `.after`
+### Position neuer Spalten
 
 Wenn ihr die neue Spalte an einer bestimmten Stelle im Datensatz haben wollt, statt ganz am Ende, nutzt `.before` oder `.after`:
 
@@ -278,7 +280,7 @@ tweets |>
 
 Mit `.before = retweet_count` würde die neue Spalte direkt vor `retweet_count` erscheinen. Das ist praktisch, wenn ihr euren Datensatz übersichtlich halten wollt, ohne danach extra `relocate()` aufrufen zu müssen.
 
-### Spalten behalten oder verwerfen mit `.keep`
+### Spalten behalten oder verwerfen
 
 Der Parameter `.keep` steuert, welche der bestehenden Spalten im Ergebnis erhalten bleiben. Es gibt vier Optionen:
 

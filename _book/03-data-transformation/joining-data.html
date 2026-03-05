@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>13&nbsp; Datensätze verbinden – Hands-On Exploratory Data Analytics</title>
+<title>17&nbsp; Datensätze verbinden – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../04-data-visualization/grammar-of-graphics.html" rel="next">
+<link href="../03-data-transformation/complex-data-structures.html" rel="next">
 <link href="../03-data-transformation/summarize.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/joining-data.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/joining-data.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -153,6 +153,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -167,19 +191,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,55 +220,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,43 +291,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,13 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,25 +367,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,10 +416,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#sec-joining-data-beispiel" id="toc-sec-joining-data-beispiel" class="nav-link active" data-scroll-target="#sec-joining-data-beispiel"><span class="header-section-number">13.1</span> Beispieldaten</a></li>
-  <li><a href="#sec-joining-data-grundprinzip" id="toc-sec-joining-data-grundprinzip" class="nav-link" data-scroll-target="#sec-joining-data-grundprinzip"><span class="header-section-number">13.2</span> Das Grundprinzip</a></li>
+<li><a href="#sec-joining-data-beispiel" id="toc-sec-joining-data-beispiel" class="nav-link active" data-scroll-target="#sec-joining-data-beispiel"><span class="header-section-number">17.1</span> Beispieldaten</a></li>
+  <li><a href="#sec-joining-data-grundprinzip" id="toc-sec-joining-data-grundprinzip" class="nav-link" data-scroll-target="#sec-joining-data-grundprinzip"><span class="header-section-number">17.2</span> Das Grundprinzip</a></li>
   <li>
-<a href="#sec-joining-data-typen" id="toc-sec-joining-data-typen" class="nav-link" data-scroll-target="#sec-joining-data-typen"><span class="header-section-number">13.3</span> Join-Typen</a>
+<a href="#sec-joining-data-typen" id="toc-sec-joining-data-typen" class="nav-link" data-scroll-target="#sec-joining-data-typen"><span class="header-section-number">17.3</span> Join-Typen</a>
   <ul class="collapse">
 <li><a href="#inner_join" id="toc-inner_join" class="nav-link" data-scroll-target="#inner_join"><code>inner_join()</code></a></li>
   <li><a href="#left_join" id="toc-left_join" class="nav-link" data-scroll-target="#left_join"><code>left_join()</code></a></li>
@@ -399,34 +429,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#sec-joining-data-keys" id="toc-sec-joining-data-keys" class="nav-link" data-scroll-target="#sec-joining-data-keys"><span class="header-section-number">13.4</span> Schlüssel festlegen</a>
+<a href="#sec-joining-data-keys" id="toc-sec-joining-data-keys" class="nav-link" data-scroll-target="#sec-joining-data-keys"><span class="header-section-number">17.4</span> Schlüssel festlegen</a>
   <ul class="collapse">
 <li><a href="#automatische-erkennung" id="toc-automatische-erkennung" class="nav-link" data-scroll-target="#automatische-erkennung">Automatische Erkennung</a></li>
   <li><a href="#unterschiedliche-spaltennamen" id="toc-unterschiedliche-spaltennamen" class="nav-link" data-scroll-target="#unterschiedliche-spaltennamen">Unterschiedliche Spaltennamen</a></li>
   <li><a href="#mehrere-schl%C3%BCsselspalten" id="toc-mehrere-schlüsselspalten" class="nav-link" data-scroll-target="#mehrere-schl%C3%BCsselspalten">Mehrere Schlüsselspalten</a></li>
   </ul>
 </li>
-  <li><a href="#sec-joining-data-kardinalitaet" id="toc-sec-joining-data-kardinalitaet" class="nav-link" data-scroll-target="#sec-joining-data-kardinalitaet"><span class="header-section-number">13.5</span> Duplikate und Kardinalität</a></li>
+  <li><a href="#sec-joining-data-kardinalitaet" id="toc-sec-joining-data-kardinalitaet" class="nav-link" data-scroll-target="#sec-joining-data-kardinalitaet"><span class="header-section-number">17.5</span> Duplikate und Kardinalität</a></li>
   <li>
-<a href="#sec-joining-data-filtering" id="toc-sec-joining-data-filtering" class="nav-link" data-scroll-target="#sec-joining-data-filtering"><span class="header-section-number">13.6</span> Filtering-Joins</a>
+<a href="#sec-joining-data-filtering" id="toc-sec-joining-data-filtering" class="nav-link" data-scroll-target="#sec-joining-data-filtering"><span class="header-section-number">17.6</span> Filtering-Joins</a>
   <ul class="collapse">
 <li><a href="#semi_join" id="toc-semi_join" class="nav-link" data-scroll-target="#semi_join"><code>semi_join()</code></a></li>
   <li><a href="#anti_join" id="toc-anti_join" class="nav-link" data-scroll-target="#anti_join"><code>anti_join()</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-joining-data-real" id="toc-sec-joining-data-real" class="nav-link" data-scroll-target="#sec-joining-data-real"><span class="header-section-number">13.7</span> Joins mit echten Daten</a>
+<a href="#sec-joining-data-real" id="toc-sec-joining-data-real" class="nav-link" data-scroll-target="#sec-joining-data-real"><span class="header-section-number">17.7</span> Joins mit echten Daten</a>
   <ul class="collapse">
 <li><a href="#fehlende-treffer-finden" id="toc-fehlende-treffer-finden" class="nav-link" data-scroll-target="#fehlende-treffer-finden">Fehlende Treffer finden</a></li>
   <li><a href="#spaltenkonflikte" id="toc-spaltenkonflikte" class="nav-link" data-scroll-target="#spaltenkonflikte">Spaltenkonflikte</a></li>
   </ul>
 </li>
-  <li><a href="#sec-joining-data-zusammenfassung" id="toc-sec-joining-data-zusammenfassung" class="nav-link" data-scroll-target="#sec-joining-data-zusammenfassung"><span class="header-section-number">13.8</span> Kurz zusammengefasst</a></li>
+  <li><a href="#sec-joining-data-zusammenfassung" id="toc-sec-joining-data-zusammenfassung" class="nav-link" data-scroll-target="#sec-joining-data-zusammenfassung"><span class="header-section-number">17.8</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/joining-data.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-joining-data" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../03-data-transformation/loading-data.html">Datentransformation</a></li><li class="breadcrumb-item"><a href="../03-data-transformation/joining-data.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-joining-data" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></h1>
 </div>
 
 
@@ -480,8 +510,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Um die Mechanismen der einzelnen Joins bestmöglich zu verstehen, nutzen wir zunächst stark vereinfachte Beispieldaten.</p>
-<section id="sec-joining-data-beispiel" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="sec-joining-data-beispiel">
-<span class="header-section-number">13.1</span> Beispieldaten</h2>
+<section id="sec-joining-data-beispiel" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="sec-joining-data-beispiel">
+<span class="header-section-number">17.1</span> Beispieldaten</h2>
 <p>Um die verschiedenen Join-Typen zu verstehen, arbeiten wir mit zwei kleinen Tabellen, die wir selbst erstellen. So seht ihr genau, was passiert.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">customers</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span></span>
@@ -520,12 +550,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4         104           5 Monitor </code></pre>
 </div>
 </div>
-</section><section id="sec-joining-data-grundprinzip" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="sec-joining-data-grundprinzip">
-<span class="header-section-number">13.2</span> Das Grundprinzip</h2>
+</section><section id="sec-joining-data-grundprinzip" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="sec-joining-data-grundprinzip">
+<span class="header-section-number">17.2</span> Das Grundprinzip</h2>
 <p>Ein Join verbindet zwei Tabellen über eine oder mehrere gemeinsame Spalten, die sogenannten <strong>Schlüssel</strong> (keys). Für jede Zeile in der linken Tabelle sucht R passende Zeilen in der rechten Tabelle, und umgekehrt. Was mit Zeilen passiert, die keinen Partner finden, hängt vom Join-Typ ab.</p>
 <p><em>Abbildung: Zwei Tabellen nebeneinander. Links “customers” mit den Spalten customer_id und name, rechts “purchases” mit den Spalten purchase_id, customer_id und product. Gestrichelte Linien verbinden die customer_id-Werte, die in beiden Tabellen vorkommen (1, 2). Die customer_id 3 und 4 in der linken Tabelle und die customer_id 5 in der rechten Tabelle haben keine Verbindung. Unter den Tabellen steht “Schlüssel: customer_id”.</em></p>
-</section><section id="sec-joining-data-typen" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="sec-joining-data-typen">
-<span class="header-section-number">13.3</span> Join-Typen</h2>
+</section><section id="sec-joining-data-typen" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="sec-joining-data-typen">
+<span class="header-section-number">17.3</span> Join-Typen</h2>
 <section id="inner_join" class="level3"><h3 class="anchored" data-anchor-id="inner_join"><code>inner_join()</code></h3>
 <p><code>inner_join()</code> behält nur die Zeilen, die in beiden Tabellen einen passenden Partner haben. Alles ohne Treffer fällt raus.</p>
 <div class="cell">
@@ -619,8 +649,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><em>Abbildung: Vier kleine Diagramme nebeneinander, eines pro Join-Typ. Jedes Diagramm zeigt zwei Mengen (Kreise oder Rechtecke) als Venn-Diagramm. Die farblich hervorgehobene Fläche zeigt, welche Zeilen im Ergebnis enthalten sind. Bei inner_join ist nur die Schnittmenge farbig. Bei left_join ist der gesamte linke Kreis farbig. Bei right_join ist der gesamte rechte Kreis farbig. Bei full_join sind beide Kreise vollständig farbig. Unter jedem Diagramm steht der Funktionsname.</em></p>
-</section></section><section id="sec-joining-data-keys" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="sec-joining-data-keys">
-<span class="header-section-number">13.4</span> Schlüssel festlegen</h2>
+</section></section><section id="sec-joining-data-keys" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="sec-joining-data-keys">
+<span class="header-section-number">17.4</span> Schlüssel festlegen</h2>
 <section id="automatische-erkennung" class="level3"><h3 class="anchored" data-anchor-id="automatische-erkennung">Automatische Erkennung</h3>
 <p>Wenn ihr <code>by</code> nicht angebt, sucht <code>dplyr</code> automatisch nach Spalten mit dem gleichen Namen in beiden Tabellen und nutzt diese als Schlüssel:</p>
 <div class="cell">
@@ -683,8 +713,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3  2025     1  5800   6000</code></pre>
 </div>
 </div>
-</section></section><section id="sec-joining-data-kardinalitaet" class="level2" data-number="13.5"><h2 data-number="13.5" class="anchored" data-anchor-id="sec-joining-data-kardinalitaet">
-<span class="header-section-number">13.5</span> Duplikate und Kardinalität</h2>
+</section></section><section id="sec-joining-data-kardinalitaet" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="sec-joining-data-kardinalitaet">
+<span class="header-section-number">17.5</span> Duplikate und Kardinalität</h2>
 <p>Bei Joins können sich Zeilen vervielfachen. Das habt ihr schon bei Ben gesehen: Weil er zwei Bestellungen hat, erscheint sein Name im Ergebnis zweimal. Das nennt man eine <strong>Eins-zu-Viele-Beziehung</strong> (one-to-many).</p>
 <p>Was passiert bei einer <strong>Viele-zu-Viele-Beziehung</strong> (many-to-many)? Dann bildet R das kartesische Produkt, also jede mögliche Kombination:</p>
 <div class="cell">
@@ -724,8 +754,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Prüft nach jedem Join kurz mit <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, ob die Zeilenzahl plausibel ist. Wenn sie unerwartet steigt, habt ihr wahrscheinlich Duplikate im Schlüssel. Mit <code>count(key, sort = TRUE)</code> findet ihr die Übeltäter.</p>
 </div>
 </div>
-</section><section id="sec-joining-data-filtering" class="level2" data-number="13.6"><h2 data-number="13.6" class="anchored" data-anchor-id="sec-joining-data-filtering">
-<span class="header-section-number">13.6</span> Filtering-Joins</h2>
+</section><section id="sec-joining-data-filtering" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="sec-joining-data-filtering">
+<span class="header-section-number">17.6</span> Filtering-Joins</h2>
 <p>Neben den verbindenden Joins gibt es auch <strong>Filtering-Joins</strong>. Sie verändern die Spalten nicht, sondern filtern nur die Zeilen der linken Tabelle.</p>
 <section id="semi_join" class="level3"><h3 class="anchored" data-anchor-id="semi_join"><code>semi_join()</code></h3>
 <p><code>semi_join()</code> behält die Zeilen der linken Tabelle, für die es einen Treffer in der rechten Tabelle gibt. Es fügt aber keine Spalten der rechten Tabelle hinzu:</p>
@@ -767,8 +797,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Hier findet ihr die Bestellung von Kunde 5, die keinem Kunden zugeordnet werden kann. Das ist ein typischer Einsatz bei der Datenqualitätsprüfung.</p>
 <p><em>Abbildung: Zwei Diagramme nebeneinander. Links: semi_join. Zwei Tabellen “customers” und “purchases”. Der Pfeil zeigt von purchases auf customers. In der customers-Tabelle sind die Zeilen mit Treffern (Anna, Ben) hervorgehoben. Die purchases-Spalten werden NICHT hinzugefügt. Rechts: anti_join. Gleicher Aufbau, aber in der customers-Tabelle sind die Zeilen OHNE Treffer (Cleo, David) hervorgehoben.</em></p>
-</section></section><section id="sec-joining-data-real" class="level2" data-number="13.7"><h2 data-number="13.7" class="anchored" data-anchor-id="sec-joining-data-real">
-<span class="header-section-number">13.7</span> Joins mit echten Daten</h2>
+</section></section><section id="sec-joining-data-real" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="sec-joining-data-real">
+<span class="header-section-number">17.7</span> Joins mit echten Daten</h2>
 <p>Schauen wir uns einen Join mit dem <code>tweets</code>-Datensatz an. Im Ordner <code>data/</code> liegt eine CSV-Datei, die den Twitter-Accounts der Ampel-Politiker ihre Parteizugehörigkeit zuordnet. So eine Lookup-Tabelle ist ein typischer Anwendungsfall für Joins: Die Information steckt in einer separaten Datei, und ihr bringt sie per Join in euren Hauptdatensatz.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">party_info</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/party_info.csv"</span><span class="op">)</span></span>
@@ -873,8 +903,8 @@ purchases |&gt;
 2           2            5             4</code></pre>
 </div>
 </div>
-</section></section><section id="sec-joining-data-zusammenfassung" class="level2" data-number="13.8"><h2 data-number="13.8" class="anchored" data-anchor-id="sec-joining-data-zusammenfassung">
-<span class="header-section-number">13.8</span> Kurz zusammengefasst</h2>
+</section></section><section id="sec-joining-data-zusammenfassung" class="level2" data-number="17.8"><h2 data-number="17.8" class="anchored" data-anchor-id="sec-joining-data-zusammenfassung">
+<span class="header-section-number">17.8</span> Kurz zusammengefasst</h2>
 <ul>
 <li>Joins verbinden zwei Tabellen über gemeinsame Schlüsselspalten.</li>
 <li>
@@ -888,7 +918,7 @@ purchases |&gt;
 <code>semi_join()</code> und <code>anti_join()</code> filtern die linke Tabelle, ohne Spalten hinzuzufügen.</li>
 <li>Prüft nach jedem Join die Zeilenzahl mit <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>, um unerwartete Duplikate zu erkennen.</li>
 </ul>
-<p>Damit habt ihr alle wichtigen Werkzeuge für die Datentransformation kennengelernt. Ihr wisst, wie ihr Daten ladet (siehe <a href="loading-data.html" class="quarto-xref"><span>Kapitel 5</span></a>), Spalten auswählt (siehe <a href="select.html" class="quarto-xref"><span>Kapitel 8</span></a>), Variablen verändert und neue berechnet (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 9</span></a> und <a href="mutate-add.html" class="quarto-xref"><span>Kapitel 10</span></a>), Zeilen filtert (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 11</span></a>), Daten zusammenfasst (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 12</span></a>) und Tabellen verbindet. Im nächsten Teil des Buches geht es darum, eure Ergebnisse sichtbar zu machen: mit Datenvisualisierungen.</p>
+<p>Damit habt ihr alle wichtigen Werkzeuge für die Datentransformation kennengelernt. Ihr wisst, wie ihr Daten ladet (siehe <a href="loading-data.html" class="quarto-xref"><span>Kapitel 9</span></a>), Spalten auswählt (siehe <a href="select.html" class="quarto-xref"><span>Kapitel 12</span></a>), Variablen verändert und neue berechnet (siehe <a href="mutate-modify.html" class="quarto-xref"><span>Kapitel 13</span></a> und <a href="mutate-add.html" class="quarto-xref"><span>Kapitel 14</span></a>), Zeilen filtert (siehe <a href="filter.html" class="quarto-xref"><span>Kapitel 15</span></a>), Daten zusammenfasst (siehe <a href="summarize.html" class="quarto-xref"><span>Kapitel 16</span></a>) und Tabellen verbindet. Im nächsten Teil des Buches geht es darum, eure Ergebnisse sichtbar zu machen: mit Datenvisualisierungen.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1331,12 +1361,12 @@ purchases |&gt;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../03-data-transformation/summarize.html" class="pagination-link" aria-label="Beobachtungen zusammenfassen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../04-data-visualization/grammar-of-graphics.html" class="pagination-link" aria-label="Grammar of Graphics">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../03-data-transformation/complex-data-structures.html" class="pagination-link" aria-label="Komplexe Datenstrukturen">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

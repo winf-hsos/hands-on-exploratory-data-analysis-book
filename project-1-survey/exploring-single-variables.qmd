@@ -1,0 +1,7 @@
+# Variablen sichten {#sec-surveys-exploring-single-variables}
+
+```{r}
+#| include: false
+source("setup.R")
+```
+

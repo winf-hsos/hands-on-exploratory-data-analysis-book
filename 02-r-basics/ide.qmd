@@ -1,12 +1,17 @@
 # Entwicklungsumgebung
 
+```{r}
+#| include: false
+source("setup.R")
+```
+
 Zum Programmieren reicht theoretisch ein einfacher Texteditor, denn Code ist am Ende nur Text. In der Praxis wollt ihr aber Unterstützung beim Schreiben und Ausführen von Code und beim Organisieren eurer Dateien. Genau dafür gibt es integrierte Entwicklungsumgebungen, kurz IDEs (das steht für *Integrated Development Environment*).
 
 In diesem Buch arbeiten wir mit **Positron**. Das ist eine moderne Entwicklungsumgebung für Data Science, die sich in vielen Dingen wie Visual Studio Code anfühlt. Installiert Positron jetzt einmal, dann nutzen wir es direkt für eure ersten Schritte in R.
 
 ## Positron installieren
 
-Ladet Positron in der neuesten Version herunter und installiert es auf eurem Rechner: [positron.posit.co/download.html](https://positron.posit.co/download.html). Startet Positron danach direkt. Wenn es geöffnet ist, geht es mit dem nächsten Abschnitt weiter.
+Ladet [Positron](https://positron.posit.co/download.html) in der neuesten Version herunter und installiert es auf eurem Rechner. Startet Positron danach direkt. Wenn es geöffnet ist, geht es mit dem nächsten Abschnitt weiter.
 
 ## Projekte und Ordner
 
@@ -20,11 +25,51 @@ Wenn ihr regelmäßig an Projekten arbeitet, lohnt sich eine Strategie für Back
 
 ![Meine Projekte liegen in einem gemeinsamen Ordner.](/images/projects-folders.svg)
 
-## Projekt öffnen
+## Projekt anlegen und öffnen
 
 Legt zuerst euren Projektordner im Datei-Explorer an. Öffnet anschließend diesen Ordner in Positron. Sobald der Ordner geöffnet ist, seht ihr links die Projektstruktur, in der Mitte euren Editor und unten die Konsole.
 
 Ab jetzt gilt: Alles, was zu eurem Projekt gehört, landet in diesem Ordner. Wenn ihr später mit Daten arbeitet, speichert ihr sie ebenfalls dort oder ihr ladet sie aus einer Quelle, die ihr nachvollziehbar dokumentiert.
+
+### Virtuelle Umgebungen für R
+
+Es ist eine gute Idee, die Abhängigkeiten eurer R-Projekte zu isolieren. Das geht mit virtuellen Umgebungen, die ihr mit dem `renv`-Paket anlegen könnt. So stellt ihr sicher, dass jedes Projekt genau die Pakete nutzt, die es braucht, und dass Updates in einem Projekt nicht die anderen Projekte kaputtmachen.
+
+```{r}
+renv::init()
+```
+
+Die Zeile sorgt dafür, dass in eurem Ordner eine virtuelle Umgebung angelegt wird. Ihr erkennt das an dem neuen Ornder `renv` und den Dateien `renv.lock` sowie `.Rprofile`. Jedes Mal, wenn ihr eurer Projekt in Zukunft öffnet, wird eure virtuelle R-Umgebung automatisch für euch aktiviert. ihr könnt prüfen, ob eure virtuelle Umgebung aktiv ist:
+
+```{r}
+renv::project()
+```
+
+Die Ausgabe sollte den Pfad zu eurem Projektordner enthalten. Wenn das der Fall ist, seid ihr bereit, Pakete zu installieren und loszulegen.
+
+Wir werden für die Installation von externen Paketen ein eigenes Paket mit dem Namen `pacmman` verwenden, das ihr am besten direkt zu Beginn einmal in eurer virtuellen Umgebung installiert:
+
+```{r}
+renv::install("pacman")
+```
+
+Ihr werdet im Laufe des Buches viele Pakete installieren. Um einen Überblick zu bekommen, welche Pakete in eurer virtuellen Umgebung installiert sind, führt ihr einfach diesen Befehl aus (wir gehen an dieser Stelle nicht weiter darauf ein, einfach nur ausführen):
+
+```{r}
+ip <- installed.packages()
+ip[, c("Package", "Version", "LibPath")] |> 
+  as_tibble() |> 
+  clean_names() |>
+  mutate(in_virtual_env = 
+    str_detect(
+        str_to_lower(lib_path), 
+        str_to_lower(getwd())
+    )
+  ) |>
+  select(package, version, in_virtual_env) |> 
+  arrange(in_virtual_env, package)
+```
+
 
 ## Dateien anlegen
 

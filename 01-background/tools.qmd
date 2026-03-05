@@ -1,0 +1,4 @@
+# Werkzeuge
+
+> Für einfache quantitative Analysen (Deskriptivstatistik) und grafische Aufbereitungen von numerischem Datenmaterial ist teure und komplexe Statistik-Software tatsächlich oft überflüssig. Sich im Studium in die statistische Datenanalyse mit MS Excel einzuarbeiten ist insofern sinnvoll, als in vielen Unternehmen damit gearbeitet wird. Für anspruchsvollere quantitative Studien und insbesondere inferenzstatistische Analysen sind spezialisierte Statistik-Programmpakete unumgänglich.
+

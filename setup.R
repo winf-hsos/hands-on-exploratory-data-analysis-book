@@ -1,5 +1,4 @@
-library(tidyverse)
-
+pacman::p_load(tidyverse, janitor)
 find_project_dir <- function(start_dir = getwd()) {
   dir <- normalizePath(start_dir)
   repeat {

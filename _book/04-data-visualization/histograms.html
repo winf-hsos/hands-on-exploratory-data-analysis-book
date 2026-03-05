@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>17&nbsp; Histogramme – Hands-On Exploratory Data Analytics</title>
+<title>22&nbsp; Histogramme – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -130,7 +130,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/histograms.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/histograms.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -172,6 +172,30 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -186,19 +210,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -215,55 +239,61 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -280,43 +310,43 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -333,13 +363,13 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -356,25 +386,25 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -405,31 +435,31 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#einfaches-histogramm" id="toc-einfaches-histogramm" class="nav-link active" data-scroll-target="#einfaches-histogramm"><span class="header-section-number">17.1</span> Einfaches Histogramm</a></li>
-  <li><a href="#bins-einstellen" id="toc-bins-einstellen" class="nav-link" data-scroll-target="#bins-einstellen"><span class="header-section-number">17.2</span> Bins einstellen</a></li>
-  <li><a href="#schiefe-verteilungen" id="toc-schiefe-verteilungen" class="nav-link" data-scroll-target="#schiefe-verteilungen"><span class="header-section-number">17.3</span> Schiefe Verteilungen</a></li>
+<li><a href="#einfaches-histogramm" id="toc-einfaches-histogramm" class="nav-link active" data-scroll-target="#einfaches-histogramm"><span class="header-section-number">22.1</span> Einfaches Histogramm</a></li>
+  <li><a href="#bins-einstellen" id="toc-bins-einstellen" class="nav-link" data-scroll-target="#bins-einstellen"><span class="header-section-number">22.2</span> Bins einstellen</a></li>
+  <li><a href="#schiefe-verteilungen" id="toc-schiefe-verteilungen" class="nav-link" data-scroll-target="#schiefe-verteilungen"><span class="header-section-number">22.3</span> Schiefe Verteilungen</a></li>
   <li>
-<a href="#gruppen-vergleichen" id="toc-gruppen-vergleichen" class="nav-link" data-scroll-target="#gruppen-vergleichen"><span class="header-section-number">17.4</span> Gruppen vergleichen</a>
+<a href="#gruppen-vergleichen" id="toc-gruppen-vergleichen" class="nav-link" data-scroll-target="#gruppen-vergleichen"><span class="header-section-number">22.4</span> Gruppen vergleichen</a>
   <ul class="collapse">
 <li><a href="#%C3%BCberlagerte-histogramme" id="toc-überlagerte-histogramme" class="nav-link" data-scroll-target="#%C3%BCberlagerte-histogramme">Überlagerte Histogramme</a></li>
   <li><a href="#facetten" id="toc-facetten" class="nav-link" data-scroll-target="#facetten">Facetten</a></li>
   </ul>
 </li>
-  <li><a href="#dichtekurven-als-alternative" id="toc-dichtekurven-als-alternative" class="nav-link" data-scroll-target="#dichtekurven-als-alternative"><span class="header-section-number">17.5</span> Dichtekurven als Alternative</a></li>
+  <li><a href="#dichtekurven-als-alternative" id="toc-dichtekurven-als-alternative" class="nav-link" data-scroll-target="#dichtekurven-als-alternative"><span class="header-section-number">22.5</span> Dichtekurven als Alternative</a></li>
   <li>
-<a href="#typische-fehler" id="toc-typische-fehler" class="nav-link" data-scroll-target="#typische-fehler"><span class="header-section-number">17.6</span> Typische Fehler</a>
+<a href="#typische-fehler" id="toc-typische-fehler" class="nav-link" data-scroll-target="#typische-fehler"><span class="header-section-number">22.6</span> Typische Fehler</a>
   <ul class="collapse">
 <li><a href="#standardwerte-nicht-hinterfragen" id="toc-standardwerte-nicht-hinterfragen" class="nav-link" data-scroll-target="#standardwerte-nicht-hinterfragen">Standardwerte nicht hinterfragen</a></li>
   <li><a href="#gruppen-ohne-position-identity" id="toc-gruppen-ohne-position-identity" class="nav-link" data-scroll-target="#gruppen-ohne-position-identity">Gruppen ohne <code>position = "identity"</code></a></li>
   <li><a href="#nullwerte-bei-log-skalen" id="toc-nullwerte-bei-log-skalen" class="nav-link" data-scroll-target="#nullwerte-bei-log-skalen">Nullwerte bei Log-Skalen</a></li>
   </ul>
 </li>
-  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">17.7</span> Kurz zusammengefasst</a></li>
+  <li><a href="#kurz-zusammengefasst" id="toc-kurz-zusammengefasst" class="nav-link" data-scroll-target="#kurz-zusammengefasst"><span class="header-section-number">22.7</span> Kurz zusammengefasst</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/histograms.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-basics-histogramme" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-data-visualization/grammar-of-graphics.html">Datenvisualisierung</a></li><li class="breadcrumb-item"><a href="../04-data-visualization/histograms.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-basics-histogramme" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></h1>
 </div>
 
 
@@ -444,8 +474,8 @@ div.csl-indent {
 
 
 </header><p>Histogramme zeigen, wie sich die Werte einer numerischen Variable verteilen. Statt einzelne Datenpunkte darzustellen, werden die Werte in Intervalle (Bins) eingeteilt und die Häufigkeit pro Intervall als Balken dargestellt. Claus Wilke beschreibt Histogramme als die natürliche Wahl, wenn ihr die Form einer Verteilung untersuchen wollt — ob symmetrisch, schief oder mit mehreren Gipfeln <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="../references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke 2019</a>)</span>.</p>
-<section id="einfaches-histogramm" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="einfaches-histogramm">
-<span class="header-section-number">17.1</span> Einfaches Histogramm</h2>
+<section id="einfaches-histogramm" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="einfaches-histogramm">
+<span class="header-section-number">22.1</span> Einfaches Histogramm</h2>
 <p>Wie sieht die Verteilung der Retweet-Zahlen aus? Die meisten Tweets bekommen wenige Retweets, einige wenige bekommen sehr viele:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -459,14 +489,14 @@ div.csl-indent {
 <img src="histograms_files/figure-html/fig-hist-basic-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-basic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.1: Verteilung der Retweet-Zahlen.
+Abbildung&nbsp;22.1: Verteilung der Retweet-Zahlen.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p><code>ggplot2</code> zeigt eine Meldung, dass es 30 Bins verwendet hat (<code>bins = 30</code>). Das ist der Standardwert, aber nicht immer ideal.</p>
-</section><section id="bins-einstellen" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="bins-einstellen">
-<span class="header-section-number">17.2</span> Bins einstellen</h2>
+</section><section id="bins-einstellen" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="bins-einstellen">
+<span class="header-section-number">22.2</span> Bins einstellen</h2>
 <p>Die Anzahl der Bins beeinflusst, wie viel Detail ihr seht. Zu wenige Bins verbergen Muster, zu viele erzeugen Rauschen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -480,7 +510,7 @@ Abbildung&nbsp;17.1: Verteilung der Retweet-Zahlen.
 <img src="histograms_files/figure-html/fig-hist-bins-10-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-bins-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.2: Histogramm mit 10 Bins: grob, aber übersichtlich.
+Abbildung&nbsp;22.2: Histogramm mit 10 Bins: grob, aber übersichtlich.
 </figcaption></figure>
 </div>
 </div>
@@ -497,7 +527,7 @@ Abbildung&nbsp;17.2: Histogramm mit 10 Bins: grob, aber übersichtlich.
 <img src="histograms_files/figure-html/fig-hist-bins-100-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-bins-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.3: Histogramm mit 100 Bins: mehr Detail, aber auch mehr Rauschen.
+Abbildung&nbsp;22.3: Histogramm mit 100 Bins: mehr Detail, aber auch mehr Rauschen.
 </figcaption></figure>
 </div>
 </div>
@@ -515,7 +545,7 @@ Abbildung&nbsp;17.3: Histogramm mit 100 Bins: mehr Detail, aber auch mehr Rausch
 <img src="histograms_files/figure-html/fig-hist-binwidth-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-binwidth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.4: Histogramm mit einer Binbreite von 50.
+Abbildung&nbsp;22.4: Histogramm mit einer Binbreite von 50.
 </figcaption></figure>
 </div>
 </div>
@@ -533,8 +563,8 @@ Abbildung&nbsp;17.4: Histogramm mit einer Binbreite von 50.
 <p>Es gibt keine perfekte Bin-Anzahl. Probiert zwei, drei Werte aus und schaut, welcher die Verteilung am klarsten zeigt. Das ist ein normaler Teil der explorativen Analyse.</p>
 </div>
 </div>
-</section><section id="schiefe-verteilungen" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="schiefe-verteilungen">
-<span class="header-section-number">17.3</span> Schiefe Verteilungen</h2>
+</section><section id="schiefe-verteilungen" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="schiefe-verteilungen">
+<span class="header-section-number">22.3</span> Schiefe Verteilungen</h2>
 <p>Daten wie Retweet-Zahlen, Umsätze oder Follower-Zahlen sind oft stark rechtsschief: Die meisten Werte sind klein, einige wenige sind extrem groß. In solchen Fällen hilft es, den Blick auf einen Ausschnitt zu richten:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -548,7 +578,7 @@ Abbildung&nbsp;17.4: Histogramm mit einer Binbreite von 50.
 <img src="histograms_files/figure-html/fig-hist-zoom-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-zoom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.5: Histogramm mit Fokus auf den Bereich 0–500 Retweets.
+Abbildung&nbsp;22.5: Histogramm mit Fokus auf den Bereich 0–500 Retweets.
 </figcaption></figure>
 </div>
 </div>
@@ -567,13 +597,13 @@ Abbildung&nbsp;17.5: Histogramm mit Fokus auf den Bereich 0–500 Retweets.
 <img src="histograms_files/figure-html/fig-hist-log-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.6: Histogramm mit logarithmischer x-Achse.
+Abbildung&nbsp;22.6: Histogramm mit logarithmischer x-Achse.
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="gruppen-vergleichen" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="gruppen-vergleichen">
-<span class="header-section-number">17.4</span> Gruppen vergleichen</h2>
+</section><section id="gruppen-vergleichen" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="gruppen-vergleichen">
+<span class="header-section-number">22.4</span> Gruppen vergleichen</h2>
 <section id="überlagerte-histogramme" class="level3"><h3 class="anchored" data-anchor-id="überlagerte-histogramme">Überlagerte Histogramme</h3>
 <p>Um die Verteilung zweier Gruppen zu vergleichen, könnt ihr sie überlagern. <code>alpha</code> sorgt dafür, dass beide sichtbar bleiben:</p>
 <div class="cell">
@@ -588,7 +618,7 @@ Abbildung&nbsp;17.6: Histogramm mit logarithmischer x-Achse.
 <img src="histograms_files/figure-html/fig-hist-overlay-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-overlay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.7: Überlagerte Histogramme vergleichen zwei Gruppen.
+Abbildung&nbsp;22.7: Überlagerte Histogramme vergleichen zwei Gruppen.
 </figcaption></figure>
 </div>
 </div>
@@ -610,13 +640,13 @@ Abbildung&nbsp;17.7: Überlagerte Histogramme vergleichen zwei Gruppen.
 <img src="histograms_files/figure-html/fig-hist-facet-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.8: Facetten zeigen die Verteilung pro Sprache.
+Abbildung&nbsp;22.8: Facetten zeigen die Verteilung pro Sprache.
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="dichtekurven-als-alternative" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="dichtekurven-als-alternative">
-<span class="header-section-number">17.5</span> Dichtekurven als Alternative</h2>
+</section></section><section id="dichtekurven-als-alternative" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="dichtekurven-als-alternative">
+<span class="header-section-number">22.5</span> Dichtekurven als Alternative</h2>
 <p><code>geom_density()</code> zeichnet eine geglättete Kurve statt diskreter Balken. Das kann hilfreich sein, wenn ihr die Form der Verteilung hervorheben wollt:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">|&gt;</span></span>
@@ -631,14 +661,14 @@ Abbildung&nbsp;17.8: Facetten zeigen die Verteilung pro Sprache.
 <img src="histograms_files/figure-html/fig-hist-density-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hist-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;17.9: Dichtekurven glätten die Verteilung.
+Abbildung&nbsp;22.9: Dichtekurven glätten die Verteilung.
 </figcaption></figure>
 </div>
 </div>
 </div>
 <p>Dichtekurven eignen sich besonders gut für Vergleiche, weil sich die Kurven leichter überlagern lassen als Balken <span class="citation" data-cites="wilke_fundamentals_2019">(<a href="../references.html#ref-wilke_fundamentals_2019" role="doc-biblioref">Wilke 2019</a>)</span>.</p>
-</section><section id="typische-fehler" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="typische-fehler">
-<span class="header-section-number">17.6</span> Typische Fehler</h2>
+</section><section id="typische-fehler" class="level2" data-number="22.6"><h2 data-number="22.6" class="anchored" data-anchor-id="typische-fehler">
+<span class="header-section-number">22.6</span> Typische Fehler</h2>
 <section id="standardwerte-nicht-hinterfragen" class="level3"><h3 class="anchored" data-anchor-id="standardwerte-nicht-hinterfragen">Standardwerte nicht hinterfragen</h3>
 <p>Die 30 Standard-Bins sind ein Startpunkt, nicht die richtige Wahl. Passt <code>bins</code> oder <code>binwidth</code> immer bewusst an.</p>
 </section><section id="gruppen-ohne-position-identity" class="level3"><h3 class="anchored" data-anchor-id="gruppen-ohne-position-identity">Gruppen ohne <code>position = "identity"</code>
@@ -646,8 +676,8 @@ Abbildung&nbsp;17.9: Dichtekurven glätten die Verteilung.
 <p>Wenn ihr Histogramme zweier Gruppen überlagern wollt, vergesst nicht <code>position = "identity"</code>. Sonst werden sie gestapelt, und ihr seht nicht die echte Verteilung.</p>
 </section><section id="nullwerte-bei-log-skalen" class="level3"><h3 class="anchored" data-anchor-id="nullwerte-bei-log-skalen">Nullwerte bei Log-Skalen</h3>
 <p><code>log10(0)</code> ist nicht definiert. Filtert Nullwerte heraus, wenn ihr logarithmische Skalen verwendet.</p>
-</section></section><section id="kurz-zusammengefasst" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="kurz-zusammengefasst">
-<span class="header-section-number">17.7</span> Kurz zusammengefasst</h2>
+</section></section><section id="kurz-zusammengefasst" class="level2" data-number="22.7"><h2 data-number="22.7" class="anchored" data-anchor-id="kurz-zusammengefasst">
+<span class="header-section-number">22.7</span> Kurz zusammengefasst</h2>
 <ul>
 <li>
 <code>geom_histogram()</code> zeigt die Verteilung einer numerischen Variable.</li>
@@ -1104,12 +1134,12 @@ Wilke, C. 2019. <em>Fundamentals of data visualization: a primer on making infor
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../04-data-visualization/scatter-plots.html" class="pagination-link" aria-label="Punktediagramme">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../04-data-visualization/boxplots.html" class="pagination-link" aria-label="Boxplots">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

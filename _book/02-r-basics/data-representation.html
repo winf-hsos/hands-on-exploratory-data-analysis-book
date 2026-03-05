@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.20">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>4&nbsp; Datenrepräsentation – Hands-On Exploratory Data Analytics</title>
+<title>8&nbsp; Datenrepräsentation – Hands-On Exploratory Data Analytics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-r-basics/ide.html">Erste Schritte mit R</a></li><li class="breadcrumb-item"><a href="../02-r-basics/data-representation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-r-basics/ide.html">Erste Schritte mit R</a></li><li class="breadcrumb-item"><a href="../02-r-basics/data-representation.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -153,6 +153,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Empirische Forschung</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/research-questions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Forschungsfragen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/types-of-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/data-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenauswertung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-background/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Werkzeuge</span></span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -167,19 +191,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Entwicklungsumgebung</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/programming-with-r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../02-r-basics/data-representation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></a>
   </div>
 </li>
       </ul>
@@ -196,55 +220,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/loading-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/pipe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Pipe-Operator</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Daten kennenlernen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/select.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Variablen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-modify.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Variablen verändern</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/mutate-add.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Variablen erstellen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/filter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Beobachtungen auswählen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/summarize.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Beobachtungen zusammenfassen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../03-data-transformation/joining-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Datensätze verbinden</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-transformation/complex-data-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Komplexe Datenstrukturen</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,43 +291,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/grammar-of-graphics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Grammar of Graphics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/bar-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Balkendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/scatter-plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Punktediagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/histograms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Histogramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/boxplots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Boxplots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/line-charts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Liniendiagramme</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../04-data-visualization/visualizations-polish.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Visualisuerungen polieren</span></span></a>
   </div>
 </li>
       </ul>
@@ -314,13 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-1-survey/survey-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Umfragedaten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-1-survey/types-of-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Arten von Variablen</span></span></a>
+  <a href="../project-1-survey/exploring-single-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></span></a>
   </div>
 </li>
       </ul>
@@ -337,25 +367,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/load.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Laden der Daten</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Faktoren</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Übersicht der Variablen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../project-2-news/time.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Zeit</span></span></a>
   </div>
 </li>
       </ul>
@@ -386,9 +416,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-<li><a href="#skalare-werte" id="toc-skalare-werte" class="nav-link active" data-scroll-target="#skalare-werte"><span class="header-section-number">4.1</span> Skalare Werte</a></li>
+<li><a href="#skalare-werte" id="toc-skalare-werte" class="nav-link active" data-scroll-target="#skalare-werte"><span class="header-section-number">8.1</span> Skalare Werte</a></li>
   <li>
-<a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen"><span class="header-section-number">4.2</span> Datentypen</a>
+<a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen"><span class="header-section-number">8.2</span> Datentypen</a>
   <ul class="collapse">
 <li><a href="#grundlegende-datentypen" id="toc-grundlegende-datentypen" class="nav-link" data-scroll-target="#grundlegende-datentypen">Grundlegende Datentypen</a></li>
   <li><a href="#typumwandlung" id="toc-typumwandlung" class="nav-link" data-scroll-target="#typumwandlung">Typumwandlung</a></li>
@@ -396,7 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#vektoren" id="toc-vektoren" class="nav-link" data-scroll-target="#vektoren"><span class="header-section-number">4.3</span> Vektoren</a>
+<a href="#vektoren" id="toc-vektoren" class="nav-link" data-scroll-target="#vektoren"><span class="header-section-number">8.3</span> Vektoren</a>
   <ul class="collapse">
 <li><a href="#zugriff-auf-elemente" id="toc-zugriff-auf-elemente" class="nav-link" data-scroll-target="#zugriff-auf-elemente">Zugriff auf Elemente</a></li>
   <li><a href="#rechnen-mit-vektoren" id="toc-rechnen-mit-vektoren" class="nav-link" data-scroll-target="#rechnen-mit-vektoren">Rechnen mit Vektoren</a></li>
@@ -405,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#faktoren" id="toc-faktoren" class="nav-link" data-scroll-target="#faktoren"><span class="header-section-number">4.4</span> Faktoren</a>
+<a href="#faktoren" id="toc-faktoren" class="nav-link" data-scroll-target="#faktoren"><span class="header-section-number">8.4</span> Faktoren</a>
   <ul class="collapse">
 <li><a href="#einen-faktor-erstellen" id="toc-einen-faktor-erstellen" class="nav-link" data-scroll-target="#einen-faktor-erstellen">Einen Faktor erstellen</a></li>
   <li><a href="#warum-nicht-einfach-text" id="toc-warum-nicht-einfach-text" class="nav-link" data-scroll-target="#warum-nicht-einfach-text">Warum nicht einfach Text?</a></li>
@@ -413,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#matrizen" id="toc-matrizen" class="nav-link" data-scroll-target="#matrizen"><span class="header-section-number">4.5</span> Matrizen</a>
+<a href="#matrizen" id="toc-matrizen" class="nav-link" data-scroll-target="#matrizen"><span class="header-section-number">8.5</span> Matrizen</a>
   <ul class="collapse">
 <li><a href="#zeilen-und-spalten-benennen" id="toc-zeilen-und-spalten-benennen" class="nav-link" data-scroll-target="#zeilen-und-spalten-benennen">Zeilen und Spalten benennen</a></li>
   <li><a href="#zugriff-auf-elemente-1" id="toc-zugriff-auf-elemente-1" class="nav-link" data-scroll-target="#zugriff-auf-elemente-1">Zugriff auf Elemente</a></li>
@@ -421,14 +451,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li>
-<a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="header-section-number">4.6</span> Data Frames</a>
+<a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="header-section-number">8.6</span> Data Frames</a>
   <ul class="collapse">
 <li><a href="#zugriff-auf-spalten" id="toc-zugriff-auf-spalten" class="nav-link" data-scroll-target="#zugriff-auf-spalten">Zugriff auf Spalten</a></li>
   <li><a href="#das-problem-mit-data-frames" id="toc-das-problem-mit-data-frames" class="nav-link" data-scroll-target="#das-problem-mit-data-frames">Das Problem mit Data Frames</a></li>
   </ul>
 </li>
   <li>
-<a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">4.7</span> Tibbles</a>
+<a href="#tibbles" id="toc-tibbles" class="nav-link" data-scroll-target="#tibbles"><span class="header-section-number">8.7</span> Tibbles</a>
   <ul class="collapse">
 <li><a href="#was-ist-anders" id="toc-was-ist-anders" class="nav-link" data-scroll-target="#was-ist-anders">Was ist anders?</a></li>
   <li><a href="#einen-tibble-erstellen" id="toc-einen-tibble-erstellen" class="nav-link" data-scroll-target="#einen-tibble-erstellen">Einen Tibble erstellen</a></li>
@@ -440,8 +470,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-r-basics/ide.html">Erste Schritte mit R</a></li><li class="breadcrumb-item"><a href="../02-r-basics/data-representation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-basics-data-representation" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-r-basics/ide.html">Erste Schritte mit R</a></li><li class="breadcrumb-item"><a href="../02-r-basics/data-representation.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-basics-data-representation" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Datenrepräsentation</span></span></h1>
 </div>
 
 
@@ -464,8 +494,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Was ist der Unterschied zwischen einem Data Frame und einem Tibble, und warum verwenden wir Tibbles?</li>
 </ul>
 </div>
-<section id="skalare-werte" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="skalare-werte">
-<span class="header-section-number">4.1</span> Skalare Werte</h2>
+<section id="skalare-werte" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="skalare-werte">
+<span class="header-section-number">8.1</span> Skalare Werte</h2>
 <p>Was passiert, wenn ihr R einfach eine Zahl gebt?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">42</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -491,8 +521,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Aber nicht jeder Wert ist gleich. Eine Zahl ist etwas anderes als ein Text, und das bringt uns zum nächsten Thema.</p>
-</section><section id="datentypen" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="datentypen">
-<span class="header-section-number">4.2</span> Datentypen</h2>
+</section><section id="datentypen" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="datentypen">
+<span class="header-section-number">8.2</span> Datentypen</h2>
 <p>Warum ist es wichtig, ob ein Wert eine Zahl oder ein Text ist? Weil R mit verschiedenen Typen unterschiedlich umgeht. Ihr könnt zwei Zahlen addieren, aber ihr könnt nicht einen Text und eine Zahl addieren. Wenn R die Typen durcheinanderbringt, bekommt ihr entweder einen Fehler oder ein unerwartetes Ergebnis.</p>
 <section id="grundlegende-datentypen" class="level3"><h3 class="anchored" data-anchor-id="grundlegende-datentypen">Grundlegende Datentypen</h3>
 <p>R kennt vier grundlegende Datentypen, die euch im Alltag ständig begegnen:</p>
@@ -633,8 +663,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Für die Arbeit mit Datumswerten gibt es im Tidyverse das Paket <code>lubridate</code>, das euch viele hilfreiche Funktionen bereitstellt. Darauf gehen wir in späteren Kapiteln genauer ein.</p>
-</section></section><section id="vektoren" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="vektoren">
-<span class="header-section-number">4.3</span> Vektoren</h2>
+</section></section><section id="vektoren" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="vektoren">
+<span class="header-section-number">8.3</span> Vektoren</h2>
 <p>Was aber, wenn ihr nicht nur eine einzelne Zahl speichern wollt, sondern gleich fünf Prüfungsnoten? Oder die Namen aller Teilnehmenden eines Kurses?</p>
 <p>Dafür gibt es den <strong>Vektor</strong>. Ein Vektor ist eine geordnete Sammlung von Werten desselben Typs. Ihr erstellt ihn mit der Funktion <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, was für <em>combine</em> steht:</p>
 <div class="cell">
@@ -745,8 +775,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Wenn R verschiedene Typen in einem Vektor findet, wandelt es alle Werte in den allgemeinsten Typ um. Die Reihenfolge ist: <code>logical</code> → <code>integer</code> → <code>numeric</code> → <code>character</code>. Das nennt man <em>Coercion</em>. Achtet darauf, nur gleichartige Werte in einen Vektor zu packen.</p>
 </div>
 </div>
-</section></section><section id="faktoren" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="faktoren">
-<span class="header-section-number">4.4</span> Faktoren</h2>
+</section></section><section id="faktoren" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="faktoren">
+<span class="header-section-number">8.4</span> Faktoren</h2>
 <p>Manche Werte sehen zwar aus wie Text, sind aber eigentlich Kategorien. Denkt an Antworten in einer Umfrage: „stimme zu”, „neutral”, „stimme nicht zu”. Oder an Schulnoten. Es gibt nur bestimmte erlaubte Werte, und manchmal haben sie eine Reihenfolge. Wir sprechen auch von <em>kategorialen Daten</em>.</p>
 <p>Genau dafür gibt es <strong>Faktoren</strong>. Ein Faktor ist ein Vektor, bei dem R weiß, welche Werte überhaupt möglich sind (die sogenannten <em>Levels</em> oder Kategorien) und in welcher Reihenfolge sie stehen.</p>
 <section id="einen-faktor-erstellen" class="level3"><h3 class="anchored" data-anchor-id="einen-faktor-erstellen">Einen Faktor erstellen</h3>
@@ -807,8 +837,8 @@ Levels: bad &lt; medium &lt; good</code></pre>
 </div>
 </div>
 <p>In der Praxis begegnen euch Faktoren vor allem bei der Datenvisualisierung und bei statistischen Modellen. Das Tidyverse bietet mit dem Paket <code>forcats</code> viele hilfreiche Funktionen für die Arbeit mit Faktoren.</p>
-</section></section><section id="matrizen" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="matrizen">
-<span class="header-section-number">4.5</span> Matrizen</h2>
+</section></section><section id="matrizen" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="matrizen">
+<span class="header-section-number">8.5</span> Matrizen</h2>
 <p>Vektoren sind eindimensional. Aber was, wenn eure Daten zwei Dimensionen haben, also Zeilen und Spalten? Dann kommt die <strong>Matrix</strong> ins Spiel.</p>
 <p>Eine Matrix ist im Grunde ein Vektor, der in Zeilen und Spalten angeordnet ist. Wie beim Vektor gilt: <strong>Alle Elemente müssen denselben Typ haben</strong>, typischerweise Zahlen.</p>
 <div class="cell">
@@ -888,8 +918,8 @@ Exam 2 0.68       0.79        0.95</code></pre>
 </div>
 <p>Matrizen spielen in der Statistik und im maschinellen Lernen eine zentrale Rolle, zum Beispiel bei der linearen Algebra. Für die explorative Datenanalyse braucht ihr sie eher selten direkt, weil Data Frames und Tibbles flexibler sind. Aber es ist gut zu wissen, dass es sie gibt.</p>
 <p><em>Abbildung: Eine Matrix als Gitter dargestellt, mit beschrifteten Zeilen (Exam 1, Exam 2) und Spalten (Math, Statistics, Programming). Daneben ein Vektor als einzelne Spalte. Ein Pfeil zeigt, dass die Matrix aus mehreren gleichartigen Vektoren zusammengesetzt ist. Untertitel: „Eine Matrix ist ein zweidimensionaler Vektor.”</em></p>
-</section></section><section id="data-frames" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="data-frames">
-<span class="header-section-number">4.6</span> Data Frames</h2>
+</section></section><section id="data-frames" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="data-frames">
+<span class="header-section-number">8.6</span> Data Frames</h2>
 <p>Vektoren können nur einen Typ enthalten, Matrizen genauso. In der Praxis sehen eure Daten aber anders aus: Eine Spalte enthält Namen (Text), eine andere Alter (Zahlen), eine dritte, ob eine Zustimmung vorliegt (Wahrheitswert). Ihr braucht also eine Struktur, die verschiedene Typen in verschiedenen Spalten erlaubt.</p>
 <p>Genau das ist ein <strong>Data Frame</strong>. Ein Data Frame ist die klassische tabellarische Datenstruktur in R. Jede Spalte ist ein Vektor, und die Spalten dürfen unterschiedliche Typen haben.</p>
 <div class="cell">
@@ -939,8 +969,8 @@ Exam 2 0.68       0.79        0.95</code></pre>
 </div>
 <p>Schaut euch die Ausgabe genau an. Wenn ein Data Frame viele Zeilen hat, zeigt R <em>alle</em> an. Bei einem Datensatz mit zehntausenden Beobachtungen überflutet das eure Konsole. Außerdem wandelt <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> Textspalten manchmal automatisch in Faktoren um, was zu unerwarteten Ergebnissen führen kann.</p>
 <p>Es gibt also Raum für Verbesserungen. Und genau hier kommen Tibbles ins Spiel.</p>
-</section></section><section id="tibbles" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="tibbles">
-<span class="header-section-number">4.7</span> Tibbles</h2>
+</section></section><section id="tibbles" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="tibbles">
+<span class="header-section-number">8.7</span> Tibbles</h2>
 <p>Tibbles sind die moderne Version des Data Frames. Sie kommen aus dem Tidyverse und sind so gebaut, dass sie im Arbeitsalltag angenehmer und sicherer sind. Alles, was ein Data Frame kann, kann auch ein Tibble. Aber ein Tibble macht ein paar Dinge cleverer.</p>
 <section id="was-ist-anders" class="level3"><h3 class="anchored" data-anchor-id="was-ist-anders">Was ist anders?</h3>
 <p>Schauen wir uns den Unterschied direkt an. Wir laden den Tweets-Datensatz als Tibble:</p>
@@ -1121,7 +1151,7 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
 </div>
 <p>Und umgekehrt, wenn eine Funktion einen Data Frame erwartet, nutzt ihr <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>. In der Praxis braucht ihr das aber selten, weil Tibbles überall dort funktionieren, wo Data Frames erwartet werden.</p>
 <p>In der Praxis werden wir die gezeigten Datenstrukturen nicht per Hand erzeugen, sondern aus Dateien laden. Und für die Arbeit in diesem Buch werden wir zu 99% mit Tibbles arbeiten, die standardmäßige Darstellung von Daten im Tidyverse. An manchen Stellen verlassen wir jedoch da Tidyverse und brauchen dann auch das Verständnis der anderen Datenstrukturen, speziell Vektoren udn Skalarwerte.</p>
-<p>Wie wir Tibbles aus Dateien laden und was wir dabei beachten müssen, zeigen wir im nächsten <a href="../03-data-transformation/loading-data.html" class="quarto-xref"><span>Kapitel 5</span></a>.</p>
+<p>Wie wir Tibbles aus Dateien laden und was wir dabei beachten müssen, zeigen wir im nächsten <a href="../03-data-transformation/loading-data.html" class="quarto-xref"><span>Kapitel 9</span></a>.</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1564,12 +1594,12 @@ $ quoted_status_id        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, "1642409544046
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../02-r-basics/programming-with-r.html" class="pagination-link" aria-label="Programmieren mit R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Programmieren mit R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../03-data-transformation/loading-data.html" class="pagination-link" aria-label="Daten laden">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Daten laden</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Daten laden</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

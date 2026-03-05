@@ -7,6 +7,8 @@ source("setup.R")
 
 Ihr habt jetzt gelernt, wie ihr mit `select()` den Blick auf die richtigen Spalten richtet und mit `mutate()` neue Variablen anlegt. In diesem Kapitel widmen wir uns dem Gegenstück zur Spaltenauswahl: Der Auswahl der relevanten Zeilen. Wir zeigen euch, wie ihr mit der Funktion `filter()` aus `dplyr` gezielt Beobachtungen behaltet, die bestimmte logische Bedingungen erfüllen, und wie ihr leere oder doppelte Zeilen entfernt.
 
+![Die Funktion `filter` bietet flexible Möglichkeiten, die Beobachtungen (Zeilen) zu reduzieren.](/images/google_slides/filter_schema.svg){#fig-filter-schema}
+
 Das Filtern von Daten ist einer der wichtigsten Schritte in jeder explorativen Analyse. Reale Datensätze sind fast immer größer und unschärfer als das, was ihr für eine spezifische Forschungsfrage untersuchen möchtet. Erst indem ihr Gruppen isoliert, Ausreißer entfernt oder den Fokus auf einen konkreten Zeitraum beschränkt, könnt ihr präzise Aussagen treffen und den Rausch aus euren Daten entfernen.
 
 Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.

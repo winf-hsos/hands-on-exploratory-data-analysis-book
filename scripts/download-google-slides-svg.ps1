@@ -27,6 +27,41 @@ function Convert-YamlScalar {
   return $v
 }
 
+function Parse-GoogleSlidesEditUrl {
+  param([string]$Url)
+
+  if ([string]::IsNullOrWhiteSpace($Url)) {
+    throw "Google Slides URL is empty."
+  }
+
+  $docId = $null
+  if ($Url -match 'docs\.google\.com/presentation/d/(?<doc>[^/?#]+)') {
+    $docId = $matches['doc']
+  } else {
+    throw "Could not extract document_id from URL: $Url"
+  }
+
+  $slideToken = $null
+  if ($Url -match '(?:[?#&]slide=id\.(?<sid>[^&#]+))') {
+    $slideToken = $matches['sid']
+  } elseif ($Url -match '(?:[?&]pageid=(?<pid>[^&#]+))') {
+    $slideToken = $matches['pid']
+  }
+
+  $pageId = $null
+  if (-not [string]::IsNullOrWhiteSpace($slideToken)) {
+    $pageId = $slideToken
+    if ($pageId.StartsWith('id.')) {
+      $pageId = $pageId.Substring(3)
+    }
+  }
+
+  return @{
+    document_id = $docId
+    pageid = $pageId
+  }
+}
+
 function Read-SlidesConfigYaml {
   param([string]$Path)
 
@@ -56,21 +91,21 @@ function Read-SlidesConfigYaml {
       continue
     }
 
-    if ($line -match '^\s*-\s*pageid:\s*(?<value>.+?)\s*$') {
+    if ($line -match '^\s*-\s*(?<key>pageid|edit_url|slide_edit_url):\s*(?<value>.+?)\s*$') {
       if ($null -eq $currentPresentation) {
-        throw "Found pageid before document_id in config: $Path"
+        throw "Found slide entry before document_id in config: $Path"
       }
-      $pageId = Convert-YamlScalar -Value $matches['value']
-      $currentSlide = [ordered]@{
-        pageid = $pageId
-      }
+      $k = [string]$matches['key']
+      $v = Convert-YamlScalar -Value $matches['value']
+      $currentSlide = [ordered]@{}
+      $currentSlide[$k] = $v
       $currentPresentation.slides += ,$currentSlide
       continue
     }
 
-    if ($line -match '^\s*(?<key>slide_pageid|filename):\s*(?<value>.+?)\s*$') {
+    if ($line -match '^\s*(?<key>pageid|slide_pageid|filename|edit_url|slide_edit_url):\s*(?<value>.+?)\s*$') {
       if ($null -eq $currentSlide) {
-        throw "Found $($matches['key']) before pageid in config: $Path"
+        throw "Found $($matches['key']) before slide entry start in config: $Path"
       }
       $currentSlide[$matches['key']] = Convert-YamlScalar -Value $matches['value']
       continue
@@ -117,17 +152,33 @@ New-Item -ItemType Directory -Force -Path $slidesOutputPath | Out-Null
 $downloaded = 0
 foreach ($presentation in $config.presentations) {
   $docId = [string]$presentation.document_id
-  if ([string]::IsNullOrWhiteSpace($docId)) {
-    throw "A presentation entry is missing document_id."
-  }
   if (-not $presentation.slides -or $presentation.slides.Count -eq 0) {
     throw "Presentation $docId has no slides configured."
   }
 
   foreach ($slide in $presentation.slides) {
-    $pageId = [string]$slide.pageid
+    $pageId = $null
+    if ($slide.Contains("pageid")) {
+      $pageId = [string]$slide.pageid
+    }
+
+    if ($slide.Contains("edit_url")) {
+      $parsed = Parse-GoogleSlidesEditUrl -Url ([string]$slide.edit_url)
+      if ([string]::IsNullOrWhiteSpace($docId)) {
+        $docId = [string]$parsed.document_id
+      } elseif ($docId -ne [string]$parsed.document_id) {
+        throw "document_id mismatch between presentation ($docId) and edit_url ($($parsed.document_id))."
+      }
+      if ([string]::IsNullOrWhiteSpace($pageId)) {
+        $pageId = [string]$parsed.pageid
+      }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($docId)) {
+      throw "Missing document_id. Set presentation.document_id or use edit_url."
+    }
     if ([string]::IsNullOrWhiteSpace($pageId)) {
-      throw "A slide entry in presentation $docId is missing pageid."
+      throw "A slide entry in presentation $docId is missing pageid. Set pageid or edit_url with slide=id..."
     }
 
     $explicitName = $null
@@ -154,6 +205,13 @@ foreach ($presentation in $config.presentations) {
     $slidePageId = $null
     if ($slide.Contains("slide_pageid")) {
       $slidePageId = [string]$slide.slide_pageid
+    }
+    if ([string]::IsNullOrWhiteSpace($slidePageId) -and $slide.Contains("slide_edit_url")) {
+      $parsedSlide = Parse-GoogleSlidesEditUrl -Url ([string]$slide.slide_edit_url)
+      if ($docId -ne [string]$parsedSlide.document_id) {
+        throw "document_id mismatch between presentation ($docId) and slide_edit_url ($($parsedSlide.document_id))."
+      }
+      $slidePageId = [string]$parsedSlide.pageid
     }
 
     if (-not [string]::IsNullOrWhiteSpace($slidePageId)) {

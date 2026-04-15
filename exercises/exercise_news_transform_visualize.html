@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Übung: Strukturierte Daten transformieren und visualisieren – Hands-On Exploratory Data Analytics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-cc6d6016adaf1c7a86dcaac46e77afcc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6df4ea5e2a9c94d4713f3123cab90f7d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles/sidebar.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#einführung" id="toc-einführung" class="nav-link active" data-scroll-target="#einführung"><span class="header-section-number">0.1</span> Einführung</a></li>
+  <li><a href="#aufgaben" id="toc-aufgaben" class="nav-link" data-scroll-target="#aufgaben"><span class="header-section-number">0.2</span> Aufgaben</a>
+  <ul class="collapse">
+  <li><a href="#projekt-aufsetzen-und-daten-einlesen" id="toc-projekt-aufsetzen-und-daten-einlesen" class="nav-link" data-scroll-target="#projekt-aufsetzen-und-daten-einlesen">Projekt aufsetzen und Daten einlesen</a></li>
+  <li><a href="#teil-1-aufwärmen-variablen-auswählen-und-beobachtungen-filtern" id="toc-teil-1-aufwärmen-variablen-auswählen-und-beobachtungen-filtern" class="nav-link" data-scroll-target="#teil-1-aufwärmen-variablen-auswählen-und-beobachtungen-filtern">Teil 1: Aufwärmen — Variablen auswählen und Beobachtungen filtern</a></li>
+  <li><a href="#teil-2-neue-variablen-erzeugen-mit-mutate-und-transmute" id="toc-teil-2-neue-variablen-erzeugen-mit-mutate-und-transmute" class="nav-link" data-scroll-target="#teil-2-neue-variablen-erzeugen-mit-mutate-und-transmute">Teil 2: Neue Variablen erzeugen mit <code>mutate</code> und <code>transmute</code></a></li>
+  <li><a href="#teil-3-daten-gruppieren-und-zusammenfassen" id="toc-teil-3-daten-gruppieren-und-zusammenfassen" class="nav-link" data-scroll-target="#teil-3-daten-gruppieren-und-zusammenfassen">Teil 3: Daten gruppieren und zusammenfassen</a></li>
+  <li><a href="#teil-4-häufigkeiten-und-verteilungen-visualisieren" id="toc-teil-4-häufigkeiten-und-verteilungen-visualisieren" class="nav-link" data-scroll-target="#teil-4-häufigkeiten-und-verteilungen-visualisieren">Teil 4: Häufigkeiten und Verteilungen visualisieren</a></li>
+  <li><a href="#teil-5-gruppenvergleiche-visualisieren" id="toc-teil-5-gruppenvergleiche-visualisieren" class="nav-link" data-scroll-target="#teil-5-gruppenvergleiche-visualisieren">Teil 5: Gruppenvergleiche visualisieren</a></li>
+  <li><a href="#teil-6-zeitliche-entwicklungen-visualisieren" id="toc-teil-6-zeitliche-entwicklungen-visualisieren" class="nav-link" data-scroll-target="#teil-6-zeitliche-entwicklungen-visualisieren">Teil 6: Zeitliche Entwicklungen visualisieren</a></li>
+  <li><a href="#teil-7-zusammenhänge-und-mehrdimensionale-analysen" id="toc-teil-7-zusammenhänge-und-mehrdimensionale-analysen" class="nav-link" data-scroll-target="#teil-7-zusammenhänge-und-mehrdimensionale-analysen">Teil 7: Zusammenhänge und mehrdimensionale Analysen</a></li>
+  <li><a href="#teil-8-datensätze-verknüpfen-mit-joins" id="toc-teil-8-datensätze-verknüpfen-mit-joins" class="nav-link" data-scroll-target="#teil-8-datensätze-verknüpfen-mit-joins">Teil 8: Datensätze verknüpfen mit Joins</a></li>
+  <li><a href="#reflexion" id="toc-reflexion" class="nav-link" data-scroll-target="#reflexion">Reflexion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Übung: Strukturierte Daten transformieren und visualisieren</h1>
+<p class="subtitle lead">Am Beispiel von Tagesschau-Nachrichten</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="einführung" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="einführung"><span class="header-section-number">0.1</span> Einführung</h2>
+<p>In dieser Übung fokussieren wir uns auf die strukturierten Variablen des Tagesschau-Datensatzes. Wir lernen, welche Transformationen wir mit strukturierten Daten durchführen können und wie wir sie sinnvoll einsetzen, um explorative Fragen visuell zu beantworten. Dabei werden wir verschiedene Visualisierungstechniken kennenlernen, um die Daten ansprechend und informativ darzustellen.</p>
+<hr>
+</section>
+<section id="aufgaben" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="aufgaben"><span class="header-section-number">0.2</span> Aufgaben</h2>
+<section id="projekt-aufsetzen-und-daten-einlesen" class="level3">
+<h3 class="anchored" data-anchor-id="projekt-aufsetzen-und-daten-einlesen">Projekt aufsetzen und Daten einlesen</h3>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Nur wenn ihr noch kein Projekt erstellt habt
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wenn ihr bereits ein Projekt für eine vorherige Übung erstellt habt, könnt ihr die Aufgaben 1 bis 3 sowie 5 auslassen und nur das neue R-Skript in Aufgabe 4 anlegen.</p>
+</div>
+</div>
+<ol type="1">
+<li><p>Erstellt ein neues Projekt für diese Übung und öffnet es in unserer Entwicklungsumgebung Positron. Stellt sicher, dass ihr eine <em>virtuelle R-Umgebung</em> für das Projekt erstellt und aktiviert habt.</p></li>
+<li><p>Installiert die folgenden Pakete in eurer virtuellen Umgebung: <code>tidyverse</code>, <code>janitor</code>, <code>skimr</code> und <code>ggridges</code>. Verwendet das Metapaket <code>pacman</code>, damit ihr die Pakete mit einem einzigen Befehl installieren und laden könnt!</p></li>
+<li><p>Ladet den Datensatz <code>tagesschau.zip</code> auf euren Computer herunter und speichert ihn in einem Unterordner <code>data/</code> in eurem Projektverzeichnis.</p></li>
+<li><p>Erzeugt einen neuen Ordner <code>scripts/</code> in eurem Projektverzeichnis und erstellt eine neue R-Skriptdatei <code>transform_visualize_news.R</code> in diesem Ordner.</p></li>
+<li><p>Der Datensatz liegt als komprimierte ZIP-Datei vor. Entpackt die Datei — das könnt ihr direkt in R mit <code>unzip()</code> erledigen. Schaut euch die entpackte Datei genauer an und prüft, wie das Format aussieht (z. B. Trennzeichen, Zeichenkodierung). Lest die Daten dann mit einer geeigneten Funktion aus <code>readr</code> ein und speichert den Code in eurer Skriptdatei.</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-1-aufwärmen-variablen-auswählen-und-beobachtungen-filtern" class="level3">
+<h3 class="anchored" data-anchor-id="teil-1-aufwärmen-variablen-auswählen-und-beobachtungen-filtern">Teil 1: Aufwärmen — Variablen auswählen und Beobachtungen filtern</h3>
+<p><em>Bevor ihr komplexere Analysen durchführt, lernt ihr in diesem Teil die grundlegenden <code>dplyr</code>-Verben <code>select()</code>, <code>filter()</code> und <code>arrange()</code> kennen. Diese drei Funktionen allein erlauben es euch bereits, viele konkrete Fragen an einen Datensatz zu beantworten — ganz ohne Visualisierung.</em></p>
+<ol start="6" type="1">
+<li><p>Der Datensatz enthält 21 Variablen, aber für viele Analysen braucht ihr davon nur einen Teil. Erstellt einen reduzierten Datensatz <code>articles_slim</code>, der ausschließlich die Variablen <code>title</code>, <code>date_time</code>, <code>ressort</code>, <code>tag</code>, <code>author</code> und <code>word_count</code> enthält. Verwendet dafür <code>select()</code>. Wie viele Zeilen hat dieser reduzierte Datensatz?</p></li>
+<li><p>Filtert den Datensatz <code>articles_slim</code> auf alle Artikel aus dem Ressort <code>"inland"</code> und speichert das Ergebnis als <code>articles_inland</code>. Wie viele Inland-Artikel enthält der Datensatz insgesamt?</p></li>
+<li><p>Wie viele Artikel aus dem Ressort <code>"ausland"</code> wurden seit dem 1. Januar 2020 veröffentlicht <em>und</em> haben mehr als 800 Wörter? Kombiniert <code>filter()</code> mit mehreren Bedingungen gleichzeitig. Welches Datum trägt der älteste dieser Artikel?</p>
+<p><em>Tipp: Datumsvergleiche funktionieren in R direkt mit <code>as.Date("2020-01-01")</code>.</em></p></li>
+<li><p>Die Variable <code>author</code> enthält für viele Artikel keine Angabe (<code>NA</code>). Ermittelt zunächst, welchen Anteil (in Prozent) die Artikel ohne Autorenangabe am Gesamtdatensatz ausmachen. Erstellt dann eine gefilterte Version <code>articles_with_author</code>, die nur Zeilen <em>mit</em> Autorenangabe enthält. Verwendet <code>is.na()</code> in Kombination mit <code>filter()</code>.</p>
+<p>Was könnte es inhaltlich bedeuten, wenn kein Autor angegeben ist? Ist ein fehlender Wert hier wirklich „unbekannt” oder könnte er auch „kein namentlicher Autor” bedeuten?</p></li>
+<li><p>Welche zehn Artikel haben die meisten Wörter? Verwendet <code>arrange()</code> mit <code>desc()</code> und <code>head()</code> (oder alternativ <code>slice_max()</code>), um die zehn längsten Artikel zu identifizieren. Gebt <code>title</code>, <code>ressort</code> und <code>word_count</code> aus. In welchen Ressorts erscheinen die besonders langen Artikel?</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-2-neue-variablen-erzeugen-mit-mutate-und-transmute" class="level3">
+<h3 class="anchored" data-anchor-id="teil-2-neue-variablen-erzeugen-mit-mutate-und-transmute">Teil 2: Neue Variablen erzeugen mit <code>mutate</code> und <code>transmute</code></h3>
+<p><em>Mit <code>mutate()</code> könnt ihr bestehende Datensätze um neue, berechnete Variablen erweitern — ohne dabei andere Spalten oder die Zeilenanzahl zu verändern. In diesem Teil lernt ihr außerdem, wie ihr Datentypen anpasst, Datumsvariablen zerlegt und kategoriale Einteilungen vornehmt.</em></p>
+<ol start="11" type="1">
+<li><p>Die Variable <code>date_time</code> enthält sowohl Datum als auch Uhrzeit. Für viele Analysen brauchen wir sie in Einzelteilen. Fügt dem Datensatz <code>articles_slim</code> mit <code>mutate()</code> drei neue Variablen hinzu:</p>
+<ul>
+<li><code>year</code>: das Erscheinungsjahr (Funktion: <code>year()</code> aus <code>lubridate</code>)</li>
+<li><code>month</code>: der Erscheinungsmonat als Zahl von 1 bis 12 (Funktion: <code>month()</code>)</li>
+<li><code>weekday</code>: der Wochentag als geordneter Faktor (Funktion: <code>wday(..., label = TRUE)</code>)</li>
+</ul>
+<p>Speichert den erweiterten Datensatz wieder als <code>articles_slim</code>. Welche Wochentage sind im Datensatz vertreten, und wie heißen sie in R?</p></li>
+<li><p>Die Variable <code>ressort</code> wurde beim Einlesen als <code>character</code> gespeichert, ist inhaltlich aber eine nominale kategoriale Variable. Wandelt sie mit <code>mutate()</code> und <code>as_factor()</code> in einen Faktor um. Überprüft mit <code>levels()</code>, welche Ausprägungen vorhanden sind, und mit <code>nlevels()</code>, wie viele es insgesamt gibt.</p>
+<p>Macht dasselbe mit der Variable <code>tag</code>. Wie viele verschiedene Tags enthält der Datensatz? Fällt euch dabei etwas Unerwartetes auf?</p></li>
+<li><p>Nicht nur numerische Werte lassen sich berechnen — auch aus Textvariablen können wir nützliche Kenngrößen ableiten. Erstellt mit <code>mutate()</code> und Funktionen aus <code>stringr</code> zwei neue Variablen:</p>
+<ul>
+<li><code>title_length</code>: die Zeichenanzahl des Titels (Funktion: <code>str_length()</code>)</li>
+<li><code>title_word_count</code>: die geschätzte Wortanzahl des Titels — zählt dafür die Leerzeichen und addiert 1 (Funktion: <code>str_count(title, " ") + 1</code>)</li>
+</ul>
+<p>Berechnet für <code>title_length</code> Minimum, Median und Maximum. Was ist der kürzeste und was der längste Titel im Datensatz? Druckt die Artikel mit dem kürzesten und dem längsten Titel aus.</p></li>
+<li><p><code>transmute()</code> verhält sich wie <code>mutate()</code>, behält aber im Ergebnis <em>nur</em> die neu erzeugten Spalten. Erstellt mit <code>transmute()</code> einen neuen kompakten Datensatz <code>articles_timeline</code>, der ausschließlich folgende Variablen enthält: <code>year</code>, <code>month</code>, <code>weekday</code>, <code>ressort</code>, <code>word_count</code> sowie <code>title_length</code> (aus Aufgabe 13). Speichert diesen Datensatz für spätere Analysen.</p>
+<p>In welchen Situationen ist <code>transmute()</code> praktischer als <code>mutate()</code>? Nennt ein konkretes Beispiel.</p></li>
+<li><p>Metrische Variablen lassen sich sinnvoll in inhaltliche Kategorien einteilen. Erstellt mit <code>mutate()</code> und <code>case_when()</code> eine neue Variable <code>article_type</code>, die Artikel nach ihrer Länge einordnet:</p>
+<ul>
+<li><code>"Kurzmeldung"</code>: weniger als 200 Wörter</li>
+<li><code>"Standardartikel"</code>: 200 bis unter 700 Wörter</li>
+<li><code>"Langer Artikel"</code>: 700 Wörter und mehr</li>
+</ul>
+<p>Wandelt <code>article_type</code> anschließend in einen Faktor mit einer inhaltlich sinnvollen Reihenfolge um (<code>factor(..., levels = c(...))</code>). Berechnet, wie viele Artikel auf jede Kategorie entfallen, und ermittelt den Anteil (in Prozent) für jede Kategorie.</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-3-daten-gruppieren-und-zusammenfassen" class="level3">
+<h3 class="anchored" data-anchor-id="teil-3-daten-gruppieren-und-zusammenfassen">Teil 3: Daten gruppieren und zusammenfassen</h3>
+<p><em><code>group_by()</code> und <code>summarize()</code> sind das mächtigste Werkzeugpaar in <code>dplyr</code>. Mit ihnen berechnet ihr beliebige Kenngrößen für beliebige Gruppen — von der einfachen Häufigkeitsauszählung bis hin zu differenzierten Gruppenstatistiken.</em></p>
+<ol start="16" type="1">
+<li><p>Berechnet die Anzahl der Artikel pro Ressort und sortiert das Ergebnis absteigend nach Häufigkeit (<code>arrange(desc(n))</code>). Welches ist das häufigste Ressort? Welche Ressorts enthalten weniger als 100 Artikel? Notiert euch die sechs häufigsten Ressorts für spätere Analysen — wir werden diese Gruppe als „Hauptressorts” bezeichnen.</p></li>
+<li><p>Berechnet für die sechs Hauptressorts — <code>"inland"</code>, <code>"ausland"</code>, <code>"wirtschaft"</code>, <code>"wissen"</code>, <code>"investigativ"</code>, <code>"faktenfinder"</code> — folgende Kenngrößen in einem einzigen <code>summarize()</code>-Aufruf:</p>
+<ul>
+<li>Anzahl der Artikel (<code>n</code>)</li>
+<li>Median der Wortanzahl (<code>median_word_count</code>)</li>
+<li>Mittlere Wortanzahl, gerundet auf ganze Zahlen (<code>mean_word_count</code>)</li>
+<li>Anteil der Artikel mit namentlichem Autor in Prozent — dabei gilt: ein Autor gilt als „namentlich”, wenn <code>author</code> weder <code>NA</code> noch <code>"tagesschau.de"</code> ist</li>
+</ul>
+<p>Sortiert das Ergebnis absteigend nach der mittleren Wortanzahl. Welches Ressort produziert im Schnitt die längsten Artikel, und welches die kürzesten?</p></li>
+<li><p>Wie hat sich die Artikelanzahl über die Jahre entwickelt? Berechnet für jedes Jahr die Gesamtanzahl aller Artikel sowie separat die Anzahl für die drei Ressorts <code>"inland"</code>, <code>"ausland"</code> und <code>"wirtschaft"</code>. Tipp: <code>group_by()</code> kann mehrere Variablen gleichzeitig gruppieren.</p>
+<p>Fällt euch etwas an den Jahren 2006 und 2026 auf? Warum könnten diese Jahrgänge unvollständig sein — und wie solltet ihr das bei Interpretationen berücksichtigen?</p></li>
+<li><p><code>group_by()</code> funktioniert nicht nur mit <code>summarize()</code>, sondern auch mit <code>mutate()</code>. Der entscheidende Unterschied: <code>summarize()</code> verdichtet den Datensatz auf eine Zeile pro Gruppe, während <code>mutate()</code> alle Originalzeilen beibehält und lediglich eine neue Spalte hinzufügt.</p>
+<p>Fügt dem Datensatz (gefiltert auf die Hauptressorts) mit <code>group_by()</code> und <code>mutate()</code> zwei neue Variablen hinzu:</p>
+<ul>
+<li><code>ressort_median_wc</code>: der Median der Wortanzahl <em>des jeweiligen Ressorts</em></li>
+<li><code>above_median</code>: ein logischer Wert (<code>TRUE</code>/<code>FALSE</code>), der angibt, ob der Artikel über dem Ressort-Median liegt</li>
+</ul>
+<p>Wie viele Artikel im Ressort <code>"inland"</code> liegen über dem eigenen Ressort-Median? Ist das überraschend — und warum?</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-4-häufigkeiten-und-verteilungen-visualisieren" class="level3">
+<h3 class="anchored" data-anchor-id="teil-4-häufigkeiten-und-verteilungen-visualisieren">Teil 4: Häufigkeiten und Verteilungen visualisieren</h3>
+<p><em>Die grundlegenden Visualisierungsformen für einzelne Variablen sind das Balkendiagramm für kategoriale und das Histogramm für metrische Variablen. In diesem Teil lernt ihr, diese Formen gezielt einzusetzen und ansprechend zu gestalten.</em></p>
+<ol start="20" type="1">
+<li><p>Erstellt ein Balkendiagramm, das die Häufigkeitsverteilung der Ressorts zeigt. Filtert vorab auf die sechs Hauptressorts. Die Balken sollen nach Häufigkeit <em>absteigend</em> sortiert sein — verwendet dafür <code>fct_reorder()</code> in Kombination mit <code>..count..</code> oder <code>fct_infreq()</code>.</p>
+<p>Beschriftet beide Achsen sinnvoll, wählt einen aussagekräftigen Diagrammtitel und verwendet ein schlichtes Theme (z. B. <code>theme_minimal()</code>). Strebt eine publikationsreife Darstellung an.</p></li>
+<li><p>Erstellt ein Histogramm der Variable <code>word_count</code>. Filtert zuvor Artikel mit mehr als 3.000 Wörtern heraus, damit die Verteilung übersichtlich bleibt. Experimentiert mit verschiedenen <code>bins</code>-Werten (z. B. 30, 60, 100), um eine aussagekräftige Klasseneinteilung zu finden.</p>
+<p>Fügt dem Histogramm mit <code>geom_vline()</code> eine vertikale Linie für den Median hinzu und beschriftet sie mit <code>annotate()</code>. Beschreibt die Verteilung: Ist sie symmetrisch, links- oder rechtsschief? Was sagt das über typische Artikellängen auf tagesschau.de aus?</p></li>
+<li><p>Untersucht, welche Tags am häufigsten vergeben wurden. Filtert zunächst alle Tags heraus, die mindestens 200 Mal vorkommen, und entfernt <code>NA</code>-Werte. Achtung: Die Tags <code>"FAKTENFINDER"</code> und <code>"#FAKTENFINDER"</code> bezeichnen dasselbe Konzept — bereinigt das mit <code>str_remove_all(tag, "#")</code>, bevor ihr zählt.</p>
+<p>Stellt die Top-Tags als sortiertes Balkendiagramm dar (absteigend nach Häufigkeit). Welche thematischen Schwerpunkte lassen sich aus der Tag-Verteilung ablesen?</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-5-gruppenvergleiche-visualisieren" class="level3">
+<h3 class="anchored" data-anchor-id="teil-5-gruppenvergleiche-visualisieren">Teil 5: Gruppenvergleiche visualisieren</h3>
+<p><em>Nicht nur einzelne Variablen, sondern Unterschiede zwischen Gruppen sind oft am aufschlussreichsten. Boxplots, kombinierte Boxplot-Jitter-Darstellungen und Ridgeline-Plots sind dafür besonders geeignet. Heatmaps helfen, zwei kategoriale Dimensionen gleichzeitig zu erkunden.</em></p>
+<ol start="23" type="1">
+<li><p>Erstellt einen Boxplot, der die Verteilung der Wortanzahl für die sechs Hauptressorts zeigt. Filtert Artikel mit mehr als 3.000 Wörtern heraus. Sortiert die Ressorts nach ihrem Median (Tipp: <code>fct_reorder(ressort, word_count, .fun = median)</code>), sodass das Ressort mit dem niedrigsten Median oben steht. Verwendet <code>coord_flip()</code> für eine horizontale Darstellung.</p>
+<p>Welches Ressort hat die größte Streuung? Welches die kleinste? Was erklärt den Unterschied zwischen <code>"investigativ"</code> und <code>"wirtschaft"</code> inhaltlich?</p></li>
+<li><p>Ergänzt den Boxplot aus Aufgabe 23 um überlagerte Datenpunkte mit <code>geom_jitter()</code>. Setzt <code>alpha = 0.1</code> und <code>size = 0.5</code>, um Überlappungen zu reduzieren. Achtet auf die Reihenfolge der <code>geom_</code>-Aufrufe: Der Boxplot sollte <em>über</em> den Punkten liegen, nicht darunter.</p>
+<p>Ab welcher Datenmenge gerät diese Darstellung an ihre Grenzen? Was ist der Vorteil dieser kombinierten Form gegenüber einem reinen Boxplot?</p></li>
+<li><p>Installiert das Paket <code>ggridges</code> und erstellt mit <code>geom_density_ridges()</code> ein Ridgeline-Diagramm der Wortanzahl-Verteilung für alle Hauptressorts (Filterung auf <code>word_count &lt; 3000</code> beibehalten). Füllt die Flächen mit <code>fill = ressort</code> und wählt eine ansprechende Farbpalette.</p>
+<p>Beschreibt den Unterschied zwischen einem Boxplot und einem Ridgeline-Diagramm: Welche Informationen zeigt jede Darstellungsform, welche verbirgt sie? Wann würdet ihr welche Form bevorzugen?</p></li>
+<li><p>Erstellt eine Heatmap, die zeigt, wie viele Artikel an welchem Wochentag in welchem Hauptressort erschienen. Berechnet dafür zunächst die Häufigkeiten pro Wochentag und Ressort mit <code>group_by()</code> und <code>summarize()</code>. Visualisiert das Ergebnis mit <code>geom_tile()</code> und <code>scale_fill_viridis_c()</code>.</p>
+<p>Zeigt die Wochentage auf der x-Achse (Montag bis Sonntag), die Ressorts auf der y-Achse. Was fällt euch beim Wochenendverhalten auf? Unterscheiden sich die Ressorts darin?</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-6-zeitliche-entwicklungen-visualisieren" class="level3">
+<h3 class="anchored" data-anchor-id="teil-6-zeitliche-entwicklungen-visualisieren">Teil 6: Zeitliche Entwicklungen visualisieren</h3>
+<p><em>Der Tagesschau-Datensatz erstreckt sich über fast zwei Jahrzehnte. Zeitreihenvisualisierungen helfen uns, Trends, Wachstum und saisonale Muster zu erkennen.</em></p>
+<ol start="27" type="1">
+<li><p>Erstellt ein Liniendiagramm, das die Gesamtanzahl der Artikel pro Jahr zeigt. Markiert die Datenpunkte zusätzlich mit <code>geom_point()</code>. Beschriftet die y-Achse sinnvoll und dreht die x-Achsenbeschriftungen, falls nötig.</p>
+<p>Welche Jahre stechen besonders hervor? Versucht, den starken Anstieg ab 2023 inhaltlich zu erklären. Berücksichtigt dabei, dass 2006 und 2026 möglicherweise keine vollständigen Jahrgänge sind — wie könnte man diesen Sachverhalt im Diagramm kenntlich machen?</p></li>
+<li><p>Erstellt ein Liniendiagramm, das die Artikelanzahl pro Jahr <em>für die drei Ressorts <code>"inland"</code>, <code>"ausland"</code> und <code>"wirtschaft"</code> gleichzeitig</em> als drei farbige Linien zeigt. Verwendet <code>color = ressort</code> innerhalb von <code>aes()</code>. Fügt eine Legende hinzu und wählt aussagekräftige Farben mit <code>scale_color_manual()</code> oder einer vorgefertigten Palette.</p>
+<p>Welches Ressort ist in den letzten Jahren am stärksten gewachsen? Gibt es Phasen, in denen ein Ressort vorübergehend besonders aktiv war?</p></li>
+<li><p>Erstellt ein gestapeltes Flächendiagramm (<code>geom_area()</code>) der Artikelanzahl pro Jahr für die sechs Hauptressorts. Wählt <code>position = "stack"</code> (gestapelt) und eine angemessene Farbpalette. Vergleicht die Darstellung mit dem Liniendiagramm aus Aufgabe 28.</p>
+<p>Was lässt sich aus der Gesamtfläche ablesen, was im Liniendiagramm nicht sichtbar war? Welche Darstellungsform ist besser geeignet, um den Anteil einzelner Ressorts am Gesamtvolumen zu zeigen?</p></li>
+<li><p>Erstellt eine Heatmap, die zeigt, wie viele Artikel pro Jahr <em>und Monat</em> erschienen. Die x-Achse soll die Monate zeigen (Januar bis Dezember), die y-Achse die Jahre — mit dem neuesten Jahr oben (Tipp: Faktor mit umgekehrter Reihenfolge). Verwendet <code>geom_tile()</code> und <code>scale_fill_viridis_c(option = "plasma")</code>.</p>
+<p>Lassen sich saisonale Muster erkennen? Ab welchem Jahr nimmt die Datendichte deutlich zu? Was könnte das über die Entstehungsgeschichte des Datensatzes verraten?</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-7-zusammenhänge-und-mehrdimensionale-analysen" class="level3">
+<h3 class="anchored" data-anchor-id="teil-7-zusammenhänge-und-mehrdimensionale-analysen">Teil 7: Zusammenhänge und mehrdimensionale Analysen</h3>
+<p><em>Scatter-Plots sind das klassische Werkzeug, um Zusammenhänge zwischen zwei metrischen Variablen zu erkunden. Wenn eine dritte Variable ins Spiel kommt, setzen wir Farbe oder Facettierung ein.</em></p>
+<ol start="31" type="1">
+<li><p>Gibt es einen Zusammenhang zwischen der Länge eines Titels (<code>title_length</code>) und der Länge des zugehörigen Artikels (<code>word_count</code>)? Zieht zunächst mit <code>slice_sample(n = 3000)</code> ein Zufallssample, um die Darstellung übersichtlich zu halten. Erstellt dann einen Scatter-Plot der beiden Variablen und fügt mit <code>geom_smooth(method = "lm")</code> eine lineare Trendlinie hinzu.</p>
+<p>Beschreibt Stärke und Richtung des sichtbaren Zusammenhangs. Überprüft euren visuellen Eindruck mit <code>cor()</code>: Wie stark ist die Korrelation tatsächlich? Ist das Ergebnis überraschend — und warum oder warum nicht?</p></li>
+<li><p>Erweitert den Scatter-Plot aus Aufgabe 31 um eine dritte Dimension: Färbt die Punkte nach <code>ressort</code> ein (nur die sechs Hauptressorts). Verwendet <code>facet_wrap(~ ressort)</code>, um für jedes Ressort ein eigenes Teildiagramm zu erzeugen. Setzt <code>scales = "free"</code>, damit die Achsen sich an die jeweiligen Daten anpassen.</p>
+<p>Unterscheidet sich der Zusammenhang zwischen Titellänge und Artikellänge zwischen den Ressorts? Was fällt euch bei <code>"investigativ"</code> und <code>"faktenfinder"</code> auf?</p></li>
+<li><p>Untersucht den Tagesrhythmus der Redaktion: Berechnet für jede Stunde des Tages (0–23 Uhr) die Anzahl der veröffentlichten Artikel. Verwendet dafür <code>mutate(hour = hour(date_time))</code>, dann <code>group_by(hour)</code> und <code>summarize(n = n())</code>. Visualisiert das Ergebnis als Flächendiagramm (<code>geom_area()</code>) oder Balkendiagramm.</p>
+<p>Wann ist die Redaktion am produktivsten? Wann ist die Aktivität am niedrigsten? Gibt es Muster, die auf einen typischen Redaktionsalltag hindeuten? Vergleicht das Muster mit eurem eigenen Alltag als Studierende.</p></li>
+</ol>
+<hr>
+</section>
+<section id="teil-8-datensätze-verknüpfen-mit-joins" class="level3">
+<h3 class="anchored" data-anchor-id="teil-8-datensätze-verknüpfen-mit-joins">Teil 8: Datensätze verknüpfen mit Joins</h3>
+<p><em>In der Praxis liegen Informationen selten in einer einzigen Tabelle vor. Joins ermöglichen es, Tabellen über gemeinsame Schlüsselspalten zu verknüpfen. In diesem Teil erstellt ihr eine Metadaten-Tabelle und verknüpft sie auf verschiedene Weisen mit dem Hauptdatensatz.</em></p>
+<ol start="34" type="1">
+<li><p>Erstellt in R eine kleine Metadaten-Tabelle <code>ressort_meta</code> als <code>tibble()</code> mit folgenden Spalten:</p>
+<ul>
+<li><code>ressort</code>: der Ressort-Schlüssel, wie er im Datensatz vorkommt (z. B. <code>"inland"</code>)</li>
+<li><code>ressort_label</code>: ein leserfreundlicher Anzeigename (z. B. <code>"Inland"</code>)</li>
+<li><code>themenbereich</code>: eine übergeordnete thematische Kategorie (z. B. <code>"Politik"</code>, <code>"Wirtschaft"</code>, <code>"Gesellschaft"</code>, <code>"Faktencheck"</code>)</li>
+</ul>
+<p>Befüllt die Tabelle mit Einträgen für mindestens die acht häufigsten Ressorts. Lasst dabei bewusst einige seltene Ressorts <em>weg</em> — das wird in den nächsten Aufgaben relevant. Tipp: Verwendet <code>tibble(ressort = c(...), ressort_label = c(...), ...)</code>.</p></li>
+<li><p>Verknüpft den (auf die Hauptvariablen reduzierten) Hauptdatensatz mit <code>ressort_meta</code> über einen <code>left_join()</code> — verbunden über die gemeinsame Spalte <code>ressort</code>. Was bedeutet ein <code>left_join()</code> in diesem Kontext: Welche Zeilen bleiben garantiert erhalten?</p>
+<p>Prüft das Ergebnis: Für wie viele Artikel wurde kein passender Eintrag in <code>ressort_meta</code> gefunden (erkennbar an <code>NA</code> in <code>ressort_label</code>)? Welche Ressorts sind das? Was würdet ihr in einer echten Analyse mit diesen Artikeln tun?</p></li>
+<li><p>Führt denselben Join als <code>inner_join()</code> durch. Was ist der Unterschied zum <code>left_join()</code> aus Aufgabe 35? Wie viele Zeilen hat das Ergebnis im Vergleich? Welche Artikel fehlen jetzt — und ist das ein Problem?</p></li>
+<li><p>Verwendet <code>anti_join()</code>, um herauszufinden, welche Artikel im Hauptdatensatz einen Ressort-Wert haben, der <em>nicht</em> in <code>ressort_meta</code> vorkommt. Gebt die fehlenden Ressorts mit ihrer Häufigkeit aus, sortiert nach Häufigkeit.</p>
+<p>Was ist der praktische Nutzen von <code>anti_join()</code> beim Arbeiten mit Lookup-Tabellen? Wie hängt der <code>anti_join()</code> mit dem <code>left_join()</code> zusammen — was ist der Bezug zwischen den Zeilen, die beim <code>left_join()</code> <code>NA</code> erhalten, und dem Ergebnis des <code>anti_join()</code>?</p></li>
+</ol>
+<hr>
+</section>
+<section id="reflexion" class="level3">
+<h3 class="anchored" data-anchor-id="reflexion">Reflexion</h3>
+<ol start="38" type="1">
+<li><p>Erklärt in eigenen Worten den Unterschied zwischen <code>summarize()</code> und <code>mutate()</code> in Kombination mit <code>group_by()</code>. Nennt je ein konkretes Beispiel aus dieser Übung, bei dem ihr lieber <code>summarize()</code> und eines, bei dem ihr lieber <code>group_by() + mutate()</code> eingesetzt habt — und begründet eure Wahl. Wann wäre die falsche Wahl nicht nur unelegant, sondern inhaltlich falsch?</p></li>
+<li><p>Ihr habt in dieser Übung fast zwei Jahrzehnte Tagesschau-Berichterstattung analysiert. Welche drei Beobachtungen haben euch am meisten überrascht oder sind euch besonders aufgefallen? Versucht, jede Beobachtung auch inhaltlich — über das bloße Zahlenmuster hinaus — zu erklären oder einzuordnen.</p></li>
+<li><p>Betrachtet alle Visualisierungsformen dieser Übung: Histogramm, Balkendiagramm, Boxplot, Boxplot mit Jitter, Ridgeline-Plot, Heatmap, Liniendiagramm, Flächendiagramm und Scatter-Plot. Erstellt eine eigene gedankliche Klassifikation: Welche Form ist für welche Kombination aus Fragestellung (univariat, bivariat, trivariat) und Variablentyp (metrisch, kategorial, zeitlich) am besten geeignet? Gibt es Überschneidungen, also Situationen, in denen mehrere Formen in Frage kämen — und was bestimmt dann die Wahl?</p></li>
+<li><p>Datenqualität ist ein unterschätztes, aber entscheidendes Thema. Nennt mindestens vier konkrete Hinweise auf potenzielle Qualitätsprobleme oder Einschränkungen im Tagesschau-Datensatz, die euch im Laufe dieser Übung aufgefallen sind. Denkt dabei an fehlende Werte, uneinheitliche Kodierungen, unvollständige Jahrgänge, Veränderungen der Datenquelle über die Zeit und mögliche Selektionseffekte. Wie würdet ihr diese Probleme in einer veröffentlichungswürdigen Analyse dokumentieren und behandeln?</p></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

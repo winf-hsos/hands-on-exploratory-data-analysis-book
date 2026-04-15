@@ -1,0 +1,598 @@
+﻿---
+title: "Exploring Variables"
+subtitle: "Scales, Data Types and Distributions"
+format: revealjs
+footer: "Exploring Variables - Scales, Data Types and Distributions"
+---
+
+```{r}
+#| include: false
+source("../setup.R")
+```
+
+## Overview
+
+- Loading Data from CSV
+- Scales of Measurement
+- Data Types in R
+- Nominal Scale
+- Ordinal Scale
+- Interval Scale
+- Ratio Scale
+
+# Loading Data from CSV
+
+## With `{readr}`
+
+The `readr` package provides functions to read data from text files.
+
+```{r}
+#| eval: false
+survey <- read_csv("data/mds12_schoko_milch.csv")
+```
+
+## A Look at the Result
+
+```{r}
+survey
+```
+
+
+## Data Representation in R
+
+![](/images/slides/google_slides/data_representation_in_r.svg)
+
+## Dimensions of the Data
+
+Number of observations and variables:
+
+```{r}
+dim(survey)
+
+num_cols <- ncol(survey)
+num_rows <- nrow(survey)
+
+print(str_glue("The data set has {num_rows} rows and {num_cols} columns."))
+```
+
+## Adding an ID Column
+
+If there is no ID, we can add a surrogate ID:
+
+```{r}
+survey <- survey |> 
+  rowid_to_column("id")
+```
+
+# Scales of Measurement
+
+## Four Scales of Measurement
+
+![](/images/slides/variable-scales.svg)
+
+::: aside
+Read more on scales of measurement in @doring_forschungsmethoden_2023, chapter 8.4
+:::
+
+## Types of Variables
+
+![](/images/slides/types-of-variables-with-data-types.svg)
+
+::: aside
+See @effect_2026, chapter 3
+:::
+
+# Data Types in R
+
+## Overview of Data Types
+
+| Type           | Description                     | Example                        |
+|----------------|---------------------------------|--------------------------------|
+| `<chr>`        | String of characters            | `"hello"`     |
+| `<int>`        | Whole number                    | `42L`                          |
+| `<dbl>`        | Decimal number                  | `3.14`                         |
+| `<lgl>`        | Boolean value                   | `TRUE` or `FALSE`              |
+| `<fct>`        | Fixed set of values             | `male`, `female`, `diverse`    |
+
+## Finding the Data Type
+
+```{r}
+survey |> 
+    glimpse()
+```
+
+## Selecting by Data Type
+
+```{r}
+survey |> 
+    select(where(is.character)) |> 
+    names()
+```
+
+# Nominal Scale
+
+## Nominal Scale Overview
+
+Categorical variables without a natural order.
+
+::: incremental
+-   **Possible interpretations**: Two values are the same or different
+-   **Examples**: gender, religion, political affiliation
+-   **Data Type**:  convert to `<fct>` 
+:::
+
+## Converting to Factor {.smaller}
+
+Nominal variables often come as character strings. We can convert them to factors:
+
+```{r}
+survey |> 
+  select(q004geschlecht) |> 
+  mutate(q004geschlecht = as_factor(q004geschlecht))
+```
+
+## Recoding Values {.smaller}
+
+We can recode the values to something more meaningful:
+
+```{r}
+s_q004 <- 
+    survey |>
+        select(q004geschlecht) |> 
+        mutate(q004geschlecht = 
+            as_factor(q004geschlecht) |>
+            fct_recode(
+                "männlich" = "1",
+                "weiblich" = "2",
+                "divers" = "3"
+            )
+        )
+
+s_q004 |> head(5)
+```
+
+## Frequencies of Nominal Variables
+
+```{r}
+s_q004 |> 
+    count(q004geschlecht)
+```
+
+## Using a Bar Plot
+
+```{r}
+s_q004 |> 
+    ggplot() +
+    aes(x = q004geschlecht) +
+    geom_bar()
+```
+
+## Order by Frequency
+
+```{r}
+s_q004 |> 
+    ggplot() +
+    aes(x = fct_infreq(q004geschlecht)) +
+    geom_bar()
+```
+
+## Multiple Nominal Variables
+
+Define a vector of variable names:
+
+```{r}
+locations_labels <- c(
+  "v008ort_1discount" = "Discounter",
+  "v008ort_2super" = "Supermarkt",
+  "v008ort_3sbmarkt" = "SB-Markt",
+  "v008ort_4fach" = "Fachgeschäft",
+  "v008ort_5markt" = "Wochenmarkt",
+  "v008ort_6hof" = "Hofladen",
+  "v008ort_7bioladen" = "Bioladen",
+  "v008ort_8onlineds" = "Online (Lieferdienst)",
+  "v008ort_9online" = "Online (Shop)",
+  "v008ort_other" = "Sonstiges"
+)
+```
+
+## Multiple Nominal Variables
+
+We can access the label of a variable:
+
+```{r}
+locations_labels["v008ort_1discount"]
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Get all variables belonging to question 8...
+
+```{r}
+#| output: false
+survey |> 
+  select(id, contains("008"))
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+But not the "other" variable...
+
+```{r}
+#| output: false
+survey |> 
+  select(id, contains("008"), -v008ort_other)
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Make the data long for easier analysis...
+
+```{r}
+#| output: false
+survey |> 
+  select(id, contains("008"), -v008ort_other) |>
+  pivot_longer(
+      cols = c(everything(), -id), 
+      names_to = "location", 
+      values_to = "mentioned"
+  )
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Convert to factor using the labels...
+
+```{r}
+#| output: false
+survey |> 
+  select(id, contains("008"), -v008ort_other) |>
+  pivot_longer(
+      cols = c(everything(), -id), 
+      names_to = "location", 
+      values_to = "mentioned"
+  ) |> 
+  mutate(location = as_factor(locations_labels[location]))
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Filter only the mentioned locations...
+
+```{r}
+#| output: false
+survey |> 
+  select(id, contains("008"), -v008ort_other) |>
+  pivot_longer(
+      cols = c(everything(), -id), 
+      names_to = "location", 
+      values_to = "mentioned"
+  ) |> 
+  mutate(location = as_factor(locations_labels[location])) |> 
+  filter(mentioned == 1)
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Count how often each location was mentioned...
+
+```{r}
+#| output: false
+survey |> 
+  select(id, contains("008"), -v008ort_other) |>
+  pivot_longer(
+      cols = c(everything(), -id), 
+      names_to = "location", 
+      values_to = "mentioned"
+  ) |> 
+  mutate(location = as_factor(locations_labels[location])) |> 
+  filter(mentioned == 1) |> 
+  count(location)
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Finally, calculate relative frequencies...
+
+```{r}
+survey |> 
+  select(id, contains("008"), -v008ort_other) |>
+  pivot_longer(
+      cols = c(everything(), -id), 
+      names_to = "location", 
+      values_to = "mentioned"
+  ) |> 
+  mutate(location = as_factor(locations_labels[location])) |> 
+  filter(mentioned == 1) |> 
+  count(location) |> 
+  mutate(anteil = n / num_rows) |> 
+  head(3)
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Store this in a new tibble...
+
+```{r}
+s_q008_agg <- survey |> 
+  select(id, contains("008"), -v008ort_other) |>
+  pivot_longer(
+      cols = c(everything(), -id), 
+      names_to = "location", 
+      values_to = "mentioned"
+  ) |> 
+  mutate(location = as_factor(locations_labels[location])) |> 
+  filter(mentioned == 1) |> 
+  count(location) |> 
+  mutate(anteil = n / num_rows)
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+And visualize it...
+
+```{r}
+s_q008_agg  |> 
+  ggplot() +
+  aes(y = location, x = anteil) +
+  geom_col()
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Order the bars by frequencies...
+
+```{r}
+s_q008_agg  |> 
+  ggplot() +
+  aes(y = fct_reorder(location, n), x = anteil) +
+  geom_col()
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Add a nice label to the x-axis with percentages...
+
+```{r}
+s_q008_agg  |> 
+  ggplot() +
+  aes(y = fct_reorder(location, n), x = anteil) +
+  geom_col() +
+  scale_x_continuous(labels = scales::percent_format())
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Add a header and axis labels...
+
+```{r}
+s_q008_agg  |> 
+  ggplot() +
+  aes(y = fct_reorder(location, n), x = anteil) +
+  geom_col() +
+  scale_x_continuous(labels = scales::percent_format()) +
+  labs(title = "Wo kaufen die Menschen ein?", x = "Anteil der Nennungen", y = NULL)
+```
+
+## Multiple Nominal Variables {auto-animate="true"}
+
+Use a lighter theme...
+
+```{r}
+s_q008_agg  |> 
+  ggplot() +
+  aes(y = fct_reorder(location, n), x = anteil) +
+  geom_col() +
+  scale_x_continuous(labels = scales::percent_format()) +
+  labs(title = "Wo kaufen die Menschen ein?", x = "Anteil der Nennungen", y = NULL) +
+  theme_light()
+```
+
+# Ordinal Scale
+
+## Ordinal Scale Overview
+
+Categorical variables with a natural order, but no fixed intervals.
+
+::: incremental
+-   **Possible interpretations**: One value is greater than another value
+-   **Examples**: school grades, satisfaction ratings, t-shirt sizes
+-   **Data Type**:  convert to `<fct>` (ordered)
+:::
+
+
+## Multiple Choice Answers {.smaller}
+
+Get all variables belonging to question 11:
+
+```{r}
+survey |> 
+  select(id, contains("011"))
+```
+
+::: aside
+This works if the data collection was designed thoughtfully.
+:::
+
+## Ordered Factors
+
+"Ich habe ein höheres Vertrauen in regionale Lebensmittel"
+
+```{r}
+s_q011_vertrauen <- survey |> 
+    select(p011regio_2vertrauen) |> 
+    mutate(p011regio_2vertrauen = 
+        as_factor(p011regio_2vertrauen) |> 
+        fct_recode(
+            "trifft nicht zu" = "-2",
+            "trifft eher nicht zu" = "-1",
+            "teils-teils" = "0",
+            "trifft eher zu" = "1",
+            "trifft voll zu" = "2"
+        ) |> 
+        fct_relevel("trifft nicht zu", "trifft eher nicht zu", "teils-teils", "trifft eher zu", "trifft voll zu")
+    )
+```
+
+## Frequencies of Ordinal Variables
+
+Automatically ordered by the factor levels:
+
+```{r}
+s_q011_vertrauen |> 
+    count(p011regio_2vertrauen)
+```
+
+## Using a Bar Plot
+
+No need to order the bars manually:
+
+```{r}
+s_q011_vertrauen |> 
+    ggplot() +
+    aes(x = p011regio_2vertrauen) +
+    geom_bar()
+```
+
+# Interval Scale
+
+## Interval Scale Overview
+
+Ordered values with fixed intervals, but no true zero point.
+
+::: incremental
+-   **Possible interpretations**: The difference between two values is the same (or not) as the difference between two other values
+-   **Examples**: temperature in Celsius or Fahrenheit, calendar years
+-   **Data Type**:  `<int>` or `<dbl>`
+:::
+
+## Year of Birth
+
+```{r}
+s_q002birthyear <-
+  survey |> 
+  select(q002geburt) |> 
+  mutate(q002geburt = as.integer(q002geburt))
+
+s_q002birthyear |> 
+    head(5)
+```
+
+## Summary Statistics
+
+```{r}
+s_q002birthyear |> 
+    drop_na() |>
+    summarise(
+        min = min(q002geburt),
+        q25 = quantile(q002geburt, 0.25),
+        median = median(q002geburt),
+        q75 = quantile(q002geburt, 0.75),
+        max = max(q002geburt),
+        mean = mean(q002geburt)
+    )
+```
+
+## With `skimr`
+
+Get info as a tibble:
+
+```{r}
+library(skimr)
+s_q002birthyear |>
+  skim(q002geburt) |> 
+  as_tibble() |> 
+  clean_names()
+```
+
+## With `summarytools` {.smaller}
+
+Only for quick info in the console:
+
+```{r}
+library(summarytools)
+s_q002birthyear |>
+  dfSummary()
+```
+
+## Histogram
+
+Distribution of birth years:
+
+```{r}
+s_q002birthyear |> 
+    ggplot() +
+    aes(x = q002geburt) +
+    geom_histogram(binwidth = 5)
+```
+
+## Boxplot
+
+Distribution of birth years with a different focus:
+
+```{r}
+s_q002birthyear |> 
+    ggplot() +
+    aes(x = q002geburt) +
+    geom_boxplot()
+```
+
+# Ratio Scale
+
+## Ratio Scale Overview
+
+Ordered values with fixed intervals and a true zero point.
+
+::: incremental
+-   **Possible interpretations**: The ratio of two values is meaningful (e.g., one value is twice as much as another)
+-   **Examples**: weight, height, income, age
+-   **Data Type**:  `<int>` or `<dbl>`
+:::
+
+## Accepted Price
+
+"Geben Sie [..] bitte den Preis an, den Sie für angemessen halten und bei dem Sie zugreifen
+würden!"
+
+```{r}
+s_q013_accepted_price <- survey |> 
+    select(u013pzahl_1weihen) |> 
+    transmute(accepted_price = as.double(u013pzahl_1weihen))
+
+s_q013_accepted_price |> 
+    drop_na() |>
+    head(5)
+```
+
+## Summary Statistics
+
+Look at the mean (!)
+
+```{r}
+s_q013_accepted_price |> 
+    drop_na() |>
+    summarise(
+        min = min(accepted_price),
+        q25 = quantile(accepted_price, 0.25),
+        median = median(accepted_price),
+        q75 = quantile(accepted_price, 0.75),
+        max = max(accepted_price),
+        mean = mean(accepted_price)
+    )
+```
+
+## Ratios Become Meaningful
+
+How much more or less is the respondent willing to pay compared to the median?
+
+```{r}
+s_q013_accepted_price |> 
+    drop_na() |>
+    mutate(
+        median_price = median(accepted_price),
+        ratio_to_median = accepted_price / median_price * 100,
+        above_median = accepted_price > median_price
+    ) |> 
+    head(5)
+```
+
+## References

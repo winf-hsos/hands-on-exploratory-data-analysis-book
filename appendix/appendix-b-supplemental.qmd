@@ -1,5 +1,12 @@
 # Anhang A: Material {.unnumbered}
 
+## Übungen
+
+### Projekt 2: Newsartikel
+
+- [Strukturierte und unstrukturierte Daten erkunden: Am Beispiel von Tagesschau-Nachrichten](/exercises/exercise_news_explore_structured_unstructured.pdf)
+- [Strukturierte Daten transformieren und visualisieren: Am Beispiel von Tagesschau-Nachrichten](/exercises/exercise_news_transform_visualize.pdf)
+
 ## Slides
 
 ### Projekt 1: Umfragen

@@ -5,3 +5,193 @@
 source("setup.R")
 ```
 
+Wir erheben Daten mithilfe von Umfragen, um Erkenntnisse in Bezug auf eine vorher definierte Forschungsfrage zu gewinnen. Nach der Erhebung folgt das Sichten der Daten als erster Schritt in der Analyse. Dabei können wir unterschiedliche Dinge betrachten:
+
+1.  Beschreibung **der Stichprobe**, also des gesamten vorliegenden Datensatzes
+2.  Beschreibung **einzelner Variablen**, die in der Studie gemessen wurden
+3.  Beschreibung von **Variablen in Bezug zu anderen Variablen**. Dabei unterscheiden wir insbesondere:
+    a.  Die gruppierte Betrachtung von Variablen
+    b.  Die Betrachtung von Zusammenhängen zwischen Variablen
+
+## Beschreibung der Stichprobe
+
+In diesem Kontext meinen wir mit der Stichprobe die uns vorliegenden Daten. Unsere Analyse bezieht sich auf alles, was wir aus den Daten heraus finden können. Wir grenzen an dieser Stelle die Kontextinformationen, also "Wer wurde befragt?", "Wann wurde die Erhebung durchgeführt?" oder "Wer ist der Autor der Studie" bewusst aus. Schließlich können wir diese Dinge nicht mit R ermitteln.
+
+### Umfang der Stichprobe
+
+Die wichtigsten Informationen zu einem Datensatz bekommen wir, wenn wir einfach den Namen des Objekts in der Konsole eingeben:
+
+```{r}
+survey
+```
+
+Ein Tibble hat die schöne Angewohnheit, sich sehr kompakt mit den wichtigsten Informationen auf der Konsole zu präsentieren. So bekommen wir einen schnellen Eindruck von der Dimensionierung des Datensatzes. Alternativen gibt es auch:
+
+```{r}
+survey |> 
+    dim()
+```
+
+Und wenn wir die Anzahl Beobachtungen und Variablen als Werte benötigen, dann gibt es dafür spezielle Funktionen:
+
+```{r}
+n_cols <- ncol(survey)
+n_rows <- nrow(survey)
+
+print(str_glue("The data set contains {n_cols} variables and {n_rows} observations."))
+```
+
+### Datentypen
+
+Die Funktion `glimpse` ist hilfreich, um einen schnellen Überblick über die Variablennamen, deren Datentypen und erste Werte zu bekommen. Allerdings stößt die Funktion bei einem Datensatz mit sehr vielen Variablen an ihre Grenzen, weil sie **alle** in der Konsole auflistet. Bei `r n_cols` Variablen überfrachtet das die Konsole:
+
+```{r}
+#| eval: false
+survey |> 
+    glimpse()
+
+# Erzeugt sehr viele Zeilen auf der Konsole...
+```
+
+Es wäre vielleicht besser, wir könnten eine aggregierte Sicht bekommen, um die Häufigkeiten der ermittelten Datentypen schnell zu sichten. Dazu können wir folgenden Befehl verwenden:
+
+```{r}
+survey |> 
+  map_df(type_sum) |> 
+  pivot_longer(everything(), names_to = "variable", values_to = "type")
+```
+
+Die Funktion `map_df` ist eine spezielle Variante der allgemeineren `map` Funktion und liefert immer einen Dataframe zurück. Sie sorgt dafür, dass für jede Spalte im Dataframe die Funktion `type_sum` aufgerufen wird. Diese Funktion liefert und den Datentyp zusammen mit dem Namen der Spalte. Mit `pivot_longer` sorgen wir dafür, dass wir statt eines sehr breiten Ergebnisses mit vielen Spalten, einen Tibble mit nur zwei spalten `variable` und `type` bekommen. Jede Zeile stellt dann eine Spalte mit Name und Datentyp dar.
+
+Auf der Grundlage dieser Daten können wir die Häufigkeiten der erkannten Datentypen schnell visualisieren:
+
+```{r}
+survey |> 
+  map_df(type_sum) |> 
+  pivot_longer(everything(), names_to = "variable", values_to = "type") |> 
+
+  ggplot() +
+  aes(x = fct_infreq(type)) +
+  geom_bar()
+```
+
+Mit `fct_infreq` können wir die Variable `type` nach ihrere Häufigkeit sortieren, was in der Reihenfolge der Balken im Diagramm ersichtlich wird. Die überwiegende Menge an Spalten ist also numerisch.
+
+## Skaleniveau identifzieren
+
+Wenn wir eine einzelne Variable betrachten, dann sollten wir uns zunächst die Frage stellen, was eigentlich damit gemessen wurde und auf welcher Skala. In @sec-basics-types-of-variables haben wir bereits die vier Skalenniveaus kennengelernt, die eine Variable annehmen kann. Von ihm hängt maßgeblich ab, was wir mit den Werten einer Variable anstellen können.
+
+Wie ermittelt man das Skalenniveau einer Variable?
+
+## Datentypen
+
+Wenn wir das Skalenviveu kennen, sollten wir als nächstes überprüfen, ob die Variable bereits in einem passenden Datentyp vorliegt, oder ob wir eine Konvertierung vornehmen müssen. Tabelle @tbl-exploring-single-variables-data-types gibt einen Überlick über die typischen Datentypen, in denen die unetrschiedlichen Variablen nach dem Laden aus einer Textdatei vorliegen und welcher Datentyp für das jeweilige Niveau wünschenswert ist. Etwaige Diskrepanzen sollten ausgeglichen werden.
+
+| Skalenniveau | Typische Datentypen | Gewünschter Datentyp |
+|----|----|----|
+| kein Skalenniveau (unstrukturiert) | `chr` | `chr` |
+| Nominal | `chr`, `int`, `dbl`, `lgl` | `fct` |
+| Ordinal | `chr`, `int`, `dbl` | `fct` |
+| Intervall | `int`, `dbl` | `dbl` |
+| Rational | `dbl` | `dbl` |
+
+: Skalenniveaus und Datentypen. {#tbl-exploring-single-variables-data-types}
+
+Die Umwandlung des Datentyps einer Spalte können wir mit `mutate` bewerkstelligen. Betrachten wir dazu einmal das Beispiel der Frage nach dem Fleischkonsum in Frage 41. Hierbei soll der Proband eine aus 5 Antwortmöglichkeiten auswählen, zusätzlich gibt es noch eine Antwortmöglichkeit für "Sonstiges":
+
+```{r}
+survey |> 
+  select(v041nofleisch) |> 
+  head()
+```
+
+Wir erkennen an der Ausgabe, dass es sich um eine Variable vom Typ `dbl` handelt, zumindest wurde sie beim Ladevorgang als solche erkannt. Das ist logisch, schließlich enthalten die Antworten die numerischen Kodierungen, die allesamt Zahlen sind.
+
+Was aber ist das Skalenniveau dieser Variable? Und passt der *automatisch erkannte* zum für das Skalenniveau *gewünschten* Datentyp? Für das niedrigste Niveau, der Nominalskala, wird lediglich eine endliche Liste diskreter Kategorien verlangt, die die Variable annehmen kann. Das ist hier erfüllt, was wir anhand des Fragebogens erkennen können (fünf Antwortmöglichkeiten) und auch in den Daten sehen:
+
+```{r}
+survey |> 
+  select(v041nofleisch) |> 
+  count(v041nofleisch)
+```
+
+Neben den Werten von 0 bis 4 sind auch `NA`-Werte zu seehen. Diese bedeutet, dass hier keine der Optionen gewählt wurde und stattdessen ein Wert für "Sonstiges" angegeben wurde, in Form vo Freitext. Diese Freitexte können wir ebenfalls betrachten:
+
+```{r}
+survey |> 
+  select(v041nofleisch, v041nofleisch_other) |>
+  filter(is.na(v041nofleisch))  
+```
+
+Abgesehen von den Freitexten für "Sonstiges" liegt also auch anhand der Daten eine feste Liste an Werten (Kategorien) vor, so dass wir in jedem Fall mindestens eine Nominalskala vorliegen haben. Erfüllt die Variable auch die Anforderungen für das nächst höhere Skalenniveau, die Ordinalskala?
+
+Dazu müssten die Kategorien nicht nur klar abgrenzbar sein, sondern auch in einer Reihenfolge zueinander stehen. Die Frage nach einer Reihenfolge kann nicht anhand der Daten beantwortet werden, sondern muss aus dem Wissen und der Theorie hinter dem abgefragten Sachverhalt abgeleitet werden. Ist die Antwort "ohne Einschränkungen des Fleischkonsums" besser oder schlechter, größer oder keiner als "flexitarisch" oder "vegetarisch"? Möglich wäre das, wenn man den Anteil an tierischen Produkten betrachten möchte, der mit jeder Ernährungsweise verbunden ist. Dann wäre dieser bei "keine Einschränkung" größer als bei "flexitarisch", und bei "flexitarisch" wiederum größer als bei "vegetarisch" usw. Es ist aber anhand der Frage nicht klar, dass das die Intention war. Zudem kann das auch nicht für alle Kategorien trennscharf bestimmt werden (isst ein Flexitarier mehr oder weniger Tier als ein Pescetarier?). Wir gehen deshalb von einem nominalskalierten Merkmal aus.
+
+Passt also der Datentyp `dbl` zum gewünschten Datentyp einer nominalskalierten Variable? Tabelle @tbl-exploring-single-variables-data-types gibt uns die klare Antwort "Nein". Wir sollten die Variable in einen Faktor (`fct`) umwandeln:
+
+```{r}
+survey |> 
+  mutate(v041nofleisch_fct = 
+    as_factor(v041nofleisch), .keep = "used"
+  )
+```
+
+Mit `.keep = "used"` können wir im Ergebnis die neue Variable `v041nofleisch_fct` zusammen mit der Ursprungsvariable `v041nofleisch` betrachten. Wir sehen sehr gut den neuen Datentyp `fct`, während die Werte gleich geblieben sind. Im nächsten Schritt wollen wir auch die Werte selbst verändern, und zwar sollen statt der Zahlenkodierungen die textuellen Werte aus dem Fragebogen angezeigt werden. Wir müssen den Faktor also umkodieren:
+
+```{r}
+survey |> 
+  mutate(v041nofleisch_fct = 
+    as_factor(v041nofleisch) |> 
+    fct_recode(
+      "ohne Einschränkungen" = "0",
+      "flexitarisch" = "1",
+      "vegetarisch" = "2",
+      "vegan" = "3",
+      "pescetarisch" = "4"
+    ) |> 
+    fct_na_value_to_level("Sonstige"),
+    .keep = "used"
+  ) |> 
+  count(v041nofleisch_fct)
+```
+
+## Wertebereiche und Verteilung
+
+### Nominalskala
+
+![Die Auswertungsmöglichkeiten einer nominalskalierten Variable.](/images/options-nominal-scale.svg){#fig-exploring-single-variables-options-nominal-scale .lightbox}
+
+Der Wertebereich ist bei einem Faktor klar definiert: Alle definierten Kategorien. Für nominalskalierte Variablen kommen wir somit über `distinct` oder `count` schnell an den Wertebereich und die Verteilung der Häufigkeiten. Diese können wir auch schnell visualisieren:
+
+```{r}
+survey |> 
+  mutate(v041nofleisch_fct = 
+    as_factor(v041nofleisch) |> 
+    fct_recode(
+      "ohne Einschränkungen" = "0",
+      "flexitarisch" = "1",
+      "vegetarisch" = "2",
+      "vegan" = "3",
+      "pescetarisch" = "4"
+    ) |> 
+    fct_na_value_to_level("Sonstige") |> 
+    fct_infreq() |> 
+    fct_rev(),
+    .keep = "used"
+  ) |> 
+  count(v041nofleisch_fct) |> 
+  ggplot() +
+  aes(y = v041nofleisch_fct, x = n) +
+  geom_col()
+```
+
+### Ordinalskala
+
+
+
+## Deskriptive Kenngrößen
+
+## Füllgrad
+
+
+

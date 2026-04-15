@@ -1,0 +1,328 @@
+---
+title: Filtering Data
+subtitle: Selecting Rows with `dplyr`
+format: revealjs
+footer: "Data Transformation with `dplyr`"
+---
+
+```{r}
+#| include: false
+source("../setup.R")
+```
+
+## Overview
+
+- The `filter()` Function
+- Comparison Operators
+- Combining Conditions (AND & OR)
+- Value Ranges & Lists
+- Text Filtering
+- Dealing with Missing Values (`NA`)
+- Advanced Row Selection (`slice`, `distinct`)
+- Filtering in Groups
+
+# The `filter()` Function
+
+## The Basic Principle
+
+> `filter()` evaluates conditions and keeps only the rows where the condition is `TRUE`.
+
+![Filtering observations in a Tibble.](https://winf-hsos.github.io/university-docs/images/filter_schema.png){.lightbox}
+
+## First Example
+
+Keep only original tweets (exclude retweets):
+
+```{r}
+#| eval: false
+tweets |>
+  filter(!is_retweet) |>
+  select(screen_name, retweet_count, text)
+```
+
+::: {.fragment}
+
+Validate by counting the remaining rows:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(!is_retweet) |>
+  nrow()
+```
+
+:::
+
+# Comparisons & Combinations
+
+## Comparison Operators
+
+| Operator | Meaning |
+|---|---|
+| `==` | Equal |
+| `!=` | Not equal |
+| `<` / `<=` | Less than / Less or equal |
+| `>` / `>=` | Greater than / Greater or equal |
+
+::: {.fragment}
+
+<br>
+**Rule of thumb:** `=` is for assignment, `==` is for comparison!
+
+:::
+
+## Logical AND 
+
+Multiple conditions separated by comma (`,`) must **all** be true:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(!is_retweet, retweet_count >= 500)
+```
+
+::: {.fragment}
+
+Alternatively, you can use `&`:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(!is_retweet & retweet_count >= 500)
+```
+
+:::
+
+## Logical OR
+
+Conditions separated by `|` mean **at least one** must be true:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(retweet_count >= 2000 | favorite_count >= 5000)
+```
+
+## Watch Your Parentheses!
+
+When mixing `&` and `|`, use parentheses to explicitly control the evaluation order!
+
+```{r}
+#| eval: false
+#| code-line-numbers: "2"
+tweets |>
+  filter(!is_retweet & (retweet_count >= 2000 | favorite_count >= 5000))
+```
+
+::: {.fragment}
+
+> Without parentheses, `!is_retweet` would only group with `retweet_count >= 2000`, drastically changing your results!
+
+:::
+
+# Value Ranges & Lists
+
+## The `between()` Helper
+
+Instead of writing two comparisons (`x >= 100 & x <= 500`), use `between()`:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(between(retweet_count, 100, 500))
+```
+
+## The Guest List: `%in%`
+
+Filter for multiple precise values using `%in%`:
+
+```{r}
+#| eval: false
+users <- c("cem_oezdemir", "Karl_Lauterbach")
+
+tweets |>
+  filter(screen_name %in% users)
+```
+
+::: {.fragment}
+
+Negate it to **exclude** a list of values:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(!screen_name %in% users)
+```
+
+:::
+
+# Missing Values & Text
+
+## Dealing with `NA`
+
+`NA` is neither true nor false. It means "missing".
+Use `is.na()` to explicitly find missing values:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(is.na(in_reply_to_screen_name))
+```
+
+::: {.fragment}
+
+Or keep only rows where the value is present:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(!is.na(in_reply_to_screen_name))
+```
+
+:::
+
+## Text Filters 
+
+Use `str_detect()` from the `stringr` package to find patterns:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(str_detect(text, "klima"))
+```
+
+::: {.fragment}
+
+Ignore case sensitivity:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(str_detect(text, regex("klima", ignore_case = TRUE)))
+```
+
+:::
+
+# Multiple Columns
+
+## The `if_any()` Helper
+
+Keep rows if the condition is `TRUE` for **at least one** chosen column:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(if_any(c(retweet_count, favorite_count), \(x) x >= 2000))
+```
+
+## The `if_all()` Helper
+
+Keep rows if the condition is `TRUE` for **all** chosen columns:
+
+```{r}
+#| eval: false
+tweets |>
+  filter(if_all(c(retweet_count, favorite_count), \(x) x >= 2000))
+```
+
+# Advanced Row Selection
+
+## The `slice()` Family
+
+Select rows by position or rank, rather than logic.
+
+::: {.fragment}
+
+First 3 rows:
+```{r}
+#| eval: false
+tweets |> slice_head(n = 3)
+```
+
+:::
+
+::: {.fragment}
+
+Top 5 retweets:
+```{r}
+#| eval: false
+tweets |> slice_max(retweet_count, n = 5)
+```
+
+:::
+
+::: {.fragment}
+
+Random sample of 5 rows:
+```{r}
+#| eval: false
+tweets |> slice_sample(n = 5)
+```
+
+:::
+
+## Removing Duplicates
+
+Use `distinct()` to keep only unique rows based on specific columns:
+
+```{r}
+#| eval: false
+tweets |>
+  distinct(screen_name)
+```
+
+::: {.fragment}
+
+Keep all other columns too, maintaining only the first occurrence:
+
+```{r}
+#| eval: false
+tweets |>
+  distinct(screen_name, .keep_all = TRUE)
+```
+
+:::
+
+# Filtering with Groups
+
+## Context-Aware Filters
+
+Together with `group_by()`, filtering evaluates metrics **per group**:
+
+::: {.fragment}
+
+Keep only users with at least 50 tweets in the dataset:
+
+```{r}
+#| eval: false
+#| code-line-numbers: "3"
+tweets |>
+  group_by(screen_name) |>
+  filter(n() >= 50) |>
+  ungroup()
+```
+
+:::
+
+## Top Records per Group
+
+Keep the most retweeted tweet **per user**:
+
+```{r}
+#| eval: false
+#| code-line-numbers: "3"
+tweets |>
+  group_by(screen_name) |>
+  slice_max(retweet_count, n = 1) |>
+  ungroup()
+```
+
+## Summary
+
+- Use **`filter()`** for logical conditions.
+- Remember **`==`**, **`!=`**, and combinations (**`&`** / **`,`** / **`|`**).
+- Make use of **`between()`** and **`%in%`**.
+- Handle missing values with **`is.na()`**.
+- Match text with **`str_detect()`**.
+- Use **`slice_*()`** for positions / ranks.
+- Combine with **`group_by()`** for group-level filtering!

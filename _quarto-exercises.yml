@@ -1,0 +1,14 @@
+project:
+  type: default
+  execute-dir: project
+  output-dir: _exercises-render
+  render:
+    - exercises/*.qmd
+  post-render:
+    - powershell -ExecutionPolicy Bypass -File scripts/copy-exercises-pdfs.ps1
+
+author: Prof. Dr. Nicolas Meseth
+suppress-bibliography: true
+
+format:
+  pdf: default

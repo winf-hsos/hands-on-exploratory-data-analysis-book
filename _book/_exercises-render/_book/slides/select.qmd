@@ -1,0 +1,24 @@
+---
+title: Selecting Variables
+subtitle: Narrowing down columns with `select`
+format: revealjs
+footer: "Data Transformation with `dplyr`"
+---
+
+```{r}
+#| include: false
+source("../setup.R")
+```
+
+## Overview
+
+- ...
+
+# The `select()` Function
+
+## The Basic Principle
+
+> `select()` changes the width of a data frame by keeping only the columns you specify.
+
+![](/images/slides/google_slides/select_schema.svg)
+

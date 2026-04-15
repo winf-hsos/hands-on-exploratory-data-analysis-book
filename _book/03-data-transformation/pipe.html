@@ -456,6 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header><p>Nachdem ihr im vorherigen Kapitel gelernt habt, wie Daten in R geladen werden, schauen wir uns nun das wichtigste Werkzeug an, um diese Daten effizient weiterzuverarbeiten: den Pipe-Operator <code>|&gt;</code>. In diesem Kapitel lernt ihr, wie die Pipe funktioniert, wie sie Ergebnisse von einer Funktion an die nächste weiterreicht und wie ihr Code schreibt, der sich wie ein flüssiger Text liest.</p>
 <p>Wenn ihr Daten analysiert, arbeitet ihr fast nie mit einem einzigen Befehl, sondern baut eine kleine Kette aus vielen Einzelschritten. Ohne die Pipe müsstet ihr entweder sehr viele Zwischenergebnisse speichern oder Funktionen unübersichtlich ineinander verschachteln. Mit der Pipe schreibt ihr eure Analyse stattdessen so, dass ihr sie von oben nach unten lesen könnt, was euren Code deutlich verständlicher und leichter anpassbar macht.</p>
+<p>Die folgende Tabelle zeigt die Funktionen, die wir in diesem Abschnitt kennenlernen.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -476,6 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<p>Schauen wir uns als Erstes an, wie die Pipe im Detail funktioniert.</p>
 <section id="sec-pipe-funktionsweise" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="sec-pipe-funktionsweise">
 <span class="header-section-number">10.1</span> Funktionsweise</h2>
 <p>Die wichtigste Regel ist kurz: Die Pipe nimmt das Ergebnis links und setzt es rechts als <strong>erstes Argument</strong> ein.</p>
@@ -510,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Inhaltlich ist das Beispiel etwas künstlich. Es zeigt aber gut, dass die Pipe einfach Ergebnisse weiterreicht, egal ob es ein Tibble, eine Zahl oder ein Text ist.</p>
 <div id="fig-r-basics-pipe" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-r-basics-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\images/select_pipe_glimpse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;10.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter."><img src="..\images/select_pipe_glimpse.png" class="img-fluid figure-img"></a>
+<a href="..\images/pipe-operator.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;10.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter."><img src="..\images/pipe-operator.svg" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-r-basics-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Abbildung&nbsp;10.1: Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.

@@ -1,0 +1,52 @@
+---
+title: "Übung: Gruppierte Betrachtung von Variablen"
+subtitle: "Am Beispiel der Marktforschungs-Musterstudie"
+format: pdf
+---
+
+## Aufgaben
+
+### Erste Schritte mit Gruppierungen
+
+1.  Erstellt ein neues R-Skript in eurem Projekt und öffnet es für die Bearbeitung. Ladet die notwendigen Pakete mittels `p_load` und lest den Datensatz der Musterstudie ein!
+
+2.  Beschäftigt euch mit den beiden Transformationen `mutate` und `summarize`. Was machen beide und was unterscheiden sie? Erklärt, was der Unterschied im Ergebnis zwischen den beiden folgenden Befehlen ist!
+
+    ```{r}
+    #| eval: false
+    # Was macht summarize?
+    survey |> 
+        summarize(n_observations = n())
+
+    # Was macht mutate?
+    survey |> 
+        mutate(n_observations = n())
+    ```
+
+3.  Welche Abkürzung gibt es für die obige Anwendung von `summarize`?
+
+4.  Findet heraus, welchen Effekt ein vorangestelltes `group_by` auf die beiden Transformationen `mutate` und `summarize` haben. Testet das anhand der Variable für das Geschlecht der Probanden!
+
+5.  Welche Visualisierungsform würdet ihr für die Häufigkeiten der Bundesländer (F3) verwenden? Wie könnt ihr die Häufigkeiten schnell visuell darstellen, ohne manuell gruppieren zu müssen?
+
+6.  Erstellt eine Gruppierung nach den beiden Merkmalen "Bundesland" (F3) und "Geschlecht" (F4). Ermittelt die Häufigkeiten pro Gruppe!
+
+7.  Stellt die Häufigkeiten in den Gruppen aus 6. visuell dar! Welche Form ist dafür geeignet?
+
+8.  Stellt nun die *relative* Häufigkeit der Geschlechter für jedes Bundesland visuell dar!
+
+### Gruppierte Analysen und Visualisierungen
+
+9.  Wie ist die Preisbereitschaft für Milch der Marke Weihenstephan (F13) in den Bundesländern (F3) verteilt?
+
+10.  Wie ist die mittlere Preisbereitschaft für Milch der Marke Weihenstephan (F13) in den Bundesländern (F3) pro Geschlecht (F4)?
+
+11.  Unterscheidet sich die mittlere Preisbereitschaft (F13) zwischen Probanden, die Lebensmittel auf dem Wochenmarkt (F8) einkaufen und denen, die das nicht tun?
+
+12.  Wie ist die mittlere Zustimmung der Probanden nach Bundesland (F3) zur folgenden Aussage (F11): "Ich kaufe regionale Lebensmittel, um die regionale Wirtschaft zu unterstützen."
+
+13.  In welchem Bundesland (F3) ist die mittlere Zustimmung zur Aussage (F12) "Ich esse gerne Essen aus anderen Kulturen" am höchsten?
+
+14.  Wie ist der Preis für Milch der Marke Weihenstephan, bei dem das Produkt noch als günstig eingeschätzt wird (F16), über die Altersgruppen (F2) verteilt?
+
+15.  Wie ist die mittlere Mediennutzung (F216) in den unterschiedlichen Altersklassen (F2) ausgeprägt?

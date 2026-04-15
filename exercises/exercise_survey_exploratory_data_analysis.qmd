@@ -1,0 +1,77 @@
+---
+title: "Übung: Explorative Datenanalyse"
+subtitle: "Am Beispiel der Marktforschungs-Musterstudie"
+format: pdf
+---
+
+## Einführung
+
+Ihr habt die wichtigsten Werkzeuge für die explorative Datenanalyse bereits kennengelernt. Wir gehen dabei stets fragegesteuert vor: Erst kommt die Frage, dann folgt die passende Analyse. Für jede Fragestellung wählen wir die relevanten Variablen aus, untersuchen ihre Verteilung und Zusammenhänge, und stellen die Ergebnisse geeignet visuell dar.
+
+In dieser Aufgabe wendet ihr diese Vorgehensweise auf ausgewählte Fragestellungen aus der Marktforschungs-Musterstudie an. Bearbeitet für **jede Fragestellung** die folgenden Schritte:
+
+a. Findet die zur Fragestellung gehörigen Variablen im Datensatz anhand der angegebenen Fragenummer(n). Lest den Fragebogen, um die Kodierung zu verstehen.
+
+b. Ermittelt das Skalenniveau der Variablen.
+
+c. Prüft, ob der Datentyp im Datensatz zum Skalenniveau passt. Führt notwendige Transformationen durch (z. B. Umkodierung in Faktoren, Zusammenfassen von Mehrfachantworten, Skalierung).
+
+d. Ermittelt den Wertebereich und den Füllgrad der Variablen.
+
+e. Berechnet geeignete Kenngrößen zur Zusammenfassung (abhängig vom Skalenniveau).
+
+f. Stellt die Verteilung bzw. den Zusammenhang visuell dar. Wählt eine Visualisierungsform, die zur Art der Variablen und zur Fragestellung passt. Strebt eine publikationsreife Darstellung an.
+
+---
+
+## Fragestellungen
+
+### Einzelne Variablen erkunden
+
+**1.** Welche Ernährungsformen und Diäten sind in der Stichprobe verbreitet, und welche davon kommen am häufigsten vor? (F41)
+
+**2.** Welche Informationen auf Lebensmittelverpackungen nehmen Konsumentinnen und Konsumenten beim Einkauf wahr? (F21)
+
+**3.** Welche Nachhaltigkeitslabels und Bio-Siegel haben die höchste Bekanntheit in der Stichprobe? (F22)
+
+**4.** Wie kochbegeistert sind die Befragten — und welche Aspekte des Kochens sind ihnen besonders wichtig? (F35)
+
+**5.** Wie schätzen die Befragten ihr eigenes Wissen über Lebensmittelzusatzstoffe ein? (F36)
+
+**6.** Wie hoch ist der selbst angegebene Bio-Anteil im Lebensmitteleinkauf der Befragten, und wie ist er in der Stichprobe verteilt? (F32)
+
+**7.** Wie stark ist das Umweltbewusstsein der Befragten ausgeprägt, und wie homogen oder heterogen ist diese Einstellung in der Stichprobe? (F30)
+
+---
+
+### Gruppenvergleiche
+
+**8.** Unterscheidet sich das Umweltbewusstsein (F30) zwischen verschiedenen Altersgruppen (F2)? Gibt es einen klaren Trend?
+
+**9.** Gibt es Unterschiede in der Kochbegeisterung (F35) zwischen Männern und Frauen (F4)?
+
+**10.** Spielt die Stadtgröße (F44) eine Rolle dabei, ob Menschen auf dem Wochenmarkt oder direkt ab Hof einkaufen (F8)? Oder kaufen Landbewohnende schlicht anders ein?
+
+**11.** Kaufen Befragte mit Kindern im Haushalt (F43) seltener im Discounter ein (F8)? Oder zeigt sich kein Unterschied?
+
+**12.** Unterscheidet sich die Offenheit für neue und unbekannte Lebensmittel — die Lebensmittelneophilie (F12) — nach dem Bildungsniveau (F37)?
+
+**13.** Kaufen Haushalte mit höherem Einkommen (F49) tatsächlich mehr Bio? Überprüft den vermuteten Zusammenhang zwischen Einkommenshöhe und Bio-Anteil im Einkauf (F32).
+
+**14.** Wie hängt die eigene Ernährungsform (F41) mit der Einstellung zu Fleischkonsum (F33) zusammen? Essen Menschen, die sich vegan oder vegetarisch ernähren, nicht nur anders, sondern denken sie auch anders über Fleisch?
+
+---
+
+### Zusammenhänge
+
+**15.** Haben Menschen mit mehr Wissen über Lebensmittelzusatzstoffe (F36) auch ein anderes Leseverhalten bei Verpackungen (F21)? Lesen „Wissende" häufiger die Zutatenliste?
+
+**16.** Gibt es einen Zusammenhang zwischen dem Besitz eines E-Bikes (F39) und dem Bio-Anteil im Einkauf (F32)? Sind „grüne Mobilität" und „grüner Konsum" tatsächlich korreliert? Oder ist das ein Klischee?
+
+**17.** Korreliert die Big-Five-Dimension „Offenheit für Erfahrungen" (F47) mit der Kochbegeisterung (F35)? Sind fantasievollere Persönlichkeiten auch leidenschaftlichere Köche?
+
+**18.** Orientieren sich Menschen, die beim Essen stark auf soziale Normen achten (F34), auch weniger gerne an unbekannten Lebensmitteln, also an der Lebensmittelneophilie (F12)?
+
+**19.** Haben Menschen, die Essen als Luxusgut schätzen (F40), eine positivere Einstellung zu Bio-Produkten (F31)? Oder ist Bio für sie nur eine weitere Form von Konsum?
+
+**20.** Beeinflusst die Nutzung von Instagram oder TikTok (F216) die Einstellung zu Pflanzenmilchalternativen (F29)? Zeigen starke Social-Media-Nutzerinnen und -nutzer eine offenere Haltung gegenüber alternativen Milchprodukten?

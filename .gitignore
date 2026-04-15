@@ -36,3 +36,7 @@ Thumbs.db
 
 /.luarc.json
 
+/site_libs
+/_exercises_render
+
+.claude

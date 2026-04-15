@@ -57,7 +57,7 @@ tweets |>
 
 Inhaltlich ist das Beispiel etwas künstlich. Es zeigt aber gut, dass die Pipe einfach Ergebnisse weiterreicht, egal ob es ein Tibble, eine Zahl oder ein Text ist.
 
-![Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.](/images/select_pipe_glimpse.png){#fig-r-basics-pipe .lightbox}
+![Die Pipe leitet das Ergebnis des ersten Befehls an den zweiten Befehl weiter.](/images/pipe-operator.svg){#fig-r-basics-pipe .lightbox}
 
 In @fig-r-basics-pipe seht ihr das typische Muster, das euch im ganzen Buch immer wieder begegnet: Am Anfang steht ein Datensatz als Tibble, danach folgen mehrere Schritte, am Ende kommt oft eine kurze Ausgabe zur Kontrolle.
 

@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -41,7 +76,10 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-3512cbed9e2527d986e9b0b56d261405.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-2aba14264cc3e83a53bc9b44aa83aa68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -377,8 +415,29 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+<li>
+<a href="#beschreibung-der-stichprobe" id="toc-beschreibung-der-stichprobe" class="nav-link active" data-scroll-target="#beschreibung-der-stichprobe"><span class="header-section-number">27.1</span> Beschreibung der Stichprobe</a>
+  <ul class="collapse">
+<li><a href="#umfang-der-stichprobe" id="toc-umfang-der-stichprobe" class="nav-link" data-scroll-target="#umfang-der-stichprobe">Umfang der Stichprobe</a></li>
+  <li><a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen">Datentypen</a></li>
+  </ul>
+</li>
+  <li><a href="#skaleniveau-identifzieren" id="toc-skaleniveau-identifzieren" class="nav-link" data-scroll-target="#skaleniveau-identifzieren"><span class="header-section-number">27.2</span> Skaleniveau identifzieren</a></li>
+  <li><a href="#datentypen-1" id="toc-datentypen-1" class="nav-link" data-scroll-target="#datentypen-1"><span class="header-section-number">27.3</span> Datentypen</a></li>
+  <li>
+<a href="#wertebereiche-und-verteilung" id="toc-wertebereiche-und-verteilung" class="nav-link" data-scroll-target="#wertebereiche-und-verteilung"><span class="header-section-number">27.4</span> Wertebereiche und Verteilung</a>
+  <ul class="collapse">
+<li><a href="#nominalskala" id="toc-nominalskala" class="nav-link" data-scroll-target="#nominalskala">Nominalskala</a></li>
+  <li><a href="#ordinalskala" id="toc-ordinalskala" class="nav-link" data-scroll-target="#ordinalskala">Ordinalskala</a></li>
+  </ul>
+</li>
+  <li><a href="#deskriptive-kenngr%C3%B6%C3%9Fen" id="toc-deskriptive-kenngrößen" class="nav-link" data-scroll-target="#deskriptive-kenngr%C3%B6%C3%9Fen"><span class="header-section-number">27.5</span> Deskriptive Kenngrößen</a></li>
+  <li><a href="#f%C3%BCllgrad" id="toc-füllgrad" class="nav-link" data-scroll-target="#f%C3%BCllgrad"><span class="header-section-number">27.6</span> Füllgrad</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project-1-survey/survey-data.html">Projekt 1: Umfragen</a></li><li class="breadcrumb-item"><a href="../project-1-survey/exploring-single-variables.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Variablen sichten</span></a></li></ol></nav><div class="quarto-title">
@@ -396,10 +455,324 @@ ul.task-list li input[type="checkbox"] {
   
 
 
-</header>
+</header><p>Wir erheben Daten mithilfe von Umfragen, um Erkenntnisse in Bezug auf eine vorher definierte Forschungsfrage zu gewinnen. Nach der Erhebung folgt das Sichten der Daten als erster Schritt in der Analyse. Dabei können wir unterschiedliche Dinge betrachten:</p>
+<ol type="1">
+<li>Beschreibung <strong>der Stichprobe</strong>, also des gesamten vorliegenden Datensatzes</li>
+<li>Beschreibung <strong>einzelner Variablen</strong>, die in der Studie gemessen wurden</li>
+<li>Beschreibung von <strong>Variablen in Bezug zu anderen Variablen</strong>. Dabei unterscheiden wir insbesondere:
+<ol type="a">
+<li>Die gruppierte Betrachtung von Variablen</li>
+<li>Die Betrachtung von Zusammenhängen zwischen Variablen</li>
+</ol>
+</li>
+</ol>
+<section id="beschreibung-der-stichprobe" class="level2" data-number="27.1"><h2 data-number="27.1" class="anchored" data-anchor-id="beschreibung-der-stichprobe">
+<span class="header-section-number">27.1</span> Beschreibung der Stichprobe</h2>
+<p>In diesem Kontext meinen wir mit der Stichprobe die uns vorliegenden Daten. Unsere Analyse bezieht sich auf alles, was wir aus den Daten heraus finden können. Wir grenzen an dieser Stelle die Kontextinformationen, also “Wer wurde befragt?”, “Wann wurde die Erhebung durchgeführt?” oder “Wer ist der Autor der Studie” bewusst aus. Schließlich können wir diese Dinge nicht mit R ermitteln.</p>
+<section id="umfang-der-stichprobe" class="level3"><h3 class="anchored" data-anchor-id="umfang-der-stichprobe">Umfang der Stichprobe</h3>
+<p>Die wichtigsten Informationen zu einem Datensatz bekommen wir, wenn wir einfach den Namen des Objekts in der Konsole eingeben:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 813
+   q001hheinkauf q002geburt q003land q004geschlecht q005os v041nofleisch
+           &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;
+ 1             2       1970        1              1      0             0
+ 2             1       1990        7              1      0             0
+ 3             2       1963        6              1      0             0
+ 4             2       1989       13              2      0             1
+ 5             2       1965        4              1      0             1
+ 6             2       1957        2              1      0             0
+ 7             2       1960       14              2      0             1
+ 8             2       1984       13              1      0             0
+ 9             2       1974        1              2      0             0
+10             2       1954       13              2      0             0
+# ℹ 2,801 more rows
+# ℹ 807 more variables: v041nofleisch_other &lt;chr&gt;, v041diaet_0nodiaet &lt;dbl&gt;,
+#   v041diaet_1lowcarb &lt;dbl&gt;, v041diaet_2laktose &lt;dbl&gt;,
+#   v041diaet_3gluten &lt;dbl&gt;, v041diaet_4paleo &lt;dbl&gt;, v041diaet_5ketogen &lt;dbl&gt;,
+#   v041diaet_6rohkost &lt;dbl&gt;, v041diaet_7makro &lt;dbl&gt;, v041diaet_8trenn &lt;dbl&gt;,
+#   v041diaet_9frutarisch &lt;dbl&gt;, v041diaet_10fleisch &lt;dbl&gt;,
+#   v041diaet_11mediterran &lt;dbl&gt;, v041diaet_12histaminarm &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Ein Tibble hat die schöne Angewohnheit, sich sehr kompakt mit den wichtigsten Informationen auf der Konsole zu präsentieren. So bekommen wir einen schnellen Eindruck von der Dimensionierung des Datensatzes. Alternativen gibt es auch:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2811  813</code></pre>
+</div>
+</div>
+<p>Und wenn wir die Anzahl Beobachtungen und Variablen als Werte benötigen, dann gibt es dafür spezielle Funktionen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">survey</span><span class="op">)</span></span>
+<span><span class="va">n_rows</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">survey</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu">str_glue</span><span class="op">(</span><span class="st">"The data set contains {n_cols} variables and {n_rows} observations."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The data set contains 813 variables and 2811 observations.</code></pre>
+</div>
+</div>
+</section><section id="datentypen" class="level3"><h3 class="anchored" data-anchor-id="datentypen">Datentypen</h3>
+<p>Die Funktion <code>glimpse</code> ist hilfreich, um einen schnellen Überblick über die Variablennamen, deren Datentypen und erste Werte zu bekommen. Allerdings stößt die Funktion bei einem Datensatz mit sehr vielen Variablen an ihre Grenzen, weil sie <strong>alle</strong> in der Konsole auflistet. Bei 813 Variablen überfrachtet das die Konsole:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Erzeugt sehr viele Zeilen auf der Konsole...</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Es wäre vielleicht besser, wir könnten eine aggregierte Sicht bekommen, um die Häufigkeiten der ermittelten Datentypen schnell zu sichten. Dazu können wir folgenden Befehl verwenden:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">map_df</span><span class="op">(</span><span class="va">type_sum</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"variable"</span>, values_to <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 813 × 2
+   variable            type 
+   &lt;chr&gt;               &lt;chr&gt;
+ 1 q001hheinkauf       dbl  
+ 2 q002geburt          dbl  
+ 3 q003land            dbl  
+ 4 q004geschlecht      dbl  
+ 5 q005os              dbl  
+ 6 v041nofleisch       dbl  
+ 7 v041nofleisch_other chr  
+ 8 v041diaet_0nodiaet  dbl  
+ 9 v041diaet_1lowcarb  dbl  
+10 v041diaet_2laktose  dbl  
+# ℹ 803 more rows</code></pre>
+</div>
+</div>
+<p>Die Funktion <code>map_df</code> ist eine spezielle Variante der allgemeineren <code>map</code> Funktion und liefert immer einen Dataframe zurück. Sie sorgt dafür, dass für jede Spalte im Dataframe die Funktion <code>type_sum</code> aufgerufen wird. Diese Funktion liefert und den Datentyp zusammen mit dem Namen der Spalte. Mit <code>pivot_longer</code> sorgen wir dafür, dass wir statt eines sehr breiten Ergebnisses mit vielen Spalten, einen Tibble mit nur zwei spalten <code>variable</code> und <code>type</code> bekommen. Jede Zeile stellt dann eine Spalte mit Name und Datentyp dar.</p>
+<p>Auf der Grundlage dieser Daten können wir die Häufigkeiten der erkannten Datentypen schnell visualisieren:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">map_df</span><span class="op">(</span><span class="va">type_sum</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"variable"</span>, values_to <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu">fct_infreq</span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_bar</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="exploring-single-variables_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Mit <code>fct_infreq</code> können wir die Variable <code>type</code> nach ihrere Häufigkeit sortieren, was in der Reihenfolge der Balken im Diagramm ersichtlich wird. Die überwiegende Menge an Spalten ist also numerisch.</p>
+</section></section><section id="skaleniveau-identifzieren" class="level2" data-number="27.2"><h2 data-number="27.2" class="anchored" data-anchor-id="skaleniveau-identifzieren">
+<span class="header-section-number">27.2</span> Skaleniveau identifzieren</h2>
+<p>Wenn wir eine einzelne Variable betrachten, dann sollten wir uns zunächst die Frage stellen, was eigentlich damit gemessen wurde und auf welcher Skala. In <a href="../01-background/types-of-variables.html" class="quarto-xref"><span>Kapitel 3</span></a> haben wir bereits die vier Skalenniveaus kennengelernt, die eine Variable annehmen kann. Von ihm hängt maßgeblich ab, was wir mit den Werten einer Variable anstellen können.</p>
+<p>Wie ermittelt man das Skalenniveau einer Variable?</p>
+</section><section id="datentypen-1" class="level2" data-number="27.3"><h2 data-number="27.3" class="anchored" data-anchor-id="datentypen-1">
+<span class="header-section-number">27.3</span> Datentypen</h2>
+<p>Wenn wir das Skalenviveu kennen, sollten wir als nächstes überprüfen, ob die Variable bereits in einem passenden Datentyp vorliegt, oder ob wir eine Konvertierung vornehmen müssen. Tabelle <a href="#tbl-exploring-single-variables-data-types" class="quarto-xref">Tabelle&nbsp;<span>27.1</span></a> gibt einen Überlick über die typischen Datentypen, in denen die unetrschiedlichen Variablen nach dem Laden aus einer Textdatei vorliegen und welcher Datentyp für das jeweilige Niveau wünschenswert ist. Etwaige Diskrepanzen sollten ausgeglichen werden.</p>
+<div id="tbl-exploring-single-variables-data-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exploring-single-variables-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabelle&nbsp;27.1: Skalenniveaus und Datentypen.
+</figcaption><div aria-describedby="tbl-exploring-single-variables-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead><tr class="header">
+<th>Skalenniveau</th>
+<th>Typische Datentypen</th>
+<th>Gewünschter Datentyp</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>kein Skalenniveau (unstrukturiert)</td>
+<td><code>chr</code></td>
+<td><code>chr</code></td>
+</tr>
+<tr class="even">
+<td>Nominal</td>
+<td>
+<code>chr</code>, <code>int</code>, <code>dbl</code>, <code>lgl</code>
+</td>
+<td><code>fct</code></td>
+</tr>
+<tr class="odd">
+<td>Ordinal</td>
+<td>
+<code>chr</code>, <code>int</code>, <code>dbl</code>
+</td>
+<td><code>fct</code></td>
+</tr>
+<tr class="even">
+<td>Intervall</td>
+<td>
+<code>int</code>, <code>dbl</code>
+</td>
+<td><code>dbl</code></td>
+</tr>
+<tr class="odd">
+<td>Rational</td>
+<td><code>dbl</code></td>
+<td><code>dbl</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Die Umwandlung des Datentyps einer Spalte können wir mit <code>mutate</code> bewerkstelligen. Betrachten wir dazu einmal das Beispiel der Frage nach dem Fleischkonsum in Frage 41. Hierbei soll der Proband eine aus 5 Antwortmöglichkeiten auswählen, zusätzlich gibt es noch eine Antwortmöglichkeit für “Sonstiges”:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 1
+  v041nofleisch
+          &lt;dbl&gt;
+1             0
+2             0
+3             0
+4             1
+5             1
+6             0</code></pre>
+</div>
+</div>
+<p>Wir erkennen an der Ausgabe, dass es sich um eine Variable vom Typ <code>dbl</code> handelt, zumindest wurde sie beim Ladevorgang als solche erkannt. Das ist logisch, schließlich enthalten die Antworten die numerischen Kodierungen, die allesamt Zahlen sind.</p>
+<p>Was aber ist das Skalenniveau dieser Variable? Und passt der <em>automatisch erkannte</em> zum für das Skalenniveau <em>gewünschten</em> Datentyp? Für das niedrigste Niveau, der Nominalskala, wird lediglich eine endliche Liste diskreter Kategorien verlangt, die die Variable annehmen kann. Das ist hier erfüllt, was wir anhand des Fragebogens erkennen können (fünf Antwortmöglichkeiten) und auch in den Daten sehen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  v041nofleisch     n
+          &lt;dbl&gt; &lt;int&gt;
+1             0  1827
+2             1   749
+3             2   134
+4             3    36
+5             4    37
+6            NA    28</code></pre>
+</div>
+</div>
+<p>Neben den Werten von 0 bis 4 sind auch <code>NA</code>-Werte zu seehen. Diese bedeutet, dass hier keine der Optionen gewählt wurde und stattdessen ein Wert für “Sonstiges” angegeben wurde, in Form vo Freitext. Diese Freitexte können wir ebenfalls betrachten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">v041nofleisch</span>, <span class="va">v041nofleisch_other</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span><span class="op">)</span>  </span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 28 × 2
+   v041nofleisch v041nofleisch_other                                            
+           &lt;dbl&gt; &lt;chr&gt;                                                          
+ 1            NA alles was schmeckt                                             
+ 2            NA leichte Einschränkung des Fleischkonsums und fast ausschließli…
+ 3            NA ich versuche mein Fleisch Konsum einzuschränken, dies fällt mi…
+ 4            NA normal                                                         
+ 5            NA wenig Fleisch und Fisch, aber nicht explizit vegetarisch       
+ 6            NA wenig Fleisch                                                  
+ 7            NA um 50% reduzierter Fleischkonsum                               
+ 8            NA Fleischverbrauch eingeschränkt                                 
+ 9            NA Ganz normal wie es normale Menschen so machen                  
+10            NA Kein Schwein                                                   
+# ℹ 18 more rows</code></pre>
+</div>
+</div>
+<p>Abgesehen von den Freitexten für “Sonstiges” liegt also auch anhand der Daten eine feste Liste an Werten (Kategorien) vor, so dass wir in jedem Fall mindestens eine Nominalskala vorliegen haben. Erfüllt die Variable auch die Anforderungen für das nächst höhere Skalenniveau, die Ordinalskala?</p>
+<p>Dazu müssten die Kategorien nicht nur klar abgrenzbar sein, sondern auch in einer Reihenfolge zueinander stehen. Die Frage nach einer Reihenfolge kann nicht anhand der Daten beantwortet werden, sondern muss aus dem Wissen und der Theorie hinter dem abgefragten Sachverhalt abgeleitet werden. Ist die Antwort “ohne Einschränkungen des Fleischkonsums” besser oder schlechter, größer oder keiner als “flexitarisch” oder “vegetarisch”? Möglich wäre das, wenn man den Anteil an tierischen Produkten betrachten möchte, der mit jeder Ernährungsweise verbunden ist. Dann wäre dieser bei “keine Einschränkung” größer als bei “flexitarisch”, und bei “flexitarisch” wiederum größer als bei “vegetarisch” usw. Es ist aber anhand der Frage nicht klar, dass das die Intention war. Zudem kann das auch nicht für alle Kategorien trennscharf bestimmt werden (isst ein Flexitarier mehr oder weniger Tier als ein Pescetarier?). Wir gehen deshalb von einem nominalskalierten Merkmal aus.</p>
+<p>Passt also der Datentyp <code>dbl</code> zum gewünschten Datentyp einer nominalskalierten Variable? Tabelle <a href="#tbl-exploring-single-variables-data-types" class="quarto-xref">Tabelle&nbsp;<span>27.1</span></a> gibt uns die klare Antwort “Nein”. Wir sollten die Variable in einen Faktor (<code>fct</code>) umwandeln:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v041nofleisch_fct <span class="op">=</span> </span>
+<span>    <span class="fu">as_factor</span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span>, .keep <span class="op">=</span> <span class="st">"used"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,811 × 2
+   v041nofleisch v041nofleisch_fct
+           &lt;dbl&gt; &lt;fct&gt;            
+ 1             0 0                
+ 2             0 0                
+ 3             0 0                
+ 4             1 1                
+ 5             1 1                
+ 6             0 0                
+ 7             1 1                
+ 8             0 0                
+ 9             0 0                
+10             0 0                
+# ℹ 2,801 more rows</code></pre>
+</div>
+</div>
+<p>Mit <code>.keep = "used"</code> können wir im Ergebnis die neue Variable <code>v041nofleisch_fct</code> zusammen mit der Ursprungsvariable <code>v041nofleisch</code> betrachten. Wir sehen sehr gut den neuen Datentyp <code>fct</code>, während die Werte gleich geblieben sind. Im nächsten Schritt wollen wir auch die Werte selbst verändern, und zwar sollen statt der Zahlenkodierungen die textuellen Werte aus dem Fragebogen angezeigt werden. Wir müssen den Faktor also umkodieren:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v041nofleisch_fct <span class="op">=</span> </span>
+<span>    <span class="fu">as_factor</span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">fct_recode</span><span class="op">(</span></span>
+<span>      <span class="st">"ohne Einschränkungen"</span> <span class="op">=</span> <span class="st">"0"</span>,</span>
+<span>      <span class="st">"flexitarisch"</span> <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>      <span class="st">"vegetarisch"</span> <span class="op">=</span> <span class="st">"2"</span>,</span>
+<span>      <span class="st">"vegan"</span> <span class="op">=</span> <span class="st">"3"</span>,</span>
+<span>      <span class="st">"pescetarisch"</span> <span class="op">=</span> <span class="st">"4"</span></span>
+<span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">fct_na_value_to_level</span><span class="op">(</span><span class="st">"Sonstige"</span><span class="op">)</span>,</span>
+<span>    .keep <span class="op">=</span> <span class="st">"used"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">v041nofleisch_fct</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  v041nofleisch_fct        n
+  &lt;fct&gt;                &lt;int&gt;
+1 ohne Einschränkungen  1827
+2 flexitarisch           749
+3 vegetarisch            134
+4 vegan                   36
+5 pescetarisch            37
+6 Sonstige                28</code></pre>
+</div>
+</div>
+</section><section id="wertebereiche-und-verteilung" class="level2" data-number="27.4"><h2 data-number="27.4" class="anchored" data-anchor-id="wertebereiche-und-verteilung">
+<span class="header-section-number">27.4</span> Wertebereiche und Verteilung</h2>
+<section id="nominalskala" class="level3"><h3 class="anchored" data-anchor-id="nominalskala">Nominalskala</h3>
+<div id="fig-exploring-single-variables-options-nominal-scale" class="lightbox quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-exploring-single-variables-options-nominal-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\images/options-nominal-scale.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Abbildung&nbsp;27.1: Die Auswertungsmöglichkeiten einer nominalskalierten Variable."><img src="..\images/options-nominal-scale.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exploring-single-variables-options-nominal-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;27.1: Die Auswertungsmöglichkeiten einer nominalskalierten Variable.
+</figcaption></figure>
+</div>
+<p>Der Wertebereich ist bei einem Faktor klar definiert: Alle definierten Kategorien. Für nominalskalierte Variablen kommen wir somit über <code>distinct</code> oder <code>count</code> schnell an den Wertebereich und die Verteilung der Häufigkeiten. Diese können wir auch schnell visualisieren:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">survey</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>v041nofleisch_fct <span class="op">=</span> </span>
+<span>    <span class="fu">as_factor</span><span class="op">(</span><span class="va">v041nofleisch</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">fct_recode</span><span class="op">(</span></span>
+<span>      <span class="st">"ohne Einschränkungen"</span> <span class="op">=</span> <span class="st">"0"</span>,</span>
+<span>      <span class="st">"flexitarisch"</span> <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>      <span class="st">"vegetarisch"</span> <span class="op">=</span> <span class="st">"2"</span>,</span>
+<span>      <span class="st">"vegan"</span> <span class="op">=</span> <span class="st">"3"</span>,</span>
+<span>      <span class="st">"pescetarisch"</span> <span class="op">=</span> <span class="st">"4"</span></span>
+<span>    <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">fct_na_value_to_level</span><span class="op">(</span><span class="st">"Sonstige"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">fct_infreq</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu">fct_rev</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    .keep <span class="op">=</span> <span class="st">"used"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">v041nofleisch_fct</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">v041nofleisch_fct</span>, x <span class="op">=</span> <span class="va">n</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="exploring-single-variables_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="ordinalskala" class="level3"><h3 class="anchored" data-anchor-id="ordinalskala">Ordinalskala</h3>
+</section></section><section id="deskriptive-kenngrößen" class="level2" data-number="27.5"><h2 data-number="27.5" class="anchored" data-anchor-id="deskriptive-kenngrößen">
+<span class="header-section-number">27.5</span> Deskriptive Kenngrößen</h2>
+</section><section id="füllgrad" class="level2" data-number="27.6"><h2 data-number="27.6" class="anchored" data-anchor-id="füllgrad">
+<span class="header-section-number">27.6</span> Füllgrad</h2>
 
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -849,7 +1222,38 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </nav>
 </div> <!-- /content -->
-
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 </body></html>

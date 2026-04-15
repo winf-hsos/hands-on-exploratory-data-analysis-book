@@ -1,0 +1,11 @@
+format:
+  revealjs:
+    slide-level: 2
+    theme: dark
+    css: slides.css
+    embed-resources: true
+    logo: ../images/slides/hs_logo.svg
+    slide-number: c/t
+    highlight-style: atom-one
+    code-line-numbers: false
+    code-link: true
